@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:minHeight="70dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="70dp"
+            android:src="@drawable/ic_launcher" />
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/PublicationNameID"
+                    android:name="name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:singleLine="false" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/PublicationStreetID"
+                    android:name="street"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:singleLine="false" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/PublicationPriceID"
+                    android:name="price"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textStyle="bold" />
+
+            </TableRow>
+        </TableLayout>
+
+    </TableRow>
+</TableLayout>
