@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  effective_date: 2014-09-10
+  operation: MyString
+  address: MyString
+  floor: 1
+  apartment: MyString
+  number_spaces: 1
+  surface: 1
+  price: 1.5
+  expenses: 1.5
+  antiquity: 1
+  description: MyText
+  additional_info: MyText
+
+two:
+  effective_date: 2014-09-10
+  operation: MyString
+  address: MyString
+  floor: 1
+  apartment: MyString
+  number_spaces: 1
+  surface: 1
+  price: 1.5
+  expenses: 1.5
+  antiquity: 1
+  description: MyText
+  additional_info: MyText

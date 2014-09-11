@@ -1,0 +1,111 @@
+<%= form_for @publication, :html => { :class => "form-horizontal publication" } do |f| %>
+
+  <% if @publication.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@publication.errors.count, "error") %> prohibited this publication from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @publication.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :effective_date, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :effective_date, :class => 'form-control' %>
+    </div>
+    <%= error_span(@publication[:effective_date]) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :operation, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :operation, :class => 'form-control' %>
+    </div>
+    <%= error_span(@publication[:operation]) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :address, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :address, :class => 'form-control' %>
+    </div>
+    <%= error_span(@publication[:address]) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :floor, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :floor, :class => 'form-control' %>
+    </div>
+    <%= error_span(@publication[:floor]) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :apartment, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :apartment, :class => 'form-control' %>
+    </div>
+    <%= error_span(@publication[:apartment]) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :number_spaces, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :number_spaces, :class => 'form-control' %>
+    </div>
+    <%= error_span(@publication[:number_spaces]) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :surface, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :surface, :class => 'form-control' %>
+    </div>
+    <%= error_span(@publication[:surface]) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :price, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :price, :class => 'form-control' %>
+    </div>
+    <%= error_span(@publication[:price]) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :expenses, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :expenses, :class => 'form-control' %>
+    </div>
+    <%= error_span(@publication[:expenses]) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :antiquity, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :antiquity, :class => 'form-control' %>
+    </div>
+    <%= error_span(@publication[:antiquity]) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :description, :class => 'form-control' %>
+    </div>
+    <%= error_span(@publication[:description]) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :additional_info, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :additional_info, :class => 'form-control' %>
+    </div>
+    <%= error_span(@publication[:additional_info]) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">  
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                publications_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

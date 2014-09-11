@@ -1,0 +1,41 @@
+<%- model_class = Publication -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:effective_date) %>:</strong></dt>
+  <dd><%= @publication.effective_date %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:operation) %>:</strong></dt>
+  <dd><%= @publication.operation %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
+  <dd><%= @publication.address %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:floor) %>:</strong></dt>
+  <dd><%= @publication.floor %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:apartment) %>:</strong></dt>
+  <dd><%= @publication.apartment %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:number_spaces) %>:</strong></dt>
+  <dd><%= @publication.number_spaces %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:surface) %>:</strong></dt>
+  <dd><%= @publication.surface %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
+  <dd><%= @publication.price %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:expenses) %>:</strong></dt>
+  <dd><%= @publication.expenses %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:antiquity) %>:</strong></dt>
+  <dd><%= @publication.antiquity %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @publication.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:additional_info) %>:</strong></dt>
+  <dd><%= @publication.additional_info %></dd>
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              publications_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_publication_path(@publication), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              publication_path(@publication),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
