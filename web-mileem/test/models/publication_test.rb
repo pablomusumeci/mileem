@@ -18,4 +18,9 @@ class PublicationTest < ActiveSupport::TestCase
     assert_not @publication.save, 'Validate that price must be numeric'
   end
   
+  def test_create_publicattion_ok
+    @publication.price = '3000'
+    assert @publication.save, 'Validate all fields have values according to its validations'
+  end
+  
 end
