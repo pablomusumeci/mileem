@@ -117,9 +117,8 @@
 <br>
   <div class="form-group">
     <div class="col-md-4 ">  
-      <%= f.submit nil, :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                publications_path, :class => 'btn btn-default' %>
+      <%= f.submit 'Crear Publicacion', :class => 'btn btn-primary' %>
+      <%= link_to 'Cancelar', publications_path, :class => 'btn btn-default' %>
     </div>
   </div>
 
