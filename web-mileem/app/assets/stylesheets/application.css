@@ -10,6 +10,37 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require_self 
+ *= require bootstrap-ubuntu
+ *= require bootstrap-datepicker
  *= require_tree .
- *= require_self
  */
+ 
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+a.navbar-brand  {
+  padding: 5px 0;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+label {
+  font-weight: normal;
+}
+
+.datepicker{
+	z-index:1200;
+}
+
+body {
+  line-height: 3;
+}
+
+html,
+body {
+  padding-top:10px;
+  height: 100%;
+  margin-left:40px;
+}
+
+

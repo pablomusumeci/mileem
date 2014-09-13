@@ -29,4 +29,6 @@ gem 'spring',        group: :development
 gem 'annotate', '~> 2.6.5' #http://github.com/ctran/annotate_models
 gem 'therubyracer'
 gem 'less-rails'
+gem 'rails_layout'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'bootstrap-datepicker-rails'
