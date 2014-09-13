@@ -11,6 +11,10 @@ class PublicationsController < ApplicationController
   # GET /publications/1
   # GET /publications/1.json
   def show
+    respond_to do |format|
+      format.html { render :show}
+      format.json { render @publications.to_json }
+    end
   end
 
   # GET /publications/new

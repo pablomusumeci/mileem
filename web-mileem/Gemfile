@@ -39,3 +39,6 @@ gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootst
 gem 'twitter-typeahead-rails', :git => "git://github.com/yourabi/twitter-typeahead-rails.git"
 gem 'bootstrap-datepicker-rails'
 gem 'rails_layout'
+
+# Servidor web violento
+gem 'puma'
