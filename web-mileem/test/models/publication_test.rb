@@ -10,6 +10,7 @@ class PublicationTest < ActiveSupport::TestCase
     @publication = Publication.new
     @publication.price = '3000'
     @publication.effective_date = Date.today
+    @publication.address = 'Av Congreso 2420, Buenos Aires, Argentina'
   end
   
   def test_create_publication_ok
@@ -25,7 +26,17 @@ class PublicationTest < ActiveSupport::TestCase
     @publication.price = ''
     assert_not @publication.save, 'Price must be a required field'
   end
+
+  def test_address_required
+    @publication.address = ''
+    assert_not @publication.save, 'Address must be a required field'
+  end
   
+  def test_effective_date_required
+    @publication.effective_date = ''
+    assert_not @publication.save, 'Effective Date must be a required field'
+  end
+
   def test_price_numeric
     @publication.price = 'cien'
     assert_not @publication.save, 'Validate that price must be numeric'

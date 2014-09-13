@@ -22,6 +22,7 @@
 
 class Publication < ActiveRecord::Base
   validates :price, presence: true, :numericality => true
+  validates :address, presence: true
   validates :effective_date, presence: true, date: {on_or_after: DateTime.now.change(:hour => 0, :min => 0)}
   validates :antiquity, :numericality => true, :allow_nil => true
   validates :expenses, :numericality => true, :allow_nil => true
