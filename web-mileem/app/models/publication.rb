@@ -21,13 +21,13 @@
 #
 
 class Publication < ActiveRecord::Base
-  validates :price, presence: true, :numericality => true
+  validates :price, presence: true, :numericality => { :greater_than_or_equal_to => 0 }
   validates :address, presence: true
   validates :effective_date, presence: true, date: {on_or_after: DateTime.now.change(:hour => 0, :min => 0)}
-  validates :antiquity, :numericality => true, :allow_nil => true
-  validates :expenses, :numericality => true, :allow_nil => true
-  validates :floor, :numericality => true, :allow_nil => true
-  validates :number_spaces, :numericality => true, :allow_nil => true
-  validates :surface, :numericality => true, :allow_nil => true
+  validates :antiquity, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
+  validates :expenses, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
+  validates :floor, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
+  validates :number_spaces, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
+  validates :surface, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
   
 end
