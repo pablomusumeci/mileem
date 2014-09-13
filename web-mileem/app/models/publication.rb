@@ -21,6 +21,7 @@
 #
 
 class Publication < ActiveRecord::Base
+	belongs_to :neighbourhood
   validates :price, presence: true, :numericality => true
   validates :effective_date, presence: true, date: {on_or_after: DateTime.now.change(:hour => 0, :min => 0)}
 end
