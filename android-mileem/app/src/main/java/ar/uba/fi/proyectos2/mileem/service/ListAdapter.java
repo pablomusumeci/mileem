@@ -33,9 +33,9 @@ public class ListAdapter extends ArrayAdapter<Publication> {
                 LayoutInflater vi = LayoutInflater.from(getContext());
                 v = vi.inflate(R.layout.publication_search_display, null);
                 tt = (TextView) v.findViewById(R.id.PublicationNameID);
-                tt.setText(p.getName());
+                tt.setText(p.getDescription());
                 tt = (TextView) v.findViewById(R.id.PublicationStreetID);
-                tt.setText(p.getStreet());
+                tt.setText(p.getAddress());
                 tt = (TextView) v.findViewById(R.id.PublicationPriceID);
                 tt.setText(Integer.toString(p.getPrice()));
             }

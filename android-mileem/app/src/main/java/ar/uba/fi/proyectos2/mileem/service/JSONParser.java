@@ -61,9 +61,9 @@ public class JSONParser {
 
         // try parse the string to a JSON object
         try {
-            JSONObject obj = new JSONObject(json);
+            JSONArray obj = new JSONArray(json);
             // Extraigo la lista de publicaciones, bajo la clave 'propiedades'
-            return obj.getJSONArray("publicaciones");
+            return obj;
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
         }
