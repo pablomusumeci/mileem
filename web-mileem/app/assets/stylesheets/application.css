@@ -28,6 +28,10 @@ a.navbar-brand  {
 	z-index:1200;
 }
 
+.required {
+	color: red;
+}
+
 .alert {
   margin-top: 40px;
 }

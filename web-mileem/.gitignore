@@ -18,3 +18,4 @@
 .project
 Gemfile.lock
 config/database.yml
+db/schema.rb
