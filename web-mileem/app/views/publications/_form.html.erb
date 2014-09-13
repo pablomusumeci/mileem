@@ -65,6 +65,9 @@
 <div class="row">
   <div class="col-md-2">
     <label for="inmueble" class="control-label">Tipos de inmueble</label>
+    <select id="tipo_inmueble" class="selectpicker" data-style="btn-primary">
+     <%= options_from_collection_for_select(Neighbourhood.all, 'id', 'name') %> 
+    </select>
   </div>
   <div class="col-md-2">
     <label for="number_spaces" class="control-label">Ambientes</label>
@@ -155,6 +158,8 @@
         todayHighlight: true
       }
     );
+
+    $('select').selectpicker();
   }
 
   $(document).ready(ready);
