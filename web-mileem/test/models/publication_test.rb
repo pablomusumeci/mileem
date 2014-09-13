@@ -31,12 +31,38 @@ class PublicationTest < ActiveSupport::TestCase
     assert_not @publication.save, 'Validate that price must be numeric'
   end
   
-  # price must be positive
-  
   def test_publication_effective_date_on_future
     @publication.effective_date = Date.today.change(year: 2012)
     assert_not @publication.save, 'Validate that effective date is on the future'
   end
+  
+  def test_antiquity_numeric
+    @publication.antiquity = 'tres'
+    assert_not @publication.save, 'Validate that antiquity must be numeric'
+  end
+  
+  def test_expenses_numeric
+    @publication.expenses = 'mucho'
+    assert_not @publication.save, 'Validate that expenses must be numeric'
+  end
+  
+  def test_floor_numeric
+    @publication.floor = 'tres'
+    assert_not @publication.save, 'Validate that floor must be numeric'
+  end
+  
+  def test_number_spaces_numeric
+    @publication.number_spaces = 'dos'
+    assert_not @publication.save, 'Validate that number_spaces must be numeric'
+  end
+  
+  def test_surface_numeric
+    @publication.surface = 'quinientos mil'
+    assert_not @publication.save, 'Validate that surface must be numeric'
+  end
+  
+  
+  #direccion fecha y precio son obligatorios
   
   # publication date must have date format
   # Validate direction from outside territory (capital) ?
