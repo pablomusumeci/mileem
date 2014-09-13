@@ -15,97 +15,142 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :effective_date, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :effective_date, :class => 'form-control' %>
-    </div>
-    <%= error_span(@publication[:effective_date]) %>
+<div class="row">
+  <div class="col-md-2">
+     <label for="effective_date" class="control-label">Fecha</label>
+     <div class="input-group">
+     <%= f.text_field :effective_date, :required => true , :class => 'form-control', 'data-behaviour' => 'datepicker', 
+     "data-date-format" => "dd/mm/yyyy" %>
+      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+      </div>
+     <%= error_span(@publication[:effective_date]) %>
   </div>
-  <div class="form-group">
-    <%= f.label :operation, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :operation, :class => 'form-control' %>
-    </div>
-    <%= error_span(@publication[:operation]) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :address, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :address, :class => 'form-control' %>
-    </div>
-    <%= error_span(@publication[:address]) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :floor, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :floor, :class => 'form-control' %>
-    </div>
-    <%= error_span(@publication[:floor]) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :apartment, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :apartment, :class => 'form-control' %>
-    </div>
-    <%= error_span(@publication[:apartment]) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :number_spaces, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :number_spaces, :class => 'form-control' %>
-    </div>
-    <%= error_span(@publication[:number_spaces]) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :surface, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :surface, :class => 'form-control' %>
-    </div>
-    <%= error_span(@publication[:surface]) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :price, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :price, :class => 'form-control' %>
-    </div>
-    <%= error_span(@publication[:price]) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :expenses, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :expenses, :class => 'form-control' %>
-    </div>
-    <%= error_span(@publication[:expenses]) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :antiquity, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :antiquity, :class => 'form-control' %>
-    </div>
-    <%= error_span(@publication[:antiquity]) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :description, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :description, :class => 'form-control' %>
-    </div>
-    <%= error_span(@publication[:description]) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :additional_info, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :additional_info, :class => 'form-control' %>
-    </div>
-    <%= error_span(@publication[:additional_info]) %>
+  <div class="col-md-3">
+    <label for="operation" class="control-label"></label>
+    <div class="radio">
+      <label class="radio-inline">
+        <%= f.radio_button :operation, "Alquiler", :checked => 'checked' %><p>Alquiler</p>
+      </label>
+      <label class="radio-inline">  
+        <%= f.radio_button :operation, "Venta" %><p>Venta</p>
+      </label>
+    </div>   
   </div>
 
+<div class="row">  
+  <div class="col-md-4">
+    <label for="address" class="control-label">Dirección</label>
+      <input id="address" name="publication[address]" class="form-control" type="text" placeholder="Autocompletado automático" required="required">
+      <%#= f.text_field :address, :required => true , :class => 'form-control' %>
+      <%= error_span(@publication[:address]) %>
+  </div>
+
+  <div class="col-md-2">
+    <label for="floor" class="control-label">Piso</label>
+    <%= f.text_field :floor, :class => 'form-control' %>
+    <%= error_span(@publication[:floor]) %>
+  </div>
+  <div class="col-md-2">
+    <label for="apartment" class="control-label">Departamento</label>
+    <%= f.text_field :apartment, :class => 'form-control' %>
+    <%= error_span(@publication[:apartment]) %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-2">
+    <label for="inmueble" class="control-label">Tipos de inmueble</label>
+  </div>
+  <div class="col-md-2">
+    <label for="number_spaces" class="control-label">Ambientes</label>
+    <%= f.text_field :number_spaces, :class => 'form-control' %>
+    <%= error_span(@publication[:number_spaces]) %>
+  </div>
+  <div class="col-md-2">
+    <label for="surface" class="control-label">Superficie (m2)</label>
+    <%= f.text_field :surface, :class => 'form-control' %>
+    <%= error_span(@publication[:surface]) %>
+  </div>
+  <div class="col-md-2">
+    <label for="antiquity" class="control-label">Antiguedad</label>
+    <%= f.text_field :antiquity, :required => true, :class => 'form-control' %>
+    <%= error_span(@publication[:antiquity]) %>
+  </div>
+ 
+</div>
+
+<div class="row">
+<div class="col-md-2">
+    <label for="price" class="control-label">Precio</label>
+    <%= f.text_field :price, :class => 'form-control' %>
+    <%= error_span(@publication[:price]) %>
+  </div>
+  <div class="col-md-2">
+    <label for="expenses" class="control-label">Expensas</label>
+    <%= f.text_field :expenses, :class => 'form-control' %>
+    <%= error_span(@publication[:expenses]) %>
+  </div>
+</div>
+
+<div class="row"> 
+  <div class="col-md-10"> 
+    <label for="description" class="control-label">Descripción</label>
+    <%= f.text_area :description, :class => 'form-control' %>
+    <%= error_span(@publication[:description]) %>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10">
+    <label for="additional_info" class="control-label">Información Adicional</label>
+    <%= f.text_area :additional_info, :class => 'form-control' %>
+    <%= error_span(@publication[:additional_info]) %>
+    </div>
+</div>
+
+<br>
   <div class="form-group">
-    <div class="col-lg-offset-2 col-lg-10">  
+    <div class="col-md-4 ">  
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 publications_path, :class => 'btn btn-default' %>
     </div>
   </div>
 
+<% end %>
+
+<%= javascript_tag do %>
+  var ready;
+  ready = function() {
+    // https://developers.google.com/places/documentation/autocomplete#place_types
+    var addressPicker = new AddressPicker(
+      {
+        autocompleteService: {
+          types: ['address'], 
+          componentRestrictions: {country: 'AR'}
+        }
+      }
+    );
+
+    $('#address').typeahead(null, {
+      displayKey: 'description',
+      source: addressPicker.ttAdapter()
+    });
+
+    //$('#address').on('typeahead:selected', function (e, direccion) {
+    //  console.log(direccion);
+    //});
+
+
+    $('#publication_effective_date').datepicker(
+      {
+        language: "es",
+        startDate: "<%= DateTime.now.strftime("%d/%m/%Y") %>",
+        autoclose: true,
+        todayHighlight: true
+      }
+    );
+  }
+
+  $(document).ready(ready);
+  $(document).on('page:load', ready);
 <% end %>

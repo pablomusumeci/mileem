@@ -29,4 +29,16 @@ gem 'spring',        group: :development
 gem 'annotate', '~> 2.6.5' #http://github.com/ctran/annotate_models
 gem 'therubyracer'
 gem 'less-rails'
+
+gem 'typeahead-addresspicker-rails'
+gem 'date_validator'
+gem 'magic_encoding'
+
+#Bootstrap plugins
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'twitter-typeahead-rails', :git => "git://github.com/yourabi/twitter-typeahead-rails.git"
+gem 'bootstrap-datepicker-rails'
+gem 'rails_layout'
+
+# Servidor web violento
+gem 'puma'

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'test_helper'
 
 class PublicationsControllerTest < ActionController::TestCase
@@ -18,7 +19,7 @@ class PublicationsControllerTest < ActionController::TestCase
 
   test "should create publication" do
     assert_difference('Publication.count') do
-      post :create, publication: { additional_info: @publication.additional_info, address: @publication.address, antiquity: @publication.antiquity, apartment: @publication.apartment, description: @publication.description, effective_date: @publication.effective_date, expenses: @publication.expenses, floor: @publication.floor, number_spaces: @publication.number_spaces, operation: @publication.operation, price: @publication.price, surface: @publication.surface }
+      post :create, publication: { additional_info: @publication.additional_info, address: @publication.address, antiquity: @publication.antiquity, apartment: @publication.apartment, description: @publication.description, effective_date: Date.today, expenses: @publication.expenses, floor: @publication.floor, number_spaces: @publication.number_spaces, operation: @publication.operation, price: @publication.price, surface: @publication.surface }
     end
 
     assert_redirected_to publication_path(assigns(:publication))

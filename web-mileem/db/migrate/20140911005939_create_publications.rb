@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreatePublications < ActiveRecord::Migration
   def change
     create_table :publications do |t|
