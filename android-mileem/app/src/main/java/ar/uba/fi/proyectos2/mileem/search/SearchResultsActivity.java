@@ -21,7 +21,7 @@ import ar.uba.fi.proyectos2.mileem.R;
 public class SearchResultsActivity extends ListActivity {
 
     ArrayList<Publication> list = new ArrayList<Publication>();
-    private String url = "http://192.168.1.100:8080/mockJSONService-0.1/publicacion/getAllPublications";
+    private String url = "http://186.19.187.67/rest_publications/publications.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +68,22 @@ public class SearchResultsActivity extends ListActivity {
             for (int i = 0; i < len; ++i) {
                 try {
                     JSONObject obj = jArray.getJSONObject(i);
-                    list.add(new Publication(obj.getString("name").trim(), obj.getString("direccion").trim(),
-                             obj.getInt("precio")));
+                    Publication p = new Publication();
+                    p.setAdditional_info(obj.getString("additional_info"));
+                    p.setAddress(obj.getString("address"));
+                    p.setAntiquity(obj.getInt("antiquity"));
+                    p.setApartment(obj.getString("apartment"));
+                    p.setDescription(obj.getString("description"));
+                    p.setEffective_date(obj.getString("effective_date"));
+                    p.setExpenses(obj.getInt("expenses"));
+                    p.setFloor(obj.getInt("floor"));
+                    p.setNumber_spaces(obj.getInt("number_spaces"));
+                    p.setOperation(obj.getString("operation"));
+                    p.setPrice(obj.getInt("price"));
+                    p.setSurface(obj.getInt("surface"));
+                    p.setUrl(obj.getString("url"));
+                    p.setId(obj.getInt("id"));
+                    list.add(p);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
