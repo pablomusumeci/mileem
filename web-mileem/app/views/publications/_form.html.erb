@@ -17,7 +17,9 @@
 
 <div class="row">
   <div class="col-md-2">
-     <label for="effective_date" class="control-label">Fecha</label>
+     <label for="effective_date" class="control-label">Fecha
+        <span class="required">*</span> 
+     </label>
      <div class="input-group">
      <%= f.text_field :effective_date, :required => true , :class => 'form-control', 'data-behaviour' => 'datepicker', 
      "data-date-format" => "dd/mm/yyyy" %>
@@ -36,10 +38,13 @@
       </label>
     </div>   
   </div>
+</div>
 
 <div class="row">  
   <div class="col-md-4">
-    <label for="address" class="control-label">Dirección</label>
+    <label for="address" class="control-label">Dirección
+      <span class="required">*</span>
+    </label>
       <input id="address" name="publication[address]" class="form-control" type="text" placeholder="Autocompletado automático" required="required">
       <%#= f.text_field :address, :required => true , :class => 'form-control' %>
       <%= error_span(@publication[:address]) %>
@@ -81,8 +86,10 @@
 
 <div class="row">
 <div class="col-md-2">
-    <label for="price" class="control-label">Precio</label>
-    <%= f.text_field :price, :class => 'form-control' %>
+    <label for="price" class="control-label">Precio
+      <span class="required">*</span>
+    </label>
+    <%= f.text_field :price, :class => 'form-control', :required => true %>
     <%= error_span(@publication[:price]) %>
   </div>
   <div class="col-md-2">
