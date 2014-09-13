@@ -32,13 +32,13 @@ class PublicationTest < ActiveSupport::TestCase
   end
   
   # price must be positive
-  # Validate direction from outside territory (capital) ?
-  # publication day must be on the future
+  
   def test_publication_effective_date_on_future
     @publication.effective_date = Date.today.change(year: 2012)
     assert_not @publication.save, 'Validate that effective date is on the future'
   end
   
   # publication date must have date format
+  # Validate direction from outside territory (capital) ?
   
 end
