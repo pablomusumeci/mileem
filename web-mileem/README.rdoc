@@ -8,3 +8,7 @@ Ejemplo:
 * rails g scaffold Post title:string description:text
 * rake db:migrate
 * rails g bootstrap:themed Posts
+
+Para validar las fechas ver el ejemplo acá
+
+* http://andowebsit.es/blog/noteslog.com/post/how-to-validate-dates-in-rails-4/

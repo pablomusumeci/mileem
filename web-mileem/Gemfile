@@ -31,7 +31,6 @@ gem 'therubyracer'
 gem 'less-rails'
 
 gem 'typeahead-addresspicker-rails'
-gem 'date_validator'
 gem 'magic_encoding'
 
 #Bootstrap plugins

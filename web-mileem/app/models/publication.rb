@@ -22,7 +22,5 @@
 
 class Publication < ActiveRecord::Base
   validates :price, presence: true, :numericality => true
-  validates :effective_date,
-  date: { after_or_equal_to: Proc.new { DateTime.now }, message: "La fecha publicación no puede ser anterior al día de hoy" },
-  on: :create
+  validates :effective_date, presence: true, date: {on_or_after: DateTime.now.change(:hour => 0, :min => 0)}
 end
