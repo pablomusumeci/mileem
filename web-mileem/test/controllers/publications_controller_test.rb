@@ -4,6 +4,7 @@ require 'test_helper'
 class PublicationsControllerTest < ActionController::TestCase
   setup do
     @publication = publications(:one)
+    @publication.effective_date = Date.today
   end
 
   test "should get index" do
