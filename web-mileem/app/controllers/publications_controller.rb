@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class PublicationsController < ApplicationController
   before_action :set_publication, only: [:show, :edit, :update, :destroy]
 

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'test_helper'
 
 class PublicationTest < ActiveSupport::TestCase
@@ -11,7 +12,7 @@ class PublicationTest < ActiveSupport::TestCase
     @publication.effective_date = Date.today
   end
   
-  def test_create_publicattion_ok
+  def test_create_publication_ok
     assert @publication.save, 'Validate all fields have values according to its validations'
   end
   

@@ -32,7 +32,8 @@
   <div class="form-group">
     <%= f.label :address, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :address, :class => 'form-control' %>
+      <input id="address" class="form-control" type="text" placeholder="Dirección">
+      <% #f.text_field :address, :class => 'form-control' %>
     </div>
     <%= error_span(@publication[:address]) %>
   </div>
@@ -108,4 +109,21 @@
     </div>
   </div>
 
+<% end %>
+
+<%= javascript_tag do %>
+// https://developers.google.com/places/documentation/autocomplete#place_types
+var addressPicker = new AddressPicker(
+  {
+    autocompleteService: {
+      types: ['address'], 
+      componentRestrictions: {country: 'AR'}
+    }
+  }
+);
+
+$('#address').typeahead(null, {
+  displayKey: 'description',
+  source: addressPicker.ttAdapter()
+});
 <% end %>
