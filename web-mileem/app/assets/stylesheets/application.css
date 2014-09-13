@@ -24,16 +24,12 @@ a.navbar-brand  {
   display: inline-block;
 }
 
-label {
-  font-weight: normal;
-}
-
 .datepicker{
 	z-index:1200;
 }
 
-body {
-  line-height: 3;
+.alert {
+  margin-top: 40px;
 }
 
 html,
