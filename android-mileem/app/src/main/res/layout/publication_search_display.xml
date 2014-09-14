@@ -21,7 +21,7 @@
             android:src="@drawable/house" />
 
         <TableLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
             <TableRow
@@ -41,7 +41,8 @@
                         android:gravity="left"
                         android:singleLine="false"
                         android:autoText="false"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:text="calle de la publicacion" />
                 </LinearLayout>
 
             </TableRow>
@@ -68,7 +69,8 @@
                         android:layout_width="37dp"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:layout_weight="0.16" />
+                        android:layout_weight="0.16"
+                        android:text="Habs." />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -81,7 +83,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/PublicationSurfaceId"
                         android:layout_weight="0.52"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:text="Sup. M2" />
                 </LinearLayout>
 
             </TableRow>
@@ -100,7 +103,8 @@
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/PublicationOperationId"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:text="Operacion" />
 
                     <TableRow
                         android:layout_width="fill_parent"
@@ -113,7 +117,9 @@
                             android:layout_width="124dp"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:gravity="right" />
+                            android:gravity="right"
+                            android:layout_gravity="right"
+                            android:text="Precio $" />
                     </TableRow>
 
                 </LinearLayout>

@@ -76,20 +76,22 @@ public class SearchResultsActivity extends ListActivity {
                 try {
                     JSONObject obj = jArray.getJSONObject(i);
                     Publication p = new Publication();
-                    p.setAdditional_info(obj.getString("additional_info"));
-                    p.setAddress(obj.getString("address"));
-                    p.setAntiquity(obj.getInt("antiquity"));
-                    p.setApartment(obj.getString("apartment"));
-                    p.setDescription(obj.getString("description"));
-                    p.setEffective_date(obj.getString("effective_date"));
-                    p.setExpenses(obj.getInt("expenses"));
-                    p.setFloor(obj.getInt("floor"));
-                    p.setNumber_spaces(obj.getInt("number_spaces"));
-                    p.setOperation(obj.getString("operation"));
-                    p.setPrice(obj.getInt("price"));
-                    p.setSurface(obj.getInt("surface"));
-                    p.setUrl(obj.getString("url"));
                     p.setId(obj.getInt("id"));
+                    p.setEffective_date(obj.getString("effective_date"));
+                    p.setOperation(obj.getString("operation"));
+                    p.setAddress(obj.getString("address"));
+                    p.setFloor(obj.getInt("floor"));
+                    p.setApartment(obj.getString("apartment"));
+                    p.setNumber_spaces(obj.getInt("number_spaces"));
+                    p.setSurface(obj.getInt("surface"));
+                    p.setPrice(obj.getInt("price"));
+                    p.setExpenses(obj.getInt("expenses"));
+                    p.setAntiquity(obj.getInt("antiquity"));
+                    p.setDescription(obj.getString("description"));
+                    p.setAdditional_info(obj.getString("additional_info"));
+                    p.setCurrency_name(obj.getString("currency_name"));
+                    p.setProperty_name(obj.getString("property_type"));
+                    p.setNeighbourhood_name(obj.getString("neighbourhood_name"));
                     list.add(p);
                 } catch (JSONException e) {
                     e.printStackTrace();

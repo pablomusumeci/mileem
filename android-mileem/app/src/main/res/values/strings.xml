@@ -17,4 +17,5 @@
     <string name="additional_info">Información adicional: </string>
     <string name="url">Web: </string>
     <string name="numberSpaces">Ambientes: </string>
+    <string name="neighbourhood_name">Barrio:</string>
 </resources>

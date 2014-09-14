@@ -41,8 +41,8 @@ public class PublicationDetailActivity extends Activity {
         tv.setText(Integer.toString(p.getAntiquity()));
         tv = (TextView) findViewById(R.id.additional_info);
         tv.setText(p.getAdditional_info());
-        tv = (TextView) findViewById(R.id.url);
-        tv.setText(p.getUrl());
+        tv = (TextView) findViewById(R.id.neighbourhood_name);
+        tv.setText(p.getNeighbourhood_name());
     }
 
 
