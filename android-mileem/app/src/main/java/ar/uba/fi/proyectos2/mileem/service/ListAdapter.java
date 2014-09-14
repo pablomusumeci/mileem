@@ -34,17 +34,20 @@ public class ListAdapter extends ArrayAdapter<Publication> {
             if (v == null) {
                 LayoutInflater vi = LayoutInflater.from(getContext());
                 v = vi.inflate(R.layout.publication_search_display, null);
-                tt = (TextView) v.findViewById(R.id.PublicationNameID);
-                tt.setText(p.getDescription());
                 tt = (TextView) v.findViewById(R.id.PublicationStreetID);
                 tt.setText(p.getAddress());
+                tt = (TextView) v.findViewById(R.id.PublicationOperationId);
+                tt.setText(p.getOperation());
+                tt = (TextView) v.findViewById(R.id.PublicationSpacesID);
+                tt.setText(Integer.toString(p.getNumber_spaces()));
+                tt = (TextView) v.findViewById(R.id.PublicationSurfaceId);
+                tt.setText(p.getSurface() + "m2");
                 tt = (TextView) v.findViewById(R.id.PublicationPriceID);
-                tt.setText(Integer.toString(p.getPrice()));
-                if (position % 2 == 1) {
+                tt.setText("$" + Integer.toString(p.getPrice()));
+                if (position % 2 != 1)
                     v.setBackgroundColor(Color.parseColor("#D7E7FF"));
-                } else {
+                else
                     v.setBackgroundColor(Color.parseColor("#F0F0F0"));
-                }
             }
         } catch (Exception e) {
             e.printStackTrace();
