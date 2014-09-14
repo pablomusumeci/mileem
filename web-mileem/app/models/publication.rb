@@ -3,24 +3,24 @@
 #
 # Table name: publications
 #
-#  id              :integer          not null, primary key
-#  effective_date  :date
-#  operation       :string(255)
-#  address         :string(255)
-#  floor           :integer
-#  apartment       :string(255)
-#  number_spaces   :integer
-#  surface         :integer
-#  price           :float(24)
-#  expenses        :float(24)
-#  antiquity       :integer
-#  description     :text
-#  additional_info :text
-#  neighbourhood   :neighbourhood
-#  property_type   :property_type
-#  currency        :currency
-#  created_at      :datetime
-#  updated_at      :datetime
+#  id               :integer          not null, primary key
+#  effective_date   :date
+#  operation        :string(255)
+#  address          :string(255)
+#  floor            :integer
+#  apartment        :string(255)
+#  number_spaces    :integer
+#  surface          :integer
+#  price            :float(24)
+#  expenses         :float(24)
+#  antiquity        :integer
+#  description      :text
+#  additional_info  :text
+#  created_at       :datetime
+#  updated_at       :datetime
+#  currency_id      :integer
+#  neighbourhood_id :integer
+#  property_type_id :integer
 #
 
 class Publication < ActiveRecord::Base

@@ -52,7 +52,7 @@
     <label for="address" class="control-label">Dirección
       <span class="required">*</span>
     </label>
-      <input id="address" name="publication[address]" class="form-control" type="text" placeholder="Autocompletado automático" required="required">
+      <input id="publication_address" name="publication[address]" class="form-control" type="text" placeholder="Autocompletado automático" required="required">
       <%= error_span(@publication[:address]) %>
   </div>
 
@@ -157,15 +157,10 @@
       }
     );
 
-    $('#address').typeahead(null, {
+    $('#publication_address').typeahead(null, {
       displayKey: 'description',
       source: addressPicker.ttAdapter()
     });
-
-    //$('#address').on('typeahead:selected', function (e, direccion) {
-    //  console.log(direccion);
-    //});
-
 
     $('#publication_effective_date').datepicker(
       {
@@ -175,6 +170,10 @@
         todayHighlight: true
       }
     );
+
+    <% if not @publication.address.blank? %>
+      $('#publication_address').typeahead('val', "<%= @publication.address %>");
+    <% end %>
   }
 
   $(document).ready(ready);
