@@ -25,7 +25,7 @@ import ar.uba.fi.proyectos2.mileem.service.ListAdapter;
 public class SearchResultsActivity extends ListActivity {
 
     ArrayList<Publication> list = new ArrayList<Publication>();
-    private String url = "http://demo9345628.mockable.io/publications.json";
+    private String url = "http://192.168.1.100/rest_publications";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
