@@ -37,6 +37,7 @@ class Publication < ActiveRecord::Base
 	validates :number_spaces, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	validates :surface, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	
+	
 	# agrego los nombres de las entidades externas
 	def to_json
 		result = self.attributes
