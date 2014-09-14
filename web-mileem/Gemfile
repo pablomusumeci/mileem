@@ -37,7 +37,6 @@ gem 'magic_encoding'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'twitter-typeahead-rails', :git => "git://github.com/yourabi/twitter-typeahead-rails.git"
 gem 'bootstrap-datepicker-rails'
-gem 'bootstrap-select-rails'
 
 gem 'rails_layout'
 

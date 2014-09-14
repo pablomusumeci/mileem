@@ -16,12 +16,16 @@
 #  antiquity       :integer
 #  description     :text
 #  additional_info :text
+#  neighbourhood   :neighbourhood
+#  property_type   :property_type
+#  currency        :currency
 #  created_at      :datetime
 #  updated_at      :datetime
 #
 
 class Publication < ActiveRecord::Base
-	belongs_to :neighbourhood
+	belongs_to   :neighbourhood
+	validates :neighbourhood, presence: true
 	validates :price, presence: true, :numericality => { :greater_than_or_equal_to => 0 }
 	validates :address, presence: true
 	validates :effective_date, presence: true, date: {on_or_after: DateTime.now.change(:hour => 0, :min => 0)}
@@ -30,4 +34,5 @@ class Publication < ActiveRecord::Base
 	validates :floor, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	validates :number_spaces, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	validates :surface, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
+	
 end
