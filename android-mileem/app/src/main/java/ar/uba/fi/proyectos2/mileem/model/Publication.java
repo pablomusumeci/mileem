@@ -1,11 +1,16 @@
 package ar.uba.fi.proyectos2.mileem.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
 /**
  * Created by javier on 07/09/14.
  */
-public class Publication {
+public class Publication implements Parcelable {
+
+    public static final String KEY = "ar.uba.fi.proyectos2.mileem.model.publication";
 
     private int id;
     private String effective_date;
@@ -136,4 +141,52 @@ public class Publication {
     public void setUrl(String url) {
         this.url = url;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(effective_date);
+        parcel.writeString(operation);
+        parcel.writeString(address);
+        parcel.writeInt(floor);
+        parcel.writeString(apartment);
+        parcel.writeInt(number_spaces);
+        parcel.writeInt(surface);
+        parcel.writeInt(price);
+        parcel.writeInt(expenses);
+        parcel.writeInt(antiquity);
+        parcel.writeString(description);
+        parcel.writeString(additional_info);
+        parcel.writeString(url);
+    }
+
+    public static final Parcelable.Creator<Publication> CREATOR = new Creator<Publication>() {
+        public Publication createFromParcel(Parcel source) {
+            Publication p = new Publication();
+            p.id = source.readInt();
+            p.effective_date = source.readString();
+            p.operation = source.readString();
+            p.address = source.readString();
+            p.floor = source.readInt();
+            p.apartment = source.readString();
+            p.number_spaces = source.readInt();
+            p.surface = source.readInt();
+            p.price = source.readInt();
+            p.expenses = source.readInt();
+            p.antiquity = source.readInt();
+            p.description = source.readString();
+            p.additional_info = source.readString();
+            p.url = source.readString();
+            return p;
+        }
+        public Publication[] newArray(int size) {
+            return new Publication[size];
+        }
+    };
 }

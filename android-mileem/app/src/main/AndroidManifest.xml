@@ -11,20 +11,29 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="ar.uba.fi.proyectos2.mileem.search.SearchPublicationsActivity"
+            android:name=".search.SearchPublicationsActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="ar.uba.fi.proyectos2.mileem.search.SearchResultsActivity"
+            android:name=".search.SearchResultsActivity"
             android:label="@string/title_activity_search_results"
-            android:parentActivityName="ar.uba.fi.proyectos2.mileem.search.SearchPublicationsActivity" >
+            android:parentActivityName=".search.SearchPublicationsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ar.uba.fi.proyectos2.mileem.search.SearchPublicationsActivity" />
+        </activity>
+        <activity
+            android:name=".search.PublicationDetailActivity"
+            android:label="@string/title_activity_publication_detail"
+            android:parentActivityName=".search.SearchResultsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ar.uba.fi.proyectos2.mileem.search.SearchResultsActivity" />
         </activity>
     </application>
 
