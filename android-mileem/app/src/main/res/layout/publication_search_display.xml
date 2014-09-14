@@ -113,7 +113,8 @@
                             android:layout_width="124dp"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:gravity="right" />
+                            android:gravity="right"
+                            android:layout_gravity="right" />
                     </TableRow>
 
                 </LinearLayout>

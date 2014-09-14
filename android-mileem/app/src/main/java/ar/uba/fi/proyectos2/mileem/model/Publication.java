@@ -25,9 +25,36 @@ public class Publication implements Parcelable {
     private int antiquity;
     private String description;
     private String additional_info;
-    private String url;
+    private String currency_name;
+    private String property_name;
+    private String neighbourhood_name;
+
+    public String getCurrency_name() {
+        return currency_name;
+    }
+
+    public void setCurrency_name(String currency_name) {
+        this.currency_name = currency_name;
+    }
+
+    public String getProperty_name() {
+        return property_name;
+    }
+
+    public void setProperty_name(String property_name) {
+        this.property_name = property_name;
+    }
+
+    public String getNeighbourhood_name() {
+        return neighbourhood_name;
+    }
+
+    public void setNeighbourhood_name(String neighbourhood_name) {
+        this.neighbourhood_name = neighbourhood_name;
+    }
 
     public Publication() {
+
     }
 
     public int getId() {
@@ -134,14 +161,6 @@ public class Publication implements Parcelable {
         this.additional_info = additional_info;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
 
     @Override
     public int describeContents() {
@@ -163,7 +182,9 @@ public class Publication implements Parcelable {
         parcel.writeInt(antiquity);
         parcel.writeString(description);
         parcel.writeString(additional_info);
-        parcel.writeString(url);
+        parcel.writeString(currency_name);
+        parcel.writeString(property_name);
+        parcel.writeString(neighbourhood_name);
     }
 
     public static final Parcelable.Creator<Publication> CREATOR = new Creator<Publication>() {
@@ -182,7 +203,9 @@ public class Publication implements Parcelable {
             p.antiquity = source.readInt();
             p.description = source.readString();
             p.additional_info = source.readString();
-            p.url = source.readString();
+            p.currency_name = source.readString();
+            p.property_name = source.readString();
+            p.neighbourhood_name = source.readString();
             return p;
         }
         public Publication[] newArray(int size) {

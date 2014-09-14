@@ -43,7 +43,7 @@ public class ListAdapter extends ArrayAdapter<Publication> {
                 tt = (TextView) v.findViewById(R.id.PublicationSurfaceId);
                 tt.setText(p.getSurface() + "m2");
                 tt = (TextView) v.findViewById(R.id.PublicationPriceID);
-                tt.setText("$" + Integer.toString(p.getPrice()));
+                tt.setText(p.getCurrency_name()+ " " + Integer.toString(p.getPrice()));
                 if (position % 2 != 1)
                     v.setBackgroundColor(Color.parseColor("#D7E7FF"));
                 else
