@@ -6,19 +6,19 @@
     android:orientation="vertical">
 
     <TableRow
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:minHeight="70dp">
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:minWidth="70dp"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/house" />
 
         <TableLayout
-            android:layout_width="fill_parent"
+            android:layout_width="300dp"
             android:layout_height="fill_parent">
 
             <TableRow
@@ -28,7 +28,7 @@
                 <TextView
                     android:id="@+id/PublicationNameID"
                     android:name="name"
-                    android:layout_width="fill_parent"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:singleLine="false" />
@@ -41,7 +41,7 @@
                 <TextView
                     android:id="@+id/PublicationStreetID"
                     android:name="street"
-                    android:layout_width="fill_parent"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:singleLine="false" />
@@ -55,9 +55,8 @@
                 <TextView
                     android:id="@+id/PublicationPriceID"
                     android:name="price"
-                    android:layout_width="fill_parent"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
                     android:textStyle="bold" />
 
             </TableRow>
