@@ -194,18 +194,21 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/url"
-        android:id="@+id/textView15"
-        android:layout_below="@+id/additional_info"
-        android:layout_alignParentStart="true" />
+        android:text="@string/neighbourhood_name"
+        android:id="@+id/textView"
+        android:layout_toEndOf="@+id/image"
+        android:layout_alignBottom="@+id/image"
+        android:layout_toRightOf="@+id/image" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/url"
-        android:layout_below="@+id/additional_info"
-        android:layout_alignStart="@+id/floor" />
+        android:id="@+id/neighbourhood_name"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_toEndOf="@+id/textView"
+        android:layout_marginLeft="5dp" />
 
 
 </RelativeLayout>
