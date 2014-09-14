@@ -6,6 +6,10 @@ class PublicationsController < ApplicationController
   # GET /publications.json
   def index
     @publications = Publication.all
+    respond_to do |format|
+      format.html { render :show}
+      format.json { render :json => @publications.to_a.map{ |p| p.to_json_for_index }.to_json }
+    end
   end
 
   # GET /publications/1
@@ -13,7 +17,7 @@ class PublicationsController < ApplicationController
   def show
     respond_to do |format|
       format.html { render :show}
-      format.json { render @publications.to_json }
+      format.json { render :json => @publication.to_json}
     end
   end
 
