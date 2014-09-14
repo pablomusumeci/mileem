@@ -24,7 +24,9 @@
 #
 
 class Publication < ActiveRecord::Base
-	belongs_to   :neighbourhood
+	belongs_to	:neighbourhood
+	belongs_to  :currency
+	belongs_to  :property_type
 	validates :neighbourhood, presence: true
 	validates :price, presence: true, :numericality => { :greater_than_or_equal_to => 0 }
 	validates :address, presence: true
@@ -35,4 +37,28 @@ class Publication < ActiveRecord::Base
 	validates :number_spaces, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	validates :surface, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	
+	# agrego los nombres de las entidades externas
+	def to_json
+		result = self.attributes
+		result[:currency_name] = self.currency.name
+		result[:property_type] = self.property_type.name
+		result[:neighbourhood_name] = self.neighbourhood.name
+
+		return result
+	end
+
+	def to_json_for_index
+		return self.to_json
+
+		# Si queremos armar un json propio con otros datos
+		# result = {}
+		# result[:id] = self.id
+		# result[:price] = self.price
+		# result[:address] = self.address
+		# result[:currency] = self.currency.abreviatura
+		# result[:operation] = self.operation
+		# result[:neighbourhood] = self.neighbourhood.name
+		# return result
+	end
 end
+
