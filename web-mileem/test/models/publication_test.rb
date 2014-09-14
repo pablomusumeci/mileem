@@ -11,6 +11,9 @@ class PublicationTest < ActiveSupport::TestCase
     @publication.price = '3000'
     @publication.effective_date = Date.today
     @publication.address = 'Av Congreso 2420, Buenos Aires, Argentina'
+    @barrio = Neighbourhood.create(:name => "Sarlanga")
+    @publication.neighbourhood = @barrio
+
   end
   
   def test_create_publication_ok
