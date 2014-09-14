@@ -31,7 +31,11 @@ gem 'therubyracer'
 gem 'less-rails'
 
 gem 'typeahead-addresspicker-rails'
+
+# Agregar tag de utf8
 gem 'magic_encoding'
+# Silencia el debug del asset pipeline
+gem 'quiet_assets', group: :development
 
 #Bootstrap plugins
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'

@@ -2,15 +2,14 @@
 require 'test_helper'
 
 class PublicationTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
   
   def setup
     @publication = Publication.new
     @publication.price = '3000'
     @publication.effective_date = Date.today
     @publication.address = 'Av Congreso 2420, Buenos Aires, Argentina'
+    @barrio = Neighbourhood.create(:name => "Belgrano")
+    @publication.neighbourhood = @barrio
   end
   
   def test_create_publication_ok
@@ -35,6 +34,11 @@ class PublicationTest < ActiveSupport::TestCase
   def test_effective_date_required
     @publication.effective_date = ''
     assert_not @publication.save, 'Effective Date must be a required field'
+  end
+  
+  def test_neighbourhood_required
+    @publication.neighbourhood = nil
+    assert_not @publication.save, 'Neighbourhood must be a required field'
   end
 
   def test_price_numeric
