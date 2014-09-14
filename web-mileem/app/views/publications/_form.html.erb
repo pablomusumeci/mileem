@@ -41,12 +41,18 @@
 </div>
 
 <div class="row">  
+  <div class="col-md-2">
+    <label for="neighbourhood" class="control-label">Barrio
+      <span class="required">*</span>
+    </label>
+     <%= f.collection_select(:neighbourhood_id, Neighbourhood.all , :id, :name, {:prompt   => "Seleccione una opción"}, { :class =>"form-control", :required => true } ) %>
+    <%= error_span(@publication[:neighbourhood]) %>
+   </div>
   <div class="col-md-4">
     <label for="address" class="control-label">Dirección
       <span class="required">*</span>
     </label>
       <input id="address" name="publication[address]" class="form-control" type="text" placeholder="Autocompletado automático" required="required">
-      <%#= f.text_field :address, :required => true , :class => 'form-control' %>
       <%= error_span(@publication[:address]) %>
   </div>
 
@@ -65,9 +71,8 @@
 <div class="row">
   <div class="col-md-2">
     <label for="inmueble" class="control-label">Tipos de inmueble</label>
-    <select id="tipo_inmueble" class="selectpicker" data-style="btn-primary">
-     <%= options_from_collection_for_select(Neighbourhood.all, 'id', 'name') %> 
-    </select>
+    <%= f.collection_select(:property_type_id, PropertyType.all , :id, :name, {:prompt   => "Seleccione una opción"}, { :class =>"form-control" } ) %>  
+    <%= error_span(@publication[:property_type]) %>
   </div>
   <div class="col-md-2">
     <label for="number_spaces" class="control-label">Ambientes</label>
@@ -100,6 +105,18 @@
     <%= f.number_field :expenses, :class => 'form-control', step: 0.01, min:0 %>
     <%= error_span(@publication[:expenses]) %>
   </div>
+  <div class="col-md-3">
+    <label for="currency" class="control-label"></label>
+    <div class="radio">
+      <% Currency.all.each do |c| %>
+      <label class="radio-inline">
+        <%= f.radio_button :currency_id , c.id , :checked => (@publication.currency_id == c.id) ? 'checked' : "" %><p> <%= c.abreviatura %></p>
+      </label>
+    <% end %>  
+    </div>   
+  </div>
+
+
 </div>
 
 <div class="row"> 
@@ -127,7 +144,7 @@
 
 <% end %>
 
-<%= javascript_tag do %>
+<script type="text/javascript" >
   var ready;
   ready = function() {
     // https://developers.google.com/places/documentation/autocomplete#place_types
@@ -158,10 +175,8 @@
         todayHighlight: true
       }
     );
-
-    $('select').selectpicker();
   }
 
   $(document).ready(ready);
   $(document).on('page:load', ready);
-<% end %>
+</script>

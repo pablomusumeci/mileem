@@ -20,7 +20,10 @@ class PublicationsController < ApplicationController
   # GET /publications/new
   def new
     @publication = Publication.new
-  end
+    pesos = Currency.where(name: "Pesos").first
+    @publication.currency_id = pesos.id
+    @publication.effective_date = Date.today.strftime("%d/%m/%Y")
+  end  
 
   # GET /publications/1/edit
   def edit
@@ -74,6 +77,6 @@ class PublicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def publication_params
-      params.require(:publication).permit(:effective_date, :operation, :address, :floor, :apartment, :number_spaces, :surface, :price, :expenses, :antiquity, :description, :additional_info)
+      params.require(:publication).permit(:effective_date, :operation, :address, :floor, :apartment, :number_spaces, :surface, :price, :expenses, :antiquity, :description, :additional_info, :neighbourhood_id, :currency_id,:property_type_id)
     end
 end

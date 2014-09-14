@@ -1,3 +1,4 @@
+
 package ar.uba.fi.proyectos2.mileem.service;
 
 import android.util.Log;
@@ -28,7 +29,7 @@ public class JSONParser {
         JSONArray jObj = null;
         String json = "";
         // Making HTTP request
-        try {
+/*        try {
             // defaultHttpClient
             DefaultHttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
@@ -57,7 +58,8 @@ public class JSONParser {
             json = sb.toString();
         } catch (Exception e) {
             Log.e("Buffer Error", "Error converting result " + e.toString());
-        }
+        }*/
+        json = "[{\"id\":1,\"effective_date\":\"2014-09-25\",\"operation\":\"Alquiler\",\"address\":\"Avenida Cordoba, Buenos Aires, Argentina\",\"floor\":1,\"apartment\":\"1\",\"number_spaces\":1,\"surface\":1,\"price\":1.0,\"expenses\":1.0,\"antiquity\":1,\"description\":\"\",\"additional_info\":\"\",\"url\":\"http://localhost:3000/publications/1.json\"},{\"id\":2,\"effective_date\":\"2014-09-13\",\"operation\":\"Alquiler\",\"address\":\"Adolfo Alsina, Villa Martelli, Buenos Aires Province, Argentina\",\"floor\":1,\"apartment\":\"\",\"number_spaces\":1,\"surface\":1,\"price\":1.0,\"expenses\":1.0,\"antiquity\":1,\"description\":\"\",\"additional_info\":\"\",\"url\":\"http://localhost:3000/publications/2.json\"},{\"id\":3,\"effective_date\":\"2014-09-25\",\"operation\":\"Alquiler\",\"address\":\"Adolfo Alsina, Buenos Aires, Argentina\",\"floor\":2,\"apartment\":\"\",\"number_spaces\":3,\"surface\":45,\"price\":1000.0,\"expenses\":350,\"antiquity\":1,\"description\":\"\",\"additional_info\":\"\",\"url\":\"http://localhost:3000/publications/3.json\"}]";
 
         // try parse the string to a JSON object
         try {

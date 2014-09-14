@@ -20,5 +20,4 @@
 //= require twitter/typeahead.min
 //= require typeahead-addresspicker.min
 //= require bootstrap-datepicker
-//= require bootstrap-select
 //= require_tree .
