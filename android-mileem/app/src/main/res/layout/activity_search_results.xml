@@ -2,11 +2,24 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:baselineAligned="true">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/SearchResultTitle"
+        android:id="@+id/textView2"
+        android:layout_gravity="center_horizontal"
+        android:autoText="false"
+        android:background="#ff97cf38"
+        android:gravity="center"
+        android:textColor="@android:color/background_light" />
 
     <ListView
         android:id="@android:id/list"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
 

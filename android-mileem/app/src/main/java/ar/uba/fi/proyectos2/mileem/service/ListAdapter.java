@@ -1,6 +1,8 @@
 package ar.uba.fi.proyectos2.mileem.service;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +40,11 @@ public class ListAdapter extends ArrayAdapter<Publication> {
                 tt.setText(p.getAddress());
                 tt = (TextView) v.findViewById(R.id.PublicationPriceID);
                 tt.setText(Integer.toString(p.getPrice()));
+                if (position % 2 == 1) {
+                    v.setBackgroundColor(Color.parseColor("#D7E7FF"));
+                } else {
+                    v.setBackgroundColor(Color.parseColor("#F0F0F0"));
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

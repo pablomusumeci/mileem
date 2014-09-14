@@ -4,5 +4,6 @@
     <string name="app_name">MiLEEM</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_search_results">SearchResults</string>
+    <string name="SearchResultTitle">Resultados</string>
 
 </resources>
