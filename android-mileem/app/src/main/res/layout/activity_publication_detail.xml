@@ -106,7 +106,7 @@
                 android:text="New Text" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/message.surface"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -117,8 +117,8 @@
                 android:id="@+id/apartment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/textView9"
-                android:layout_toEndOf="@+id/textView9"
+                android:layout_alignTop="@+id/message.surface"
+                android:layout_toEndOf="@+id/message.surface"
                 android:text="New Text" />
 
             <TextView
@@ -126,14 +126,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/textView9"
+                android:layout_below="@+id/message.surface"
                 android:text="@string/number_spaces" />
 
             <TextView
                 android:id="@+id/number_spaces"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textView9"
+                android:layout_below="@+id/message.surface"
                 android:layout_toEndOf="@+id/textView10"
                 android:text="New Text" />
 
