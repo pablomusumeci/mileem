@@ -28,6 +28,19 @@ public class Publication implements Parcelable {
     private String currency_name;
     private String property_name;
     private String neighbourhood_name;
+    private String currency_symbol;
+
+    public Publication() {
+
+    }
+
+    public String getCurrency_symbol() {
+        return currency_symbol;
+    }
+
+    public void setCurrency_symbol(String currency_symbol) {
+        this.currency_symbol = currency_symbol;
+    }
 
     public String getCurrency_name() {
         return currency_name;
@@ -51,10 +64,6 @@ public class Publication implements Parcelable {
 
     public void setNeighbourhood_name(String neighbourhood_name) {
         this.neighbourhood_name = neighbourhood_name;
-    }
-
-    public Publication() {
-
     }
 
     public int getId() {
@@ -185,6 +194,7 @@ public class Publication implements Parcelable {
         parcel.writeString(currency_name);
         parcel.writeString(property_name);
         parcel.writeString(neighbourhood_name);
+        parcel.writeString(currency_symbol);
     }
 
     public static final Parcelable.Creator<Publication> CREATOR = new Creator<Publication>() {
@@ -206,6 +216,7 @@ public class Publication implements Parcelable {
             p.currency_name = source.readString();
             p.property_name = source.readString();
             p.neighbourhood_name = source.readString();
+            p.currency_symbol = source.readString();
             return p;
         }
         public Publication[] newArray(int size) {
