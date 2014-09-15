@@ -39,15 +39,30 @@ public class ListAdapter extends ArrayAdapter<Publication> {
                 tt = (TextView) v.findViewById(R.id.PublicationOperationId);
                 tt.setText(p.getOperation());
                 tt = (TextView) v.findViewById(R.id.PublicationSpacesID);
-                tt.setText(Integer.toString(p.getNumber_spaces()));
+                if (p.getNumber_spaces() == -1) {
+                    tt.setText("");
+                    tt = (TextView) v.findViewById(R.id.detail_message_ambients);
+                    tt.setText("");
+                } else {
+                    tt.setText(Integer.toString(p.getNumber_spaces()));
+                }
                 tt = (TextView) v.findViewById(R.id.PublicationSurfaceId);
-                tt.setText(p.getSurface() + "m2");
+                if (p.getSurface() == -1) {
+                    tt.setText("");
+                    tt = (TextView) v.findViewById(R.id.detail_message_surface);
+                    tt.setText("");
+                } else {
+                    tt.setText(p.getSurface() + "m2");
+                }
                 tt = (TextView) v.findViewById(R.id.PublicationPriceID);
-                tt.setText( Integer.toString(p.getPrice()) + " " + p.getCurrency_name());
+                tt.setText( Integer.toString(p.getPrice()) + " " + p.getCurrency_symbol());
                 if (position % 2 != 1)
                     v.setBackgroundColor(Color.parseColor("#D7E7FF"));
                 else
                     v.setBackgroundColor(Color.parseColor("#F0F0F0"));
+                tt = (TextView) v.findViewById(R.id.neighbourhood);
+                tt.setText(p.getNeighbourhood_name());
+
             }
         } catch (Exception e) {
             e.printStackTrace();
