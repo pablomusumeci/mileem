@@ -42,6 +42,8 @@ class Publication < ActiveRecord::Base
 	def to_json
 		result = self.attributes
 		result[:currency_name] = self.currency.name
+		result[:currency_symbol] = self.currency.abreviatura
+
 		result[:property_type] = self.property_type.name
 		result[:neighbourhood_name] = self.neighbourhood.name
 

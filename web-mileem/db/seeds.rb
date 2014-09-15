@@ -60,3 +60,7 @@ PropertyType.create(:name => "Casa")
 PropertyType.create(:name => "Terreno")
 PropertyType.create(:name => "Oficina")
 PropertyType.create(:name => "Local Comercial")
+
+Publication.create( effective_date: "2014-09-17", operation: "Alquiler", address: "Adolfo Alsina, Buenos Aires, Argentina", floor: 1, apartment: "1", number_spaces: 2, surface: 50, price: 3000.0, expenses: 200.0, antiquity: 10, description: "", additional_info: "", created_at: "2014-09-14 15:21:35", updated_at: "2014-09-14 17:33:20", currency_id: 2, neighbourhood_id: 5, property_type_id: 3)
+Publication.create( effective_date: "2014-09-16", operation: "Alquiler", address: "Quesada, Buenos Aires, Argentina", floor: 2, apartment: "3", number_spaces: 4, surface: 120, price: 7000.0, expenses: 200.0, antiquity: 50, description: "", additional_info: "", created_at: "2014-09-14 17:38:48", updated_at: "2014-09-14 17:38:48", currency_id: 1, neighbourhood_id: 6, property_type_id: 3)
+Publication.create( effective_date: "2014-09-15", operation: "Venta", address: "Avenida del Libertador, Buenos Aires, Argentina", floor: 10, apartment: "5", number_spaces: 3, surface: 100, price: 75000.0, expenses: 2000, antiquity: 5, description: "", additional_info: "", created_at: "2014-09-14 17:40:21", updated_at: "2014-09-14 17:56:50", currency_id: 1, neighbourhood_id: 1, property_type_id: 4)

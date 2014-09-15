@@ -1,21 +1,22 @@
 <%- model_class = Publication -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1><%=t '.title', :default => "Publicaciones" %></h1>
 </div>
 <table class="table table-striped">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= "Fecha" %></th>
-      <th><%= "Tipo" %></th>
-      <th><%= "Dirección" %></th>
-      <th><%= "Piso" %></th>
-      <th><%= "Departamento" %></th>
-      <th><%= "Ambientes" %></th>
-      <th><%= "Superficie" %></th>
-      <th><%= "Precio" %></th>
-      <th><%= "Expensas" %></th>
-      <th><%= "Antiguedad" %></th>
+      <th>Fecha</th>
+      <th>Tipo</th>
+      <th>Dirección</th>
+      <th>Barrio</th>
+      <th>Piso</th>
+      <th>Depto</th>
+      <th>Ambientes</th>
+      <th>Superficie</th>
+      <th>Precio</th>
+      <th>Expensas</th>
+      <th>Antiguedad</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -26,11 +27,12 @@
         <td><%= publication.effective_date %></td>
         <td><%= publication.operation %></td>
         <td><%= publication.address %></td>
+        <td><%= publication.neighbourhood.name %></td>
         <td><%= publication.floor %></td>
         <td><%= publication.apartment %></td>
         <td><%= publication.number_spaces %></td>
         <td><%= publication.surface %></td>
-        <td><%= publication.price %></td>
+        <td>(<%= publication.currency.abreviatura %>) <%= publication.price %></td>
         <td><%= publication.expenses %></td>
         <td><%= publication.antiquity %></td>
         <td>

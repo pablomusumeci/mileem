@@ -5,29 +5,31 @@
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:effective_date) %>:</strong></dt>
+  <dt><strong>Fecha de publicación</strong></dt>
   <dd><%= @publication.effective_date %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:operation) %>:</strong></dt>
+  <dt><strong>Tipo</strong></dt>
   <dd><%= @publication.operation %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
+  <dt><strong>Dirección</strong></dt>
   <dd><%= @publication.address %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:floor) %>:</strong></dt>
+  <dt><strong>Barrio</strong></dt>
+  <dd><%= @publication.neighbourhood.name %></dd>
+  <dt><strong>Piso</strong></dt>
   <dd><%= @publication.floor %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:apartment) %>:</strong></dt>
+  <dt><strong>Departamento</strong></dt>
   <dd><%= @publication.apartment %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:number_spaces) %>:</strong></dt>
+  <dt><strong>Ambientes</strong></dt>
   <dd><%= @publication.number_spaces %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:surface) %>:</strong></dt>
+  <dt><strong>Superficie</strong></dt>
   <dd><%= @publication.surface %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
+  <dt><strong>Precio (<%= @publication.currency.abreviatura %>)</strong></dt>
   <dd><%= @publication.price %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:expenses) %>:</strong></dt>
+  <dt><strong>Expensas</strong></dt>
   <dd><%= @publication.expenses %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:antiquity) %>:</strong></dt>
+  <dt><strong>Antiguedad</strong></dt>
   <dd><%= @publication.antiquity %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dt><strong>Descripción</strong></dt>
   <dd><%= @publication.description %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:additional_info) %>:</strong></dt>
+  <dt><strong>Información adicional</strong></dt>
   <dd><%= @publication.additional_info %></dd>
 </dl>
 
