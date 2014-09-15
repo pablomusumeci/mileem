@@ -25,7 +25,7 @@ import ar.uba.fi.proyectos2.mileem.service.ListAdapter;
 public class SearchResultsActivity extends ListActivity {
 
     ArrayList<Publication> list = new ArrayList<Publication>();
-    private String url = "http://192.168.1.100/rest_publications";
+    private String url = "http://181.46.183.212:4567/publications.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,13 +80,33 @@ public class SearchResultsActivity extends ListActivity {
                     p.setEffective_date(obj.getString("effective_date"));
                     p.setOperation(obj.getString("operation"));
                     p.setAddress(obj.getString("address"));
-                    p.setFloor(obj.getInt("floor"));
+                    try {
+                        p.setFloor(obj.getInt("floor"));
+                    } catch (JSONException e) {
+                        p.setFloor(-1);
+                    }
                     p.setApartment(obj.getString("apartment"));
-                    p.setNumber_spaces(obj.getInt("number_spaces"));
-                    p.setSurface(obj.getInt("surface"));
+                    try {
+                        p.setNumber_spaces(obj.getInt("number_spaces"));
+                    } catch (JSONException e) {
+                        p.setNumber_spaces(-1);
+                    }
+                    try {
+                        p.setSurface(obj.getInt("surface"));
+                    } catch (JSONException e) {
+                        p.setSurface(-1);
+                    }
                     p.setPrice(obj.getInt("price"));
-                    p.setExpenses(obj.getInt("expenses"));
-                    p.setAntiquity(obj.getInt("antiquity"));
+                    try {
+                        p.setExpenses(obj.getInt("expenses"));
+                    } catch (JSONException e) {
+                        p.setExpenses(-1);
+                    }
+                    try {
+                        p.setAntiquity(obj.getInt("antiquity"));
+                    } catch (JSONException e) {
+                        p.setAntiquity(-1);
+                    }
                     p.setDescription(obj.getString("description"));
                     p.setAdditional_info(obj.getString("additional_info"));
                     p.setCurrency_name(obj.getString("currency_name"));
