@@ -60,6 +60,9 @@ public class ListAdapter extends ArrayAdapter<Publication> {
                     v.setBackgroundColor(Color.parseColor("#D7E7FF"));
                 else
                     v.setBackgroundColor(Color.parseColor("#F0F0F0"));
+                tt = (TextView) v.findViewById(R.id.neighbourhood);
+                tt.setText(p.getNeighbourhood_name());
+
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -122,6 +122,31 @@
 
                 </TableRow>
 
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/neighbourhood_name"
+                            android:id="@+id/textView"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="neighbourhood"
+                            android:id="@+id/neighbourhood"
+                            android:paddingLeft="3dp" />
+                    </LinearLayout>
+                </TableRow>
+
             </TableLayout>
 
         </TableRow>
