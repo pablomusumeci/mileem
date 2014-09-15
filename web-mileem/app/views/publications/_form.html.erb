@@ -176,6 +176,11 @@
     <% end %>
   }
 
+  $('#publication_address').on('typeahead:selected', function(evt, item) {
+    console.log(item.description);
+    $('#publication_address').typeahead('val', item.description);
+  });
+
   $(document).ready(ready);
   $(document).on('page:load', ready);
 </script>

@@ -6,19 +6,16 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:effective_date) %></th>
-      <th><%= model_class.human_attribute_name(:operation) %></th>
-      <th><%= model_class.human_attribute_name(:address) %></th>
-      <th><%= model_class.human_attribute_name(:floor) %></th>
-      <th><%= model_class.human_attribute_name(:apartment) %></th>
-      <th><%= model_class.human_attribute_name(:number_spaces) %></th>
-      <th><%= model_class.human_attribute_name(:surface) %></th>
-      <th><%= model_class.human_attribute_name(:price) %></th>
-      <th><%= model_class.human_attribute_name(:expenses) %></th>
-      <th><%= model_class.human_attribute_name(:antiquity) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:additional_info) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= "Fecha" %></th>
+      <th><%= "Tipo" %></th>
+      <th><%= "Dirección" %></th>
+      <th><%= "Piso" %></th>
+      <th><%= "Departamento" %></th>
+      <th><%= "Ambientes" %></th>
+      <th><%= "Superficie" %></th>
+      <th><%= "Precio" %></th>
+      <th><%= "Expensas" %></th>
+      <th><%= "Antiguedad" %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -36,9 +33,6 @@
         <td><%= publication.price %></td>
         <td><%= publication.expenses %></td>
         <td><%= publication.antiquity %></td>
-        <td><%= publication.description %></td>
-        <td><%= publication.additional_info %></td>
-        <td><%=l publication.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_publication_path(publication), :class => 'btn btn-default btn-xs' %>
