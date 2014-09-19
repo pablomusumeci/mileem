@@ -14,7 +14,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require gmaps
 //= require twitter/bootstrap
 //= require twitter/typeahead.min
 //= require typeahead-addresspicker.min
