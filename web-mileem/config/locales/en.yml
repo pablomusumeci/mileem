@@ -23,10 +23,11 @@ en:
   hello: "Hello world"
   devise:  
     failure:  
-      unauthenticated: 'Debes estar autentiado para poder continuar.'  
+      unauthenticated: 'Debes estar autenticado para poder continuar.'  
       unconfirmed: 'You have to confirm your account before continuing.'  
       locked: 'Your account is locked.'  
-      invalid: 'OH NOES! ERROR IN TEH EMAIL!'  
+      invalid: 'Contraseña invalida.'  
+      not_found_in_database: "Contraseña o email invalidos."
       invalid_token: 'Invalid authentication token.'  
       timeout: 'Your session expired, please sign in again to continue.'  
       inactive: 'Your account was not activated yet.'  

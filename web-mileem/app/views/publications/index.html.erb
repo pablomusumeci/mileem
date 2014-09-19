@@ -1,11 +1,9 @@
-<%- model_class = Publication -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => "Publicaciones" %></h1>
+  <h1>Mis Publicaciones</h1>
 </div>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th>Fecha</th>
       <th>Tipo</th>
       <th>Dirección</th>
@@ -23,7 +21,6 @@
   <tbody>
     <% @publications.each do |publication| %>
       <tr>
-        <td><%= link_to publication.id, publication_path(publication) %></td>
         <td><%= publication.effective_date %></td>
         <td><%= publication.operation %></td>
         <td><%= publication.address %></td>
@@ -36,19 +33,22 @@
         <td><%= publication.expenses %></td>
         <td><%= publication.antiquity %></td>
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+          <%= link_to "Ver",
+                      publication_path(publication), :class => 'btn btn-success btn-xs' %>
+          <%= link_to "Editar",
                       edit_publication_path(publication), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          <%= link_to "Eliminar",
                       publication_path(publication),
                       :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :data => { :confirm => "¿Esta usted seguro que quiere eliminar la publicación?"},
                       :class => 'btn btn-xs btn-danger' %>
+
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
+<%= link_to "Nueva publicación",
             new_publication_path,
             :class => 'btn btn-primary' %>

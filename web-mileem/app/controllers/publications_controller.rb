@@ -1,13 +1,13 @@
 # -*- encoding : utf-8 -*-
 class PublicationsController < ApplicationController
   before_action :set_publication, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!, :except => [:show, :index]  # permisos del devise
+  before_filter :authenticate_user! # permisos del devise
   skip_before_action :verify_authenticity_token
 
   # GET /publications
   # GET /publications.json
   def index
-    @publications = Publication.all
+    @publications = current_user.publications
     respond_to do |format|
       format.html { render :index}
       format.json { render :json => @publications.to_a.map{ |p| p.to_json_for_index }.to_json }

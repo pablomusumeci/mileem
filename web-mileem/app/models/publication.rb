@@ -27,6 +27,8 @@ class Publication < ActiveRecord::Base
 	belongs_to	:neighbourhood
 	belongs_to  :currency
 	belongs_to  :property_type
+	belongs_to  :user
+
 	validates :neighbourhood, presence: true
 	validates :price, presence: true, :numericality => { :greater_than_or_equal_to => 0 }
 	validates :address, presence: true
