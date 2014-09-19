@@ -20,7 +20,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
   devise:  
     failure:  
       unauthenticated: 'Debes estar autenticado para poder continuar.'  
@@ -33,4 +32,9 @@ en:
       inactive: 'Your account was not activated yet.'  
     sessions:  
       signed_in: 'Acceso exitoso.'  
-      signed_out: 'Salida exitosa.'  
+      signed_out: 'Salida exitosa.'
+  errors:
+    messages:
+      not_saved:
+        one: "Un error impidio que el %{resource} sea guardado:"
+        other: "%{count} errores impidieron que el %{resource} sea guardado:"
