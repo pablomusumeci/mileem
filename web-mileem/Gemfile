@@ -46,3 +46,6 @@ gem 'rails_layout'
 
 # Servidor web violento
 gem 'puma'
+
+# Autenticacion
+gem 'devise'

@@ -21,3 +21,15 @@
 
 en:
   hello: "Hello world"
+  devise:  
+    failure:  
+      unauthenticated: 'Debes estar autentiado para poder continuar.'  
+      unconfirmed: 'You have to confirm your account before continuing.'  
+      locked: 'Your account is locked.'  
+      invalid: 'OH NOES! ERROR IN TEH EMAIL!'  
+      invalid_token: 'Invalid authentication token.'  
+      timeout: 'Your session expired, please sign in again to continue.'  
+      inactive: 'Your account was not activated yet.'  
+    sessions:  
+      signed_in: 'Acceso exitoso.'  
+      signed_out: 'Salida exitosa.'  
