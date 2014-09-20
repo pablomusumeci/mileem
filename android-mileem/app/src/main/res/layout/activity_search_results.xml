@@ -15,7 +15,7 @@
         android:id="@+id/textView2"
         android:layout_gravity="center_horizontal"
         android:autoText="false"
-        android:background="#ff97cf38"
+        android:background="#5c2040"
         android:gravity="center"
         android:textColor="@android:color/background_light" />
 

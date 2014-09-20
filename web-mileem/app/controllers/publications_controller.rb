@@ -1,7 +1,8 @@
 # -*- encoding : utf-8 -*-
 class PublicationsController < ApplicationController
   before_action :set_publication, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user! # permisos del devise
+  before_action :authorize_update, only: [:edit, :update, :destroy] #perimsos del pundit
+  before_filter :authenticate_user!, except: [:search, :show] # permisos del devise
   skip_before_action :verify_authenticity_token
 
   # GET /publications
@@ -83,10 +84,88 @@ class PublicationsController < ApplicationController
     end
   end
 
+  # GET /publications/search.json?param1=x&param2=y...
+  def search
+    @publications = Publication.all.to_a
+
+    if not params[:neighbourhood_name].nil?
+      barrio = params[:neighbourhood_name]
+      @publications.select!{ |p| p.neighbourhood.name == barrio} if barrio != "Todos"
+    end
+
+    # precio maximo
+    if not params[:operation].nil?
+      @publications.select!{ |p| p.operation == params[:operation] }
+    end
+
+    if not params[:property_name].nil?
+      tipo = params[:property_name]
+      @publications.select!{ |p| p.property_type.name == params[:property_name]} if tipo != "Todos"
+    end
+
+    # precio minimo
+    if not params[:min_price].nil?
+      @publications.select!{ |p| p.price >= params[:min_price].to_i }
+    end
+
+    # precio maximo
+    if not params[:max_price].nil?
+      @publications.select!{ |p| p.price <= params[:max_price].to_i }
+    end
+
+    # antiguedad minima
+    if not params[:min_antiquity].nil?
+      @publications.select!{ |p| p.antiquity >= params[:min_antiquity].to_i }
+    end
+
+    # antiguedad maxima
+    if not params[:max_antiquity].nil?
+      @publications.select!{ |p| p.antiquity <= params[:max_antiquity].to_i }
+    end
+
+    # superficie minima
+    if not params[:min_surface].nil?
+      @publications.select!{ |p| p.surface >= params[:min_surface].to_i }
+    end
+
+    # superficie maxima
+    if not params[:max_surface].nil?
+      @publications.select!{ |p| p.surface <= params[:max_surface].to_i }
+    end
+
+    # expensas minima
+    if not params[:min_expenses].nil?
+      @publications.select!{ |p| p.expenses >= params[:min_expenses].to_i }
+    end
+
+    # expensas maxima
+    if not params[:max_expenses].nil?
+      @publications.select!{ |p| p.expenses <= params[:max_expenses].to_i }
+    end
+
+    # abreviatura de moneda
+    if not params[:currency].nil?
+      @publications.select!{ |p| p.currency.abreviatura == params[:currency] }
+    end
+
+    # ambientes
+    if not params[:number_spaces].nil?
+      @publications.select!{ |p| p.number_spaces == params[:number_spaces].to_i }
+    end
+
+    respond_to do |format|
+      format.json { render :json => @publications.to_a.map{ |p| p.to_json_for_index }.to_json }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_publication
       @publication = Publication.find(params[:id])
+    end
+
+    def authorize_update
+      authorize @publication, :update?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

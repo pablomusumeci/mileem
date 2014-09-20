@@ -48,7 +48,9 @@ class Publication < ActiveRecord::Base
 
 		result[:property_type] = self.property_type.name
 		result[:neighbourhood_name] = self.neighbourhood.name
-
+		
+		result[:user_phone_number] = self.user.phone_number
+		result[:user_email] = self.user.email
 		return result
 	end
 

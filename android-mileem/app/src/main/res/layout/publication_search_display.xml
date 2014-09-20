@@ -142,8 +142,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="neighbourhood"
-                            android:id="@+id/neighbourhood"
-                            android:paddingLeft="3dp" />
+                            android:id="@+id/neighbourhood"/>
                     </LinearLayout>
                 </TableRow>
 
@@ -163,7 +162,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="Precio $"
-            android:textColor="@android:color/holo_green_light"
+            android:textColor="#511c39"
             android:layout_gravity="right"
             android:gravity="right"
             android:fontFamily="@string/price"
