@@ -2,14 +2,12 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  get 'publications/search' => 'publications#search'
   resources :publications do
     collection do
       get :reset_filterrific
     end
   end
-
-  get 'publications/search' => 'publications#search'
-  resources :publications
 
   # Busqueda
 

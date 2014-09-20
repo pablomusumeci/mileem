@@ -13,6 +13,7 @@
  *= require_self 
  *= require bootstrap-ubuntu
  *= require bootstrap-datepicker
+ *= require jquery.fileupload-ui
  *= require_tree .
  */
  

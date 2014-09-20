@@ -44,7 +44,7 @@
     <label for="neighbourhood" class="control-label">Barrio
       <span class="required">*</span>
     </label>
-     <%= f.collection_select(:neighbourhood_id, Neighbourhood.all , :id, :name, {:prompt   => "Seleccione una opción"}, { :class =>"form-control" ,:required => true} ) %>
+     <%= f.collection_select(:neighbourhood_id, Neighbourhood.all , :id, :name, {:prompt   => "Seleccione una opción"}, { :class =>"form-control" ,:required => true }) %>
    </div>
   <div class="col-md-4">
     <label for="address" class="control-label">Dirección

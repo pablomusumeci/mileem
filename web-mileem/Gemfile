@@ -58,3 +58,6 @@ gem 'will_paginate-bootstrap'
 
 # Authorization
 gem 'pundit'
+
+gem "jquery-fileupload-rails"
+gem 'paperclip'
