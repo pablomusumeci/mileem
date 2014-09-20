@@ -61,8 +61,8 @@ PropertyType.create(:name => "Terreno")
 PropertyType.create(:name => "Oficina")
 PropertyType.create(:name => "Local Comercial")
 
-User.create!({:email => "usuario1@prueba.com", :password => "111111", :password_confirmation => "111111" })
-User.create!({:email => "usuario2@prueba.com", :password => "222222", :password_confirmation => "222222" })
+User.create!({:email => "usuario1@prueba.com", :password => "111111", :password_confirmation => "111111", :phone_number =>  "01161860000"})
+User.create!({:email => "usuario2@prueba.com", :password => "222222", :password_confirmation => "222222", :phone_number =>  "01161860001" })
 
 Publication.create(user_id: 1, effective_date: (DateTime.now + 1.year).strftime("%d/%m/%Y") , operation: "Alquiler", address: "Adolfo Alsina, Buenos Aires, Argentina", floor: 1, apartment: "1", number_spaces: 2, surface: 50, price: 3000.0, expenses: 200.0, antiquity: 10, description: "", additional_info: "", created_at: "2014-09-14 15:21:35", updated_at: "2014-09-14 17:33:20", currency_id: 2, neighbourhood_id: 5, property_type_id: 3)
 Publication.create(user_id: 1, effective_date: (DateTime.now + 1.year).strftime("%d/%m/%Y"), operation: "Alquiler", address: "Quesada, Buenos Aires, Argentina", floor: 2, apartment: "3", number_spaces: 4, surface: 120, price: 7000.0, expenses: 200.0, antiquity: 50, description: "", additional_info: "", created_at: "2014-09-14 17:38:48", updated_at: "2014-09-14 17:38:48", currency_id: 1, neighbourhood_id: 6, property_type_id: 3)
