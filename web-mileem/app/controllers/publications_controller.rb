@@ -1,7 +1,8 @@
 # -*- encoding : utf-8 -*-
 class PublicationsController < ApplicationController
   before_action :set_publication, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!, except: [:search] # permisos del devise
+  before_action :authorize_update, only: [:edit, :update, :destroy] #perimsos del pundit
+  before_filter :authenticate_user!, except: [:search, :show] # permisos del devise
   skip_before_action :verify_authenticity_token
 
   # GET /publications
@@ -151,6 +152,10 @@ class PublicationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_publication
       @publication = Publication.find(params[:id])
+    end
+
+    def authorize_update
+      authorize @publication, :update?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

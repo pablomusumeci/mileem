@@ -49,3 +49,6 @@ gem 'puma'
 
 # Autenticacion
 gem 'devise'
+
+# Authorization
+gem 'pundit'
