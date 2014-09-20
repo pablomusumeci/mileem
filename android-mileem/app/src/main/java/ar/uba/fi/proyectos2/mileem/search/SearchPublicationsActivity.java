@@ -27,6 +27,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 
 import android.net.Uri.Builder;
+import android.widget.Spinner;
 
 import ar.uba.fi.proyectos2.mileem.R;
 import ar.uba.fi.proyectos2.mileem.model.PublicationSearchRequest;
@@ -68,6 +69,13 @@ public class SearchPublicationsActivity extends Activity {
     }
 
     public void doSearch(View view) {
+
+        // seleccion del tipo de barrio
+        Spinner neighborhood = (Spinner) findViewById(R.id.searchSpinnerNeighborhood);
+        request.setNeighbourhood_name(neighborhood.getSelectedItem().toString());
+        Spinner property_name = (Spinner) findViewById(R.id.searchSpinnerType);
+        request.setProperty_name(property_name.getSelectedItem().toString());
+
         Uri.Builder builder = new Uri.Builder()
                 .scheme("http")
                 .encodedAuthority("192.168.1.103:3000")
@@ -75,6 +83,9 @@ public class SearchPublicationsActivity extends Activity {
         if (request.getOperation() != null) {
             builder.appendQueryParameter("operation", request.getOperation());
         }
+        builder.appendQueryParameter("neighbourhood_name", request.getNeighbourhood_name());
+        builder.appendQueryParameter("property_name", request.getProperty_name());
+
         Uri uri = builder.build();
         Intent intent = new Intent(this, SearchResultsActivity.class);
         intent.putExtra("SEARCH.URL", uri.toString());
