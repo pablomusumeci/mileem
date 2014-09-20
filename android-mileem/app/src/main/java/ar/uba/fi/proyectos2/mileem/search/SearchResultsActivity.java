@@ -25,7 +25,7 @@ import ar.uba.fi.proyectos2.mileem.service.ListAdapter;
 public class SearchResultsActivity extends ListActivity {
 
     ArrayList<Publication> list = new ArrayList<Publication>();
-    private String url = "http://181.46.183.212:4567/publications.json";
+    String url = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class SearchResultsActivity extends ListActivity {
     @Override
     public void onStart() {
         super.onStart();
+        url = getIntent().getStringExtra("SEARCH.URL");
         new GetHttpData().execute();
         ListView lv = getListView();
         OnPublicationClickListener listener = new OnPublicationClickListener(this);

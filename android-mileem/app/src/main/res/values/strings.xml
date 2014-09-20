@@ -18,4 +18,8 @@
     <string name="url">Web: </string>
     <string name="numberSpaces">Ambientes: </string>
     <string name="neighbourhood_name">Barrio:</string>
+    <string name="search_venta" >Venta</string>
+    <string name="search_alquiler">Alquiler</string>
+    <string name="search_ambas">Ambas</string>
+    <string name="search_button_do_search">Buscar</string>
 </resources>

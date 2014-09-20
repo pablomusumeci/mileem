@@ -2,22 +2,51 @@ package ar.uba.fi.proyectos2.mileem.search;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RadioButton;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+
+import android.net.Uri.Builder;
 
 import ar.uba.fi.proyectos2.mileem.R;
+import ar.uba.fi.proyectos2.mileem.model.PublicationSearchRequest;
+import ar.uba.fi.proyectos2.mileem.service.ListAdapter;
 
 
 public class SearchPublicationsActivity extends Activity {
+
+    private PublicationSearchRequest request;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_publications);
-    }
+        request = new PublicationSearchRequest();
 
+        // opciones por defecto
+        RadioButton rb = (RadioButton) findViewById(R.id.radioButtonAmbas);
+        rb.setChecked(true);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -38,8 +67,38 @@ public class SearchPublicationsActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void doSearch(View view){
+    public void doSearch(View view) {
+        Uri.Builder builder = new Uri.Builder()
+                .scheme("http")
+                .encodedAuthority("192.168.1.103:3000")
+                .appendEncodedPath("publications/search.json");
+        if (request.getOperation() != null) {
+            builder.appendQueryParameter("operation", request.getOperation());
+        }
+        Uri uri = builder.build();
         Intent intent = new Intent(this, SearchResultsActivity.class);
+        intent.putExtra("SEARCH.URL", uri.toString());
         startActivity(intent);
     }
+
+    public void onRadioButtonClicked(View view) {
+
+        boolean checked = ((RadioButton) view).isChecked();
+
+        switch (view.getId()) {
+            case R.id.radioButtonAlquiler:
+                if (checked)
+                    request.setOperation("Alquiler");
+                break;
+            case R.id.radioButtonAmbas:
+                if (checked)
+                    request.setOperation(null);
+                break;
+            case R.id.radioButtonVenta:
+                if (checked)
+                    request.setOperation("Venta");
+                break;
+        }
+    }
+
 }
