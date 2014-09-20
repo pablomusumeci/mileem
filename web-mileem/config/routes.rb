@@ -1,7 +1,12 @@
 # -*- encoding : utf-8 -*-
 Rails.application.routes.draw do
   devise_for :users
-  resources :publications
+
+  resources :publications do
+    collection do
+      get :reset_filterrific
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

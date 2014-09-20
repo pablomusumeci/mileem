@@ -7,11 +7,19 @@ class PublicationsController < ApplicationController
   # GET /publications
   # GET /publications.json
   def index
-    @publications = current_user.publications
+    @filterrific = Filterrific.new(Publication, params[:filterrific])
+    @publications = Publication.filterrific_find(@filterrific).paginate(page: params[:page])
+#    @publications = current_user.publications
     respond_to do |format|
       format.html { render :index}
+      format.js  
       format.json { render :json => @publications.to_a.map{ |p| p.to_json_for_index }.to_json }
     end
+  end
+
+  def reset_filterrific
+    session[:filterrific_publications] = nil
+    redirect_to :action => :index
   end
 
   # GET /publications/1

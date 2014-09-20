@@ -49,3 +49,9 @@ gem 'puma'
 
 # Autenticacion
 gem 'devise'
+
+#Filto
+gem 'filterrific'
+
+#Paginado
+gem 'will_paginate-bootstrap'

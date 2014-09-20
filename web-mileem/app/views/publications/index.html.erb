@@ -1,50 +1,53 @@
-<hr>
 <div class="page-header">
   <h1>Mis Publicaciones</h1>
 </div>
-<table class="table table-bordered table-hover table-condensed">
-  <thead>
-    <tr>
-      <th>Fecha</th>
-      <th>Dirección</th>
-      <th>Barrio</th>
-      <th>Tipo de Inmueble</th>
-      <th>Plan</th>
-      <th>Tipo de Operacion</th>
-      <th>Precio</th>
-      <th>Fotos/ Videos</th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @publications.each do |publication| %>
-      <tr>
-        <td><%= publication.effective_date %></td>
-        <td><%= publication.address %></td>
-        <td><%= publication.neighbourhood.name %></td>
-        <td><%= publication.property_type.name %></td>
-        <td></td>
-        <td><%= publication.operation %></td>
-        <td><%= publication.currency.abreviatura %> <%= publication.price %></td>
-        <td>
-          <div class="btn btn-default btn-xs"><span class="glyphicon glyphicon-picture"></span></div>
-          <div class="btn btn-default btn-xs"><span class="glyphicon glyphicon-facetime-video"></span></div>
-        </td>
-        <td>
-          <%= button_to publication , class: "btn btn-default btn-xs", :method => :get do %>
-            <span class="glyphicon glyphicon-eye-open "></span>
-          <% end %>
-          <%= button_to edit_publication_path(publication) , class: "btn btn-default btn-xs", :method => :get do %>
-            <span class="glyphicon glyphicon-edit"></span>
-          <% end %>
-          <%= button_to publication,class: "btn btn-danger btn-xs", method: :delete, data: {confirm: '¿Esta usted seguro que quiere eliminar la publicación?' } do %>
-            <span class="glyphicon glyphicon-remove-circle"></span>
-          <% end %>            
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<%= form_for @filterrific do |f| %>
+  <div class="row"> 
+   <div class="col-md-2">
+    Fecha Desde
+     <div class="input-group">
+    <%= f.text_field :date_at_gte, :class => 'form-control', 'data-behaviour' => 'datepicker', 
+     "data-date-format" => "dd/mm/yyyy" %>
+     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+      </div>
+  </div>
+  <div class="col-md-2">
+    Fecha Hasta
+     <div class="input-group">
+    <%= f.text_field(:date_at_lt, :class => 'form-control','data-behaviour' => 'datepicker', 
+     "data-date-format" => "dd/mm/yyyy" ) %>
+     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+      </div>
+  </div> 
+  <div class="col-md-2">
+    Barrio  
+    <%= f.collection_select(:with_neighbourhood_id, Neighbourhood.all , :id, :name, {:prompt   => "Seleccione una opción"}, { :class =>"form-control" } ) %>
+  </div>
+  <div class="col-md-2">
+    Precio Desde
+    <%= f.number_field :price_gte, :class => 'form-control', step: 0.01 , min: 0 %>
+  </div>
+</div>  
+  <div>
+    <%= link_to(
+      'Reset',
+      reset_filterrific_publications_path,
+    ) %>
+  </div>
+<% end %>
 
 <br>
+<%= render partial: 'publications/list', locals: {publications: @publications}  %>
+
+<br>
+
 <%= link_to "Nueva publicación", new_publication_path, :class => 'btn btn-primary' %>
+
+
+<script type="text/javascript" >
+
+$('#filterrific_date_at_gte').datepicker( {language: "es", autoclose: true,todayHighlight: true});
+$('#filterrific_date_at_lt').datepicker( {language: "es", autoclose: true,todayHighlight: true});
+
+</script>

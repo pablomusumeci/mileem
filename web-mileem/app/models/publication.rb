@@ -65,5 +65,34 @@ class Publication < ActiveRecord::Base
 		# result[:neighbourhood] = self.neighbourhood.name
 		# return result
 	end
+
+	self.per_page = 5
+
+	scope :date_at_gte, lambda { |reference_time|
+  		where('publications.effective_date >= ?', reference_time)
+	}
+
+	scope :date_at_lt, lambda { |reference_time|
+  		where('publications.effective_date < ?', reference_time)
+	}
+
+	scope :with_neighbourhood_id, lambda { |neighbourhood_id|
+    	where(:neighbourhood_id => [neighbourhood_id])
+  	}
+
+	scope :price_gte, lambda { |reference_price|
+  		where('publications.price >= ?', reference_price)
+	}
+
+	filterrific(
+  	filter_names: [
+	    :date_at_gte,
+	    :date_at_lt,
+	    :with_neighbourhood_id,
+	    :price_gte
+	  ]
+	)
 end
+
+
 

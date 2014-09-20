@@ -41,10 +41,10 @@ a.navbar-brand  {
   display: inline;
 }
 
-thead th {
+.headingListar {
   color: #ffffff;
-  background-color: #bc271c;
-  border-color: #b3251b;
+  background-color: #dd4814;
+  border-color: #bf3e11;
   height: 40px;
 }
 
