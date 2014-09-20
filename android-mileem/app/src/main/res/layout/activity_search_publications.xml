@@ -43,16 +43,6 @@
         android:layout_alignParentEnd="true" />
     </RadioGroup>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/search_button_do_search"
-        android:id="@+id/searchButtonDoSearch"
-        android:onClick="doSearch"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="190dp" />
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -85,7 +75,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        android:id="@+id/linearLayout2">
 
         <Spinner
             android:layout_width="fill_parent"
@@ -102,10 +93,104 @@
         <Spinner
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/publication_type_array"
+            android:entries="@array/property_name_array"
             android:id="@+id/searchSpinnerType"
             android:layout_column="1"
             android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout3"
+        android:layout_below="@+id/linearLayout6">
+
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/radioGroup2">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/constant.ARS"
+            android:id="@+id/radioButtonARS"
+            android:onClick="onRadioButtonCurrencyClicked"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/constant.USD"
+            android:onClick="onRadioButtonCurrencyClicked"
+            android:id="@+id/radioButtonUSD"
+            android:layout_weight="1" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout2"
+        android:id="@+id/linearLayout6">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/price"
+            android:id="@+id/textView3"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout4">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/searchMinPrice"
+            android:layout_weight="1"
+            android:hint="@string/constant.since" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/searchMaxPrice"
+            android:layout_weight="1"
+            android:hint="@string/constant.to" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout4">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_button_do_search"
+            android:id="@+id/searchButtonDoSearch"
+            android:onClick="doSearch"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="#dd4814"
+            android:clickable="true"
+            android:textColor="#ffffff" />
     </LinearLayout>
 
 </RelativeLayout>

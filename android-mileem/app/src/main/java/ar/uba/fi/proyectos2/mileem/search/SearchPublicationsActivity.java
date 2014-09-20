@@ -28,6 +28,7 @@ import java.net.URI;
 
 import android.net.Uri.Builder;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import ar.uba.fi.proyectos2.mileem.R;
 import ar.uba.fi.proyectos2.mileem.model.PublicationSearchRequest;
@@ -47,6 +48,8 @@ public class SearchPublicationsActivity extends Activity {
         // opciones por defecto
         RadioButton rb = (RadioButton) findViewById(R.id.radioButtonAmbas);
         rb.setChecked(true);
+        RadioButton rbCurrency = (RadioButton) findViewById(R.id.radioButtonARS);
+        rbCurrency.setChecked(true);
     }
 
     @Override
@@ -86,6 +89,20 @@ public class SearchPublicationsActivity extends Activity {
         builder.appendQueryParameter("neighbourhood_name", request.getNeighbourhood_name());
         builder.appendQueryParameter("property_name", request.getProperty_name());
 
+        // Filtros de precios
+        TextView tvMinPrice = (TextView) findViewById(R.id.searchMinPrice);
+        if (tvMinPrice.getText().length() > 0) {
+            request.setMin_price(Integer.parseInt(tvMinPrice.getText().toString()));
+            builder.appendQueryParameter("min_price", Integer.toString(request.getMin_price()));
+        }
+
+        TextView tvMaxPrice = (TextView) findViewById(R.id.searchMaxPrice);
+        if (tvMaxPrice.getText().length() > 0) {
+            request.setMax_price(Integer.parseInt(tvMaxPrice.getText().toString()));
+            builder.appendQueryParameter("max_price", Integer.toString(request.getMax_price()));
+        }
+        builder.appendQueryParameter("currency", request.getCurrency());
+
         Uri uri = builder.build();
         Intent intent = new Intent(this, SearchResultsActivity.class);
         intent.putExtra("SEARCH.URL", uri.toString());
@@ -108,6 +125,22 @@ public class SearchPublicationsActivity extends Activity {
             case R.id.radioButtonVenta:
                 if (checked)
                     request.setOperation("Venta");
+                break;
+        }
+    }
+
+    public void onRadioButtonCurrencyClicked(View view) {
+
+        boolean checked = ((RadioButton) view).isChecked();
+
+        switch (view.getId()) {
+            case R.id.radioButtonARS:
+                if (checked)
+                    request.setCurrency("$");
+                break;
+            case R.id.radioButtonUSD:
+                if (checked)
+                    request.setCurrency("USD");
                 break;
         }
     }

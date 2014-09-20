@@ -57,9 +57,9 @@ public class ListAdapter extends ArrayAdapter<Publication> {
                 tt = (TextView) v.findViewById(R.id.PublicationPriceID);
                 tt.setText( Integer.toString(p.getPrice()) + " " + p.getCurrency_symbol());
                 if (position % 2 != 1)
-                    v.setBackgroundColor(Color.parseColor("#D7E7FF"));
+                    v.setBackgroundColor(Color.parseColor("#efedf5"));
                 else
-                    v.setBackgroundColor(Color.parseColor("#F0F0F0"));
+                    v.setBackgroundColor(Color.parseColor("#dadaeb"));
                 tt = (TextView) v.findViewById(R.id.neighbourhood);
                 tt.setText(p.getNeighbourhood_name());
 

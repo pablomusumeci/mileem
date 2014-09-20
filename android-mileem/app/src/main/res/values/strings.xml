@@ -23,8 +23,13 @@
     <string name="search_ambas">Ambas</string>
     <string name="search_button_do_search">Buscar</string>
     <string name="publication_type">Tipo:</string>
+    <string name="constant.ARS">$</string>
+    <string name="constant.USD">U$S</string>
+    <string name="constant.since">Desde</string>
+    <string name="constant.to">Hasta</string>
 
-    <string-array name="publication_type_array">
+    <string-array name="property_name_array">
+        <item>Todos</item>
         <item>Departamento</item>
         <item>PH</item>
         <item>Casa</item>
@@ -34,6 +39,7 @@
     </string-array>
 
     <string-array name="neighborhood_array">
+        <item>Todos</item>
         <item>Agronomía</item>
         <item>Almagro</item>
         <item>Balvanera</item>
