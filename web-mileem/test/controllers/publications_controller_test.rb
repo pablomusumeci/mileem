@@ -5,8 +5,13 @@ class PublicationsControllerTest < ActionController::TestCase
   setup do
     @publication = publications(:one)
     @publication.effective_date = Date.today
-    @barrio = Neighbourhood.create(:name => "Belgrano")
-    @publication.neighbourhood = @barrio
+    #@barrio = Neighbourhood.create(:name => "Belgrano")
+    #@publication.neighbourhood = @barrio
+    
+    @user = User.create(:email => "usarioTest@prueba.com", :password => 'password')
+    sign_in @user
+    @publication.user_id = @user.id
+    
   end
 
   test "should get index" do
