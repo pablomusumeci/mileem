@@ -36,11 +36,24 @@ a.navbar-brand  {
   margin-top: 40px;
 }
 
+.button_to,
+.button_to div {
+  display: inline;
+}
+
+thead th {
+  color: #ffffff;
+  background-color: #bc271c;
+  border-color: #b3251b;
+  height: 40px;
+}
+
 html,
 body {
   padding-top:10px;
   height: 100%;
   margin-left:40px;
+  margin-right:30px;
 }
 
 
