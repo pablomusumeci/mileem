@@ -81,7 +81,8 @@ class PublicationsController < ApplicationController
     @publications = Publication.all.to_a
 
     if not params[:neighbourhood_name].nil?
-      @publications.select!{ |p| p.neighbourhood.name == params[:neighbourhood_name]}
+      barrio = params[:neighbourhood_name]
+      @publications.select!{ |p| p.neighbourhood.name == barrio} if barrio != "Todos"
     end
 
     # precio maximo
@@ -90,7 +91,8 @@ class PublicationsController < ApplicationController
     end
 
     if not params[:property_name].nil?
-      @publications.select!{ |p| p.property_type.name == params[:property_name]}
+      tipo = params[:property_name]
+      @publications.select!{ |p| p.property_type.name == params[:property_name]} if tipo != "Todos"
     end
 
     # precio minimo
