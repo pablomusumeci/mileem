@@ -16,6 +16,7 @@ one:
   currency_id: 1
   property_type_id: 1
   neighbourhood_id: 1
+  user_id: 1
 
 two:
   effective_date: 2014-09-10
@@ -33,3 +34,4 @@ two:
   currency_id: 2
   property_type_id: 2
   neighbourhood_id: 2
+  user_id: 1
