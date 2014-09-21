@@ -29,6 +29,7 @@ public class Publication implements Parcelable {
     private String property_name;
     private String neighbourhood_name;
     private String currency_symbol;
+    private String user_phone_number;
 
     public Publication() {
 
@@ -162,6 +163,14 @@ public class Publication implements Parcelable {
         this.description = description;
     }
 
+    public String getUserPhoneNumber() {
+        return user_phone_number;
+    }
+
+    public void setUserPhoneNumber(String user_phone_number) {
+        this.user_phone_number = user_phone_number;
+    }
+
     public String getAdditional_info() {
         return additional_info;
     }
@@ -195,6 +204,7 @@ public class Publication implements Parcelable {
         parcel.writeString(property_name);
         parcel.writeString(neighbourhood_name);
         parcel.writeString(currency_symbol);
+        parcel.writeString(user_phone_number);
     }
 
     public static final Parcelable.Creator<Publication> CREATOR = new Creator<Publication>() {
@@ -217,6 +227,7 @@ public class Publication implements Parcelable {
             p.property_name = source.readString();
             p.neighbourhood_name = source.readString();
             p.currency_symbol = source.readString();
+            p.user_phone_number = source.readString();
             return p;
         }
         public Publication[] newArray(int size) {
