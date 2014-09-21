@@ -6,7 +6,7 @@ class PublicationPolicy < ApplicationPolicy
   
   class Scope < Scope
     def resolve
-      scope
+      scope.where(:user_id => user.id)
     end
   end
 end

@@ -9,7 +9,8 @@ class PublicationsController < ApplicationController
   # GET /publications.json
   def index
     @filterrific = Filterrific.new(Publication, params[:filterrific])
-    @publications = Publication.filterrific_find(@filterrific).paginate(page: params[:page])
+    #@publications = policy_scope(Publication)
+    @publications = Publication.filterrific_find(@filterrific).where(:user_id => current_user.id).paginate(page: params[:page])
     # @publications = current_user.publications
     respond_to do |format|
       format.html { render :index}
