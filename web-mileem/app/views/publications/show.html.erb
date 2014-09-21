@@ -31,12 +31,13 @@
   <dd><%= @publication.additional_info %></dd>
 </dl>
 
-<%= link_to "Volver",
-              publications_path, :class => 'btn btn-default'  %>
-<%= link_to "Editar",
-              edit_publication_path(@publication), :class => 'btn btn-default' %>
+<%= link_to "Volver",  publications_path, :class => 'btn btn-default'  %>
+<%= link_to "Editar", edit_publication_path(@publication), :class => 'btn btn-default' %>
+
+
 <%= link_to "Eliminar",
               publication_path(@publication),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
+

@@ -1,7 +1,8 @@
 class Upload < ActiveRecord::Base
 
   has_attached_file :upload
-  validates_attachment :upload, content_type: { content_type: /\Aimage\/.*\Z/ }		
+#  validates_attachment :upload, content_type: { content_type: /\Aimage\/.*\Z/ }	
+  do_not_validate_attachment_file_type :upload	
   include Rails.application.routes.url_helpers
 
   def to_jq_upload
