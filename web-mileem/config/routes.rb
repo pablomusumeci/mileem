@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   get 'publications/search' => 'publications#search'
+  get 'publications/:id/uploads', to: 'publications#uploads'
+  get '/uploads/:id', to: 'uploads#index', as: 'upload'
   resources :publications do
+    resources :uploads, :only => [:create]
     collection do
       get :reset_filterrific
     end

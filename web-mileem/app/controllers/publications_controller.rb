@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class PublicationsController < ApplicationController
-  before_action :set_publication, only: [:show, :edit, :update, :destroy]
+  before_action :set_publication, only: [:show, :edit, :update, :destroy, :uploads ]
   before_action :authorize_update, only: [:edit, :update, :destroy] #perimsos del pundit
   before_filter :authenticate_user!, except: [:search, :show] # permisos del devise
   skip_before_action :verify_authenticity_token
@@ -23,6 +23,14 @@ class PublicationsController < ApplicationController
     redirect_to :action => :index
   end
 
+  def uploads
+    @uploads = @publication.uploads
+    respond_to do |format|
+      format.html { render :upload}
+      format.json { render json: @uploads.map{|upload| upload.to_jq_upload } }
+    end
+  end  
+    
   # GET /publications/1
   # GET /publications/1.json
   def show
@@ -170,6 +178,6 @@ class PublicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def publication_params
-      params.require(:publication).permit(:effective_date, :operation, :address, :floor, :apartment, :number_spaces, :surface, :price, :expenses, :antiquity, :description, :additional_info, :neighbourhood_id, :currency_id,:property_type_id)
+      params.require(:publication).permit(:effective_date, :operation, :address, :floor, :apartment, :number_spaces, :surface, :price, :expenses, :antiquity, :description, :additional_info, :neighbourhood_id, :currency_id,:property_type_id, :uploads)
     end
 end
