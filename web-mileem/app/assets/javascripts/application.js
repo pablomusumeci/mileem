@@ -19,4 +19,5 @@
 //= require typeahead-addresspicker.min
 //= require bootstrap-datepicker
 //= require filterrific-jquery
+//= require jquery-fileupload
 //= require_tree .
