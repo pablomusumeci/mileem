@@ -69,7 +69,7 @@ class Publication < ActiveRecord::Base
 		# return result
 	end
 
-	self.per_page = 5
+	self.per_page = 2
 
 	scope :date_at_gte, lambda { |reference_time|
   		where('publications.effective_date >= ?', reference_time)
