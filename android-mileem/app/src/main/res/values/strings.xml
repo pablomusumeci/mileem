@@ -10,9 +10,9 @@
     <string name="effective_date">Fecha de publicacion: </string>
     <string name="floor">Piso: </string>
     <string name="apartment">Departamento: </string>
-    <string name="number_spaces">Habitaciones:</string>
+    <string name="number_spaces">Ambientes:</string>
     <string name="surface">Superficie: </string>
-    <string name="expenses">Expensas: </string>
+    <string name="expenses">Expensas: $</string>
     <string name="antiquity">Antiguedad: </string>
     <string name="additional_info">Información adicional: </string>
     <string name="url">Web: </string>
@@ -27,6 +27,8 @@
     <string name="constant.USD">U$S</string>
     <string name="constant.since">Desde</string>
     <string name="constant.to">Hasta</string>
+    <string name="SeeAddress">Ver ubicación</string>
+    <string name="callAdvertiser">Escribir al anunciante</string>
 
     <string-array name="property_name_array">
         <item>Todos</item>

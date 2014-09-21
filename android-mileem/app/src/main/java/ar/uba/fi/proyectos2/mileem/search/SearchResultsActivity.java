@@ -108,12 +108,14 @@ public class SearchResultsActivity extends ListActivity {
                     } catch (JSONException e) {
                         p.setAntiquity(-1);
                     }
+
                     p.setDescription(obj.getString("description"));
                     p.setAdditional_info(obj.getString("additional_info"));
                     p.setCurrency_name(obj.getString("currency_name"));
                     p.setProperty_name(obj.getString("property_type"));
                     p.setNeighbourhood_name(obj.getString("neighbourhood_name"));
                     p.setCurrency_symbol(obj.getString("currency_symbol"));
+                    p.setUserPhoneNumber(obj.getString("user_phone_number"));
                     list.add(p);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -140,9 +142,9 @@ public class SearchResultsActivity extends ListActivity {
 
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            /*Intent intent = new Intent(context, PublicationDetailActivity.class);
+            Intent intent = new Intent(context, PublicationDetailActivity.class);
             intent.putExtra(Publication.KEY, list.get(i));
-            startActivity(intent);*/
+            startActivity(intent);
         }
     }
 }

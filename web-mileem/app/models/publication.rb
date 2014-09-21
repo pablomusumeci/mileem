@@ -72,11 +72,11 @@ class Publication < ActiveRecord::Base
 	self.per_page = 2
 
 	scope :date_at_gte, lambda { |reference_time|
-  		where('publications.effective_date >= ?', reference_time)
+		where('publications.effective_date >= ?', Date.parse(reference_time).strftime("%Y-%m-%d"))
 	}
 
 	scope :date_at_lt, lambda { |reference_time|
-  		where('publications.effective_date < ?', reference_time)
+  		where('publications.effective_date < ?', Date.parse(reference_time).strftime("%Y-%m-%d"))
 	}
 
 	scope :with_neighbourhood_id, lambda { |neighbourhood_id|
@@ -87,12 +87,19 @@ class Publication < ActiveRecord::Base
   		where('publications.price >= ?', reference_price)
 	}
 
+	scope :operation_search, lambda { |reference_operation|
+		if(reference_operation != "Ambos")
+  			where('publications.operation = ?', reference_operation)
+  		end	
+	}
+
 	filterrific(
   	filter_names: [
 	    :date_at_gte,
 	    :date_at_lt,
 	    :with_neighbourhood_id,
-	    :price_gte
+	    :price_gte,
+	    :operation_search
 	  ]
 	)
 end

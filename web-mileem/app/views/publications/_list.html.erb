@@ -4,31 +4,28 @@
  <table class="table table-bordered table-hover table-condensed">
   <thead class="headingListar">
     <tr>
-      <th>Fecha</th>
+      <th>Fecha Publicación</th>
+      <th>Fecha Vencimiento</th>
       <th>Dirección</th>
       <th>Barrio</th>
       <th>Tipo de Inmueble</th>
       <th>Plan</th>
       <th>Tipo de Operacion</th>
       <th>Precio</th>
-      <th>Fotos/ Videos</th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
     <% publications.each do |publication| %>
       <tr>
         <td><%= publication.effective_date %></td>
+        <td></td>
         <td><%= publication.address %></td>
         <td><%= publication.neighbourhood.name  if publication.neighbourhood %></td>
         <td><%= publication.property_type.name  if publication.property_type %></td>
         <td></td>
         <td><%= publication.operation %></td>
         <td><%= publication.currency.abreviatura %> <%= publication.price %></td>
-        <td>
-          <div class="btn btn-default btn-xs"><span class="glyphicon glyphicon-picture"></span></div>
-          <div class="btn btn-default btn-xs"><span class="glyphicon glyphicon-facetime-video"></span></div>
-        </td>
         <td>
           <%= button_to publication , class: "btn btn-default btn-xs", :method => :get do %>
             <span class="glyphicon glyphicon-eye-open "></span>

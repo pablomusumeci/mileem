@@ -4,7 +4,7 @@
 
 <%= form_for @filterrific do |f| %>
   <div class="row"> 
-   <div class="col-md-2">
+   <div class="col-md-3">
     Fecha Desde
      <div class="input-group">
     <%= f.text_field :date_at_gte, :class => 'form-control', 'data-behaviour' => 'datepicker', 
@@ -12,7 +12,7 @@
      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
       </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-3">
     Fecha Hasta
      <div class="input-group">
     <%= f.text_field(:date_at_lt, :class => 'form-control','data-behaviour' => 'datepicker', 
@@ -20,14 +20,30 @@
      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
       </div>
   </div> 
-  <div class="col-md-2">
+  <div class="col-md-3">
     Barrio  
     <%= f.collection_select(:with_neighbourhood_id, Neighbourhood.all , :id, :name, {:prompt   => "Seleccione una opción"}, { :class =>"form-control" } ) %>
   </div>
-  <div class="col-md-2">
+</div>
+<div class="row">
+  <div class="col-md-3">
     Precio Desde
     <%= f.number_field :price_gte, :class => 'form-control', step: 0.01 , min: 0 %>
   </div>
+  <div class="col-md-3">
+    Tipo de Operación
+    <div class="radio">
+      <label class="radio-inline">
+        <%= f.radio_button :operation_search, "Ambos", :checked => 'checked' %><p>Ambos</p>
+      </label>
+      <label class="radio-inline">
+        <%= f.radio_button :operation_search, "Alquiler" %><p>Alquiler</p>
+      </label>
+      <label class="radio-inline">  
+        <%= f.radio_button :operation_search, "Venta" %><p>Venta</p>
+      </label>
+    </div>   
+  </div> 
 </div>  
   <div>
     <%= link_to(
