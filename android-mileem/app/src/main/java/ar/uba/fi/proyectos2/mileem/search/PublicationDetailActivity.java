@@ -9,10 +9,23 @@ import android.view.MenuItem;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
+
 import ar.uba.fi.proyectos2.mileem.R;
 import ar.uba.fi.proyectos2.mileem.model.Publication;
 
 public class PublicationDetailActivity extends Activity {
+
+    public TextView makeCall;
+    public Intent callIntent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +71,18 @@ public class PublicationDetailActivity extends Activity {
         SpannableString content = new SpannableString(p.getUserPhoneNumber());
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         tv.setText(content);
+
+
+        makeCall = (TextView) findViewById(R.id.phone);
+
+        makeCall.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                call();
+            }
+        });
     }
 
 
@@ -79,4 +104,18 @@ public class PublicationDetailActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    private void call() {
+        try {
+            callIntent = new Intent(Intent.ACTION_CALL); //ACTION_INSERT_OR_EDIT);//ACTION_CALL);
+            //Log.e("valor",);
+            callIntent.setData(Uri.parse("tel:" + ((TextView) findViewById(R.id.phone)).getText()));
+
+            startActivity(callIntent);
+        } catch (ActivityNotFoundException activityException) {
+            Log.e("dialing-example", "Call failed", activityException);
+        }
+    }
+
 }

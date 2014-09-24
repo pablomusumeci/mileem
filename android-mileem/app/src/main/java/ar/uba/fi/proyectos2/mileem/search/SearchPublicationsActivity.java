@@ -78,7 +78,6 @@ public class SearchPublicationsActivity extends Activity {
         request.setNeighbourhood_name(neighborhood.getSelectedItem().toString());
         Spinner property_name = (Spinner) findViewById(R.id.searchSpinnerType);
         request.setProperty_name(property_name.getSelectedItem().toString());
-
         Uri.Builder builder = new Uri.Builder()
                 .scheme("http")
                 .encodedAuthority("192.168.1.103:3000")
