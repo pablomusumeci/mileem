@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   get 'publications/search' => 'publications#search'
-  get 'publications/:id/uploads', to: 'publications#uploads'
-  get '/uploads/:id', to: 'uploads#index', as: 'upload'
+  get 'publications/:id/uploads', to: 'publications#uploads', as: 'uploads_publication'
+  resources :uploads
   resources :publications do
     resources :uploads, :only => [:create]
     collection do

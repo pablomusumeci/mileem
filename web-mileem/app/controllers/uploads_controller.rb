@@ -23,6 +23,19 @@ class UploadsController < ApplicationController
     end
   end
 
+ # DELETE /uploads/1
+  # DELETE /uploads/1.json
+  def destroy
+    print "sssss"
+    @upload = Upload.find(params[:id])
+    @upload.destroy
+
+    respond_to do |format|
+      format.html { redirect_to uploads_url }
+      format.json { head :no_content }
+    end
+  end
+
   def upload_params
       params.require(:upload).permit(:publication_id, :upload => [:upload])
     end

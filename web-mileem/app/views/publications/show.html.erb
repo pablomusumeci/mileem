@@ -2,7 +2,39 @@
   <h1>Publicacion</h1>
 </div>
 
-<dl class="dl-horizontal">
+
+<div class="row">
+<div class="col-md-4">
+<div id="myCarousel" class="carousel slide">
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <% if(@publication.uploads.size() > 0) %>
+      <div class="item active">
+        <img src="<%= @publication.uploads.first().upload %>" style="width:400px;height:300px;" />
+      </div>
+      <% @publication.uploads.drop(1).each do |u| %>
+        <div class="item ">
+          <img src="<%= u.upload %>" style="width:400px;height:300px;" />
+        </div>
+    <% end %>
+    <% else %>
+      <div class="item active">
+        <%= image_tag "college.png" , :size=>"300x400" %>
+        <div class="carousel-caption"><%= @publication.name %></div>
+      </div>
+    <% end %>   
+  </div>
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+  <a class="carousel-control right" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+</div>
+</div>
+
+<div class="col-md-6">
   <dt><strong>Fecha de publicación</strong></dt>
   <dd><%= @publication.effective_date %></dd>
   <dt><strong>Tipo</strong></dt>
@@ -29,15 +61,21 @@
   <dd><%= @publication.description %></dd>
   <dt><strong>Información adicional</strong></dt>
   <dd><%= @publication.additional_info %></dd>
-</dl>
-
+</div>
+</div>
 <%= link_to "Volver",  publications_path, :class => 'btn btn-default'  %>
 <%= link_to "Editar", edit_publication_path(@publication), :class => 'btn btn-default' %>
-
+<%= link_to "Imagenes", uploads_publication_path(@publication), :class => 'btn btn-default' %>
 
 <%= link_to "Eliminar",
               publication_path(@publication),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
+
+<script type="text/javascript" >
+  $( document ).ready(function() {
+      $('.carousel').carousel();
+});
+</script>
 
