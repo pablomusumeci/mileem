@@ -98,8 +98,8 @@ class PublicationsController < ApplicationController
     @publications = Publication.all.to_a
 
     if not params[:neighbourhood_name].nil?
-      barrio = params[:neighbourhood_name]
-      @publications.select!{ |p| p.neighbourhood.name == barrio} if barrio != "Todos"
+      barrios = params[:neighbourhood_name].split(",")
+      @publications.select!{ |p| barrios.include?(p.neighbourhood.name) }
     end
 
     # precio maximo
