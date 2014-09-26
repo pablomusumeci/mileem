@@ -43,6 +43,7 @@ class Publication < ActiveRecord::Base
 	def end_date
 	  self.effective_date + 30.days
 	  # the amount of days should depend on the plan of the publication
+	  # maybe need to substract 1 day if we consider de end_date as included
 	end
 	
 	# agrego los nombres de las entidades externas
