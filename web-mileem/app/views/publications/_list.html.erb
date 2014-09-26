@@ -19,11 +19,11 @@
     <% publications.each do |publication| %>
       <tr>
         <td><%= publication.effective_date %></td>
-        <td></td>
+        <td><%= publication.end_date %></td>
         <td><%= publication.address %></td>
         <td><%= publication.neighbourhood.name  if publication.neighbourhood %></td>
         <td><%= publication.property_type.name  if publication.property_type %></td>
-        <td></td>
+        <td>Basico</td>
         <td><%= publication.operation %></td>
         <td><%= publication.currency.abreviatura %> <%= publication.price %></td>
         <td>
