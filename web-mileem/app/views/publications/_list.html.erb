@@ -18,8 +18,8 @@
   <tbody>
     <% publications.each do |publication| %>
       <tr>
-        <td><%= publication.effective_date %></td>
-        <td><%= publication.end_date %></td>
+        <td><%= publication.effective_date.strftime("%d/%m/%Y") %></td>
+        <td><%= publication.end_date.strftime("%d/%m/%Y") %></td>
         <td><%= publication.address %></td>
         <td><%= publication.neighbourhood.name  if publication.neighbourhood %></td>
         <td><%= publication.property_type.name  if publication.property_type %></td>
