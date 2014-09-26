@@ -18,24 +18,26 @@
   <tbody>
     <% publications.each do |publication| %>
       <tr>
-        <td><%= publication.effective_date %></td>
-        <td></td>
+        <td><%= publication.effective_date.strftime("%d/%m/%Y") %></td>
+        <td><%= publication.end_date.strftime("%d/%m/%Y") %></td>
         <td><%= publication.address %></td>
         <td><%= publication.neighbourhood.name  if publication.neighbourhood %></td>
         <td><%= publication.property_type.name  if publication.property_type %></td>
-        <td></td>
+        <td>Basico</td>
         <td><%= publication.operation %></td>
         <td><%= publication.currency.abreviatura %> <%= publication.price %></td>
         <td>
           <%= button_to publication , class: "btn btn-default btn-xs", :method => :get do %>
-            <span class="glyphicon glyphicon-eye-open "></span>
+            <span class="glyphicon glyphicon-eye-open " title="Ver Publicación"></span>
           <% end %>
           <%= button_to edit_publication_path(publication) , class: "btn btn-default btn-xs", :method => :get do %>
-            <span class="glyphicon glyphicon-edit"></span>
+            <span class="glyphicon glyphicon-edit" title="Editar Publicación"></span>
           <% end %>
-          <%= button_to publication,class: "btn btn-danger btn-xs", method: :delete, data: {confirm: '¿Esta usted seguro que quiere eliminar la publicación?' } do %>
-            <span class="glyphicon glyphicon-remove-circle"></span>
-          <% end %>            
+          <% if policy(publication).delete? %>
+	          <%= button_to publication,class: "btn btn-danger btn-xs", method: :delete, data: {confirm: '¿Esta usted seguro que quiere eliminar la publicación?' } do %>
+	            <span class="glyphicon glyphicon-remove-circle" title="Eliminar Publicación"></span>
+	          <% end %>
+          <% end %>           
         </td>
       </tr>
     <% end %>

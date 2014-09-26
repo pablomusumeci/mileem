@@ -40,6 +40,11 @@ class Publication < ActiveRecord::Base
 	validates :number_spaces, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	validates :surface, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	
+	def end_date
+	  self.effective_date + 30.days
+	  # the amount of days should depend on the plan of the publication
+	  # maybe need to substract 1 day if we consider de end_date as included
+	end
 	
 	# agrego los nombres de las entidades externas
 	def to_json
@@ -76,7 +81,7 @@ class Publication < ActiveRecord::Base
 	}
 
 	scope :date_at_lt, lambda { |reference_time|
-  		where('publications.effective_date < ?', Date.parse(reference_time).strftime("%Y-%m-%d"))
+  		where('publications.effective_date <= ?', Date.parse(reference_time).strftime("%Y-%m-%d"))
 	}
 
 	scope :with_neighbourhood_id, lambda { |neighbourhood_id|
