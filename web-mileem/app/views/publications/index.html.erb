@@ -72,9 +72,6 @@ $('#filterrific_date_at_gte').datepicker( {language: "es", autoclose: true,today
 
 $('#filterrific_date_at_lt').datepicker( {language: "es", autoclose: true,todayHighlight: true}).on('changeDate', 
 	function (selected) {
-		
-       
-		
         endDate = new Date(selected.date.valueOf());
         endDate.setDate(endDate.getDate(new Date(selected.date.valueOf())));
         $('#filterrific_date_at_gte').datepicker('setEndDate', endDate);
