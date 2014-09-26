@@ -1,14 +1,12 @@
 package ar.uba.fi.proyectos2.mileem.search;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.CheckedTextView;
+import android.widget.RadioButton;
 import android.widget.TextView;
-
-import java.util.ArrayList;
+import android.widget.Toast;
 
 import ar.uba.fi.proyectos2.mileem.R;
 
@@ -17,40 +15,34 @@ import ar.uba.fi.proyectos2.mileem.R;
  */
 public class AdvancedSearchListAdapter extends BaseExpandableListAdapter {
 
-    private Activity activity;
-    private ArrayList<Object> childtems;
     private LayoutInflater inflater;
-    private ArrayList<String> parentItems, child;
 
-    public AdvancedSearchListAdapter(ArrayList<String> parents, ArrayList<Object> childern) {
-        this.parentItems = parents;
-        this.childtems = childern;
-    }
-
-    public void setInflater(LayoutInflater inflater, Activity activity) {
+    public void setInflater(LayoutInflater inflater) {
         this.inflater = inflater;
-        this.activity = activity;
     }
 
     @Override
     public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        child = (ArrayList<String>) childtems.get(groupPosition);
-
-        TextView textView = null;
-
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.advanced_search_item, null);
+        if (groupPosition == 0 && convertView == null) {
+            convertView = inflater.inflate(R.layout.advanced_search_empty, null);
+        } else if (groupPosition == 1 && convertView == null) {
+            convertView = inflater.inflate(R.layout.advanced_search_advanced_options, null);
         }
-
         return convertView;
     }
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.advanced_search_group, null);
+        if (groupPosition == 0 && convertView == null) {
+            convertView = inflater.inflate(R.layout.advanced_search_basic_options, null);
+            // opciones por defecto
+            RadioButton rb = (RadioButton) convertView.findViewById(R.id.radioButtonAmbas);
+            rb.setChecked(true);
+            RadioButton rbCurrency = (RadioButton) convertView.findViewById(R.id.radioButtonARS);
+            rbCurrency.setChecked(true);
+        } else if (groupPosition == 1 && convertView == null) {
+            convertView = inflater.inflate(R.layout.advanced_search_advanced_options_title, null);
         }
-
         return convertView;
     }
 
@@ -61,12 +53,12 @@ public class AdvancedSearchListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return 0;
+        return childPosition;
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return ((ArrayList<String>) childtems.get(groupPosition)).size();
+        return 1;
     }
 
     @Override
@@ -76,7 +68,7 @@ public class AdvancedSearchListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        return parentItems.size();
+        return 2;
     }
 
     @Override
@@ -91,16 +83,16 @@ public class AdvancedSearchListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public long getGroupId(int groupPosition) {
-        return 0;
+        return groupPosition;
     }
 
     @Override
     public boolean hasStableIds() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return true;
+        return false;
     }
 }

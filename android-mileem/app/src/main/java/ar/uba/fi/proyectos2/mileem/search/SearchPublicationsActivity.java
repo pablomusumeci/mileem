@@ -22,20 +22,12 @@ import ar.uba.fi.proyectos2.mileem.model.PublicationSearchRequest;
 public class SearchPublicationsActivity extends ExpandableListActivity {
 
     private PublicationSearchRequest request;
-    private ArrayList<String> parentItems = new ArrayList<String>();
-    private ArrayList<Object> childItems = new ArrayList<Object>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_publications);
+        //setContentView(R.layout.activity_search_publications);
         request = new PublicationSearchRequest();
-
-        // opciones por defecto
-        RadioButton rb = (RadioButton) findViewById(R.id.radioButtonAmbas);
-        rb.setChecked(true);
-        RadioButton rbCurrency = (RadioButton) findViewById(R.id.radioButtonARS);
-        rbCurrency.setChecked(true);
 
         // Filtros avanzados
 
@@ -45,26 +37,10 @@ public class SearchPublicationsActivity extends ExpandableListActivity {
         expandableList.setGroupIndicator(null);
         expandableList.setClickable(true);
 
-        setGroupParents();
-        setChildData();
+        AdvancedSearchListAdapter adapter = new AdvancedSearchListAdapter();
 
-        AdvancedSearchListAdapter adapter = new AdvancedSearchListAdapter(parentItems, childItems);
-
-        adapter.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE), this);
+        adapter.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE));
         expandableList.setAdapter(adapter);
-        expandableList.setOnChildClickListener(this);
-    }
-
-    public void setGroupParents() {
-        parentItems.add("Advanced Search");
-    }
-
-    public void setChildData() {
-
-        // Android
-        ArrayList<String> child = new ArrayList<String>();
-        child.add("Advandec Filters");
-        childItems.add(child);
     }
 
     @Override
