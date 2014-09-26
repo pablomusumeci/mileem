@@ -33,9 +33,11 @@
           <%= button_to edit_publication_path(publication) , class: "btn btn-default btn-xs", :method => :get do %>
             <span class="glyphicon glyphicon-edit"></span>
           <% end %>
-          <%= button_to publication,class: "btn btn-danger btn-xs", method: :delete, data: {confirm: '¿Esta usted seguro que quiere eliminar la publicación?' } do %>
-            <span class="glyphicon glyphicon-remove-circle"></span>
-          <% end %>            
+          <% if policy(publication).delete? %>
+	          <%= button_to publication,class: "btn btn-danger btn-xs", method: :delete, data: {confirm: '¿Esta usted seguro que quiere eliminar la publicación?' } do %>
+	            <span class="glyphicon glyphicon-remove-circle"></span>
+	          <% end %>
+          <% end %>           
         </td>
       </tr>
     <% end %>
