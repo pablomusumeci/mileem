@@ -4,75 +4,86 @@
 
 
 <div class="row">
-<div class="col-md-4">
-<div id="myCarousel" class="carousel slide">
-  <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <% (1..(@publication.uploads.size()- 1)).each do |i| %>
-      <li data-target="#myCarousel" data-slide-to=<% i %> ></li>
-    <% end %>   
-  </ol>
-  <div class="carousel-inner">
-    <% if(@publication.uploads.size() > 0) %>
-      <div class="item active">
-        <img src="<%= @publication.uploads.first().upload %>" style="width:400px;height:300px;" />
+  <div class="col-md-4">
+    <div id="myCarousel" class="carousel slide">
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <% (1..(@publication.uploads.size()- 1)).each do |i| %>
+          <li data-target="#myCarousel" data-slide-to=<% i %> ></li>
+        <% end %>   
+      </ol>
+      <div class="carousel-inner">
+        <% if(@publication.uploads.size() > 0) %>
+          <div class="item active">
+            <img src="<%= @publication.uploads.first().upload %>" style="width:400px;height:300px;" />
+          </div>
+          <% @publication.uploads.drop(1).each do |u| %>
+            <div class="item ">
+              <img src="<%= u.upload %>" style="width:400px;height:300px;" />
+            </div>
+        <% end %>
+        <% else %>
+          <div class="item active">
+            <%= image_tag "skyscraper-wallpaper.jpg" , :size=>"600x400" %>
+          </div>
+        <% end %>   
       </div>
-      <% @publication.uploads.drop(1).each do |u| %>
-        <div class="item ">
-          <img src="<%= u.upload %>" style="width:400px;height:300px;" />
-        </div>
-    <% end %>
-    <% else %>
-      <div class="item active">
-        <%= image_tag "skyscraper-wallpaper.jpg" , :size=>"600x400" %>
-      </div>
-    <% end %>   
+      <!-- Carousel nav -->
+      <a class="carousel-control left" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      <a class="carousel-control right" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    </div>
   </div>
-  <!-- Carousel nav -->
-  <a class="carousel-control left" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-  <a class="carousel-control right" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-</div>
+
+  <div class="col-md-4">
+    <dl class="dl-horizontal">
+      <dt><strong>Fecha de publicación</strong></dt>
+      <dd><%= @publication.effective_date %></dd>
+      <dt><strong>Dirección</strong></dt>
+      <dd><%= @publication.address %></dd>
+      <dt><strong>Barrio</strong></dt>
+      <dd><%= @publication.neighbourhood.name %></dd>
+      <dt><strong>Precio (<%= @publication.currency.abreviatura %>)</strong></dt>
+      <dd><%= @publication.price %></dd>
+      <dt><strong>Descripción</strong></dt>
+      <dd><%= @publication.description %></dd>
+    </dl>     
+  </div>
+
+  <div class="col-md-4">
+    <dl class="dl-horizontal">
+      <dt><strong>Tipo</strong></dt>
+      <dd><%= @publication.operation %></dd>
+      <dt><strong>Piso</strong></dt>
+      <dd><%= @publication.floor %></dd>
+      <dt><strong>Departamento</strong></dt>
+      <dd><%= @publication.apartment %></dd>
+      <dt><strong>Ambientes</strong></dt>
+      <dd><%= @publication.number_spaces %></dd>
+      <dt><strong>Superficie</strong></dt>
+      <dd><%= @publication.surface %></dd>
+      <dt><strong>Antiguedad</strong></dt>
+      <dd><%= @publication.antiquity %></dd>
+      <dt><strong>Información adicional</strong></dt>
+      <dd><%= @publication.additional_info %></dd>
+    </dl>     
+  </div>
 </div>
 
-<div class="col-md-6">
-  <dt><strong>Fecha de publicación</strong></dt>
-  <dd><%= @publication.effective_date %></dd>
-  <dt><strong>Tipo</strong></dt>
-  <dd><%= @publication.operation %></dd>
-  <dt><strong>Dirección</strong></dt>
-  <dd><%= @publication.address %></dd>
-  <dt><strong>Barrio</strong></dt>
-  <dd><%= @publication.neighbourhood.name %></dd>
-  <dt><strong>Piso</strong></dt>
-  <dd><%= @publication.floor %></dd>
-  <dt><strong>Departamento</strong></dt>
-  <dd><%= @publication.apartment %></dd>
-  <dt><strong>Ambientes</strong></dt>
-  <dd><%= @publication.number_spaces %></dd>
-  <dt><strong>Superficie</strong></dt>
-  <dd><%= @publication.surface %></dd>
-  <dt><strong>Precio (<%= @publication.currency.abreviatura %>)</strong></dt>
-  <dd><%= @publication.price %></dd>
-  <dt><strong>Expensas</strong></dt>
-  <dd><%= @publication.expenses %></dd>
-  <dt><strong>Antiguedad</strong></dt>
-  <dd><%= @publication.antiquity %></dd>
-  <dt><strong>Descripción</strong></dt>
-  <dd><%= @publication.description %></dd>
-  <dt><strong>Información adicional</strong></dt>
-  <dd><%= @publication.additional_info %></dd>
-</div>
-</div>
-<%= link_to "Volver",  publications_path, :class => 'btn btn-default'  %>
-<%= link_to "Editar", edit_publication_path(@publication), :class => 'btn btn-default' %>
-<%= link_to "Imagenes", uploads_publication_path(@publication), :class => 'btn btn-default' %>
+</br>
+
+<div class="row">
+<div class="col-md-6 col-md-offset-6">
+<%= link_to "Volver",  publications_path, :class => 'btn btn-lg btn-default'  %>
+<%= link_to "Editar", edit_publication_path(@publication), :class => 'btn btn-lg btn-default' %>
+<%= link_to "Imagenes", uploads_publication_path(@publication), :class => 'btn btn-lg btn-default' %>
 
 <%= link_to "Eliminar",
               publication_path(@publication),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-
+              :class => 'btn btn-lg btn-danger' %>
+</div>
+</div>
 <script type="text/javascript" >
   $( document ).ready(function() {
       $('.carousel').carousel();
