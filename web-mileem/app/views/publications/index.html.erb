@@ -63,7 +63,13 @@
 
 <script type="text/javascript" >
 
-$('#filterrific_date_at_gte').datepicker( {language: "es", autoclose: true,todayHighlight: true});
+$('#filterrific_date_at_gte').datepicker( {language: "es", autoclose: true,todayHighlight: true}).on('changeDate', 
+	function (selected) {
+        startDate = new Date(selected.date.valueOf());
+        startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())));
+        $('#filterrific_date_at_lt').datepicker('setStartDate', startDate);
+    });
+
 $('#filterrific_date_at_lt').datepicker( {language: "es", autoclose: true,todayHighlight: true});
 
 </script>
