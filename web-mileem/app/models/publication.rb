@@ -81,7 +81,7 @@ class Publication < ActiveRecord::Base
 	}
 
 	scope :date_at_lt, lambda { |reference_time|
-  		where('publications.effective_date < ?', Date.parse(reference_time).strftime("%Y-%m-%d"))
+  		where('publications.effective_date <= ?', Date.parse(reference_time).strftime("%Y-%m-%d"))
 	}
 
 	scope :with_neighbourhood_id, lambda { |neighbourhood_id|
