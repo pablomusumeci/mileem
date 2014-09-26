@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
 class PublicationsController < ApplicationController
-  before_action :set_publication, only: [:show, :edit, :update, :destroy, :uploads ]
+  before_action :set_publication, only: [:show, :edit, :update, :destroy, :uploads, :jsonifier ]
   before_action :authorize_update, only: [:edit, :update, :destroy] #perimsos del pundit
-  before_filter :authenticate_user!, except: [:search, :show] # permisos del devise
+  before_filter :authenticate_user!, except: [:search, :jsonifier] # permisos del devise
   skip_before_action :verify_authenticity_token
 
   # GET /publications
@@ -35,10 +35,7 @@ class PublicationsController < ApplicationController
   # GET /publications/1
   # GET /publications/1.json
   def show
-    respond_to do |format|
-      format.html { render :show}
-      format.json { render :json => @publication.to_json}
-    end
+    render :show
   end
 
   # GET /publications/new
@@ -91,6 +88,12 @@ class PublicationsController < ApplicationController
       format.html { redirect_to publications_url, notice: 'La publicación fue destruida exitosamente.' }
       format.json { head :no_content }
     end
+  end
+
+  def jsonifier
+    respond_to do |format|
+    format.json { render :json => @publication.to_json}
+  end
   end
 
   # GET /publications/search.json?param1=x&param2=y...
