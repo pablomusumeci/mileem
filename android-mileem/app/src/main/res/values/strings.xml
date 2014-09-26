@@ -29,6 +29,8 @@
     <string name="constant.to">Hasta</string>
     <string name="SeeAddress">Ver ubicación</string>
     <string name="callAdvertiser">Escribir al anunciante</string>
+    <string name="advanced_options">Opciones de búsqueda avanzadas</string>
+    <string name="expenses_name">Expensas</string>
 
     <string-array name="property_name_array">
         <item>Todos</item>

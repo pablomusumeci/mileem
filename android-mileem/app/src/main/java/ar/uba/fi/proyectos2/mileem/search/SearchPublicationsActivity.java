@@ -1,14 +1,18 @@
 package ar.uba.fi.proyectos2.mileem.search;
 
 import android.app.Activity;
+import android.app.ExpandableListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ExpandableListView;
 import android.widget.RadioButton;
 
 import org.apache.http.HttpEntity;
@@ -25,6 +29,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.util.ArrayList;
 
 import android.net.Uri.Builder;
 import android.widget.Spinner;
@@ -34,10 +39,11 @@ import ar.uba.fi.proyectos2.mileem.R;
 import ar.uba.fi.proyectos2.mileem.model.PublicationSearchRequest;
 import ar.uba.fi.proyectos2.mileem.service.ListAdapter;
 
-
-public class SearchPublicationsActivity extends Activity {
+public class SearchPublicationsActivity extends ExpandableListActivity {
 
     private PublicationSearchRequest request;
+    private ArrayList<String> parentItems = new ArrayList<String>();
+    private ArrayList<Object> childItems = new ArrayList<Object>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,35 @@ public class SearchPublicationsActivity extends Activity {
         rb.setChecked(true);
         RadioButton rbCurrency = (RadioButton) findViewById(R.id.radioButtonARS);
         rbCurrency.setChecked(true);
+
+        // Filtros avanzados
+
+        ExpandableListView expandableList = getExpandableListView();
+
+        expandableList.setDividerHeight(2);
+        expandableList.setGroupIndicator(null);
+        expandableList.setClickable(true);
+
+        setGroupParents();
+        setChildData();
+
+        AdvancedSearchListAdapter adapter = new AdvancedSearchListAdapter(parentItems, childItems);
+
+        adapter.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE), this);
+        expandableList.setAdapter(adapter);
+        expandableList.setOnChildClickListener(this);
+    }
+
+    public void setGroupParents() {
+        parentItems.add("Advanced Search");
+    }
+
+    public void setChildData() {
+
+        // Android
+        ArrayList<String> child = new ArrayList<String>();
+        child.add("Advandec Filters");
+        childItems.add(child);
     }
 
     @Override
@@ -80,7 +115,7 @@ public class SearchPublicationsActivity extends Activity {
         request.setProperty_name(property_name.getSelectedItem().toString());
         Uri.Builder builder = new Uri.Builder()
                 .scheme("http")
-                .encodedAuthority("192.168.1.103:3000")
+                .encodedAuthority("192.168.1.100:3000")
                 .appendEncodedPath("publications/search.json");
         if (request.getOperation() != null) {
             builder.appendQueryParameter("operation", request.getOperation());
