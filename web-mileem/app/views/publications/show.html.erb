@@ -8,8 +8,9 @@
 <div id="myCarousel" class="carousel slide">
   <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
+    <% (1..(@publication.uploads.size()- 1)).each do |i| %>
+      <li data-target="#myCarousel" data-slide-to=<% i %> ></li>
+    <% end %>   
   </ol>
   <div class="carousel-inner">
     <% if(@publication.uploads.size() > 0) %>
@@ -23,8 +24,7 @@
     <% end %>
     <% else %>
       <div class="item active">
-        <%= image_tag "college.png" , :size=>"300x400" %>
-        <div class="carousel-caption"><%= @publication.name %></div>
+        <%= image_tag "skyscraper-wallpaper.jpg" , :size=>"600x400" %>
       </div>
     <% end %>   
   </div>
