@@ -62,13 +62,12 @@
             android:text="@string/neighbourhood_name"
             android:textSize="16dp" />
 
-        <Spinner
+        <ar.uba.fi.proyectos2.mileem.model.MultiSpinner
             android:id="@+id/searchSpinnerNeighborhood"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textViewNeighbourhood"
-            android:entries="@array/neighborhood_array" />
+            android:layout_below="@+id/textViewNeighbourhood" />
 
 
         <TextView
