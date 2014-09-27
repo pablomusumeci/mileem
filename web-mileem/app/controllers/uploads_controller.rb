@@ -5,6 +5,8 @@ class UploadsController < ApplicationController
   # POST /uploads.json
   def create
     @publication = Publication.find(params[:publication_id])
+    # check if has permission
+    authorize @publication, :update?
     @upload = Upload.new(params[:upload].permit(:upload))
     respond_to do |format|
       if @upload.save
@@ -36,6 +38,6 @@ class UploadsController < ApplicationController
   end
 
   def upload_params
-      params.require(:upload).permit(:publication_id, :upload => [:upload])
-    end
+    params.require(:upload).permit(:publication_id, :upload => [:upload])
+  end
 end

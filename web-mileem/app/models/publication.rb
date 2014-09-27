@@ -74,27 +74,29 @@ class Publication < ActiveRecord::Base
 		# return result
 	end
 
-	self.per_page = 2
+	self.per_page = 10
 
 	scope :date_at_gte, lambda { |reference_time|
 		where('publications.effective_date >= ?', Date.parse(reference_time).strftime("%Y-%m-%d"))
 	}
 
 	scope :date_at_lt, lambda { |reference_time|
-  		where('publications.effective_date < ?', Date.parse(reference_time).strftime("%Y-%m-%d"))
+  		where('publications.effective_date <= ?', Date.parse(reference_time).strftime("%Y-%m-%d"))
 	}
 
 	scope :with_neighbourhood_id, lambda { |neighbourhood_id|
     	where(:neighbourhood_id => [neighbourhood_id])
   	}
 
-#	scope :currency_filter_id, lambda { |currency_id|
-#    	where(:currency_id => [currency_id])
-#  	}
+	scope :currency_filter_id, lambda { |currency_id|
+		if(currency_id != 0)
+	    	where(:currency_id => [currency_id])
+	    end	
+  	}
 
-#	scope :price_gte, lambda { |reference_price|
- # 		where('publications.price  >= ?', reference_price)
-#	}
+	scope :price_gte, lambda { |reference_price|
+ 		where('publications.price  >= ?', reference_price)
+	}
 
 	scope :operation_search, lambda { |reference_operation|
 		if(reference_operation != "Ambos")
@@ -113,8 +115,7 @@ class Publication < ActiveRecord::Base
 	    :with_neighbourhood_id,
 	    :price_gte,
 	    :operation_search,
-	    :currency_filter_id,
-	    :final_price
+	    :currency_filter_id
 	  ]
 	)
 end

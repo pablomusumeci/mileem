@@ -2,6 +2,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  get 'publications/jsonifier/:id' => 'publications#jsonifier'
   get 'publications/search' => 'publications#search'
   get 'publications/:id/uploads', to: 'publications#uploads', as: 'uploads_publication'
   resources :uploads
