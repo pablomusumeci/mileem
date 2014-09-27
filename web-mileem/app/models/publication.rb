@@ -88,8 +88,14 @@ class Publication < ActiveRecord::Base
     	where(:neighbourhood_id => [neighbourhood_id])
   	}
 
+	scope :currency_filter_id, lambda { |currency_id|
+		if(currency_id != 0)
+	    	where(:currency_id => [currency_id])
+	    end	
+  	}
+
 	scope :price_gte, lambda { |reference_price|
-  		where('publications.price >= ?', reference_price)
+ 		where('publications.price  >= ?', reference_price)
 	}
 
 	scope :operation_search, lambda { |reference_operation|
@@ -98,13 +104,18 @@ class Publication < ActiveRecord::Base
   		end	
 	}
 
+ 	scope :price_gte, lambda { |price|   
+  		self.scoped.where(:currency_id => [currency_id] ) 
+	}
+
 	filterrific(
   	filter_names: [
 	    :date_at_gte,
 	    :date_at_lt,
 	    :with_neighbourhood_id,
 	    :price_gte,
-	    :operation_search
+	    :operation_search,
+	    :currency_filter_id
 	  ]
 	)
 end

@@ -31,6 +31,19 @@
     <%= f.number_field :price_gte, :class => 'form-control', step: 0.01 , min: 0 %>
   </div>
   <div class="col-md-3">
+    Moneda
+    <div class="radio">
+      <label class="radio-inline">
+        <%= f.radio_button :currency_filter_id , 0 , :checked => 'checked'  %><p> Ambos </p>
+      </label>
+      <% Currency.all.each do |c| %>
+      <label class="radio-inline">
+        <%= f.radio_button :currency_filter_id , c.id %> <p> <%= c.abreviatura %></p>
+      </label>
+    <% end %>  
+    </div>   
+  </div>
+  <div class="col-md-3">
     Tipo de Operación
     <div class="radio">
       <label class="radio-inline">
@@ -47,7 +60,7 @@
 </div>  
   <div>
     <%= link_to(
-      'Reset',
+      'Limpiar',
       reset_filterrific_publications_path,
     ) %>
   </div>
@@ -56,10 +69,8 @@
 <br>
 <%= render partial: 'publications/list', locals: {publications: @publications}  %>
 
-<br>
-
 <%= link_to "Nueva publicación", new_publication_path, :class => 'btn btn-primary' %>
-
+<br>
 
 <script type="text/javascript" >
 
