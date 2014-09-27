@@ -17,9 +17,9 @@ import ar.uba.fi.proyectos2.mileem.R;
 /**
  * Created by javier on 07/09/14.
  */
-public class ListAdapter extends ArrayAdapter<Publication> {
+public class PublicationsResultsListAdapter extends ArrayAdapter<Publication> {
     private List<Publication> publications;
-    public ListAdapter(Context context, int resource, List<Publication> publications) {
+    public PublicationsResultsListAdapter(Context context, int resource, List<Publication> publications) {
         super(context, resource, publications);
         this.publications = publications;
     }

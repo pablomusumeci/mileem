@@ -1,4 +1,4 @@
-package ar.uba.fi.proyectos2.mileem.search;
+package ar.uba.fi.proyectos2.mileem.detail;
 
 import android.app.Activity;
 import android.os.Bundle;

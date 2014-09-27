@@ -44,7 +44,6 @@
     </string-array>
 
     <string-array name="neighborhood_array">
-        <item>Todos</item>
         <item>Agronomía</item>
         <item>Almagro</item>
         <item>Balvanera</item>

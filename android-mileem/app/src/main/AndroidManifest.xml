@@ -30,7 +30,7 @@
                 android:value="ar.uba.fi.proyectos2.mileem.search.SearchPublicationsActivity" />
         </activity>
         <activity
-            android:name=".search.PublicationDetailActivity"
+            android:name=".detail.PublicationDetailActivity"
             android:label="@string/title_activity_publication_detail"
             android:parentActivityName=".search.SearchResultsActivity">
             <meta-data

@@ -1,14 +1,246 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
 
-    <ExpandableListView
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@android:id/list"
-        android:layout_alignParentStart="true" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textViewOperationType"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/publication_type"
+            android:textSize="16dp" />
+
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/radioGroupOperationType"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewOperationType"
+            android:orientation="horizontal">
 
 
-</LinearLayout>
+            <RadioButton
+                android:id="@+id/radioButtonVenta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onRadioButtonClicked"
+                android:text="@string/search_venta" />
+
+            <RadioButton
+                android:id="@+id/radioButtonAlquiler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_weight="1"
+                android:onClick="onRadioButtonClicked"
+                android:text="@string/search_alquiler" />
+
+            <RadioButton
+                android:id="@+id/radioButtonAmbas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onRadioButtonClicked"
+                android:text="@string/search_ambas" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textViewNeighbourhood"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/radioGroupOperationType"
+            android:text="@string/neighbourhood_name"
+            android:textSize="16dp" />
+
+        <ar.uba.fi.proyectos2.mileem.model.MultiSpinner
+            android:id="@+id/searchSpinnerNeighborhood"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textViewNeighbourhood" />
+
+
+        <TextView
+            android:id="@+id/textViewNeighborhood"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/searchSpinnerNeighborhood"
+            android:text="@string/publication_type"
+            android:textSize="16dp" />
+
+
+        <Spinner
+            android:id="@+id/searchSpinnerType"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewNeighborhood"
+            android:entries="@array/property_name_array" />
+
+        <TextView
+            android:id="@+id/textViewMoneyType"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/searchSpinnerType"
+            android:layout_weight="1"
+            android:text="@string/price"
+            android:textSize="16dp" />
+
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/radioGroupCurrency"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewMoneyType"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButtonARS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onRadioButtonCurrencyClicked"
+                android:text="@string/constant.ARS" />
+
+            <RadioButton
+                android:id="@+id/radioButtonUSD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onRadioButtonCurrencyClicked"
+                android:text="@string/constant.USD" />
+        </RadioGroup>
+
+
+        <EditText
+            android:id="@+id/searchMinPrice"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/radioGroupCurrency"
+            android:ems="10"
+            android:hint="@string/constant.since"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/searchMaxPrice"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/searchMinPrice"
+            android:ems="10"
+            android:hint="@string/constant.to"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/textViewAdvancedOptions"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/searchMaxPrice"
+            android:singleLine="false"
+            android:text="@string/advanced_options"
+            android:textSize="16dp" />
+
+        <LinearLayout
+            android:id="@+id/advancedOptionsGroup"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/textViewAdvancedOptions"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewSpaces"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewAdvancedOptions"
+                android:singleLine="false"
+                android:text="@string/number_spaces"
+                android:textSize="16dp" />
+
+            <EditText
+                android:id="@+id/search_ambients_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewSpaces"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/textViewExpenses"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/search_ambients_input"
+                android:text="@string/expenses_name"
+                android:textSize="16dp" />
+
+            <EditText
+                android:id="@+id/search_expenses_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewExpenses"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/textViewSurface"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/search_expenses_input"
+                android:text="@string/surface"
+                android:textSize="16dp" />
+
+            <Spinner
+                android:id="@+id/search_surface_selector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewSurface" />
+
+            <TextView
+                android:id="@+id/textViewAntiquity"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/search_surface_selector"
+                android:text="@string/antiquity"
+                android:textSize="16dp" />
+
+            <EditText
+                android:id="@+id/seacrh_antiquity_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewAntiquity"
+                android:ems="10"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/searchButtonDoSearch"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/advancedOptionsGroup"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:background="#dd4814"
+            android:clickable="true"
+            android:onClick="doSearch"
+            android:text="@string/search_button_do_search"
+            android:textColor="#ffffff" />
+
+
+    </RelativeLayout>
+
+
+</ScrollView>

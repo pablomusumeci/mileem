@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'uploads/:id/delete', to: 'uploads#destroy', as: 'uploads_destroy'
+
   # Busqueda
 
   # The priority is based upon order of creation: first created -> highest priority.
