@@ -20,12 +20,15 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 import ar.uba.fi.proyectos2.mileem.R;
+import ar.uba.fi.proyectos2.mileem.model.MultiSpinner;
 import ar.uba.fi.proyectos2.mileem.model.PublicationSearchRequest;
 
-public class SearchPublicationsActivity extends Activity {
+public class SearchPublicationsActivity extends Activity implements MultiSpinner.MultiSpinnerListener {
 
     private PublicationSearchRequest request;
     private boolean expanded;
@@ -36,6 +39,10 @@ public class SearchPublicationsActivity extends Activity {
         super.onCreate(savedInstanceState);
         expanded = false;
         setContentView(R.layout.activity_search_publications);
+        MultiSpinner multiSpinner = (MultiSpinner) findViewById(R.id.searchSpinnerNeighborhood);
+        List<String> neighbourhoods = Arrays.asList(getResources().getStringArray(R.array.neighborhood_array));
+        multiSpinner.setItems(neighbourhoods,"",this);
+
         request = new PublicationSearchRequest();
 
         // opciones por defecto
@@ -82,8 +89,8 @@ public class SearchPublicationsActivity extends Activity {
     public void doSearch(View view) {
 
         // seleccion del tipo de barrio
-        Spinner neighborhood = (Spinner) findViewById(R.id.searchSpinnerNeighborhood);
-        request.setNeighbourhood_name(neighborhood.getSelectedItem().toString());
+        MultiSpinner neighborhood = (MultiSpinner ) findViewById(R.id.searchSpinnerNeighborhood);
+        request.setNeighbourhood_name(neighborhood.getSelected());
         Spinner property_name = (Spinner) findViewById(R.id.searchSpinnerType);
         request.setProperty_name(property_name.getSelectedItem().toString());
         Uri.Builder builder = new Uri.Builder()
@@ -231,4 +238,8 @@ public class SearchPublicationsActivity extends Activity {
         }
     }
 
+    @Override
+    public void onItemsSelected(boolean[] selected) {
+
+    }
 }
