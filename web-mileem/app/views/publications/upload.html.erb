@@ -91,7 +91,8 @@
         <td></td>
         <td class="name"><span>{%=file.name%}</span></td>
         <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-        <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+        <td class="error" colspan="2"><span class="label label-danger">{%=locale.fileupload.error%}</span> {%=  locale.fileupload.errors[file.error] || file.error %}</td>
+
         {% } else { %}
         <td class="preview">{% if (file.thumbnail_url) { %}
           <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
@@ -103,11 +104,7 @@
         <td colspan="2"></td>
         {% } %}
       <td class="delete">
-        <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
-          <i class="glyphicon glyphicon-remove"></i>
-          <span> Eliminar </span>
-        </button>
-      </td>
+          <%= button_to 'Eliminar', "{%= o %}", :method => "delete", :confirm => 'Are you sure?'  %>
     </tr>
     {% } %}
 </script>

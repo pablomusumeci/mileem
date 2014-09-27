@@ -26,7 +26,6 @@ class UploadsController < ApplicationController
  # DELETE /uploads/1
   # DELETE /uploads/1.json
   def destroy
-    print "sssss"
     @upload = Upload.find(params[:id])
     @upload.destroy
 

@@ -31,6 +31,16 @@
     <%= f.number_field :price_gte, :class => 'form-control', step: 0.01 , min: 0 %>
   </div>
   <div class="col-md-3">
+    Moneda
+    <div class="radio">
+      <% Currency.all.each do |c| %>
+      <label class="radio-inline">
+        <%= f.radio_button :currency_filter_id , c.id , :checked => (@filterrific.currency_filter_id == c.id) ? 'checked' : "" %><p> <%= c.abreviatura %></p>
+      </label>
+    <% end %>  
+    </div>   
+  </div>
+  <div class="col-md-3">
     Tipo de Operación
     <div class="radio">
       <label class="radio-inline">

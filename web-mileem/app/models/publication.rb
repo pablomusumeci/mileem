@@ -88,14 +88,22 @@ class Publication < ActiveRecord::Base
     	where(:neighbourhood_id => [neighbourhood_id])
   	}
 
-	scope :price_gte, lambda { |reference_price|
-  		where('publications.price >= ?', reference_price)
-	}
+#	scope :currency_filter_id, lambda { |currency_id|
+#    	where(:currency_id => [currency_id])
+#  	}
+
+#	scope :price_gte, lambda { |reference_price|
+ # 		where('publications.price  >= ?', reference_price)
+#	}
 
 	scope :operation_search, lambda { |reference_operation|
 		if(reference_operation != "Ambos")
   			where('publications.operation = ?', reference_operation)
   		end	
+	}
+
+ 	scope :price_gte, lambda { |price|   
+  		self.scoped.where(:currency_id => [currency_id] ) 
 	}
 
 	filterrific(
@@ -104,7 +112,9 @@ class Publication < ActiveRecord::Base
 	    :date_at_lt,
 	    :with_neighbourhood_id,
 	    :price_gte,
-	    :operation_search
+	    :operation_search,
+	    :currency_filter_id,
+	    :final_price
 	  ]
 	)
 end

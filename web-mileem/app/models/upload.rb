@@ -1,8 +1,8 @@
 class Upload < ActiveRecord::Base
 
   has_attached_file :upload
-#  validates_attachment :upload, content_type: { content_type: /\Aimage\/.*\Z/ }	
-  do_not_validate_attachment_file_type :upload	
+  validates_attachment_content_type :upload, :content_type => ['image/png','image/jpg','image/jpeg']
+#  do_not_validate_attachment_file_type :upload	
   include Rails.application.routes.url_helpers
 
   def to_jq_upload
@@ -11,7 +11,7 @@ class Upload < ActiveRecord::Base
       "size" => read_attribute(:upload_file_size),
       "url" => upload.url(:original),
       "delete_url" => upload_path(self),
-      "delete_type" => "DELETE" 
+      "delete_type" => "DELETE"
     }
   end
 
