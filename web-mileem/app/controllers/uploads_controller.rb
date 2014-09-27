@@ -29,10 +29,12 @@ class UploadsController < ApplicationController
   # DELETE /uploads/1.json
   def destroy
     @upload = Upload.find(params[:id])
+    publication_id = @upload.publication_id
+    publication_uploads_url = "/publications/#{publication_id}/uploads"
     @upload.destroy
 
     respond_to do |format|
-      format.html { redirect_to uploads_url }
+      format.html { redirect_to publication_uploads_url }
       format.json { head :no_content }
     end
   end
