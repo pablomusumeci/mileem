@@ -95,8 +95,8 @@ public class SearchPublicationsActivity extends Activity implements MultiSpinner
         request.setProperty_name(property_name.getSelectedItem().toString());
         Uri.Builder builder = new Uri.Builder()
                 .scheme("http")
-                .encodedAuthority("demo9345628.mockable.io")
-                .appendEncodedPath("publications.json");
+                .encodedAuthority("192.168.1.110:3000")
+                .appendEncodedPath("publications/search.json");
         if (request.getOperation() != null) {
             builder.appendQueryParameter("operation", request.getOperation());
         }
