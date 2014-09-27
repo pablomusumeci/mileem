@@ -104,10 +104,6 @@ class Publication < ActiveRecord::Base
   		end	
 	}
 
- 	scope :price_gte, lambda { |price|   
-  		self.scoped.where(:currency_id => [currency_id] ) 
-	}
-
 	filterrific(
   	filter_names: [
 	    :date_at_gte,
