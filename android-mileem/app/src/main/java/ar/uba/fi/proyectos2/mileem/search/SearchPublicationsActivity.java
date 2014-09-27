@@ -1,44 +1,63 @@
 package ar.uba.fi.proyectos2.mileem.search;
 
+import android.app.Activity;
 import android.app.ExpandableListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.logging.Logger;
+
 import ar.uba.fi.proyectos2.mileem.R;
 import ar.uba.fi.proyectos2.mileem.model.PublicationSearchRequest;
 
-public class SearchPublicationsActivity extends ExpandableListActivity {
+public class SearchPublicationsActivity extends Activity {
 
     private PublicationSearchRequest request;
+    private ExpandableListView expandableList;
+    private boolean expanded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        expanded = false;
         setContentView(R.layout.activity_search_publications);
         request = new PublicationSearchRequest();
 
-        // Filtros avanzados
+        // opciones por defecto
+        RadioButton rb = (RadioButton) findViewById(R.id.radioButtonAmbas);
+        rb.setChecked(true);
+        request.setOperation(null);
+        RadioButton rbCurrency = (RadioButton) findViewById(R.id.radioButtonARS);
+        rbCurrency.setChecked(true);
+        request.setCurrency("$");
 
-        ExpandableListView expandableList = getExpandableListView();
+        TextView btn=(TextView) findViewById(R.id.textViewAdvancedOptions);
+        btn.setOnClickListener(new View.OnClickListener() {
 
-        expandableList.setDividerHeight(2);
-        expandableList.setGroupIndicator(null);
-        expandableList.setClickable(true);
+            @Override
+            public void onClick(View v) {
+                toggleAdvancedOptions();
+            }
+        });
 
-        SearchPublicationsListAdapter adapter = new SearchPublicationsListAdapter(request);
-
-        adapter.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE));
-        expandableList.setAdapter(adapter);
+        LinearLayout l = (LinearLayout) findViewById(R.id.advancedOptionsGroup);
+        l.setVisibility(View.GONE);
+        expanded = false;
     }
 
     @Override
@@ -89,20 +108,32 @@ public class SearchPublicationsActivity extends ExpandableListActivity {
             request.setMax_price(Integer.parseInt(tvMaxPrice.getText().toString()));
             builder.appendQueryParameter("max_price", Integer.toString(request.getMax_price()));
         }
+
         builder.appendQueryParameter("currency", request.getCurrency());
 
-        // if esta desplegado
-        ExpandableListView expandableList = getExpandableListView();
-        if (expandableList.isGroupExpanded(1)) {
+        if (expanded){
             TextView tvAmbients = (TextView) findViewById(R.id.search_ambients_input);
             request.setNumber_spaces(Integer.parseInt(tvAmbients.getText().toString()));
             builder.appendQueryParameter("number_spaces", Integer.toString(request.getNumber_spaces()));
+
         }
+
 
         Uri uri = builder.build();
         Intent intent = new Intent(this, SearchResultsActivity.class);
         intent.putExtra("SEARCH.URL", uri.toString());
         startActivity(intent);
+    }
+
+    public void toggleAdvancedOptions(){
+        LinearLayout l = (LinearLayout) findViewById(R.id.advancedOptionsGroup);
+        if (expanded == true) {
+            l.setVisibility(View.GONE);
+            expanded = false;
+        } else {
+            l.setVisibility(View.VISIBLE);
+            expanded = true;
+        }
     }
 
     public void onRadioButtonClicked(View view) {
