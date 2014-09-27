@@ -29,7 +29,7 @@ public class SearchPublicationsListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        if (groupPosition == 1 && convertView == null) {
+        if (groupPosition == 0 && convertView == null) {
             convertView = inflater.inflate(R.layout.advanced_search_advanced_options, null);
         }
         return convertView;
@@ -37,19 +37,8 @@ public class SearchPublicationsListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        if (groupPosition == 0 && convertView == null) {
-            convertView = inflater.inflate(R.layout.advanced_search_basic_options, null);
-            // opciones por defecto
-            RadioButton rb = (RadioButton) convertView.findViewById(R.id.radioButtonAmbas);
-            rb.setChecked(true);
-            request.setOperation(null);
-            RadioButton rbCurrency = (RadioButton) convertView.findViewById(R.id.radioButtonARS);
-            rbCurrency.setChecked(true);
-            request.setCurrency("$");
-        } else if (groupPosition == 1 && convertView == null) {
+        if (groupPosition ==  0 && convertView == null) {
             convertView = inflater.inflate(R.layout.advanced_search_advanced_options_title, null);
-        } else if (groupPosition == 2 && convertView == null) {
-            convertView = inflater.inflate(R.layout.advanced_search_search_button, null);
         }
         return convertView;
     }
@@ -76,7 +65,7 @@ public class SearchPublicationsListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        return 3;
+        return 1;
     }
 
     @Override

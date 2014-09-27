@@ -24,7 +24,7 @@ public class SearchPublicationsActivity extends ExpandableListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_search_publications);
+        setContentView(R.layout.activity_search_publications);
         request = new PublicationSearchRequest();
 
         // Filtros avanzados
