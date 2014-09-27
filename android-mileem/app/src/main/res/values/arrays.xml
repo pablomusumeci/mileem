@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="antiquity_array">
+        <item>Cualquiera</item>
+        <item>Menor a 10 años</item>
+        <item>Entre 10 y 20 años</item>
+        <item>Mayor a 20 años</item>
+    </string-array>
+
+    <string-array name="surface_array">
+        <item>Cualquiera</item>
+        <item>Hasta 60 m2</item>
+        <item>Entre 60 y 100 m2</item>
+        <item>Entre 100 y 300 m2</item>
+        <item>Más de 300 m2</item>
+    </string-array>
+</resources>
