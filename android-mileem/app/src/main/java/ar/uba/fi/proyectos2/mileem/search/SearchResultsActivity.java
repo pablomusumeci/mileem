@@ -17,9 +17,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import ar.uba.fi.proyectos2.mileem.R;
+import ar.uba.fi.proyectos2.mileem.detail.PublicationDetailActivity;
 import ar.uba.fi.proyectos2.mileem.model.Publication;
-import ar.uba.fi.proyectos2.mileem.service.JSONParser;
-import ar.uba.fi.proyectos2.mileem.service.ListAdapter;
+import ar.uba.fi.proyectos2.mileem.utils.JSONParser;
+import ar.uba.fi.proyectos2.mileem.service.PublicationsResultsListAdapter;
 
 
 public class SearchResultsActivity extends ListActivity {
@@ -126,7 +127,7 @@ public class SearchResultsActivity extends ListActivity {
 
         @Override
         protected void onPostExecute(Void result) {
-            setListAdapter(new ListAdapter(SearchResultsActivity.this, android.R.layout.activity_list_item, list));
+            setListAdapter(new PublicationsResultsListAdapter(SearchResultsActivity.this, android.R.layout.activity_list_item, list));
 
         }
 

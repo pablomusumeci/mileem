@@ -14,8 +14,6 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import ar.uba.fi.proyectos2.mileem.R;
 import ar.uba.fi.proyectos2.mileem.model.PublicationSearchRequest;
 
@@ -37,7 +35,7 @@ public class SearchPublicationsActivity extends ExpandableListActivity {
         expandableList.setGroupIndicator(null);
         expandableList.setClickable(true);
 
-        AdvancedSearchListAdapter adapter = new AdvancedSearchListAdapter();
+        SearchPublicationsListAdapter adapter = new SearchPublicationsListAdapter(request);
 
         adapter.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE));
         expandableList.setAdapter(adapter);
@@ -71,7 +69,7 @@ public class SearchPublicationsActivity extends ExpandableListActivity {
         request.setProperty_name(property_name.getSelectedItem().toString());
         Uri.Builder builder = new Uri.Builder()
                 .scheme("http")
-                .encodedAuthority("192.168.1.100:3000")
+                .encodedAuthority("192.168.1.110:3000")
                 .appendEncodedPath("publications/search.json");
         if (request.getOperation() != null) {
             builder.appendQueryParameter("operation", request.getOperation());
@@ -92,6 +90,14 @@ public class SearchPublicationsActivity extends ExpandableListActivity {
             builder.appendQueryParameter("max_price", Integer.toString(request.getMax_price()));
         }
         builder.appendQueryParameter("currency", request.getCurrency());
+
+        // if esta desplegado
+        ExpandableListView expandableList = getExpandableListView();
+        if (expandableList.isGroupExpanded(1)) {
+            TextView tvAmbients = (TextView) findViewById(R.id.search_ambients_input);
+            request.setNumber_spaces(Integer.parseInt(tvAmbients.getText().toString()));
+            builder.appendQueryParameter("number_spaces", Integer.toString(request.getNumber_spaces()));
+        }
 
         Uri uri = builder.build();
         Intent intent = new Intent(this, SearchResultsActivity.class);

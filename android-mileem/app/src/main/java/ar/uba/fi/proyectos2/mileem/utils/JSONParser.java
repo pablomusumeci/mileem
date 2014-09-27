@@ -1,5 +1,5 @@
 
-package ar.uba.fi.proyectos2.mileem.service;
+package ar.uba.fi.proyectos2.mileem.utils;
 
 import android.util.Log;
 

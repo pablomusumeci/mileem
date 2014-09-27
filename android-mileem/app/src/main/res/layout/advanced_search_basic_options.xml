@@ -176,24 +176,5 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout4"
-        android:id="@+id/linearLayout5">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/search_button_do_search"
-            android:id="@+id/searchButtonDoSearch"
-            android:onClick="doSearch"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:background="#dd4814"
-            android:clickable="true"
-            android:textColor="#ffffff" />
-    </LinearLayout>
 
 </RelativeLayout>
