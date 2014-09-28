@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +33,9 @@ public class SearchResultsActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
+
+        TextView emptyText = (TextView)findViewById(android.R.id.empty);
+        emptyText.setVisibility(View.GONE);
     }
 
 
@@ -144,7 +148,6 @@ public class SearchResultsActivity extends ListActivity {
         @Override
         protected void onPostExecute(Void result) {
             setListAdapter(new PublicationsResultsListAdapter(SearchResultsActivity.this, android.R.layout.activity_list_item, list));
-
         }
 
     }
