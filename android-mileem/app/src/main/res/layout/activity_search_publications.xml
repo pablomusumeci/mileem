@@ -157,40 +157,23 @@
             android:layout_below="@+id/textViewAdvancedOptions"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textViewSpaces"
-                style="?android:attr/listSeparatorTextViewStyle"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textViewAdvancedOptions"
-                android:singleLine="false"
-                android:text="@string/number_spaces"
-                android:textSize="16dp" />
-
             <EditText
                 android:id="@+id/search_ambients_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textViewSpaces"
+                android:layout_below="@+id/textViewAdvancedOptions"
                 android:ems="10"
-                android:inputType="number" />
-
-            <TextView
-                android:id="@+id/textViewExpenses"
-                style="?android:attr/listSeparatorTextViewStyle"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/search_ambients_input"
-                android:text="@string/expenses_name"
-                android:textSize="16dp" />
+                android:inputType="number"
+                android:hint="@string/number_spaces" />
 
             <EditText
                 android:id="@+id/search_expenses_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textViewExpenses"
+                android:layout_below="@+id/search_ambients_input"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="number"
+                android:hint="@string/expenses_name" />
 
             <TextView
                 android:id="@+id/textViewSurface"
