@@ -49,14 +49,14 @@ class Publication < ActiveRecord::Base
 	# agrego los nombres de las entidades externas
 	def to_json
 		result = self.attributes
-		result["currency_name"] = self.currency.name
-		result["currency_symbol"] = self.currency.abreviatura
+		result["currency_name"] = (self.currency.nil? ? nil : self.currency.name)
+		result["currency_symbol"] = (self.currency.nil? ? nil : self.currency.abreviatura)
 
-		result["property_type"] = self.property_type.name
-		result["neighbourhood_name"] = self.neighbourhood.name
+		result["property_type"] = (self.property_type.nil? ? nil : self.property_type.name)
+		result["neighbourhood_name"] = (self.neighbourhood.nil? ? nil : self.neighbourhood.name)
 		
-		result["user_phone_number"] = self.user.phone_number
-		result["user_email"] = self.user.email
+		result["user_phone_number"] =  (self.user.nil? ? nil : self.user.phone_number)
+		result["user_email"] = (self.user.nil? ? nil : self.user.email)
 		return result
 	end
 

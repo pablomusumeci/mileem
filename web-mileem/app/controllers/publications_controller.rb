@@ -106,7 +106,7 @@ class PublicationsController < ApplicationController
       @publications.select!{ |p| barrios.include?(p["neighbourhood_name"]) }
     end
 
-    # abreviatura de moneda
+    # Pesos como moneda default para el normalized price
     params[:currency] = "$" if params[:currency].nil?
 
     if not params[:currency].nil?
@@ -133,9 +133,9 @@ class PublicationsController < ApplicationController
 
     if not params[:property_name].nil?
       tipo = params[:property_name]
+      @publications.reject!{ |p|  p["property_type"].nil? }
       @publications.select!{ |p| p["property_type"] == params[:property_name]} if tipo != "Todos"
     end
-
 
     # antiguedad minima
     if not params[:min_antiquity].nil?
