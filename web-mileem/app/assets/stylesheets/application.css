@@ -57,4 +57,16 @@ body {
   margin-right:30px;
 }
 
+.uploadedImagePreview{
+	width: 80px;
+}
+
+.files .start{
+	text-align: center;	
+}
+
+#buttonsContainer{
+	text-align: right;
+	margin-right: 105px;
+}
 
