@@ -101,12 +101,32 @@ class PublicationsController < ApplicationController
   def search
     @publications = Publication.all.to_a.map!{|p| p.to_json}
 
-    if not params[:neighbourhood_name].nil?
+    if not params[:neighbourhood_name].nil? and (params[:neighbourhood_name].size > 0)
       barrios = params[:neighbourhood_name].split(",")
       @publications.select!{ |p| barrios.include?(p["neighbourhood_name"]) }
     end
 
+    # abreviatura de moneda
+    params[:currency] = "$" if params[:currency].nil?
+
+    if not params[:currency].nil?
+      @publications.each do |p|
+        factor = @@currency_conversion[p["currency_symbol"]][params[:currency]]
+        p["normalized_price"] = p["price"] * factor
+        p["normalized_currency"] = params[:currency]
+      end
+    end
+    # precio minimo
+    if not params[:min_price].nil?
+      @publications.select!{ |p| p["normalized_price"] >= params[:min_price].to_i }
+    end
+
     # precio maximo
+    if not params[:max_price].nil?
+      @publications.select!{ |p| p["normalized_price"] <= params[:max_price].to_i }
+    end
+    
+    # tipo de operacion
     if not params[:operation].nil?
       @publications.select!{ |p| p["operation"] == params[:operation] }
     end
@@ -116,57 +136,46 @@ class PublicationsController < ApplicationController
       @publications.select!{ |p| p["property_type"] == params[:property_name]} if tipo != "Todos"
     end
 
-    # precio minimo
-    if not params[:min_price].nil?
-      @publications.select!{ |p| p["price"] >= params[:min_price].to_i }
-    end
-
-    # precio maximo
-    if not params[:max_price].nil?
-      @publications.select!{ |p| p["price"] <= params[:max_price].to_i }
-    end
 
     # antiguedad minima
     if not params[:min_antiquity].nil?
-      @publications.select!{ |p| p["antiquity"] >= params[:min_antiquity].to_i }
+      @publications.reject!{ |p|  p["antiquity"].nil? }
+      @publications.select!{ |p| p["antiquity"] >= params[:min_antiquity].to_i}
     end
 
     # antiguedad maxima
     if not params[:max_antiquity].nil?
+      @publications.reject!{ |p|  p["antiquity"].nil? }
       @publications.select!{ |p| p["antiquity"] <= params[:max_antiquity].to_i }
     end
 
     # superficie minima
     if not params[:min_surface].nil?
+      @publications.reject!{ |p|  p["surface"].nil? }
       @publications.select!{ |p| p["surface"] >= params[:min_surface].to_i }
     end
 
     # superficie maxima
     if not params[:max_surface].nil?
+      @publications.reject!{ |p|  p["surface"].nil? }
       @publications.select!{ |p| p["surface"] <= params[:max_surface].to_i }
     end
 
     # expensas minima
     if not params[:min_expenses].nil?
+      @publications.reject!{ |p|  p["expenses"].nil? }
       @publications.select!{ |p| p["expenses"] >= params[:min_expenses].to_i }
     end
 
     # expensas maxima
     if not params[:max_expenses].nil?
+      @publications.reject!{ |p|  p["expenses"].nil? }
       @publications.select!{ |p| p["expenses"] <= params[:max_expenses].to_i }
-    end
-
-    # abreviatura de moneda
-    if not params[:currency].nil?
-      @publications.each do |p|
-        factor = @@currency_conversion[p["currency_symbol"]][params[:currency]]
-        p["normalized_price"] = p["price"] * factor
-        p["normalized_currency"] = params[:currency]
-      end
     end
 
     # ambientes
     if not params[:number_spaces].nil?
+      @publications.reject!{ |p|  p["number_spaces"].nil? }
       @publications.select!{ |p| p["number_spaces"] == params[:number_spaces].to_i }
     end
 
