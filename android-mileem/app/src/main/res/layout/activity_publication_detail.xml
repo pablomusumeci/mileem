@@ -241,7 +241,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
                             android:layout_below="@+id/textView8"
-                            android:text="Departamento: " />
+                            android:text="@string/apartment" />
 
                         <TextView
                             android:id="@+id/apartment"
