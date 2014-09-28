@@ -32,6 +32,9 @@
     <string name="advanced_options">Opciones de búsqueda avanzadas</string>
     <string name="expenses_name">Expensas</string>
     <string name="advanced_search_basic">Basico</string>
+    <string name="propertyType">Tipo de propiedad: </string>
+    <string name="description">Descripción: </string>
+    <string name="noResultsMessage">No se han encontrado resultados</string>
 
     <string-array name="property_name_array">
         <item>Todos</item>
@@ -48,7 +51,6 @@
         <item>Almagro</item>
         <item>Balvanera</item>
         <item>Barracas</item>
-        <item>Balvanera</item>
         <item>Belgrano</item>
         <item>Boedo</item>
         <item>Caballito</item>

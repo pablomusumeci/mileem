@@ -6,6 +6,7 @@ import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -53,18 +54,79 @@ public class PublicationDetailActivity extends Activity {
         tv.setText(p.getOperation());
         tv = (TextView) findViewById(R.id.price);
         tv.setText(Integer.toString(p.getPrice()) + " " + p.getCurrency_symbol());
-        tv = (TextView) findViewById(R.id.floor);
-        tv.setText(p.getFloor() == -1 ? "No informado" : Integer.toString(p.getFloor()));
-        tv = (TextView) findViewById(R.id.apartment);
-        tv.setText(p.getApartment());
-        tv = (TextView) findViewById(R.id.number_spaces);
-        tv.setText(p.getNumber_spaces() == -1 ? "No informado" : Integer.toString(p.getNumber_spaces()));
-        tv = (TextView) findViewById(R.id.surface);
-        tv.setText(p.getSurface() == -1 ? "No informado" : Integer.toString(p.getSurface()) + "m2");
-        tv = (TextView) findViewById(R.id.expenses);
-        tv.setText(p.getExpenses() == -1 ? "No informado" : Integer.toString(p.getExpenses()));
-        tv = (TextView) findViewById(R.id.antiquity);
-        tv.setText(p.getAntiquity() == -1 ? "No informado" : Integer.toString(p.getAntiquity()));
+
+        if(p.getFloor() == -1){
+            LinearLayout layout =(LinearLayout)findViewById(R.id.floorLayout);
+            layout.setVisibility(View.GONE);
+        }
+        else{
+            tv = (TextView) findViewById(R.id.floor);
+            tv.setText(Integer.toString(p.getFloor()));
+        }
+
+        if(p.getApartment().equals("")){
+            LinearLayout layout =(LinearLayout)findViewById(R.id.apartmentLayout);
+            layout.setVisibility(View.GONE);
+        }
+        else{
+            tv = (TextView) findViewById(R.id.apartment);
+            tv.setText(p.getApartment());
+        }
+
+        if(p.getNumber_spaces() == -1){
+            LinearLayout layout =(LinearLayout)findViewById(R.id.spacesLayout);
+            layout.setVisibility(View.GONE);
+        }
+        else{
+            tv = (TextView) findViewById(R.id.number_spaces);
+            tv.setText(Integer.toString(p.getNumber_spaces()));
+        }
+
+        if(p.getSurface() == -1){
+            LinearLayout layout =(LinearLayout)findViewById(R.id.surfaceLayout);
+            layout.setVisibility(View.GONE);
+        }
+        else{
+            tv = (TextView) findViewById(R.id.surface);
+            tv.setText(Integer.toString(p.getSurface()) + "m2");
+        }
+
+        if(p.getExpenses() == -1){
+            LinearLayout layout =(LinearLayout)findViewById(R.id.expensesLayout);
+            layout.setVisibility(View.GONE);
+        }
+        else{
+            tv = (TextView) findViewById(R.id.expenses);
+            tv.setText(Integer.toString(p.getExpenses()));
+        }
+
+        if(p.getAntiquity() == -1){
+            LinearLayout layout =(LinearLayout)findViewById(R.id.antiquityLayout);
+            layout.setVisibility(View.GONE);
+        }
+        else{
+            tv = (TextView) findViewById(R.id.antiquity);
+            tv.setText(Integer.toString(p.getAntiquity()));
+        }
+
+        if(p.getProperty_name().equals("")){
+            LinearLayout layout =(LinearLayout)findViewById(R.id.propertyTypeLayout);
+            layout.setVisibility(View.GONE);
+        }
+        else{
+            tv = (TextView) findViewById(R.id.propertyType);
+            tv.setText(p.getProperty_name());
+        }
+
+        if(p.getDescription().equals( "")){
+            LinearLayout layout =(LinearLayout)findViewById(R.id.descriptionLayout);
+            layout.setVisibility(View.GONE);
+        }
+        else{
+            tv = (TextView) findViewById(R.id.description);
+            tv.setText(p.getDescription());
+        }
+
         tv = (TextView) findViewById(R.id.neighbourhood_name);
         tv.setText(p.getNeighbourhood_name());
         tv = (TextView) findViewById(R.id.phone);

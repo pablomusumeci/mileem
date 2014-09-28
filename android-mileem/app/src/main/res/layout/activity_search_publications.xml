@@ -205,6 +205,7 @@
                 android:id="@+id/search_surface_selector"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:entries="@array/surface_array"
                 android:layout_below="@+id/textViewSurface" />
 
             <TextView
@@ -216,12 +217,12 @@
                 android:text="@string/antiquity"
                 android:textSize="16dp" />
 
-            <EditText
-                android:id="@+id/seacrh_antiquity_input"
+            <Spinner
+                android:id="@+id/spinner_antiquity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textViewAntiquity"
-                android:ems="10"
+                android:entries="@array/antiquity_array"
                 android:inputType="number" />
 
         </LinearLayout>

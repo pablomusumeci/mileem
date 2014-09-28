@@ -31,8 +31,8 @@ import ar.uba.fi.proyectos2.mileem.model.PublicationSearchRequest;
 public class SearchPublicationsActivity extends Activity implements MultiSpinner.MultiSpinnerListener {
 
     private PublicationSearchRequest request;
-    private ExpandableListView expandableList;
     private boolean expanded;
+    private Logger logger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +95,7 @@ public class SearchPublicationsActivity extends Activity implements MultiSpinner
         request.setProperty_name(property_name.getSelectedItem().toString());
         Uri.Builder builder = new Uri.Builder()
                 .scheme("http")
-                .encodedAuthority("192.168.1.110:3000")
+                .encodedAuthority("192.168.1.103:3000")
                 .appendEncodedPath("publications/search.json");
         if (request.getOperation() != null) {
             builder.appendQueryParameter("operation", request.getOperation());
@@ -119,9 +119,68 @@ public class SearchPublicationsActivity extends Activity implements MultiSpinner
         builder.appendQueryParameter("currency", request.getCurrency());
 
         if (expanded){
+            // numero de ambientes
             TextView tvAmbients = (TextView) findViewById(R.id.search_ambients_input);
-            request.setNumber_spaces(Integer.parseInt(tvAmbients.getText().toString()));
-            builder.appendQueryParameter("number_spaces", Integer.toString(request.getNumber_spaces()));
+            String ambients = tvAmbients.getText().toString();
+            if (ambients.length() > 0) {
+                request.setNumber_spaces(Integer.parseInt(ambients));
+                builder.appendQueryParameter("number_spaces", Integer.toString(request.getNumber_spaces()));
+            }
+            // valor de expensas
+            TextView tvExpenses = (TextView) findViewById(R.id.search_expenses_input);
+            String expenses = tvExpenses.getText().toString();
+            if (expenses.length() > 0) {
+                request.setMax_expenses(Integer.parseInt(expenses));
+                builder.appendQueryParameter("max_expenses", Integer.toString(request.getMax_expenses()));
+            }
+            // antiguedad
+            Spinner tvAntiquity = (Spinner) findViewById(R.id.spinner_antiquity);
+            int antiquity = tvAntiquity.getSelectedItemPosition();
+            switch (antiquity){
+                case 0:
+                    break;
+                case 1: // menor a 10 anyos
+                    request.setMax_antiquity(10);
+                    builder.appendQueryParameter("max_antiquity", "10");
+                    break;
+                case 2: // entre 10 y 20
+                    request.setMin_antiquity(10);
+                    request.setMax_antiquity(20);
+                    builder.appendQueryParameter("min_antiquity", "10");
+                    builder.appendQueryParameter("max_antiquity", "20");
+                    break;
+                case 3: // mas de 20 anyos
+                    request.setMin_antiquity(20);
+                    builder.appendQueryParameter("min_antiquity", "20");
+                    break;
+            }
+
+            Spinner surfaceSelector = (Spinner) findViewById(R.id.search_surface_selector);
+            int surface = surfaceSelector.getSelectedItemPosition();
+            switch (surface){
+                case 0:
+                    break;
+                case 1:  // hasta 60 m2
+                    request.setMax_surface(60);
+                    builder.appendQueryParameter("max_surface", "10");
+                    break;
+                case 2: // entre 60 y 100
+                    request.setMin_surface(60);
+                    request.setMax_surface(100);
+                    builder.appendQueryParameter("min_surface", "60");
+                    builder.appendQueryParameter("max_surface", "100");
+                    break;
+                case 3:// entre 100 y 300
+                    request.setMin_surface(100);
+                    request.setMax_surface(300);
+                    builder.appendQueryParameter("min_surface", "100");
+                    builder.appendQueryParameter("max_surface", "300");
+                    break;
+                case 4:// mas de 300
+                    request.setMin_surface(300);
+                    builder.appendQueryParameter("min_surface", "300");
+                    break;
+            }
 
         }
 
