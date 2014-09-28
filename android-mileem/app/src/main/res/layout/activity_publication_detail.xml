@@ -343,6 +343,23 @@
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/propertyType"
+                            android:id="@+id/textView3" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/propertyType" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content">
 
                         <TextView
