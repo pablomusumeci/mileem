@@ -122,7 +122,9 @@ public class SearchResultsActivity extends ListActivity {
                     e.printStackTrace();
                 }
             }
+            //setListAdapter(new PublicationsResultsListAdapter(SearchResultsActivity.this, android.R.layout.activity_list_item, list));
             return null;
+
         }
 
         @Override
