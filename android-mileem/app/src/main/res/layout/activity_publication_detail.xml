@@ -211,7 +211,27 @@
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="fill_parent"
+                        android:id="@+id/descriptionLayout">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/description"
+                            android:id="@+id/textView4" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="New Text"
+                            android:id="@+id/description" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/floorLayout">
 
                         <TextView
                             android:id="@+id/textView8"
@@ -233,7 +253,8 @@
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:id="@+id/apartmentLayout">
 
                         <TextView
                             android:id="@+id/message.surface"
@@ -255,7 +276,8 @@
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spacesLayout">
 
                         <TextView
                             android:id="@+id/textView10"
@@ -277,7 +299,8 @@
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:id="@+id/surfaceLayout">
 
                         <TextView
                             android:id="@+id/textView11"
@@ -299,7 +322,8 @@
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:id="@+id/expensesLayout">
 
                         <TextView
                             android:id="@+id/textView12"
@@ -321,7 +345,8 @@
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:id="@+id/antiquityLayout">
 
                         <TextView
                             android:id="@+id/textView13"
@@ -343,7 +368,8 @@
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
+                        android:layout_height="fill_parent"
+                        android:id="@+id/propertyTypeLayout">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -360,7 +386,8 @@
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:id="@+id/phoneLayout">
 
                         <TextView
                             android:layout_width="wrap_content"
