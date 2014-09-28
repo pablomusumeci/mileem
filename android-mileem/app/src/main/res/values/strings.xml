@@ -32,6 +32,7 @@
     <string name="advanced_options">Opciones de búsqueda avanzadas</string>
     <string name="expenses_name">Expensas</string>
     <string name="advanced_search_basic">Basico</string>
+    <string name="propertyType">Tipo de propiedad: </string>
 
     <string-array name="property_name_array">
         <item>Todos</item>

@@ -67,6 +67,8 @@ public class PublicationDetailActivity extends Activity {
         tv.setText(p.getAntiquity() == -1 ? "No informado" : Integer.toString(p.getAntiquity()));
         tv = (TextView) findViewById(R.id.neighbourhood_name);
         tv.setText(p.getNeighbourhood_name());
+        tv = (TextView) findViewById(R.id.propertyType);
+        tv.setText(p.getProperty_name());
         tv = (TextView) findViewById(R.id.phone);
         SpannableString content = new SpannableString(p.getUserPhoneNumber());
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
