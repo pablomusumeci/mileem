@@ -87,7 +87,12 @@ public class SearchResultsActivity extends ListActivity {
                     } catch (JSONException e) {
                         p.setFloor(-1);
                     }
-                    p.setApartment(obj.getString("apartment"));
+                    try {
+                        p.setApartment(obj.getString("apartment"));
+                    } catch (JSONException e) {
+                        p.setApartment("");
+                    }
+
                     try {
                         p.setNumber_spaces(obj.getInt("number_spaces"));
                     } catch (JSONException e) {
@@ -109,11 +114,20 @@ public class SearchResultsActivity extends ListActivity {
                     } catch (JSONException e) {
                         p.setAntiquity(-1);
                     }
+                    try {
+                        p.setProperty_name(obj.getString("property_type"));
+                    } catch (JSONException e) {
+                        p.setProperty_name("");
+                    }
 
-                    p.setDescription(obj.getString("description"));
+                    try {
+                        p.setDescription(obj.getString("description"));
+                    } catch (JSONException e) {
+                        p.setDescription("");
+                    }
+
                     p.setAdditional_info(obj.getString("additional_info"));
                     p.setCurrency_name(obj.getString("currency_name"));
-                    p.setProperty_name(obj.getString("property_type"));
                     p.setNeighbourhood_name(obj.getString("neighbourhood_name"));
                     p.setCurrency_symbol(obj.getString("currency_symbol"));
                     p.setUserPhoneNumber(obj.getString("user_phone_number"));
