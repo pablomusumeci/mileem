@@ -30,6 +30,25 @@ public class Publication implements Parcelable {
     private String neighbourhood_name;
     private String currency_symbol;
     private String user_phone_number;
+    private String normalized_currency;
+
+    public int getNormalized_price() {
+        return normalized_price;
+    }
+
+    public void setNormalized_price(int normalized_price) {
+        this.normalized_price = normalized_price;
+    }
+
+    public String getNormalized_currency() {
+        return normalized_currency;
+    }
+
+    public void setNormalized_currency(String normalized_currency) {
+        this.normalized_currency = normalized_currency;
+    }
+
+    private int normalized_price;
 
     public Publication() {
 

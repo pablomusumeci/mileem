@@ -62,7 +62,7 @@ public class PublicationsResultsListAdapter extends ArrayAdapter<Publication> {
                     tt.setText(p.getSurface() + "m2");
                 }
                 tt = (TextView) v.findViewById(R.id.PublicationPriceID);
-                tt.setText(Integer.toString(p.getPrice()) + " " + p.getCurrency_symbol());
+                tt.setText(Integer.toString(p.getNormalized_price()) + " " + p.getNormalized_currency());
                 if (position % 2 != 1)
                     v.setBackgroundColor(Color.parseColor("#efedf5"));
                 else
