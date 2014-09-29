@@ -12,7 +12,7 @@
     <string name="apartment">Departamento: </string>
     <string name="number_spaces">Ambientes:</string>
     <string name="surface">Superficie: </string>
-    <string name="expenses">Expensas: $</string>
+    <string name="expenses">Expensas: </string>
     <string name="antiquity">Antiguedad: </string>
     <string name="additional_info">Información adicional: </string>
     <string name="url">Web: </string>
