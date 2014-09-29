@@ -106,7 +106,7 @@
 
             <RadioButton
                 android:id="@+id/radioButtonARS"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onRadioButtonCurrencyClicked"
@@ -114,11 +114,20 @@
 
             <RadioButton
                 android:id="@+id/radioButtonUSD"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onRadioButtonCurrencyClicked"
                 android:text="@string/constant.USD" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/currency_convertion"
+                android:id="@+id/textView"
+                android:layout_weight="1"
+                android:textSize="16dp"
+                android:textStyle="italic" />
         </RadioGroup>
 
 
@@ -157,40 +166,23 @@
             android:layout_below="@+id/textViewAdvancedOptions"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textViewSpaces"
-                style="?android:attr/listSeparatorTextViewStyle"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textViewAdvancedOptions"
-                android:singleLine="false"
-                android:text="@string/number_spaces"
-                android:textSize="16dp" />
-
             <EditText
                 android:id="@+id/search_ambients_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textViewSpaces"
+                android:layout_below="@+id/textViewAdvancedOptions"
                 android:ems="10"
-                android:inputType="number" />
-
-            <TextView
-                android:id="@+id/textViewExpenses"
-                style="?android:attr/listSeparatorTextViewStyle"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/search_ambients_input"
-                android:text="@string/expenses_name"
-                android:textSize="16dp" />
+                android:inputType="number"
+                android:hint="@string/number_spaces" />
 
             <EditText
                 android:id="@+id/search_expenses_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textViewExpenses"
+                android:layout_below="@+id/search_ambients_input"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="number"
+                android:hint="@string/expenses_name" />
 
             <TextView
                 android:id="@+id/textViewSurface"

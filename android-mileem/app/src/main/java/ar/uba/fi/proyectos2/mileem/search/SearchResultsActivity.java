@@ -129,7 +129,8 @@ public class SearchResultsActivity extends ListActivity {
                     } catch (JSONException e) {
                         p.setDescription("");
                     }
-
+                    p.setNormalized_currency(obj.getString("normalized_currency"));
+                    p.setNormalized_price(obj.getInt("normalized_price"));
                     p.setAdditional_info(obj.getString("additional_info"));
                     p.setCurrency_name(obj.getString("currency_name"));
                     p.setNeighbourhood_name(obj.getString("neighbourhood_name"));
@@ -140,7 +141,6 @@ public class SearchResultsActivity extends ListActivity {
                     e.printStackTrace();
                 }
             }
-            //setListAdapter(new PublicationsResultsListAdapter(SearchResultsActivity.this, android.R.layout.activity_list_item, list));
             return null;
 
         }
