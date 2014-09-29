@@ -106,7 +106,7 @@
 
             <RadioButton
                 android:id="@+id/radioButtonARS"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onRadioButtonCurrencyClicked"
@@ -114,11 +114,20 @@
 
             <RadioButton
                 android:id="@+id/radioButtonUSD"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onRadioButtonCurrencyClicked"
                 android:text="@string/constant.USD" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/currency_convertion"
+                android:id="@+id/textView"
+                android:layout_weight="1"
+                android:textSize="16dp"
+                android:textStyle="italic" />
         </RadioGroup>
 
 

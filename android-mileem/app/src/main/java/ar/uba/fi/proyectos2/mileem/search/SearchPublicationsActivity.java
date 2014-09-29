@@ -95,7 +95,7 @@ public class SearchPublicationsActivity extends Activity implements MultiSpinner
         request.setProperty_name(property_name.getSelectedItem().toString());
         Uri.Builder builder = new Uri.Builder()
                 .scheme("http")
-                .encodedAuthority("192.168.1.103:3000")
+                .encodedAuthority("192.168.1.100:3000")
                 .appendEncodedPath("publications/search.json");
         if (request.getOperation() != null) {
             builder.appendQueryParameter("operation", request.getOperation());
