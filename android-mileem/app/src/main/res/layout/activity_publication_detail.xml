@@ -34,7 +34,8 @@
                         android:layout_centerHorizontal="true"
                         android:gravity="center_horizontal"
                         android:layout_weight="1"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:layout_marginBottom="10dp" />
 
                 </TableRow>
 
@@ -43,10 +44,10 @@
                     android:layout_height="fill_parent">
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:baselineAligned="false">
 
                         <TextView
                             android:id="@+id/operation"

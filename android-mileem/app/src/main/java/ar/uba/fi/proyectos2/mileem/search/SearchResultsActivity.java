@@ -36,6 +36,7 @@ public class SearchResultsActivity extends ListActivity {
 
         TextView emptyText = (TextView)findViewById(android.R.id.empty);
         emptyText.setVisibility(View.GONE);
+        getActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
@@ -34,6 +35,8 @@ public class PublicationDetailActivity extends Activity {
 
         Publication p = (Publication) getIntent().getParcelableExtra(Publication.KEY);
         setContentView(R.layout.activity_publication_detail);
+        getActionBar().setDisplayHomeAsUpEnabled(false);
+
 
         TabHost tabHost = (TabHost)findViewById(R.id.tabHostPictures);
         tabHost.setup();
