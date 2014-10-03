@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
@@ -34,6 +35,8 @@ public class PublicationDetailActivity extends Activity {
 
         Publication p = (Publication) getIntent().getParcelableExtra(Publication.KEY);
         setContentView(R.layout.activity_publication_detail);
+        getActionBar().setDisplayHomeAsUpEnabled(false);
+
 
         TabHost tabHost = (TabHost)findViewById(R.id.tabHostPictures);
         tabHost.setup();
@@ -45,6 +48,7 @@ public class PublicationDetailActivity extends Activity {
         tab2.setContent(R.id.imageView2);
         tab2.setIndicator("Videos");
         tabHost.addTab(tab2);
+        tabHost.setCurrentTab(1);
 
 
         TextView tv;
@@ -53,7 +57,7 @@ public class PublicationDetailActivity extends Activity {
         tv = (TextView) findViewById(R.id.operation);
         tv.setText(p.getOperation());
         tv = (TextView) findViewById(R.id.price);
-        tv.setText(Integer.toString(p.getPrice()) + " " + p.getCurrency_symbol());
+        tv.setText(Integer.toString(p.getNormalized_price()) + " " + p.getNormalized_currency());
 
         if(p.getFloor() == -1){
             LinearLayout layout =(LinearLayout)findViewById(R.id.floorLayout);
@@ -97,7 +101,7 @@ public class PublicationDetailActivity extends Activity {
         }
         else{
             tv = (TextView) findViewById(R.id.expenses);
-            tv.setText(Integer.toString(p.getExpenses()));
+            tv.setText(Integer.toString(p.getExpenses())  + " " + p.getCurrency_symbol());
         }
 
         if(p.getAntiquity() == -1){
@@ -118,7 +122,7 @@ public class PublicationDetailActivity extends Activity {
             tv.setText(p.getProperty_name());
         }
 
-        if(p.getDescription().equals( "")){
+        if(p.getDescription().equals("")){
             LinearLayout layout =(LinearLayout)findViewById(R.id.descriptionLayout);
             layout.setVisibility(View.GONE);
         }
@@ -127,24 +131,31 @@ public class PublicationDetailActivity extends Activity {
             tv.setText(p.getDescription());
         }
 
+        if(p.getUserPhoneNumber().equals("")){
+            LinearLayout layout =(LinearLayout)findViewById(R.id.phoneLayout);
+            layout.setVisibility(View.GONE);
+        }
+        else{
+            tv = (TextView) findViewById(R.id.phone);
+            SpannableString content = new SpannableString(p.getUserPhoneNumber());
+            content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+            tv.setText(content);
+
+
+            makeCall = (TextView) findViewById(R.id.phone);
+
+            makeCall.setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // TODO Auto-generated method stub
+                    call();
+                }
+            });
+        }
+
         tv = (TextView) findViewById(R.id.neighbourhood_name);
         tv.setText(p.getNeighbourhood_name());
-        tv = (TextView) findViewById(R.id.phone);
-        SpannableString content = new SpannableString(p.getUserPhoneNumber());
-        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
-        tv.setText(content);
-
-
-        makeCall = (TextView) findViewById(R.id.phone);
-
-        makeCall.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                call();
-            }
-        });
     }
 
 

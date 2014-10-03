@@ -30,11 +30,12 @@
                         android:layout_toEndOf="@+id/image"
                         android:text="address"
                         android:textSize="26sp"
-                        android:textStyle="bold"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         android:gravity="center_horizontal"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="10dp" />
 
                 </TableRow>
 
@@ -46,7 +47,8 @@
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:baselineAligned="false">
 
                         <TextView
                             android:id="@+id/operation"
@@ -70,7 +72,10 @@
                             android:textSize="18sp"
                             android:layout_below="@+id/neighbourhood_name"
                             android:layout_toRightOf="@+id/address"
-                            android:layout_gravity="right" />
+                            android:layout_gravity="right"
+                            android:background="#dd4814"
+                            android:textColor="#ffffff"
+                            android:layout_weight="0.04" />
 
                     </LinearLayout>
 
@@ -152,7 +157,7 @@
                         <LinearLayout
                             android:id="@+id/Fotos"
                             android:layout_width="fill_parent"
-                            android:layout_height="106dp"
+                            android:layout_height="fill_parent"
                             android:orientation="vertical">
 
                             <ImageView
@@ -163,7 +168,8 @@
                                 android:layout_toEndOf="@+id/imageView"
                                 android:layout_alignParentBottom="true"
                                 android:layout_toRightOf="@+id/imageView"
-                                android:layout_gravity="center_horizontal" />
+                                android:layout_gravity="center_horizontal"
+                                android:visibility="visible" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -193,13 +199,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Información general"
-                    android:id="@+id/textView"
-                    android:textSize="25sp" />
-
                 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -207,6 +206,14 @@
                     android:paddingLeft="@dimen/activity_horizontal_margin"
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     android:paddingTop="@dimen/activity_vertical_margin">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Información general"
+                        android:id="@+id/textView"
+                        android:textSize="25sp"
+                        android:layout_marginBottom="5dp" />
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -218,7 +225,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/description"
-                            android:id="@+id/textView4" />
+                            android:id="@+id/textView4"
+                            android:layout_weight="0.5" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -239,7 +247,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
                             android:text="@string/floor"
-                            android:layout_below="@+id/description" />
+                            android:layout_below="@+id/description"
+                            android:layout_weight="0.5" />
 
                         <TextView
                             android:id="@+id/floor"
@@ -262,7 +271,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
                             android:layout_below="@+id/textView8"
-                            android:text="@string/apartment" />
+                            android:text="@string/apartment"
+                            android:layout_weight="0.5" />
 
                         <TextView
                             android:id="@+id/apartment"
@@ -285,7 +295,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
                             android:layout_below="@+id/message.surface"
-                            android:text="@string/number_spaces" />
+                            android:text="@string/number_spaces"
+                            android:layout_weight="0.5" />
 
                         <TextView
                             android:id="@+id/number_spaces"
@@ -308,7 +319,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
                             android:layout_below="@+id/textView10"
-                            android:text="@string/surface" />
+                            android:text="@string/surface"
+                            android:layout_weight="0.5" />
 
                         <TextView
                             android:id="@+id/surface"
@@ -331,7 +343,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
                             android:layout_below="@+id/textView11"
-                            android:text="@string/expenses" />
+                            android:text="@string/expenses"
+                            android:layout_weight="0.5" />
 
                         <TextView
                             android:id="@+id/expenses"
@@ -354,7 +367,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
                             android:layout_below="@+id/textView12"
-                            android:text="@string/antiquity" />
+                            android:text="@string/antiquity"
+                            android:layout_weight="0.5" />
 
                         <TextView
                             android:id="@+id/antiquity"
@@ -375,12 +389,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/propertyType"
-                            android:id="@+id/textView3" />
+                            android:id="@+id/textView3"
+                            android:layout_weight="0.5" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/propertyType" />
+                            android:id="@+id/propertyType"
+                            android:text="New Text" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -393,7 +409,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Teléfono: "
-                            android:id="@+id/textView2" />
+                            android:id="@+id/textView2"
+                            android:layout_weight="0.5" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -406,18 +423,21 @@
 
                 </TableLayout>
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/callAdvertiser"
-                    android:id="@+id/button2"
-                    android:textSize="18sp"
-                    android:layout_weight="1"
-                    android:layout_gravity="left" />
-
             </LinearLayout>
 
         </TableRow>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:background="#dd4814"
+            android:clickable="true"
+            android:text="@string/callAdvertiser"
+            android:layout_weight="1"
+            android:textColor="#ffffff" />
 
 
     </TableLayout>

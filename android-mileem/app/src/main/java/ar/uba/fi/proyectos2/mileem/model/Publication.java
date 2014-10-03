@@ -224,6 +224,8 @@ public class Publication implements Parcelable {
         parcel.writeString(neighbourhood_name);
         parcel.writeString(currency_symbol);
         parcel.writeString(user_phone_number);
+        parcel.writeString(normalized_currency);
+        parcel.writeInt(normalized_price);
     }
 
     public static final Parcelable.Creator<Publication> CREATOR = new Creator<Publication>() {
@@ -247,6 +249,8 @@ public class Publication implements Parcelable {
             p.neighbourhood_name = source.readString();
             p.currency_symbol = source.readString();
             p.user_phone_number = source.readString();
+            p.normalized_currency = source.readString();
+            p.normalized_price = source.readInt();
             return p;
         }
         public Publication[] newArray(int size) {

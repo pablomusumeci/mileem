@@ -36,6 +36,7 @@ public class SearchResultsActivity extends ListActivity {
 
         TextView emptyText = (TextView)findViewById(android.R.id.empty);
         emptyText.setVisibility(View.GONE);
+        getActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
 
@@ -125,6 +126,12 @@ public class SearchResultsActivity extends ListActivity {
                     }
 
                     try {
+                        p.setUserPhoneNumber(obj.getString("user_phone_number"));
+                    } catch (JSONException e) {
+                        p.setUserPhoneNumber("");
+                    }
+
+                    try {
                         p.setDescription(obj.getString("description"));
                     } catch (JSONException e) {
                         p.setDescription("");
@@ -135,7 +142,6 @@ public class SearchResultsActivity extends ListActivity {
                     p.setCurrency_name(obj.getString("currency_name"));
                     p.setNeighbourhood_name(obj.getString("neighbourhood_name"));
                     p.setCurrency_symbol(obj.getString("currency_symbol"));
-                    p.setUserPhoneNumber(obj.getString("user_phone_number"));
                     list.add(p);
                 } catch (JSONException e) {
                     e.printStackTrace();
