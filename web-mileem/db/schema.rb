@@ -11,13 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141002210218) do
+ActiveRecord::Schema.define(version: 20141003183758) do
 
   create_table "currencies", force: true do |t|
     t.string   "name"
     t.string   "abreviatura"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "currency_conversions", id: false, force: true do |t|
+    t.integer "currency_id_1"
+    t.integer "currency_id_2"
+    t.float   "factor",        limit: 24
   end
 
   create_table "neighbourhoods", force: true do |t|
@@ -63,6 +69,8 @@ ActiveRecord::Schema.define(version: 20141002210218) do
     t.integer  "property_type_id"
     t.integer  "user_id"
     t.integer  "plan_id"
+    t.decimal  "lat",                         precision: 10, scale: 6
+    t.decimal  "lng",                         precision: 10, scale: 6
   end
 
   add_index "publications", ["currency_id"], name: "index_publications_on_currency_id", using: :btree
