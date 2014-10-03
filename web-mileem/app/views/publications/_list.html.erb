@@ -23,7 +23,7 @@
         <td><%= publication.address %></td>
         <td><%= publication.neighbourhood.name  if publication.neighbourhood %></td>
         <td><%= publication.property_type.name  if publication.property_type %></td>
-        <td>Basico</td>
+        <td><%= publication.plan.name  if publication.plan %></td>
         <td><%= publication.operation %></td>
         <td><%= publication.currency.abreviatura %> <%= publication.price %></td>
         <td>

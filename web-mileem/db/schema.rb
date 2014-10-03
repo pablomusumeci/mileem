@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140920234519) do
+ActiveRecord::Schema.define(version: 20141002210218) do
 
   create_table "currencies", force: true do |t|
     t.string   "name"
@@ -21,6 +21,17 @@ ActiveRecord::Schema.define(version: 20140920234519) do
   end
 
   create_table "neighbourhoods", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "plans", force: true do |t|
+    t.float    "price",                 limit: 24
+    t.integer  "duration"
+    t.integer  "priority"
+    t.integer  "number_images_allowed"
+    t.integer  "number_videos_allowed"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -51,10 +62,12 @@ ActiveRecord::Schema.define(version: 20140920234519) do
     t.integer  "neighbourhood_id"
     t.integer  "property_type_id"
     t.integer  "user_id"
+    t.integer  "plan_id"
   end
 
   add_index "publications", ["currency_id"], name: "index_publications_on_currency_id", using: :btree
   add_index "publications", ["neighbourhood_id"], name: "index_publications_on_neighbourhood_id", using: :btree
+  add_index "publications", ["plan_id"], name: "index_publications_on_plan_id", using: :btree
   add_index "publications", ["property_type_id"], name: "index_publications_on_property_type_id", using: :btree
   add_index "publications", ["user_id"], name: "index_publications_on_user_id", using: :btree
 

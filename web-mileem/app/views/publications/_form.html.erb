@@ -26,7 +26,13 @@
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
       </div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-2">
+    <label for="plan" class="control-label">Plan
+      <span class="required">*</span>
+    </label>
+     <%= f.collection_select(:plan_id, Plan.all , :id, :name, {:prompt   => "Seleccione una opción"}, { :class =>"form-control" ,:required => true }) %>
+   </div>
+  <div class="col-md-2">
     <label for="operation" class="control-label"></label>
     <div class="radio">
       <label class="radio-inline">

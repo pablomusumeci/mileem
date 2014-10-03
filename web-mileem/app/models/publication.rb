@@ -28,9 +28,11 @@ class Publication < ActiveRecord::Base
 	belongs_to  :currency
 	belongs_to  :property_type
 	belongs_to  :user
+	belongs_to  :plan
 	has_many 	:uploads
 
 	validates :neighbourhood, presence: true
+	validates :plan, presence: true
 	validates :price, presence: true, :numericality => { :greater_than_or_equal_to => 0 }
 	validates :address, presence: true
 	validates :effective_date, presence: true, date: {on_or_after: DateTime.now.change(:hour => 0, :min => 0)}
@@ -41,7 +43,7 @@ class Publication < ActiveRecord::Base
 	validates :surface, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	
 	def end_date
-	  self.effective_date + 30.days
+	  self.effective_date + self.plan.duration.months
 	  # the amount of days should depend on the plan of the publication
 	  # maybe need to substract 1 day if we consider de end_date as included
 	end
