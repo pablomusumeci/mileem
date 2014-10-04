@@ -18,12 +18,12 @@ class UploadsController < ApplicationController
         }
         format.json { render json: {files: [@upload.to_jq_upload]}, status: :created, location: @upload }
       else
-        print "errores" + @upload.errors.to_json
         format.html { render action: "uploads", controller: "publications"}
         format.json { render json: @upload.errors, status: :unprocessable_entity }
       end
     end
   end
+
 
  # DELETE /uploads/1
   # DELETE /uploads/1.json
@@ -32,7 +32,6 @@ class UploadsController < ApplicationController
     publication_id = @upload.publication_id
     publication_uploads_url = "/publications/#{publication_id}/uploads"
     @upload.destroy
-
     respond_to do |format|
       format.html { redirect_to publication_uploads_url }
       format.json { head :no_content }

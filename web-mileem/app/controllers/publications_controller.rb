@@ -27,9 +27,6 @@ class PublicationsController < ApplicationController
 
   def uploads
     @uploads = @publication.uploads
-    if(@publication.errors > 0)
-      flash[:error] = "Debe ser un estudiante logueado para inscribirse"
-    end  
     respond_to do |format|
       format.html { render :upload}
       format.json { render json: @uploads.map{|upload| upload.to_jq_upload } }

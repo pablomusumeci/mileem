@@ -9,7 +9,7 @@
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <% (1..(@publication.uploads.size()- 1)).each do |i| %>
-          <li data-target="#myCarousel" data-slide-to=<% i %> ></li>
+          <li data-target="#myCarousel" data-slide-to=<%= i.to_i %> ></li>
         <% end %>   
       </ol>
       <div class="carousel-inner">

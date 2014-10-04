@@ -20,12 +20,6 @@ ActiveRecord::Schema.define(version: 20141003183758) do
     t.datetime "updated_at"
   end
 
-  create_table "currency_conversions", id: false, force: true do |t|
-    t.integer "currency_id_1"
-    t.integer "currency_id_2"
-    t.float   "factor",        limit: 24
-  end
-
   create_table "neighbourhoods", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
