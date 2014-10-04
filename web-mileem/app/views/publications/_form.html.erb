@@ -70,30 +70,31 @@
     <label for="apartment" class="control-label">Departamento</label>
     <%= f.text_field :apartment, :class => 'form-control' %>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-md-2">
-    <label for="inmueble" class="control-label">Tipos de inmueble</label>
-    <%= f.collection_select(:property_type_id, PropertyType.all , :id, :name, {:prompt   => "Seleccione una opción"}, { :class =>"form-control" } ) %>  
-  </div>
-  <div class="col-md-2">
-    <label for="number_spaces" class="control-label">Ambientes</label>
-    <%= f.number_field :number_spaces, :class => 'form-control',step: 1, min: 0 %>
-  </div>
-  <div class="col-md-2">
-    <label for="surface" class="control-label">Superficie (m2)</label>
-    <%= f.number_field :surface, :class => 'form-control',step: 1, min:0 %>
-  </div>
   <div class="col-md-2">
     <label for="antiquity" class="control-label">Antiguedad</label>
     <%= f.number_field :antiquity,  :class => 'form-control',step: 1, min:0 %>
   </div>
- 
 </div>
+
 
 <div class="row">
   <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-4">
+        <label for="inmueble" class="control-label">Tipos de inmueble</label>
+        <%= f.collection_select(:property_type_id, PropertyType.all , :id, :name, {:prompt   => "Seleccione una opción"}, { :class =>"form-control" } ) %>  
+      </div>
+      <div class="col-md-4">
+        <label for="number_spaces" class="control-label">Ambientes</label>
+        <%= f.number_field :number_spaces, :class => 'form-control',step: 1, min: 0 %>
+      </div>
+      <div class="col-md-4">
+        <label for="surface" class="control-label">Superficie (m2)</label>
+        <%= f.number_field :surface, :class => 'form-control',step: 1, min:0 %>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-md-4">
         <label for="price" class="control-label">Precio
@@ -121,17 +122,25 @@
       <div class="col-md-10"> 
           <label for="description" class="control-label">Descripción</label>
           <%= f.text_area :description, :class => 'form-control' %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-10"> 
           <label for="additional_info" class="control-label">Información Adicional</label>
           <%= f.text_area :additional_info, :class => 'form-control' %>
       </div>
     </div>
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-6">
   <br>
     <div class="panel panel-primary">
       <div class="panel-body">
-        <div id="map" style="width:380px;height:220px;"></div>
+      <div class="map_container">
+    <div id="map" class="map_canvas"></div>
+</div>
+        <!-- <div id="map" style="width:500px;height:300px;"></div> -->
       </div>
     </div>
   </div>
