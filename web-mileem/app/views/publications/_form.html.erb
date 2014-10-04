@@ -15,6 +15,9 @@
     </div>
   <% end %>
 
+<input type="hidden" class="form-control" id="publication_lat" name="publication[lat]">
+<input type="hidden" class="form-control" id="publication_lng" name="publication[lng]">
+
 <div class="row">
   <div class="col-md-2">
      <label for="effective_date" class="control-label">Fecha
@@ -90,41 +93,48 @@
 </div>
 
 <div class="row">
-<div class="col-md-2">
-    <label for="price" class="control-label">Precio
-      <span class="required">*</span>
-    </label>
-    <%= f.number_field :price, :class => 'form-control', :required => true, step: 0.01 , min: 0 %>
-  </div>
-  <div class="col-md-2">
-    <label for="expenses" class="control-label">Expensas</label>
-    <%= f.number_field :expenses, :class => 'form-control', step: 0.01, min:0 %>
-  </div>
-  <div class="col-md-3">
-    <label for="currency" class="control-label"></label>
-    <div class="radio">
-      <% Currency.all.each do |c| %>
-      <label class="radio-inline">
-        <%= f.radio_button :currency_id , c.id , :checked => (@publication.currency_id == c.id) ? 'checked' : "" %><p> <%= c.abreviatura %></p>
-      </label>
-    <% end %>  
-    </div>   
-  </div>
-
-
-</div>
-
-<div class="row"> 
-  <div class="col-md-10"> 
-    <label for="description" class="control-label">Descripción</label>
-    <%= f.text_area :description, :class => 'form-control' %>
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-4">
+        <label for="price" class="control-label">Precio
+          <span class="required">*</span>
+        </label>
+        <%= f.number_field :price, :class => 'form-control', :required => true, step: 0.01 , min: 0 %>
+      </div>
+      <div class="col-md-4">
+        <label for="expenses" class="control-label">Expensas</label>
+        <%= f.number_field :expenses, :class => 'form-control', step: 0.01, min:0 %>
+      </div>
+      <div class="col-md-4">
+        <label for="currency" class="control-label"></label>
+        <div class="radio">
+          <% Currency.all.each do |c| %>
+          <label class="radio-inline">
+            <%= f.radio_button :currency_id , c.id , :checked => (@publication.currency_id == c.id) ? 'checked' : "" %><p> <%= c.abreviatura %></p>
+          </label>
+        <% end %>  
+        </div>   
+      </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-10">
-    <label for="additional_info" class="control-label">Información Adicional</label>
-    <%= f.text_area :additional_info, :class => 'form-control' %>
+
+    <div class="row">
+      <div class="col-md-10"> 
+          <label for="description" class="control-label">Descripción</label>
+          <%= f.text_area :description, :class => 'form-control' %>
+          <label for="additional_info" class="control-label">Información Adicional</label>
+          <%= f.text_area :additional_info, :class => 'form-control' %>
+      </div>
     </div>
+  </div>
+
+  <div class="col-md-4">
+  <br>
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <div id="map" style="width:380px;height:220px;"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <br>
@@ -139,6 +149,7 @@
 
 <script type="text/javascript" >
   var ready;
+  var addressPicker;
   ready = function() {
     // https://developers.google.com/places/documentation/autocomplete#place_types
     var addressPicker = new AddressPicker(
@@ -146,6 +157,15 @@
         autocompleteService: {
           types: ['address'], 
           componentRestrictions: {country: 'AR'}
+        },
+        map: {
+          id: '#map',
+          options: {
+            zoom: 12,
+            center: new google.maps.LatLng(-34.6037232, -58.3815931),
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            styles: mapStyle
+          }
         }
       }
     );
@@ -167,12 +187,17 @@
     <% if not @publication.address.blank? %>
       $('#publication_address').typeahead('val', "<%= @publication.address %>");
     <% end %>
-  }
 
-  $('#publication_address').on('typeahead:selected', function(evt, item) {
-    console.log(item.description);
-    $('#publication_address').typeahead('val', item.description);
-  });
+    $('#publication_address').bind("typeahead:selected", addressPicker.updateMap);
+    $('#publication_address').bind("typeahead:cursorchanged", addressPicker.updateMap);
+
+    addressPicker.bindDefaultTypeaheadEvent($('#address'))
+    $(addressPicker).on('addresspicker:selected', function (event, result) {
+      $('#publication_lat').val(result.latitude);
+      $('#publication_lng').val(result.longitude);
+      $('#publication_address').typeahead('val', result.placeResult.formatted_address);
+    });
+  }
 
   $(document).ready(ready);
   $(document).on('page:load', ready);

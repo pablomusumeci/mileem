@@ -59,6 +59,7 @@ class PublicationsController < ApplicationController
   def create
     @publication = Publication.new(publication_params)
     @publication.user_id = current_user.id
+
     respond_to do |format|
       if @publication.save
         format.html { redirect_to @publication, notice: 'La publicación fue creada exitosamente.' }
@@ -200,6 +201,6 @@ class PublicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def publication_params
-      params.require(:publication).permit(:effective_date, :operation, :address, :floor, :apartment, :number_spaces, :surface, :price, :expenses, :antiquity, :description, :additional_info, :neighbourhood_id, :currency_id,:property_type_id, :uploads, :plan_id)
+      params.require(:publication).permit(:effective_date, :operation, :address, :floor, :apartment, :number_spaces, :surface, :price, :expenses, :antiquity, :description, :additional_info, :neighbourhood_id, :currency_id,:property_type_id, :uploads, :plan_id, :lat, :lng)
     end
 end
