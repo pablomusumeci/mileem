@@ -1,0 +1,41 @@
+				
+<div id="myCarousel" class="carousel slide">
+    <div class="carousel-inner ">
+      	<div class="item active">
+          	<div class="panel panel-default">
+				<div class="panel-body loginPanel">
+		           	<%= image_tag("ciudad3.png", height: "100%",width: "100%") %>
+	           	</div>
+           	</div>
+        </div>
+        <div class="item">
+          	<div class="panel panel-default">
+				<div class="panel-body loginPanel">
+		            <%= image_tag "skyscraper-wallpaper.jpg", height: "100%",width: "100%"  %>
+		        </div>
+			</div>	
+        </div>
+        <div class="item">
+         	<div class="panel panel-default">
+				<div class="panel-body loginPanel">
+		           <%= image_tag("ciudad2.png" , height: "100%",width: "100%") %>
+		       	</div>
+		   	</div>
+		</div>
+        <div class="item">
+          	<div class="panel panel-default">
+				<div class="panel-body loginPanel">
+		           	<%= image_tag("ciudad4.png", height: "100%",width: "100%") %>
+	           	</div>
+	       	</div>
+	    </div>
+    </div>
+</div>	
+
+<script type="text/javascript" >
+  $( document ).ready(function() {
+      $('.carousel').carousel({
+    		interval: 7000
+		});
+  });
+</script>
