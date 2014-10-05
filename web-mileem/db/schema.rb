@@ -11,14 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20141004191026) do
+ActiveRecord::Schema.define(version: 20141004233818) do
 
   create_table "currencies", force: true do |t|
     t.string   "name"
     t.string   "abreviatura"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "currency_conversions", id: false, force: true do |t|
+    t.integer "currency_id_1"
+    t.integer "currency_id_2"
+    t.float   "factor",        limit: 24
   end
 
   create_table "neighbourhoods", force: true do |t|
