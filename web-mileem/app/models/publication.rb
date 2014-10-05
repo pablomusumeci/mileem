@@ -24,6 +24,8 @@
 #
 
 class Publication < ActiveRecord::Base
+  mount_uploader :video, VideoUploader
+	
 	belongs_to	:neighbourhood
 	belongs_to  :currency
 	belongs_to  :property_type

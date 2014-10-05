@@ -59,5 +59,9 @@ gem 'will_paginate-bootstrap'
 # Authorization
 gem 'pundit'
 
+# Upload Photos
 gem "jquery-fileupload-rails"
 gem 'paperclip'
+
+# Upload Videos
+gem 'carrierwave'
