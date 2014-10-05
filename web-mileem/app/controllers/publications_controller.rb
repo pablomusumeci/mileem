@@ -102,6 +102,8 @@ class PublicationsController < ApplicationController
   def search
     @publications = Publication.all.to_a.map!{|p| p.to_json}
 
+    @publications.select!{ |p| p["effective_date"] <= DateTime.now.strftime("%Y-%m-%d").to_date  }
+
     if not params[:neighbourhood_name].nil? and (params[:neighbourhood_name].size > 0)
       barrios = params[:neighbourhood_name].split(",")
       @publications.select!{ |p| barrios.include?(p["neighbourhood_name"]) }
@@ -179,6 +181,8 @@ class PublicationsController < ApplicationController
       @publications.reject!{ |p|  p["number_spaces"].nil? }
       @publications.select!{ |p| p["number_spaces"] == params[:number_spaces].to_i }
     end
+
+    @publications.sort_by!{ |p|  Plan.find(p["plan_id"]).priority }
 
     puts "Resultado busqueda: #{@publications.size}"
     respond_to do |format|
