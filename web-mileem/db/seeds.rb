@@ -83,3 +83,4 @@ Publication.create(user_id: 1, effective_date: (DateTime.now + 10.months).strfti
 Publication.create(user_id: 1, effective_date: (DateTime.now + 1.days).strftime("%d/%m/%Y"), operation: "Alquiler", address: "Quesada, Buenos Aires, Argentina", floor: 8, apartment: "31", number_spaces: 4, surface: 90, price: 7800.0, expenses: 300.0, antiquity: 10, description: "", additional_info: "", created_at: "2014-09-14 17:38:48", updated_at: "2014-09-14 17:38:48", currency_id: 1, neighbourhood_id: 6, property_type_id: 3,plan_id: 3)
 
 
+                           

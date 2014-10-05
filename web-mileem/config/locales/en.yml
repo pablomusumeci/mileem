@@ -33,6 +33,15 @@ en:
     sessions:  
       signed_in: 'Acceso exitoso.'  
       signed_out: 'Salida exitosa.'
+      already_signed_out: 'Salida exitosa.'
+    registrations:
+      destroyed: "Su cuenta fue destruida extisosamente."
+      signed_up: "Bienvenido! Se ha registrado de manera correcta en Mileem."
+      signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
+      signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."
+      signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
+      update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirm link to confirm your new email address."
+      updated: "Your account has been updated successfully."
   errors:
     messages:
       not_saved:
