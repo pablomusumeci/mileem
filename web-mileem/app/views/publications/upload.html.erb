@@ -2,7 +2,6 @@
 <div class="container">
   <h1>Cargar Imágenes </h1>
   <hr>
-
   <h3><%= @publication.neighbourhood.name  + " - " + @publication.address %></h3>
   <br>
   <h4>Subir fotos</h4>
@@ -129,6 +128,7 @@
       // Initialize the jQuery File Upload widget:
       $('#fileupload').fileupload({
             maxFileSize: 100000000,
+            maxNumberOfFiles: <%= @publication.plan.number_images_allowed %>,
             acceptFileTypes: '/^image\/(jpeg|jpg|png)$/',
             previewSourceFileTypes: '/^image\/(jpeg|jpg|png)$/',
         });
