@@ -1,29 +1,56 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+<br>
+<br>
+<div class="row">
+  <% devise_error_messages! %>
+  <div class="col-md-4 col-md-offset-1">
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+          
+      <div class="page-header">
+          <h3 >Editar mis datos</h3>
+      </div>
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
+      <label for="username" class="control-label">Razón Social</label>
+      <%= f.text_field :username, autofocus: true, 
+      :class => 'form-control'%>
+      
+      <label for="email" class="control-label">Email</label>
+      <%= f.email_field :email, autofocus: true, :class => 'form-control' %>
 
-  <div><%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+      <label for="phone_number" class="control-label">Teléfono (solo números)</label>
+      <%= f.text_field :phone_number, autofocus: true, pattern: "[0-9]*",
+      :class => 'form-control'%>
 
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %></div>
+      <div class="page-header">
+        <h3>Cambiar contraseña</h3>
+      </div>
 
-  <div><%= f.submit "Update" %></div>
+      <label for="password" class="control-label">Contraseña nueva (dejar en blanco si no se quiere cambiarla)</label>
+      <%= f.password_field :password, autocomplete: "off", :class => 'form-control' %>
+
+      <label for="password_confirmation" class="control-label">Confirmar nueva contraseña</label>
+      <%= f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control' %>
+
+  </div>
+
+  <div class="col-md-4 col-md-offset-1">
+      <div class="page-header">
+          <h3 >Actualizar mis datos</h3>
+      </div>
+      <p> Para actualizar su información personal debe ingresar su contraseña en el siguiente campo.</p>
+      <p>De esta manera, nos aseguramos que nadie pueda cambiar sus datos aun pudiendo acceder a su sesión.</p> 
+      <label for="current_password" class="control-label">Contraseña actual </label>
+      <%= f.password_field :current_password, autocomplete: "off", :class => 'form-control', :required => true %>
+      <br>
+
+      <div><%= f.submit "Actualizar", :class =>"btn btn-lg btn-success pull-right" %></div>
 <% end %>
 
-<h3>Cancel my account</h3>
+  </div>
+</div>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
