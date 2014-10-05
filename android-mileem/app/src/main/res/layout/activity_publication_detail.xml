@@ -63,20 +63,6 @@
                             android:layout_weight="0.5"
                             android:textSize="18sp" />
 
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/SeeAddress"
-                            android:id="@+id/button"
-                            android:layout_toEndOf="@+id/address"
-                            android:textSize="18sp"
-                            android:layout_below="@+id/neighbourhood_name"
-                            android:layout_toRightOf="@+id/address"
-                            android:layout_gravity="right"
-                            android:background="#dd4814"
-                            android:textColor="#ffffff"
-                            android:layout_weight="0.04" />
-
                     </LinearLayout>
 
                 </TableRow>
@@ -217,8 +203,8 @@
 
                     <LinearLayout
                         android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:id="@+id/descriptionLayout">
 
                         <TextView
@@ -226,13 +212,15 @@
                             android:layout_height="wrap_content"
                             android:text="@string/description"
                             android:id="@+id/textView4"
-                            android:layout_weight="0.5" />
+                            android:layout_weight="0.5"
+                            android:textSize="18sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="New Text"
-                            android:id="@+id/description" />
+                            android:id="@+id/description"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -248,7 +236,8 @@
                             android:layout_alignParentStart="true"
                             android:text="@string/floor"
                             android:layout_below="@+id/description"
-                            android:layout_weight="0.5" />
+                            android:layout_weight="0.5"
+                            android:textSize="18sp" />
 
                         <TextView
                             android:id="@+id/floor"
@@ -256,7 +245,8 @@
                             android:layout_height="wrap_content"
                             android:layout_toEndOf="@+id/textView8"
                             android:text="New Text"
-                            android:layout_below="@+id/description" />
+                            android:layout_below="@+id/description"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -272,6 +262,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_below="@+id/textView8"
                             android:text="@string/apartment"
+                            android:textSize="18sp"
                             android:layout_weight="0.5" />
 
                         <TextView
@@ -280,7 +271,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignTop="@+id/message.surface"
                             android:layout_toEndOf="@+id/message.surface"
-                            android:text="New Text" />
+                            android:text="New Text"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -296,6 +288,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_below="@+id/message.surface"
                             android:text="@string/number_spaces"
+                            android:textSize="18sp"
                             android:layout_weight="0.5" />
 
                         <TextView
@@ -304,7 +297,8 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/message.surface"
                             android:layout_toEndOf="@+id/textView10"
-                            android:text="New Text" />
+                            android:text="New Text"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -320,6 +314,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_below="@+id/textView10"
                             android:text="@string/surface"
+                            android:textSize="18sp"
                             android:layout_weight="0.5" />
 
                         <TextView
@@ -328,7 +323,8 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/textView10"
                             android:layout_toEndOf="@+id/textView11"
-                            android:text="New Text" />
+                            android:text="New Text"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -344,6 +340,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_below="@+id/textView11"
                             android:text="@string/expenses"
+                            android:textSize="18sp"
                             android:layout_weight="0.5" />
 
                         <TextView
@@ -352,7 +349,8 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/textView11"
                             android:layout_toEndOf="@+id/textView12"
-                            android:text="New Text" />
+                            android:text="New Text"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -368,6 +366,7 @@
                             android:layout_alignParentStart="true"
                             android:layout_below="@+id/textView12"
                             android:text="@string/antiquity"
+                            android:textSize="18sp"
                             android:layout_weight="0.5" />
 
                         <TextView
@@ -376,7 +375,8 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/expenses"
                             android:layout_toEndOf="@+id/textView13"
-                            android:text="New Text" />
+                            android:text="New Text"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -390,13 +390,15 @@
                             android:layout_height="wrap_content"
                             android:text="@string/propertyType"
                             android:id="@+id/textView3"
+                            android:textSize="18sp"
                             android:layout_weight="0.5" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/propertyType"
-                            android:text="New Text" />
+                            android:text="New Text"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -410,6 +412,7 @@
                             android:layout_height="wrap_content"
                             android:text="Teléfono: "
                             android:id="@+id/textView2"
+                            android:textSize="18sp"
                             android:layout_weight="0.5" />
 
                         <TextView
@@ -417,7 +420,8 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/phone"
                             android:text="New Text"
-                            android:clickable="true" />
+                            android:clickable="true"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
 
@@ -427,17 +431,48 @@
 
         </TableRow>
 
-        <Button
-            android:id="@+id/button2"
+        <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="5dp"
-            android:background="#dd4814"
-            android:clickable="true"
-            android:text="@string/callAdvertiser"
-            android:layout_weight="1"
-            android:textColor="#ffffff" />
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_horizontal">
+
+                <ImageButton
+                    android:id="@+id/button2"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerHorizontal="true"
+                    android:clickable="true"
+                    android:textColor="#ffffff"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/maps"
+                    android:background="@null"
+                    android:layout_marginRight="15dp" />
+
+                <ImageButton
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:id="@+id/button3"
+                    android:src="@drawable/mail"
+                    android:scaleType="fitXY"
+                    android:background="@null"
+                    android:layout_marginRight="15dp" />
+
+                <ImageButton
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:id="@+id/imageButton"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/phone"
+                    android:background="@null" />
+            </LinearLayout>
+        </TableRow>
 
 
     </TableLayout>

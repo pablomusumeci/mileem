@@ -24,7 +24,7 @@
         <span class="required">*</span> 
      </label>
      <div class="input-group">
-     <%= f.text_field :effective_date, :required => true , :class => 'form-control', 'data-behaviour' => 'datepicker', 
+     <%= f.text_field :effective_date, :required => true ,:disabled => (modoEdicion && @publication.isActive) , :class => 'form-control', 'data-behaviour' => 'datepicker', 
      "data-date-format" => "dd/mm/yyyy" %>
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
       </div>
@@ -33,7 +33,7 @@
     <label for="plan" class="control-label">Plan
       <span class="required">*</span>
     </label>
-     <%= f.collection_select(:plan_id, Plan.all , :id, :name, {:prompt   => "Seleccione una opción"}, { :class =>"form-control" ,:required => true }) %>
+     <%= f.collection_select(:plan_id, Plan.all , :id, :name, {:prompt   => "Seleccione una opción"}, { :class =>"form-control" ,:required => true, :disabled => modoEdicion }) %>
    </div>
   <div class="col-md-2">
     <label for="operation" class="control-label"></label>
@@ -53,13 +53,13 @@
     <label for="neighbourhood" class="control-label">Barrio
       <span class="required">*</span>
     </label>
-     <%= f.collection_select(:neighbourhood_id, Neighbourhood.all , :id, :name, {:prompt   => "Seleccione una opción"}, { :class =>"form-control" ,:required => true }) %>
+     <%= f.collection_select(:neighbourhood_id, Neighbourhood.all , :id, :name, {:prompt   => "Seleccione una opción"}, { :class =>"form-control" ,:required => true, :disabled => modoEdicion }) %>
    </div>
   <div class="col-md-4">
     <label for="address" class="control-label">Dirección
       <span class="required">*</span>
     </label>
-      <input id="publication_address" name="publication[address]" class="form-control" type="text" placeholder="Autocompletado automático" required="required">
+      <input id="publication_address" name="publication[address]" class="form-control" type="text" placeholder="Autocompletado automático" required="required" <%= modoEdicion ? "disabled" : "" %> >
   </div>
 
   <div class="col-md-2">
@@ -152,7 +152,7 @@
 <br>
   <div class="form-group">
     <div class="col-md-4 ">  
-      <%= f.submit 'Crear Publicacion', :class => 'btn btn-primary' %>
+      <%= f.submit modoEdicion ? 'Actualizar' : 'Crear', :class => 'btn btn-primary' %>
       <%= link_to 'Cancelar', publications_path, :class => 'btn btn-default' %>
     </div>
   </div>
@@ -198,6 +198,8 @@
 
     <% if not @publication.address.blank? %>
       $('#publication_address').typeahead('val', "<%= @publication.address %>");
+      $('#publication_lat').val("<%= @publication.lat %>");
+      $('#publication_lng').val("<%= @publication.lng %>");
     <% end %>
 
     $('#publication_address').bind("typeahead:selected", addressPicker.updateMap);
