@@ -1,30 +1,34 @@
-<div class="page-header">
-  <h1>Acceder a Mileem</h1>
-</div>
+<%= stylesheet_link_tag 'sessions' %>
+<div class="background">
+	<div class="row">
+		<div class="col-md-7">
+			<br><br>
+			<%= render partial: 'devise/images' %>
+		</div>	
+		<div class="col-md-5">
+			<br>
+			<div class="page-header">
+	  			<h1 class="col-md-offset-2">Acceder a Mileem</h1>
+			</div>		
+			<div class="col-md-8 col-md-offset-2">
+			<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+			   <label for="email" class="control-label">Email</label>
+			  <%= f.email_field :email, autofocus: true, :class => 'form-control', :required => true %>
+			  <br>
+			   <label for="password" class="control-label">Contraseña</label>
+			    <%= f.password_field :password, autocomplete: "off", :class => 'form-control', :required => true %>
+			</div>    
+			<div class="col-md-8 col-md-offset-5">
+			  <br><br>	    
+			  <% if devise_mapping.rememberable? -%>
+			  <label class="checkbox"><input type="checkbox" value="remember-me"> Recordarme </label>
+			  <% end -%>
 
-<div class="row">
-	<div class="col-md-3 col-md-offset-4">
-		
-		<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+			  <div><%= f.submit "Entrar", :class =>"btn btn-md btn-primary" %></div>
+			<% end %>
+			</div>
+			<%# render "devise/shared/links" %>
+		</div>
 
-		   <label for="email" class="control-label">Email</label>
-		  <%= f.email_field :email, autofocus: true, :class => 'form-control', :required => true %>
-		  <br>
-		   <label for="password" class="control-label">Contraseña</label>
-		    <%= f.password_field :password, autocomplete: "off", :class => 'form-control', :required => true %>
 	</div>
-</div>
-
-<div class="row">
-	<div class="col-md-3 col-md-offset-5">
-		  <% if devise_mapping.rememberable? -%>
-		  <label class="checkbox"><input type="checkbox" value="remember-me"> Recordarme </label>
-		  <% end -%>
-
-		  <div><%= f.submit "Entrar", :class =>"btn btn-md btn-primary" %></div>
-		<% end %>
-
-		<%# render "devise/shared/links" %>
-	</div>
-
 </div>
