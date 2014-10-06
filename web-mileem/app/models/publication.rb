@@ -24,14 +24,13 @@
 #
 
 class Publication < ActiveRecord::Base
-  mount_uploader :video, VideoUploader
-	
 	belongs_to	:neighbourhood
 	belongs_to  :currency
 	belongs_to  :property_type
 	belongs_to  :user
 	belongs_to  :plan
-	has_many 	:uploads
+	has_many 	  :uploads
+	has_many    :video_uploads
 
 	validates :neighbourhood, presence: true
 	validates :plan, presence: true

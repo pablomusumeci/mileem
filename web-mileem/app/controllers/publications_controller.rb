@@ -94,8 +94,8 @@ class PublicationsController < ApplicationController
 
   def jsonifier
     respond_to do |format|
-    format.json { render :json => @publication.to_json}
-  end
+      format.json { render :json => @publication.to_json}
+    end
   end
 
   # GET /publications/search.json?param1=x&param2=y...

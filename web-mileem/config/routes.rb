@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   get 'uploads/:id/delete', to: 'uploads#destroy', as: 'uploads_destroy'
 
+  post 'video_uploads/create/:publication_id', to: 'video_uploads#create', as: 'video_uploads_publication'
   # Busqueda
 
   # The priority is based upon order of creation: first created -> highest priority.

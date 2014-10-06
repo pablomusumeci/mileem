@@ -69,11 +69,21 @@
   </div>
 </div>
 
-<div class="row">
-    <%= video_tag @publication.video_url.to_s, :controls => true %>
-</div>
+<% if (@publication.video_uploads.size() > 0) %>
+	<div class="row">
+	    <%= video_tag @publication.video_uploads.first().video_url.to_s, :controls => true %>
+	</div>
+<% end %>
+
+<%= form_for VideoUpload.new, :url => "/video_uploads/create/#{@publication.id}", :html => { :multipart => true, :id => "videoupload"  } do |f| %>
+  <div class="col-md-6">
+  	<%=f.file_field :video%>
+  </div>
+  <%= f.submit 'Guardar Video', :class => 'btn btn-primary' %>
+<% end %>
 
 </br>
+
 
 <div class="row">
 <div class="col-md-6 col-md-offset-6">
