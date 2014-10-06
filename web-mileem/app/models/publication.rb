@@ -77,6 +77,10 @@ class Publication < ActiveRecord::Base
 		# return result
 	end
 
+	def isActive
+		return self.effective_date <= DateTime.now.strftime("%Y-%m-%d").to_date
+	end
+		
 	self.per_page = 10
 
 	scope :date_at_gte, lambda { |reference_time|
