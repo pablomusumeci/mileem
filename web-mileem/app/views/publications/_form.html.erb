@@ -164,6 +164,7 @@
   var addressPicker;
   ready = function() {
     // https://developers.google.com/places/documentation/autocomplete#place_types
+
     var addressPicker = new AddressPicker(
       {
         autocompleteService: {
@@ -173,8 +174,13 @@
         map: {
           id: '#map',
           options: {
+            <% if @publication.lat.nil? or @publication.lng.nil? %>
             zoom: 12,
             center: new google.maps.LatLng(-34.6037232, -58.3815931),
+            <% else  %>
+            zoom: 16,
+            center: new google.maps.LatLng(<%= @publication.lat %>, <%= @publication.lng %>),
+            <% end %>
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             styles: mapStyle
           }
@@ -198,8 +204,16 @@
 
     <% if not @publication.address.blank? %>
       $('#publication_address').typeahead('val', "<%= @publication.address %>");
-      $('#publication_lat').val("<%= @publication.lat %>");
-      $('#publication_lng').val("<%= @publication.lng %>");
+      $('#publication_lat').val(<%= @publication.lat %>);
+      $('#publication_lng').val(<%= @publication.lng %>);
+    <% end %>
+
+    <% if not @publication.lat.nil? and not @publication.lng.nil? %>
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(<%= @publication.lat %>, <%= @publication.lng %>),
+        map: addressPicker.map,
+        title: '<%= @publication.address %>'
+      });
     <% end %>
 
     $('#publication_address').bind("typeahead:selected", addressPicker.updateMap);

@@ -5,7 +5,8 @@ module DeviseHelper
       "Password confirmation doesn't match Password" => "La contraseña no coincide con la confirmación.",
       "Current password is invalid" => "La contraseña actual ingresada es inválida.",
       "Current password can't be blank" => "Debe completar el campo 'Contraseña actual'",
-      "Password can't be blank" => "La contraseña nueva no puede ser vacía."}
+      "Password can't be blank" => "La contraseña nueva no puede ser vacía.",
+      "Password is too short (minimum is 6 characters)" => "La contraseña es demasiado corta (mínimo 6 caracteres)."}
     return nil if resource.errors.empty?
     errors = []
     resource.errors.full_messages.each do |e|
