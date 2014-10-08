@@ -94,8 +94,8 @@ class PublicationsController < ApplicationController
 
   def jsonifier
     respond_to do |format|
-    format.json { render :json => @publication.to_json}
-  end
+      format.json { render :json => @publication.to_json}
+    end
   end
 
   # GET /publications/search.json?param1=x&param2=y...
@@ -202,6 +202,6 @@ class PublicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def publication_params
-      params.require(:publication).permit(:effective_date, :operation, :address, :floor, :apartment, :number_spaces, :surface, :price, :expenses, :antiquity, :description, :additional_info, :neighbourhood_id, :currency_id,:property_type_id, :uploads, :plan_id, :lat, :lng, :video)
+      params.require(:publication).permit(:effective_date, :operation, :address, :floor, :apartment, :number_spaces, :surface, :price, :expenses, :antiquity, :description, :additional_info, :neighbourhood_id, :currency_id,:property_type_id, :uploads, :plan_id, :lat, :lng)
     end
 end

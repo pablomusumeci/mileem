@@ -24,14 +24,13 @@
 #
 
 class Publication < ActiveRecord::Base
-  mount_uploader :video, VideoUploader
-	
 	belongs_to	:neighbourhood
 	belongs_to  :currency
 	belongs_to  :property_type
 	belongs_to  :user
 	belongs_to  :plan
-	has_many 	:uploads
+	has_many 	  :uploads
+	has_many    :video_uploads
 
 	validates :neighbourhood, presence: true
 	validates :plan, presence: true
@@ -47,7 +46,7 @@ class Publication < ActiveRecord::Base
 	def end_date
 	  self.effective_date + self.plan.duration.months
 	  # the amount of days should depend on the plan of the publication
-	  # maybe need to substract 1 day if we consider de end_date as included
+	  # maybe need to substract 1 day if we consider the end_date as included
 	end
 	
 	# agrego los nombres de las entidades externas
