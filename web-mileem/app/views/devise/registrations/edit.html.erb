@@ -1,5 +1,3 @@
-
-<br>
 <br>
 <div class="row">
   <% devise_error_messages! %>
@@ -26,6 +24,10 @@
       <%= f.text_field :phone_number, autofocus: true, pattern: "[0-9]*",
       :class => 'form-control'%>
 
+
+  </div>
+
+  <div class="col-md-4 col-md-offset-1">
       <div class="page-header">
         <h3>Cambiar contraseña</h3>
       </div>
@@ -37,20 +39,28 @@
       <%= f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control' %>
 
   </div>
+</div>
+
+<div class="row">
+  <div class="col-md-9 col-md-offset-1">
+
+    <div class="page-header">
+        <h3 >Actualizar mis datos</h3>
+    </div>
+  </div>
+  <div class="col-md-4 col-md-offset-1">
+
+    <p> Para actualizar su información personal debe ingresar su contraseña en el siguiente campo.</p>
+    <p>De esta manera, nos aseguramos que nadie pueda cambiar sus datos aun pudiendo acceder a su sesión.</p> 
+  </div>
 
   <div class="col-md-4 col-md-offset-1">
-      <div class="page-header">
-          <h3 >Actualizar mis datos</h3>
-      </div>
-      <p> Para actualizar su información personal debe ingresar su contraseña en el siguiente campo.</p>
-      <p>De esta manera, nos aseguramos que nadie pueda cambiar sus datos aun pudiendo acceder a su sesión.</p> 
-      <label for="current_password" class="control-label">Contraseña actual </label>
-      <%= f.password_field :current_password, autocomplete: "off", :class => 'form-control', :required => true %>
-      <br>
 
-      <div><%= f.submit "Actualizar", :class =>"btn btn-lg btn-success pull-right" %></div>
-<% end %>
-
+    <label for="current_password" class="control-label">Contraseña actual </label>
+    <%= f.password_field :current_password, autocomplete: "off", :class => 'form-control', :required => true %>
+    <br>
+    <div><%= f.submit "Actualizar", :class =>"btn btn-lg btn-success pull-right" %></div>
   </div>
 </div>
 
+<% end %>
