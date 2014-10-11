@@ -203,7 +203,7 @@ public class PublicationDetailActivity extends Activity {
             double lon = p.getLongitude();
             ImageView iv = (ImageView) findViewById(R.id.mapImage);
             String URL = "http://maps.google.com/maps/api/staticmap?center=" +lat + "," + lon + "&zoom=14"
-                    + "&markers=color:red%7Ccolor:red%7Clabel:C%7C" + lat +"," + lon + "&size=400x180&sensor=false";
+                    + "&markers=color:red%7Ccolor:red%7Clabel:A%7C" + lat +"," + lon + "&size=400x180&sensor=false";
 
             new DownloadImageTask(iv).execute(URL);
 
