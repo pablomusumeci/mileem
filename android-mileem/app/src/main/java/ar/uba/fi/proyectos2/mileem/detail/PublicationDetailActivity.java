@@ -209,6 +209,8 @@ public class PublicationDetailActivity extends Activity {
         else{
             ImageView iv = (ImageView) findViewById(R.id.mapImage);
             iv.setVisibility(View.GONE);
+            tv = (TextView) findViewById(R.id.locationTextView);
+            tv.setVisibility(View.GONE);
         }
 
 
