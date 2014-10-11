@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class PublicationsController < ApplicationController
-  before_action :set_publication, only: [:show, :edit, :update, :destroy, :uploads, :jsonifier ]
+  before_action :set_publication, only: [:show, :edit, :update, :destroy, :uploads, :jsonifier, :stop, :finish, :active ]
   before_action :authorize_update, only: [:show ,:edit, :update, :destroy, :uploads] #permisos del pundit
   before_filter :authenticate_user!, except: [:search, :jsonifier] # permisos del devise
   skip_before_action :verify_authenticity_token
@@ -56,7 +56,7 @@ class PublicationsController < ApplicationController
   def create
     @publication = Publication.new(publication_params)
     @publication.user_id = current_user.id
-
+    @publication.available!
     respond_to do |format|
       if @publication.save
         format.html { redirect_to @publication, notice: 'La publicación fue creada exitosamente.' }
@@ -92,6 +92,27 @@ class PublicationsController < ApplicationController
     end
   end
 
+  def stop 
+    if(@publication.isActive && @publication.available?)
+      @publication.stopped!
+      redirect_to publications_path
+    end     
+  end  
+
+  def active
+    if(@publication.isActive && @publication.stopped?)
+      @publication.available!
+      redirect_to publications_path
+    end    
+  end 
+
+  def finish
+    if(@publication.isActive && @publication.available?)
+      @publication.finished!
+      redirect_to publications_path
+    end    
+  end 
+
   def jsonifier
     respond_to do |format|
       format.json { render :json => @publication.to_json}
@@ -102,7 +123,7 @@ class PublicationsController < ApplicationController
   def search
     @publications = Publication.all.to_a.map!{|p| p.to_json}
 
-    @publications.select!{ |p| p["effective_date"] <= DateTime.now.strftime("%Y-%m-%d").to_date  }
+    @publications.select!{ |p| Publication.find(p["id"]).isAvailable }
 
     if not params[:neighbourhood_name].nil? and (params[:neighbourhood_name].size > 0)
       barrios = params[:neighbourhood_name].split(",")

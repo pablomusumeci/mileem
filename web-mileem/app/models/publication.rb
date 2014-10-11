@@ -29,8 +29,10 @@ class Publication < ActiveRecord::Base
 	belongs_to  :property_type
 	belongs_to  :user
 	belongs_to  :plan
-	has_many 	  :uploads
+	has_many    :uploads
 	has_many    :video_uploads
+
+	enum status: [ :finished, :stopped, :available]
 
 	validates :neighbourhood, presence: true
 	validates :plan, presence: true
@@ -78,7 +80,11 @@ class Publication < ActiveRecord::Base
 	end
 
 	def isActive
-		return self.effective_date <= DateTime.now.strftime("%Y-%m-%d").to_date
+		return (self.effective_date <= DateTime.now.strftime("%Y-%m-%d").to_date && self.end_date >= DateTime.now.strftime("%Y-%m-%d").to_date)
+	end
+	
+	def isAvailable
+		return (self.isActive && self.available?)
 	end
 		
 	self.per_page = 10

@@ -27,12 +27,37 @@
         <td><%= publication.operation %></td>
         <td><%= publication.currency.abreviatura %> <%= publication.price %></td>
         <td>
-          <%= button_to publication , class: "btn btn-default btn-xs", :method => :get do %>
+          <% if(publication.isActive) %>
+            
+            <% if(publication.available?) %>
+              <%= button_to stop_publication_path(publication) , class: "btn btn-default btn-xs", :method => :get do %>
+                <span class="glyphicon glyphicon-pause" title="Pausar"></span>
+              <% end %>
+
+              <a class="btn btn-default btn-xs" data-target="#myModal_<%= publication.id %>" data-toggle="modal" href="#">
+                  <span class="glyphicon glyphicon-ban-circle" title="Finalizar"></span>
+              </a>  
+             <%= render partial: 'publications/confirmFinishModal', locals: {publication: publication}  %>
+            
+            <% end %>
+            
+            <% if(publication.stopped?) %>
+              <%= button_to active_publication_path(publication) , class: "btn btn-default btn-xs", :method => :get do %>
+                <span class="glyphicon glyphicon-play" title="Activar"></span>
+              <% end %>
+            <% end %>  
+          <% end %>
+
+          <%= button_to publication , class: "btn btn-default btn-xs", data: {confirm: '¿Esta usted seguro que quiere finalizar la publicación?' } do  %>
             <span class="glyphicon glyphicon-eye-open " title="Ver Publicación"></span>
           <% end %>
-          <%= button_to edit_publication_path(publication) , class: "btn btn-default btn-xs", :method => :get do %>
-            <span class="glyphicon glyphicon-edit" title="Editar Publicación"></span>
+          
+          <% if(!publication.finished?) %>          
+            <%= button_to edit_publication_path(publication) , class: "btn btn-default btn-xs", :method => :get do %>
+              <span class="glyphicon glyphicon-edit" title="Editar Publicación"></span>
+            <% end %>
           <% end %>
+
           <% if policy(publication).delete? %>
 	          <%= button_to publication,class: "btn btn-danger btn-xs", method: :delete, data: {confirm: '¿Esta usted seguro que quiere eliminar la publicación?' } do %>
 	            <span class="glyphicon glyphicon-remove-circle" title="Eliminar Publicación"></span>
@@ -45,5 +70,4 @@
 </table>
 <%= will_paginate publications, renderer: BootstrapPagination::Rails  %>
 </div>
-
 
