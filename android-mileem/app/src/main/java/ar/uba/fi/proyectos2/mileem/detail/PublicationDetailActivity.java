@@ -7,9 +7,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -217,6 +219,28 @@ public class PublicationDetailActivity extends Activity {
 
         tv = (TextView) findViewById(R.id.neighbourhood_name);
         tv.setText(p.getNeighbourhood_name());
+
+
+        final GestureDetector gestureDetector = new GestureDetector(this, new SingleTapConfirm());
+        ImageView iv = (ImageView) findViewById(R.id.mapImage);
+
+        iv.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                setUpMap(arg0);
+                return false;
+            }
+        });
+
+    }
+
+    private class SingleTapConfirm extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent event) {
+            return true;
+        }
     }
 
 

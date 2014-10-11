@@ -519,7 +519,6 @@
             android:layout_width="wrap_content"
             android:layout_height="160dp"
             android:id="@+id/mapImage"
-            android:onClick="setUpMap"
             android:scaleType="fitXY"
             android:background="#000000"
             android:padding="1dp"
