@@ -48,7 +48,7 @@
   </div>
   <div class="col-md-6">
     <div id="alertaErrorDireccion" class="alert alert-danger" role="alert ">
-    La dirección debe pertencer a la Ciudad Autónoma de Buenos Aires.
+    La dirección debe ser exacta (con número incluido) y pertencer a la Ciudad Autónoma de Buenos Aires.
     </div>
   </div>
 
@@ -172,7 +172,8 @@
     if (typeof(placeResult.address_components) == 'undefined' || typeof(placeResult.address_components[4]) == 'undefined'){
       console.log("placeResult es undefined!");
       return false;
-    } else if (placeResult.address_components[4].long_name != 'Autonomous City of Buenos Aires'){
+    } else if ((placeResult.address_components[4].long_name != 'Autonomous City of Buenos Aires')
+    && (placeResult.address_components[4].long_name != "Ciudad Autónoma de Buenos Aires")) {
       console.log(placeResult.address_components[4].long_name + " no es buenos aires!");
       return false;
     }
