@@ -5,32 +5,44 @@
 
 <div class="row">
   <div class="col-md-4">
-    <div id="myCarousel" class="carousel slide">
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <% (1..(@publication.uploads.size()- 1)).each do |i| %>
-          <li data-target="#myCarousel" data-slide-to=<%= i.to_i %> ></li>
-        <% end %>   
-      </ol>
-      <div class="carousel-inner">
-        <% if(@publication.uploads.size() > 0) %>
-          <div class="item active">
-            <img src="<%= @publication.uploads.first().upload %>" style="width:400px;height:300px;" />
-          </div>
-          <% @publication.uploads.drop(1).each do |u| %>
-            <div class="item ">
-              <img src="<%= u.upload %>" style="width:400px;height:300px;" />
-            </div>
-        <% end %>
-        <% else %>
-          <div class="item active">
-            <%= image_tag "skyscraper-wallpaper.jpg" , :size=>"600x400" %>
-          </div>
-        <% end %>   
-      </div>
-      <!-- Carousel nav -->
-      <a class="carousel-control left" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-      <a class="carousel-control right" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+  	<div class="mediaTypeLink" onclick="showPhotos()">FOTOS</div><div class="mediaTypeLink" onclick="showVideo()">VIDEO</div>
+    <div class="mediaContainer" id="mediaContainer">
+	    <div id="myCarousel" class="carousel slide">
+	      <ol class="carousel-indicators">
+	        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+	        <% (1..(@publication.uploads.size()- 1)).each do |i| %>
+	          <li data-target="#myCarousel" data-slide-to=<%= i.to_i %> ></li>
+	        <% end %>   
+	      </ol>
+	      <div class="carousel-inner">
+	        <% if(@publication.uploads.size() > 0) %>
+	          <div class="item active">
+	            <img src="<%= @publication.uploads.first().upload %>" style="width:100%;height:100%;" />
+	          </div>
+	          <% @publication.uploads.drop(1).each do |u| %>
+	            <div class="item ">
+	              <img src="<%= u.upload %>" style="width:100%;height:100%;" />
+	            </div>
+	        <% end %>
+	        <% else %>
+	          <div class="item active">
+	            <%= image_tag "skyscraper-wallpaper.jpg" , :width=>"100%", :height=>"100%" %>
+	          </div>
+	        <% end %>   
+	      </div>
+	      <!-- Carousel nav -->
+	      <a class="carousel-control left" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+	      <a class="carousel-control right" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+	    </div>
+	    
+	    <!-- VIDEO -->
+	    <div id="videoContainer" style="display:none">
+	    	<% if (@publication.video_uploads.size() > 0) %>
+				<%= video_tag @publication.video_uploads.first().video_url.to_s, :controls => true, :width=>"100%", :height=>"100%" %>
+			<% else %>
+				NO HAY VIDEO CARGADO
+			<% end %>
+	    </div>
     </div>
   </div>
 
@@ -69,19 +81,6 @@
   </div>
 </div>
 
-<% if (@publication.video_uploads.size() > 0) %>
-	<div class="row">
-	    <%= video_tag @publication.video_uploads.first().video_url.to_s, :controls => true %>
-	</div>
-<% end %>
-
-<%= form_for VideoUpload.new, :url => "/video_uploads/create/#{@publication.id}", :html => { :multipart => true, :id => "videoupload"  } do |f| %>
-  <div class="col-md-6">
-  	<%=f.file_field :video%>
-  </div>
-  <%= f.submit 'Guardar Video', :class => 'btn btn-primary' %>
-<% end %>
-
 </br>
 
 
@@ -90,6 +89,17 @@
 <%= link_to "Volver",  publications_path, :class => 'btn btn-lg btn-default'  %>
 <%= link_to "Editar", edit_publication_path(@publication), :class => 'btn btn-lg btn-default' %>
 <%= link_to "Imagenes", uploads_publication_path(@publication), :class => 'btn btn-lg btn-default' %>
+
+<% if (@publication.video_uploads.size() == 0) %>
+	<%= form_for VideoUpload.new, :url => "/video_uploads/create/#{@publication.id}", :html => { :multipart => true, :id => "videoupload"  } do |f| %>
+	  <span class="btn btn-lg btn-success fileinput-button" id="video_upload_file_container">
+		<span>Seleccionar Video</span>
+          <%= f.file_field :video, :id => "video_upload_file" %>
+        </span>
+      </span>
+	  <%= f.submit 'Guardar Video', :id => "video_upload_button", :class => 'btn btn-primary', :style => "display:none;" %>
+	<% end %>
+<% end %>
 
 <%= link_to "Eliminar",
               publication_path(@publication),
@@ -101,6 +111,29 @@
 <script type="text/javascript" >
   $( document ).ready(function() {
       $('.carousel').carousel();
-});
+      //attach to file chosen event
+      $("#video_upload_file").change(function (){
+      	onfileSelected();
+      });
+  });
+  
+  function showPhotos(){
+  	$('#videoContainer').hide();
+  	$('#myCarousel').show();
+  }
+  
+  function showVideo(){
+  	$('#myCarousel').hide();
+  	$('#videoContainer').show();
+  }
+ 
+  function onfileSelected(){
+  	filename = $("#video_upload_file").val().split('\\').pop();
+  	$("#video_upload_file").hide();
+  	$("#video_upload_file_container").hide();
+  	$("#video_upload_button").show();
+  	$("#video_upload_button").attr("title", filename);
+  }
+
 </script>
 

@@ -48,7 +48,7 @@
             <% end %>  
           <% end %>
 
-          <%= button_to publication , class: "btn btn-default btn-xs", data: {confirm: '¿Esta usted seguro que quiere finalizar la publicación?' } do  %>
+          <%= button_to publication , class: "btn btn-default btn-xs", :method => :get do  %>
             <span class="glyphicon glyphicon-eye-open " title="Ver Publicación"></span>
           <% end %>
           
