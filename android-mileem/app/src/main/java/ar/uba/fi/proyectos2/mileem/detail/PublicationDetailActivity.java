@@ -1,6 +1,9 @@
 package ar.uba.fi.proyectos2.mileem.detail;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
@@ -8,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -20,6 +24,18 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 import ar.uba.fi.proyectos2.mileem.R;
 import ar.uba.fi.proyectos2.mileem.model.Publication;
@@ -40,7 +56,7 @@ public class PublicationDetailActivity extends Activity {
         Publication p = (Publication) getIntent().getParcelableExtra(Publication.KEY);
 
         setContentView(R.layout.activity_publication_detail);
-        //getActionBar().setDisplayHomeAsUpEnabled(false);
+        getActionBar().setDisplayHomeAsUpEnabled(false);
 
 
         TabHost tabHost = (TabHost)findViewById(R.id.tabHostPictures);
@@ -145,30 +161,6 @@ public class PublicationDetailActivity extends Activity {
             SpannableString content = new SpannableString(p.getUserPhoneNumber());
             content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
             tv.setText(content);
-
-
-            makeCall = (TextView) findViewById(R.id.phone);
-
-            makeCall.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    // TODO Auto-generated method stub
-                    call();
-                }
-            });
-
-            makeButtonCall = (ImageButton) findViewById(R.id.buttonPhone);
-
-            makeButtonCall.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    // TODO Auto-generated method stub
-                    call();
-                }
-            });
-
         }
         if(p.getUserEmail().equals("")){
             LinearLayout layout =(LinearLayout)findViewById(R.id.emailLayout);
@@ -179,30 +171,47 @@ public class PublicationDetailActivity extends Activity {
             SpannableString content = new SpannableString(p.getUserEmail());
             content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
             tv.setText(content);
-
-
-            makeEmail = (TextView) findViewById(R.id.email);
-
-            makeEmail.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    // TODO Auto-generated method stub
-                    email();
-                }
-            });
-
-            makeButtonEmail = (ImageButton) findViewById(R.id.buttonEmail);
-
-            makeButtonEmail.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    // TODO Auto-generated method stub
-                    email();
-                }
-            });
         }
+
+        boolean showMap = true;
+
+        if(p.getLatitude() == -1){
+            tv = (TextView) findViewById(R.id.latitude);
+            tv.setText("");
+            showMap = false;
+        }
+        else{
+            tv = (TextView) findViewById(R.id.latitude);
+            tv.setText(Double.toString(p.getLatitude()));
+        }
+
+        if(p.getLongitude() == -1){
+            tv = (TextView) findViewById(R.id.longitude);
+            tv.setText("");
+            showMap = false;
+        }
+        else{
+            tv = (TextView) findViewById(R.id.longitude);
+            tv.setText(Double.toString(p.getLongitude()));
+        }
+
+        if(showMap)
+        {
+            double lat = p.getLatitude();
+            double lon = p.getLongitude();
+            ImageView iv = (ImageView) findViewById(R.id.mapImage);
+            String URL = "http://maps.google.com/maps/api/staticmap?center=" +lat + "," + lon + "&zoom=14"
+                    + "&markers=color:red%7Ccolor:red%7Clabel:C%7C" + lat +"," + lon + "&size=400x180&sensor=false";
+
+            new DownloadImageTask(iv).execute(URL);
+
+        }
+        else{
+            ImageView iv = (ImageView) findViewById(R.id.mapImage);
+            iv.setVisibility(View.GONE);
+        }
+
+
 
         tv = (TextView) findViewById(R.id.neighbourhood_name);
         tv.setText(p.getNeighbourhood_name());
@@ -229,7 +238,7 @@ public class PublicationDetailActivity extends Activity {
     }
 
 
-    private void call() {
+    public void call(View view) {
         try {
             callIntent = new Intent(Intent.ACTION_CALL); //ACTION_INSERT_OR_EDIT);//ACTION_CALL);
             //Log.e("valor",);
@@ -241,7 +250,7 @@ public class PublicationDetailActivity extends Activity {
         }
     }
 
-    private void email() {
+    public void email(View view) {
 
         // Obtengo el mail del anunciante
         String[] to =  {((TextView) findViewById(R.id.email)).getText().toString()};
@@ -254,6 +263,45 @@ public class PublicationDetailActivity extends Activity {
         //emailIntent.putExtra(Intent.EXTRA_TEXT, mensaje);
         emailIntent.setType("message/rfc822");
         startActivity(Intent.createChooser(emailIntent, "Email"));
+    }
+
+    public void setUpMap(View view) {
+        if (!((TextView) findViewById(R.id.latitude)).getText().toString().isEmpty() && !((TextView) findViewById(R.id.longitude)).getText().toString().isEmpty()) {
+
+            TextView tv = (TextView) findViewById(R.id.latitude);
+            double lat = Double.parseDouble(tv.getText().toString());
+            tv = (TextView) findViewById(R.id.longitude);
+            double lon = Double.parseDouble(tv.getText().toString());
+
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:" + lat + "," + lon + "?q="+ lat + "," + lon));
+            view.getContext().startActivity(intent);
+        }
+    }
+
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
 
 }

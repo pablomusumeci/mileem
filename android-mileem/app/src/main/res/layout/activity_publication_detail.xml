@@ -151,9 +151,9 @@
                                 android:layout_width="200dp"
                                 android:layout_height="100dp"
                                 android:src="@drawable/house"
-                                android:layout_toEndOf="@+id/imageView"
+                                android:layout_toEndOf="@+id/mapImage"
                                 android:layout_alignParentBottom="true"
-                                android:layout_toRightOf="@+id/imageView"
+                                android:layout_toRightOf="@+id/mapImage"
                                 android:layout_gravity="center_horizontal"
                                 android:visibility="visible" />
                         </LinearLayout>
@@ -405,7 +405,8 @@
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/phoneLayout">
+                        android:id="@+id/phoneLayout"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -427,7 +428,8 @@
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/emailLayout">
+                        android:id="@+id/emailLayout"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -444,6 +446,57 @@
                             android:text="New Text"
                             android:clickable="true"
                             android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/latLayout"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Latitud: "
+                            android:id="@+id/textView15"
+                            android:textSize="18sp"
+                            android:layout_weight="0.5" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/latitude"
+                            android:text="New Text"
+                            android:clickable="true"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lonLayout"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Longitud: "
+                            android:id="@+id/textView16"
+                            android:textSize="18sp"
+                            android:layout_weight="0.5" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/longitude"
+                            android:text="New Text"
+                            android:clickable="true"
+                            android:textSize="18sp" />
+
                     </LinearLayout>
 
 
@@ -452,6 +505,14 @@
             </LinearLayout>
 
         </TableRow>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:id="@+id/mapImage"
+            android:onClick="setUpMap"
+            android:scaleType="fitXY"
+            android:layout_margin="15dp" />
 
         <TableRow
             android:layout_width="fill_parent"
@@ -466,18 +527,6 @@
                 android:layout_gravity="center_horizontal">
 
                 <ImageButton
-                    android:id="@+id/buttonMap"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_centerHorizontal="true"
-                    android:clickable="true"
-                    android:textColor="#ffffff"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/maps"
-                    android:background="@null"
-                    android:layout_marginRight="15dp" />
-
-                <ImageButton
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:id="@+id/buttonEmail"
@@ -485,7 +534,8 @@
                     android:scaleType="fitXY"
                     android:background="@null"
                     android:layout_marginRight="15dp"
-                    android:clickable="true" />
+                    android:clickable="true"
+                    android:onClick="email" />
 
                 <ImageButton
                     android:layout_width="70dp"
@@ -494,7 +544,8 @@
                     android:scaleType="fitXY"
                     android:src="@drawable/phone"
                     android:background="@null"
-                    android:clickable="true" />
+                    android:clickable="true"
+                    android:onClick="call" />
             </LinearLayout>
         </TableRow>
 

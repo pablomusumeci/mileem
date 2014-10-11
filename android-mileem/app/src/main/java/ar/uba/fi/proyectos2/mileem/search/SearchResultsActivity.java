@@ -142,6 +142,19 @@ public class SearchResultsActivity extends ListActivity {
                     } catch (JSONException e) {
                         p.setDescription("");
                     }
+
+                    try {
+                        p.setLatitude(obj.getDouble("lat"));
+                    } catch (JSONException e) {
+                        p.setLatitude(-1);
+                    }
+
+                    try {
+                        p.setLongitude(obj.getDouble("lng"));
+                    } catch (JSONException e) {
+                        p.setLongitude(-1);
+                    }
+
                     p.setNormalized_currency(obj.getString("normalized_currency"));
                     p.setNormalized_price(obj.getInt("normalized_price"));
                     p.setAdditional_info(obj.getString("additional_info"));

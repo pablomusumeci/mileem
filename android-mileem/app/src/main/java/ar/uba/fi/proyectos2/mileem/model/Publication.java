@@ -32,6 +32,8 @@ public class Publication implements Parcelable {
     private String user_phone_number;
     private String user_email;
     private String normalized_currency;
+    private double latitude;
+    private double longitude;
 
     public int getNormalized_price() {
         return normalized_price;
@@ -207,6 +209,22 @@ public class Publication implements Parcelable {
         this.additional_info = additional_info;
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
 
     @Override
     public int describeContents() {
@@ -236,6 +254,8 @@ public class Publication implements Parcelable {
         parcel.writeString(user_email);
         parcel.writeString(normalized_currency);
         parcel.writeInt(normalized_price);
+        parcel.writeDouble(latitude);
+        parcel.writeDouble(longitude);
     }
 
     public static final Parcelable.Creator<Publication> CREATOR = new Creator<Publication>() {
@@ -262,6 +282,8 @@ public class Publication implements Parcelable {
             p.user_email = source.readString();
             p.normalized_currency = source.readString();
             p.normalized_price = source.readInt();
+            p.latitude = source.readDouble();
+            p.longitude = source.readDouble();
             return p;
         }
         public Publication[] newArray(int size) {
