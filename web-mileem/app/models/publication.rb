@@ -45,11 +45,6 @@ class Publication < ActiveRecord::Base
 	validates :number_spaces, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	validates :surface, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	
-	def end_date
-	  self.effective_date + self.plan.duration.months
-	  # the amount of days should depend on the plan of the publication
-	  # maybe need to substract 1 day if we consider the end_date as included
-	end
 	
 	# agrego los nombres de las entidades externas
 	def to_json

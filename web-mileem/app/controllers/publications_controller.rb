@@ -56,6 +56,7 @@ class PublicationsController < ApplicationController
   def create
     @publication = Publication.new(publication_params)
     @publication.user_id = current_user.id
+    @publication.end_date = @publication.effective_date + @publication.plan.duration.months
     @publication.available!
     respond_to do |format|
       if @publication.save
@@ -72,6 +73,19 @@ class PublicationsController < ApplicationController
   # PATCH/PUT /publications/1.json
   def update
     respond_to do |format|
+      oldPlan = Publication.find(@publication.id).plan
+      newPlan = Plan.find(publication_params["plan_id"])
+      #Solo se puede hacer upgrade 
+      if(newPlan.priority > oldPlan.priority)
+        flash[:error] = "No se puede obtener un plan inferior al actual"
+        render :edit 
+        return
+      end  
+      if(!@publication.isActive)
+        @publication.end_date = @publication.effective_date + newPlan.duration.months
+      else
+         @publication.end_date = Date.today + newPlan.duration.months
+      end  
       if @publication.update(publication_params)
         format.html { redirect_to @publication, notice: 'La publicación fue actualizada exitosamente.' }
         format.json { render :show, status: :ok, location: @publication }
@@ -223,6 +237,6 @@ class PublicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def publication_params
-      params.require(:publication).permit(:effective_date, :operation, :address, :floor, :apartment, :number_spaces, :surface, :price, :expenses, :antiquity, :description, :additional_info, :neighbourhood_id, :currency_id,:property_type_id, :uploads, :plan_id, :lat, :lng)
+      params.require(:publication).permit(:effective_date, :operation, :address, :floor, :apartment, :number_spaces, :surface, :price, :expenses, :antiquity, :description, :additional_info, :neighbourhood_id, :currency_id,:property_type_id, :uploads, :plan_id, :lat, :lng, :end_date)
     end
 end

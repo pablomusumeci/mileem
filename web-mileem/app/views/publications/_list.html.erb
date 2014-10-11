@@ -45,17 +45,17 @@
               <%= button_to active_publication_path(publication) , class: "btn btn-default btn-xs", :method => :get do %>
                 <span class="glyphicon glyphicon-play" title="Activar"></span>
               <% end %>
-            <% end %>  
+            <% end %>
           <% end %>
 
           <%= button_to publication , class: "btn btn-default btn-xs", :method => :get do  %>
             <span class="glyphicon glyphicon-eye-open " title="Ver Publicación"></span>
           <% end %>
           
-          <% if(!publication.finished?) %>          
-            <%= button_to edit_publication_path(publication) , class: "btn btn-default btn-xs", :method => :get do %>
+          <% if(!publication.finished? && (publication.end_date > Date.today)) %>          
+              <%= button_to edit_publication_path(publication) , class: "btn btn-default btn-xs",:method => :get do %>
               <span class="glyphicon glyphicon-edit" title="Editar Publicación"></span>
-            <% end %>
+              <% end %>
           <% end %>
 
           <% if policy(publication).delete? %>
