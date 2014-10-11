@@ -3,7 +3,9 @@
 one:
   id: 1
   name: Pesos
+  abreviatura: $
 
 two:
   id: 2
-  name: Dolares
+  name: Dólares
+  abreviatura: USD
