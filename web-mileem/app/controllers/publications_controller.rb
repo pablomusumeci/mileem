@@ -122,8 +122,9 @@ class PublicationsController < ApplicationController
   # GET /publications/search.json?param1=x&param2=y...
   def search
     @publications = Publication.all.to_a.map!{|p| p.to_json}
-
+    Rails.logger.info "Publicaciones total: #{@publications.size}"
     @publications.select!{ |p| Publication.find(p["id"]).isAvailable }
+    Rails.logger.info "Publicaciones activas: #{@publications.size}"
 
     if not params[:neighbourhood_name].nil? and (params[:neighbourhood_name].size > 0)
       barrios = params[:neighbourhood_name].split(",")

@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  effective_date: 2014-09-10
+  effective_date: 2014-10-10
   operation: MyString
   address: MyString
   floor: 1
@@ -17,9 +17,11 @@ one:
   property_type_id: 1
   neighbourhood_id: 1
   user_id: 1
+  plan_id: 1
+  status: 2
 
 two:
-  effective_date: 2014-09-10
+  effective_date: 2014-10-10
   operation: MyString
   address: MyString
   floor: 1
@@ -35,3 +37,64 @@ two:
   property_type_id: 2
   neighbourhood_id: 2
   user_id: 1
+  plan_id: 1
+  status: 2
+
+three:
+  effective_date: 2014-10-10
+  operation: MyString
+  address: MyString
+  floor: 1
+  apartment: MyString
+  number_spaces: 2
+  surface: 120
+  price: 1200
+  expenses: 120
+  antiquity: 10
+  description: MyText
+  additional_info: MyText
+  currency_id: 1
+  property_type_id: 1
+  neighbourhood_id: 1
+  user_id: 1
+  plan_id: 1
+  status: 2
+
+four:
+  effective_date: 2014-10-10
+  operation: MyString
+  address: MyString
+  floor: 1
+  apartment: MyString
+  number_spaces: 4
+  surface: 200
+  price: 2000
+  expenses: 200
+  antiquity: 20
+  description: MyText
+  additional_info: MyText
+  currency_id: 1
+  property_type_id: 2
+  neighbourhood_id: 1
+  user_id: 1
+  plan_id: 1
+  status: 2
+
+fifth:
+  id: 11
+  effective_date: 2014-10-10
+  operation: Venta
+  address: "Quesada, Buenos Aires, Argentina"
+  floor: 7
+  apartment: Asd
+  number_spaces: 5
+  surface: 120
+  price: 6500
+  expenses: 250
+  antiquity: 20
+  currency_id: 1
+  neighbourhood_id: 3
+  property_type_id: 3
+  user_id: 1
+  plan_id: 1
+  status: 2

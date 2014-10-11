@@ -1,15 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   price: 1.5
   duration: 1
   priority: 1
   number_images_allowed: 1
   number_videos_allowed: 1
+  duration: 12
 
 two:
+  id: 2
   price: 1.5
   duration: 1
   priority: 1
   number_images_allowed: 1
   number_videos_allowed: 1
+  duration: 4
