@@ -81,16 +81,6 @@
   </div>
 </div>
 
-
-<% if (@publication.video_uploads.size() == 0) %>
-	<%= form_for VideoUpload.new, :url => "/video_uploads/create/#{@publication.id}", :html => { :multipart => true, :id => "videoupload"  } do |f| %>
-	  <div class="col-md-6">
-	  	<%=f.file_field :video%>
-	  </div>
-	  <%= f.submit 'Guardar Video', :class => 'btn btn-primary' %>
-	<% end %>
-<% end %>
-
 </br>
 
 
@@ -99,6 +89,17 @@
 <%= link_to "Volver",  publications_path, :class => 'btn btn-lg btn-default'  %>
 <%= link_to "Editar", edit_publication_path(@publication), :class => 'btn btn-lg btn-default' %>
 <%= link_to "Imagenes", uploads_publication_path(@publication), :class => 'btn btn-lg btn-default' %>
+
+<% if (@publication.video_uploads.size() == 0) %>
+	<%= form_for VideoUpload.new, :url => "/video_uploads/create/#{@publication.id}", :html => { :multipart => true, :id => "videoupload"  } do |f| %>
+	  <span class="btn btn-lg btn-success fileinput-button" id="video_upload_file_container">
+		<span>Seleccionar Video</span>
+          <%= f.file_field :video, :id => "video_upload_file" %>
+        </span>
+      </span>
+	  <%= f.submit 'Guardar Video', :id => "video_upload_button", :class => 'btn btn-primary', :style => "display:none;" %>
+	<% end %>
+<% end %>
 
 <%= link_to "Eliminar",
               publication_path(@publication),
@@ -110,6 +111,10 @@
 <script type="text/javascript" >
   $( document ).ready(function() {
       $('.carousel').carousel();
+      //attach to file chosen event
+      $("#video_upload_file").change(function (){
+      	onfileSelected();
+      });
   });
   
   function showPhotos(){
@@ -121,5 +126,14 @@
   	$('#myCarousel').hide();
   	$('#videoContainer').show();
   }
+ 
+  function onfileSelected(){
+  	filename = $("#video_upload_file").val().split('\\').pop();
+  	$("#video_upload_file").hide();
+  	$("#video_upload_file_container").hide();
+  	$("#video_upload_button").show();
+  	$("#video_upload_button").attr("title", filename);
+  }
+
 </script>
 
