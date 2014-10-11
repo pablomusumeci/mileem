@@ -38,7 +38,7 @@ class Publication < ActiveRecord::Base
 	validates :plan, presence: true
 	validates :price, presence: true, :numericality => { :greater_than_or_equal_to => 0 }
 	validates :address, presence: true
-	validates :effective_date, presence: true, date: {on_or_after: DateTime.now.change(:hour => 0, :min => 0)}
+	validates :effective_date, presence: true, :on => :create, date: {on_or_after: DateTime.now.change(:hour => 0, :min => 0)}
 	validates :antiquity, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	validates :expenses, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	validates :floor, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
