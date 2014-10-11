@@ -132,6 +132,12 @@ public class SearchResultsActivity extends ListActivity {
                     }
 
                     try {
+                        p.setUserEmail(obj.getString("user_email"));
+                    } catch (JSONException e) {
+                        p.setUserEmail("");
+                    }
+
+                    try {
                         p.setDescription(obj.getString("description"));
                     } catch (JSONException e) {
                         p.setDescription("");

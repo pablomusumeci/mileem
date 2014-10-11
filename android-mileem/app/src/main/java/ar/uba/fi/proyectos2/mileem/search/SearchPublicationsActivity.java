@@ -93,10 +93,15 @@ public class SearchPublicationsActivity extends Activity implements MultiSpinner
         request.setNeighbourhood_name(neighborhood.getSelected());
         Spinner property_name = (Spinner) findViewById(R.id.searchSpinnerType);
         request.setProperty_name(property_name.getSelectedItem().toString());
+
         Uri.Builder builder = new Uri.Builder()
                 .scheme("http")
+                .encodedAuthority("demo9345628.mockable.io")
+                .appendEncodedPath("publications.json");
+        /*Uri.Builder builder = new Uri.Builder()
+                .scheme("http")
                 .encodedAuthority("192.168.1.100:3000")
-                .appendEncodedPath("publications/search.json");
+                .appendEncodedPath("publications/search.json");*/
         if (request.getOperation() != null) {
             builder.appendQueryParameter("operation", request.getOperation());
         }

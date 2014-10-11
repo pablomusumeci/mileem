@@ -423,6 +423,28 @@
                             android:clickable="true"
                             android:textSize="18sp" />
                     </LinearLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/emailLayout">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Email: "
+                            android:id="@+id/textView14"
+                            android:textSize="18sp"
+                            android:layout_weight="0.5" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/email"
+                            android:text="New Text"
+                            android:clickable="true"
+                            android:textSize="18sp" />
+                    </LinearLayout>
 
 
                 </TableLayout>
@@ -444,7 +466,7 @@
                 android:layout_gravity="center_horizontal">
 
                 <ImageButton
-                    android:id="@+id/button2"
+                    android:id="@+id/buttonMap"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_centerHorizontal="true"
@@ -458,19 +480,21 @@
                 <ImageButton
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:id="@+id/button3"
+                    android:id="@+id/buttonEmail"
                     android:src="@drawable/mail"
                     android:scaleType="fitXY"
                     android:background="@null"
-                    android:layout_marginRight="15dp" />
+                    android:layout_marginRight="15dp"
+                    android:clickable="true" />
 
                 <ImageButton
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:id="@+id/imageButton"
+                    android:id="@+id/buttonPhone"
                     android:scaleType="fitXY"
                     android:src="@drawable/phone"
-                    android:background="@null" />
+                    android:background="@null"
+                    android:clickable="true" />
             </LinearLayout>
         </TableRow>
 

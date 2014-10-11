@@ -30,6 +30,7 @@ public class Publication implements Parcelable {
     private String neighbourhood_name;
     private String currency_symbol;
     private String user_phone_number;
+    private String user_email;
     private String normalized_currency;
 
     public int getNormalized_price() {
@@ -190,6 +191,14 @@ public class Publication implements Parcelable {
         this.user_phone_number = user_phone_number;
     }
 
+    public String getUserEmail() {
+        return user_email;
+    }
+
+    public void setUserEmail(String user_email) {
+        this.user_email = user_email;
+    }
+
     public String getAdditional_info() {
         return additional_info;
     }
@@ -224,6 +233,7 @@ public class Publication implements Parcelable {
         parcel.writeString(neighbourhood_name);
         parcel.writeString(currency_symbol);
         parcel.writeString(user_phone_number);
+        parcel.writeString(user_email);
         parcel.writeString(normalized_currency);
         parcel.writeInt(normalized_price);
     }
@@ -249,6 +259,7 @@ public class Publication implements Parcelable {
             p.neighbourhood_name = source.readString();
             p.currency_symbol = source.readString();
             p.user_phone_number = source.readString();
+            p.user_email = source.readString();
             p.normalized_currency = source.readString();
             p.normalized_price = source.readInt();
             return p;

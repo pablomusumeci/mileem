@@ -7,6 +7,7 @@ import android.text.style.UnderlineSpan;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -26,6 +27,9 @@ import ar.uba.fi.proyectos2.mileem.model.Publication;
 public class PublicationDetailActivity extends Activity {
 
     public TextView makeCall;
+    public TextView makeEmail;
+    public ImageButton makeButtonCall;
+    public ImageButton makeButtonEmail;
     public Intent callIntent;
 
 
@@ -34,8 +38,9 @@ public class PublicationDetailActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         Publication p = (Publication) getIntent().getParcelableExtra(Publication.KEY);
+
         setContentView(R.layout.activity_publication_detail);
-        getActionBar().setDisplayHomeAsUpEnabled(false);
+        //getActionBar().setDisplayHomeAsUpEnabled(false);
 
 
         TabHost tabHost = (TabHost)findViewById(R.id.tabHostPictures);
@@ -152,6 +157,51 @@ public class PublicationDetailActivity extends Activity {
                     call();
                 }
             });
+
+            makeButtonCall = (ImageButton) findViewById(R.id.buttonPhone);
+
+            makeButtonCall.setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // TODO Auto-generated method stub
+                    call();
+                }
+            });
+
+        }
+        if(p.getUserEmail().equals("")){
+            LinearLayout layout =(LinearLayout)findViewById(R.id.emailLayout);
+            layout.setVisibility(View.GONE);
+        }
+        else{
+            tv = (TextView) findViewById(R.id.email);
+            SpannableString content = new SpannableString(p.getUserEmail());
+            content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+            tv.setText(content);
+
+
+            makeEmail = (TextView) findViewById(R.id.email);
+
+            makeEmail.setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // TODO Auto-generated method stub
+                    email();
+                }
+            });
+
+            makeButtonEmail = (ImageButton) findViewById(R.id.buttonEmail);
+
+            makeButtonEmail.setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // TODO Auto-generated method stub
+                    email();
+                }
+            });
         }
 
         tv = (TextView) findViewById(R.id.neighbourhood_name);
@@ -189,6 +239,21 @@ public class PublicationDetailActivity extends Activity {
         } catch (ActivityNotFoundException activityException) {
             Log.e("dialing-example", "Call failed", activityException);
         }
+    }
+
+    private void email() {
+
+        // Obtengo el mail del anunciante
+        String[] to =  {((TextView) findViewById(R.id.email)).getText().toString()};
+        String subject = "Consulta Propiedad " + ((TextView) findViewById(R.id.address)).getText();
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
+        //emailIntent.putExtra(Intent.EXTRA_CC, cc);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        //emailIntent.putExtra(Intent.EXTRA_TEXT, mensaje);
+        emailIntent.setType("message/rfc822");
+        startActivity(Intent.createChooser(emailIntent, "Email"));
     }
 
 }
