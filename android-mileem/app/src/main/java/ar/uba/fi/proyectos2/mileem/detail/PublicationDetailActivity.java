@@ -7,9 +7,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -201,7 +203,7 @@ public class PublicationDetailActivity extends Activity {
             double lon = p.getLongitude();
             ImageView iv = (ImageView) findViewById(R.id.mapImage);
             String URL = "http://maps.google.com/maps/api/staticmap?center=" +lat + "," + lon + "&zoom=14"
-                    + "&markers=color:red%7Ccolor:red%7Clabel:C%7C" + lat +"," + lon + "&size=400x180&sensor=false";
+                    + "&markers=color:red%7Ccolor:red%7Clabel:A%7C" + lat +"," + lon + "&size=400x180&sensor=false";
 
             new DownloadImageTask(iv).execute(URL);
 
@@ -209,12 +211,36 @@ public class PublicationDetailActivity extends Activity {
         else{
             ImageView iv = (ImageView) findViewById(R.id.mapImage);
             iv.setVisibility(View.GONE);
+            tv = (TextView) findViewById(R.id.locationTextView);
+            tv.setVisibility(View.GONE);
         }
 
 
 
         tv = (TextView) findViewById(R.id.neighbourhood_name);
         tv.setText(p.getNeighbourhood_name());
+
+
+        final GestureDetector gestureDetector = new GestureDetector(this, new SingleTapConfirm());
+        ImageView iv = (ImageView) findViewById(R.id.mapImage);
+
+        iv.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View arg0, MotionEvent arg1) {
+                setUpMap(arg0);
+                return false;
+            }
+        });
+
+    }
+
+    private class SingleTapConfirm extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent event) {
+            return true;
+        }
     }
 
 

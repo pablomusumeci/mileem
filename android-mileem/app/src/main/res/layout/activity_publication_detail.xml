@@ -506,13 +506,26 @@
 
         </TableRow>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/location"
+            android:id="@+id/locationTextView"
+            android:textSize="21sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="160dp"
             android:id="@+id/mapImage"
-            android:onClick="setUpMap"
             android:scaleType="fitXY"
-            android:layout_margin="15dp" />
+            android:background="#000000"
+            android:padding="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp" />
 
         <TableRow
             android:layout_width="fill_parent"
