@@ -46,6 +46,12 @@
       </label>
     </div>   
   </div>
+  <div class="col-md-6">
+    <div id="alertaErrorDireccion" class="alert alert-danger" role="alert ">
+    La dirección debe pertencer a la Ciudad Autónoma de Buenos Aires.
+    </div>
+  </div>
+
 </div>
 
 <div class="row">  
@@ -55,12 +61,16 @@
     </label>
      <%= f.collection_select(:neighbourhood_id, Neighbourhood.all , :id, :name, {:prompt   => "Seleccione una opción"}, { :class =>"form-control" ,:required => true, :disabled => modoEdicion }) %>
    </div>
+
   <div class="col-md-4">
+  <div class="form-group" id="fg-address">
     <label for="address" class="control-label">Dirección
       <span class="required">*</span>
     </label>
       <input id="publication_address" name="publication[address]" class="form-control" type="text" placeholder="Autocompletado automático" required="required" <%= modoEdicion ? "disabled" : "" %> >
   </div>
+  </div>
+
 
   <div class="col-md-2">
     <label for="floor" class="control-label">Piso</label>
@@ -149,7 +159,7 @@
 <br>
   <div class="form-group">
     <div class="col-md-4 ">  
-      <%= f.submit modoEdicion ? 'Actualizar' : 'Crear', :class => 'btn btn-primary' %>
+      <%= f.submit modoEdicion ? 'Actualizar' : 'Crear', :class => 'btn btn-primary', :id => 'submitButton' %>
       <%= link_to 'Cancelar', publications_path, :class => 'btn btn-default' %>
     </div>
   </div>
@@ -157,11 +167,24 @@
 <% end %>
 
 <script type="text/javascript" >
+
+  function dentroDeBsAs(placeResult){
+    if (typeof(placeResult.address_components) == 'undefined' || typeof(placeResult.address_components[4]) == 'undefined'){
+      console.log("placeResult es undefined!");
+      return false;
+    } else if (placeResult.address_components[4].long_name != 'Autonomous City of Buenos Aires'){
+      console.log(placeResult.address_components[4].long_name + " no es buenos aires!");
+      return false;
+    }
+      return true;
+  }
+
   var ready;
   var addressPicker;
   ready = function() {
-    // https://developers.google.com/places/documentation/autocomplete#place_types
+    $("#alertaErrorDireccion").hide();
 
+    // https://developers.google.com/places/documentation/autocomplete#place_types
     var addressPicker = new AddressPicker(
       {
         autocompleteService: {
@@ -218,6 +241,19 @@
 
     addressPicker.bindDefaultTypeaheadEvent($('#address'))
     $(addressPicker).on('addresspicker:selected', function (event, result) {
+
+      if (! dentroDeBsAs(result.placeResult)){
+         $('#fg-address').addClass("has-error");
+         $('#fg-address').addClass("has-error");
+         $("#alertaErrorDireccion").show();
+         $('#submitButton').addClass("disabled");
+      } else {
+         $('#fg-address').removeClass("has-error");
+         $('#fg-address').addClass("has-success");
+         $('#submitButton').removeClass("disabled");
+         $("#alertaErrorDireccion").hide();
+      }
+
       $('#publication_lat').val(result.latitude);
       $('#publication_lng').val(result.longitude);
       $('#publication_address').typeahead('val', result.placeResult.formatted_address);
