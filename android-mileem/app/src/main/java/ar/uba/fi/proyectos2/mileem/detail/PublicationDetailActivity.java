@@ -332,7 +332,7 @@ public class PublicationDetailActivity extends Activity {
 
     public void viewMediaGallery(View view){
         Intent intent = new Intent(this, MediaDetailsActivity.class);
-        intent.putExtra("CANT_IMAGES", 5);
+        intent.putExtra("imagesURLs", "http://lorempixel.com/500/800/city/,http://lorempixel.com/500/800/city/");
         startActivity(intent);
 
     }

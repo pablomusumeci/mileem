@@ -2,6 +2,7 @@ package ar.uba.fi.proyectos2.mileem.detail;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -11,13 +12,16 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import ar.uba.fi.proyectos2.mileem.R;
 
 public class MediaDetailsActivity extends Activity {
     /**
      * The number of pages (wizard steps) to show in this demo.
      */
-    private static final int NUM_PAGES = 5;
+    private List<String> imagesURLs = new LinkedList<String>();
 
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
@@ -30,27 +34,17 @@ public class MediaDetailsActivity extends Activity {
      */
     private PagerAdapter mPagerAdapter;
 
-
-    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
-        public ScreenSlidePagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return MediaPageFragment.create(position);
-        }
-
-        @Override
-        public int getCount() {
-            return NUM_PAGES;
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_media_details);
+
+        Intent intent = getIntent();
+        String imageURLs = intent.getExtras().getString("imagesURLs");
+        String[] tokens = imageURLs.split(",");
+        for (String url : tokens){
+            imagesURLs.add(url);
+        }
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.mediaPager);
@@ -69,7 +63,6 @@ public class MediaDetailsActivity extends Activity {
 
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -87,6 +80,22 @@ public class MediaDetailsActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+        public ScreenSlidePagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return MediaPageFragment.create(imagesURLs.get(position));
+        }
+
+        @Override
+        public int getCount() {
+            return imagesURLs.size();
+        }
     }
 
 }
