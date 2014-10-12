@@ -1,23 +1,34 @@
 package ar.uba.fi.proyectos2.mileem.detail;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v13.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import ar.uba.fi.proyectos2.mileem.R;
 import ar.uba.fi.proyectos2.mileem.model.Publication;
@@ -31,29 +42,38 @@ public class PublicationDetailActivity extends Activity {
     public ImageButton makeButtonEmail;
     public Intent callIntent;
 
+    private Publication p;
+    private ViewPager mPager;
+    private PagerAdapter mPagerAdapter;
+    private GestureDetector gestureDetector;
+
+    private View generateViewForGallery(String url){
+
+        ImageView imageView = new ImageView(getApplicationContext());
+        imageView.setLayoutParams(new LinearLayout.LayoutParams(400, 400));
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+        new DownloadImageTask(imageView).execute(url);
+
+        return imageView;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Publication p = (Publication) getIntent().getParcelableExtra(Publication.KEY);
+        p = (Publication) getIntent().getParcelableExtra(Publication.KEY);
 
         setContentView(R.layout.activity_publication_detail);
         getActionBar().setDisplayHomeAsUpEnabled(false);
 
-
-        TabHost tabHost = (TabHost)findViewById(R.id.tabHostPictures);
-        tabHost.setup();
-        TabHost.TabSpec tab1 = tabHost.newTabSpec("Fotos");
-        tab1.setContent(R.id.imageView2);
-        tab1.setIndicator("Fotos");
-        tabHost.addTab(tab1);
-        TabHost.TabSpec tab2 = tabHost.newTabSpec("Videos");
-        tab2.setContent(R.id.imageView2);
-        tab2.setIndicator("Videos");
-        tabHost.addTab(tab2);
-        tabHost.setCurrentTab(1);
-
+        LinearLayout imageGallery = (LinearLayout) findViewById(R.id.linearLayoutImages);
+        //HorizontalScrollView horizontalScrollView = (HorizontalScrollView) findViewById(R.id.horizontalScrollImages);
+        int position = 0;
+        for (String imageUrl : p.getImagesURLs()){
+            imageGallery.addView(generateViewForGallery(imageUrl));
+        }
 
         TextView tv;
         tv = (TextView) findViewById(R.id.address);
@@ -288,7 +308,8 @@ public class PublicationDetailActivity extends Activity {
 
     public void viewMediaGallery(View view){
         Intent intent = new Intent(this, MediaDetailsActivity.class);
-        intent.putExtra("imagesURLs", "http://lorempixel.com/500/800/city/,http://lorempixel.com/500/800/city/");
+
+        intent.putStringArrayListExtra("imagesURLs", new ArrayList<String>(p.getImagesURLs()));
         startActivity(intent);
 
     }

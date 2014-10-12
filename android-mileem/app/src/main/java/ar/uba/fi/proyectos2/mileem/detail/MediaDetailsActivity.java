@@ -40,11 +40,7 @@ public class MediaDetailsActivity extends Activity {
         setContentView(R.layout.activity_media_details);
 
         Intent intent = getIntent();
-        String imageURLs = intent.getExtras().getString("imagesURLs");
-        String[] tokens = imageURLs.split(",");
-        for (String url : tokens){
-            imagesURLs.add(url);
-        }
+        imagesURLs = intent.getExtras().getStringArrayList("imagesURLs");
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.mediaPager);

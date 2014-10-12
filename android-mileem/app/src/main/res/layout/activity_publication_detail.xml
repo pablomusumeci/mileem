@@ -113,63 +113,28 @@
         </TableRow>
 
         <TableRow
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp">
+            android:layout_weight="0.1">
 
-            <TabHost
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/tabHostPictures"
-                android:layout_weight="1">
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollImages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:orientation="horizontal" >
 
                 <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="vertical">
-
-                    <TabWidget
-                        android:id="@android:id/tabs"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"></TabWidget>
-
-                    <FrameLayout
-                        android:id="@android:id/tabcontent"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
-
-                        <LinearLayout
-                            android:id="@+id/Fotos"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:id="@+id/imageView2"
-                                android:layout_width="200dp"
-                                android:layout_height="100dp"
-                                android:src="@drawable/house"
-                                android:layout_toEndOf="@+id/mapImage"
-                                android:layout_alignParentBottom="true"
-                                android:layout_toRightOf="@+id/mapImage"
-                                android:layout_gravity="center_horizontal"
-                                android:onClick="viewMediaGallery"
-                                android:visibility="visible" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/Videos"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:orientation="vertical">
-
-                        </LinearLayout>
-
-                    </FrameLayout>
+                    android:id="@+id/linearLayoutImages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="viewMediaGallery"
+                    android:layout_gravity="left"
+                    android:orientation="horizontal" >
                 </LinearLayout>
-            </TabHost>
+            </HorizontalScrollView>
         </TableRow>
 
         <TableRow

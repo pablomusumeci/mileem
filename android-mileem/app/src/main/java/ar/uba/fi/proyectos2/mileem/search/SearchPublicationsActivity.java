@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ExpandableListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,11 +21,15 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Logger;
 
 import ar.uba.fi.proyectos2.mileem.R;
+import ar.uba.fi.proyectos2.mileem.application.Main;
 import ar.uba.fi.proyectos2.mileem.model.MultiSpinner;
 import ar.uba.fi.proyectos2.mileem.model.PublicationSearchRequest;
 
@@ -39,6 +44,7 @@ public class SearchPublicationsActivity extends Activity implements MultiSpinner
         super.onCreate(savedInstanceState);
         expanded = false;
         setContentView(R.layout.activity_search_publications);
+
         MultiSpinner multiSpinner = (MultiSpinner) findViewById(R.id.searchSpinnerNeighborhood);
         List<String> neighbourhoods = Arrays.asList(getResources().getStringArray(R.array.neighborhood_array));
         multiSpinner.setItems(neighbourhoods,"",this);
@@ -96,8 +102,8 @@ public class SearchPublicationsActivity extends Activity implements MultiSpinner
 
         Uri.Builder builder = new Uri.Builder()
                 .scheme("http")
-                .encodedAuthority("192.168.1.100:3000")
-                .appendEncodedPath("publications/search.json");
+                .encodedAuthority(getString(R.string.host))
+                .appendEncodedPath(getString(R.string.search_path));
         if (request.getOperation() != null) {
             builder.appendQueryParameter("operation", request.getOperation());
         }

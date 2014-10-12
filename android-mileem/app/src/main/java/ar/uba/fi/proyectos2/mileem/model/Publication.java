@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by javier on 07/09/14.
@@ -34,6 +36,32 @@ public class Publication implements Parcelable {
     private String normalized_currency;
     private double latitude;
     private double longitude;
+
+    public List<String> getImagesURLs() {
+        return imagesURLs;
+    }
+
+    public void setImagesURLs(List<String> imagesURLs) {
+        this.imagesURLs = imagesURLs;
+    }
+
+    public String getUser_phone_number() {
+        return user_phone_number;
+    }
+
+    public void setUser_phone_number(String user_phone_number) {
+        this.user_phone_number = user_phone_number;
+    }
+
+    public String getUser_email() {
+        return user_email;
+    }
+
+    public void setUser_email(String user_email) {
+        this.user_email = user_email;
+    }
+
+    private List<String> imagesURLs = new LinkedList<String>();
 
     public int getNormalized_price() {
         return normalized_price;
@@ -256,6 +284,7 @@ public class Publication implements Parcelable {
         parcel.writeInt(normalized_price);
         parcel.writeDouble(latitude);
         parcel.writeDouble(longitude);
+        parcel.writeList(imagesURLs);
     }
 
     public static final Parcelable.Creator<Publication> CREATOR = new Creator<Publication>() {
@@ -284,6 +313,7 @@ public class Publication implements Parcelable {
             p.normalized_price = source.readInt();
             p.latitude = source.readDouble();
             p.longitude = source.readDouble();
+            source.readList(p.imagesURLs, List.class.getClassLoader());
             return p;
         }
         public Publication[] newArray(int size) {
