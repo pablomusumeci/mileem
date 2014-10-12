@@ -61,9 +61,10 @@ class Publication < ActiveRecord::Base
 		# Agrego URL absoluta de las imagenes
 		result["images"] = []
 		self.uploads.each do |u|
-			result["images"] << u.upload
+			result["images"] << u.upload.to_s
 		end
 
+		result["video"] = (self.video_uploads.first.nil? ? nil : self.video_uploads.first.video_url)
 		return result
 	end
 
