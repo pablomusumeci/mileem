@@ -57,6 +57,7 @@ class Publication < ActiveRecord::Base
 		
 		result["user_phone_number"] =  (self.user.nil? ? nil : self.user.phone_number)
 		result["user_email"] = (self.user.nil? ? nil : self.user.email)
+		result["plan_priority"] = (self.plan.nil? ? nil : self.plan.priority)
 
 		# Agrego URL absoluta de las imagenes
 		result["images"] = []

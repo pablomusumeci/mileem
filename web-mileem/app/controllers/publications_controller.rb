@@ -51,6 +51,34 @@ class PublicationsController < ApplicationController
   def edit
   end
 
+  # GET /publications/republicate
+  def republicate
+    @publication_data = Publication.find(params[:id]).attributes
+    
+    # Limpio campos de la publicacion vieja
+    ["id", "created_at", "updated_at", "status", "plan_id", "end_date"].each { |k| @publication_data.delete k }
+    @publication = Publication.new(@publication_data)
+    pesos = Currency.where(name: "Pesos").first
+    @publication.effective_date = Date.today.strftime("%d/%m/%Y")
+  end
+
+  # POST /publications/republicate
+  def save_republicate
+    @publication = Publication.new(publication_params)
+    @publication.user_id = current_user.id
+    @publication.end_date = @publication.effective_date + @publication.plan.duration.months
+    @publication.available!
+    respond_to do |format|
+      if @publication.save
+        format.html { redirect_to @publication, notice: 'La publicación fue republicada exitosamente.' }
+        format.json { render :show, status: :created, location: @publication }
+      else
+        format.html { render :new }
+        format.json { render json: @publication.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # POST /publications
   # POST /publications.json
   def create

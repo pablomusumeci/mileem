@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   get 'publications/:id/stop', to: 'publications#stop', as: 'stop_publication'
   get 'publications/:id/finish', to: 'publications#finish', as: 'finish_publication'
   get 'publications/:id/active', to: 'publications#active', as: 'active_publication'
+  get 'publications/:id/republicate', to: 'publications#republicate', as: 'republicate'
+  post 'publications/:id/republicate', to: 'publications#save_republicate'
+
 
   resources :uploads
   resources :publications do
