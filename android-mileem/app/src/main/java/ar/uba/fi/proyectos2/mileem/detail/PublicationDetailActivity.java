@@ -206,8 +206,20 @@ public class PublicationDetailActivity extends Activity {
             String URL = "http://maps.google.com/maps/api/staticmap?center=" +lat + "," + lon + "&zoom=14"
                     + "&markers=color:red%7Ccolor:red%7Clabel:A%7C" + lat +"," + lon + "&size=400x180&sensor=false";
 
-            new DownloadImageTask(iv).execute(URL);
+            final DownloadImageTask downloadImageTask = new DownloadImageTask(iv);
+            downloadImageTask.execute(URL);
+            final GestureDetector gestureDetector = new GestureDetector(this, new SingleTapConfirm());
 
+            iv.setOnTouchListener(new View.OnTouchListener() {
+
+                @Override
+                public boolean onTouch(View arg0, MotionEvent arg1) {
+                    if(downloadImageTask.getMapLoaded()) {
+                        setUpMap(arg0);
+                    }
+                    return false;
+                }
+            });
         }
         else{
             ImageView iv = (ImageView) findViewById(R.id.mapImage);
@@ -220,19 +232,6 @@ public class PublicationDetailActivity extends Activity {
 
         tv = (TextView) findViewById(R.id.neighbourhood_name);
         tv.setText(p.getNeighbourhood_name());
-
-
-        final GestureDetector gestureDetector = new GestureDetector(this, new SingleTapConfirm());
-        ImageView iv = (ImageView) findViewById(R.id.mapImage);
-
-        iv.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                setUpMap(arg0);
-                return false;
-            }
-        });
 
     }
 
