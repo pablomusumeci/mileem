@@ -18,7 +18,7 @@
     <string name="url">Web: </string>
     <string name="numberSpaces">Ambientes: </string>
     <string name="neighbourhood_name">Barrio:</string>
-    <string name="search_venta" >Venta</string>
+    <string name="search_venta">Venta</string>
     <string name="search_alquiler">Alquiler</string>
     <string name="search_ambas">Ambas</string>
     <string name="search_button_do_search">Buscar</string>
@@ -47,7 +47,6 @@
         <item>Oficina</item>
         <item>Local Comercial</item>
     </string-array>
-
     <string-array name="neighborhood_array">
         <item>Agronomía</item>
         <item>Almagro</item>
@@ -98,4 +97,7 @@
         <item>Villa Soldati</item>
         <item>Villa Urquiza</item>
     </string-array>
+
+    <string name="title_activity_media_details">Galería</string>
+
 </resources>

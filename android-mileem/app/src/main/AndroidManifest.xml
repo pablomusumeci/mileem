@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ar.uba.fi.proyectos2.mileem">
+    package="ar.uba.fi.proyectos2.mileem" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
-            android:windowSoftInputMode="stateHidden"
             android:name=".search.SearchPublicationsActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +24,7 @@
         <activity
             android:name=".search.SearchResultsActivity"
             android:label="@string/title_activity_search_results"
-            android:parentActivityName=".search.SearchPublicationsActivity">
+            android:parentActivityName=".search.SearchPublicationsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ar.uba.fi.proyectos2.mileem.search.SearchPublicationsActivity" />
@@ -33,10 +32,18 @@
         <activity
             android:name=".detail.PublicationDetailActivity"
             android:label="@string/title_activity_publication_detail"
-            android:parentActivityName=".search.SearchResultsActivity">
+            android:parentActivityName=".search.SearchResultsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ar.uba.fi.proyectos2.mileem.search.SearchResultsActivity" />
+        </activity>
+        <activity
+            android:name=".detail.MediaDetailsActivity"
+            android:label="@string/title_activity_media_details"
+            android:parentActivityName=".detail.PublicationDetailActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ar.uba.fi.proyectos2.mileem.detail.PublicationDetailActivity" />
         </activity>
     </application>
 

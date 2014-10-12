@@ -155,6 +155,7 @@
                                 android:layout_alignParentBottom="true"
                                 android:layout_toRightOf="@+id/mapImage"
                                 android:layout_gravity="center_horizontal"
+                                android:onClick="viewMediaGallery"
                                 android:visibility="visible" />
                         </LinearLayout>
 
