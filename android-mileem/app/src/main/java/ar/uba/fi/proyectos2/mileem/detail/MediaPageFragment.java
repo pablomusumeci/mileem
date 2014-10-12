@@ -1,19 +1,14 @@
 package ar.uba.fi.proyectos2.mileem.detail;
 
 import android.app.Fragment;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import java.io.InputStream;
-
 import ar.uba.fi.proyectos2.mileem.R;
+import ar.uba.fi.proyectos2.mileem.utils.DownloadImageTask;
 
 
 public class MediaPageFragment extends Fragment {
@@ -57,30 +52,7 @@ public class MediaPageFragment extends Fragment {
         return rootView;
     }
 
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        private ImageView bmImage;
 
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
-    }
 
 
 }
