@@ -57,6 +57,13 @@ class Publication < ActiveRecord::Base
 		
 		result["user_phone_number"] =  (self.user.nil? ? nil : self.user.phone_number)
 		result["user_email"] = (self.user.nil? ? nil : self.user.email)
+
+		# Agrego URL absoluta de las imagenes
+		result["images"] = []
+		self.uploads.each do |u|
+			result["images"] << u.upload
+		end
+
 		return result
 	end
 
@@ -123,6 +130,3 @@ class Publication < ActiveRecord::Base
 	  ]
 	)
 end
-
-
-
