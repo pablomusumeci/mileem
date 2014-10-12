@@ -4,8 +4,6 @@
     <!-- Configuracion de la aplicacion -->
     <string name="host">192.168.1.100:3000</string>
     <string name="search_path">publications/search.json</string>
-
-
     <string name="app_name">MiLEEM</string>
     <string name="SearchResultTitle">Resultados</string>
     <string name="action_settings">Configuración</string>
@@ -106,5 +104,6 @@
     <string name="title_activity_media_details">Galería</string>
     <string name="title_activity_main">Main</string>
     <string name="hello_world">Hello world!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

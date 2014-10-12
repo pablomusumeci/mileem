@@ -85,7 +85,7 @@ public class MediaDetailsActivity extends Activity {
 
         @Override
         public Fragment getItem(int position) {
-            return MediaPageFragment.create(imagesURLs.get(position));
+            return ImagePageFragment.create(imagesURLs.get(position));
         }
 
         @Override

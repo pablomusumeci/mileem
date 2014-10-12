@@ -11,7 +11,7 @@ import ar.uba.fi.proyectos2.mileem.R;
 import ar.uba.fi.proyectos2.mileem.utils.DownloadImageTask;
 
 
-public class MediaPageFragment extends Fragment {
+public class ImagePageFragment extends Fragment {
 
     public static final String URL_KEY = "url";
 
@@ -20,15 +20,15 @@ public class MediaPageFragment extends Fragment {
     /**
      * Factory method for this fragment class. Constructs a new fragment for the given page number.
      */
-    public static MediaPageFragment create(String url) {
-        MediaPageFragment fragment = new MediaPageFragment();
+    public static ImagePageFragment create(String url) {
+        ImagePageFragment fragment = new ImagePageFragment();
         Bundle args = new Bundle();
         args.putString(URL_KEY, url);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public MediaPageFragment() {
+    public ImagePageFragment() {
         // Required empty public constructor
     }
 
@@ -44,7 +44,7 @@ public class MediaPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = (View) inflater
-                .inflate(R.layout.fragment_media_page, container, false);
+                .inflate(R.layout.fragment_image_page, container, false);
         ImageView iv = (ImageView) rootView.findViewById(R.id.imageViewGallery);
 
         new DownloadImageTask(iv).execute(url);
