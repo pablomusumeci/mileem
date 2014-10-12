@@ -2,7 +2,6 @@ package ar.uba.fi.proyectos2.mileem.service;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import ar.uba.fi.proyectos2.mileem.model.Publication;
 import ar.uba.fi.proyectos2.mileem.R;
+import ar.uba.fi.proyectos2.mileem.model.Publication;
 
 /**
  * Created by javier on 07/09/14.

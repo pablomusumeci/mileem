@@ -1,35 +1,22 @@
 package ar.uba.fi.proyectos2.mileem.search;
 
 import android.app.Activity;
-import android.app.ExpandableListActivity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Properties;
 import java.util.logging.Logger;
 
 import ar.uba.fi.proyectos2.mileem.R;
-import ar.uba.fi.proyectos2.mileem.application.Main;
 import ar.uba.fi.proyectos2.mileem.model.MultiSpinner;
 import ar.uba.fi.proyectos2.mileem.model.PublicationSearchRequest;
 

@@ -1,8 +1,8 @@
 package ar.uba.fi.proyectos2.mileem.model;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.ArrayAdapter;

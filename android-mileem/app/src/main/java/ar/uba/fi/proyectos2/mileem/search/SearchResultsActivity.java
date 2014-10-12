@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import ar.uba.fi.proyectos2.mileem.R;
 import ar.uba.fi.proyectos2.mileem.detail.PublicationDetailActivity;
 import ar.uba.fi.proyectos2.mileem.model.Publication;
-import ar.uba.fi.proyectos2.mileem.utils.JSONParser;
 import ar.uba.fi.proyectos2.mileem.service.PublicationsResultsListAdapter;
+import ar.uba.fi.proyectos2.mileem.utils.JSONParser;
 import ar.uba.fi.proyectos2.mileem.utils.PublicationBuilder;
 
 

@@ -2,7 +2,6 @@ package ar.uba.fi.proyectos2.mileem.utils;
 
 import android.content.Context;
 
-import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

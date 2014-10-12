@@ -3,7 +3,6 @@ package ar.uba.fi.proyectos2.mileem.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
