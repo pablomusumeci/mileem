@@ -67,7 +67,9 @@ class PublicationsController < ApplicationController
     @publication = Publication.new(publication_params)
     @publication.user_id = current_user.id
     @publication.end_date = @publication.effective_date + @publication.plan.duration.months
-    @publication.available!
+    #@publication.available!
+    @publication.status = "available"
+
     respond_to do |format|
       if @publication.save
         format.html { redirect_to @publication, notice: 'La publicación fue republicada exitosamente.' }
@@ -85,7 +87,8 @@ class PublicationsController < ApplicationController
     @publication = Publication.new(publication_params)
     @publication.user_id = current_user.id
     @publication.end_date = @publication.effective_date + @publication.plan.duration.months
-    @publication.available!
+    @publication.status = "available"
+    Rails.logger.info @publication.inspect
     respond_to do |format|
       if @publication.save
         format.html { redirect_to @publication, notice: 'La publicación fue creada exitosamente.' }

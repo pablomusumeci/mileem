@@ -10,7 +10,8 @@ Bundler.require(*Rails.groups)
 module WebMileem
   class Application < Rails::Application
     config.autoload_paths << Rails.root.join('validators')
-    
+    config.logger = Logger.new(STDOUT)
+    config.log_level = :info
     # Descomentando esta linea se habilita el output de debug de los assets
     # config.quiet_assets = false
 

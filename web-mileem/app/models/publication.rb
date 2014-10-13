@@ -45,7 +45,14 @@ class Publication < ActiveRecord::Base
 	validates :number_spaces, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	validates :surface, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	
-	
+	validate :user_free_active_publication_limit
+
+	def user_free_active_publication_limit
+		@user = User.find(self.user_id)
+		if (not @user.can_have_new_free_publication?) and (self.plan_id == 3)
+      		errors.add(:limite_de_publicaciones_gratuitas_activas_alcanzado, 'No se pueden tener más de 5 publicaciones gratuitas activas de manera simultánea!')
+    	end
+	end
 	# agrego los nombres de las entidades externas
 	def to_json
 		result = self.attributes
