@@ -35,6 +35,15 @@ public class Publication implements Parcelable {
     private String normalized_currency;
     private double latitude;
     private double longitude;
+    private String video;
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
 
     public List<String> getImagesURLs() {
         return imagesURLs;
@@ -284,6 +293,7 @@ public class Publication implements Parcelable {
         parcel.writeDouble(latitude);
         parcel.writeDouble(longitude);
         parcel.writeList(imagesURLs);
+        parcel.writeString(video);
     }
 
     public static final Parcelable.Creator<Publication> CREATOR = new Creator<Publication>() {
@@ -313,6 +323,7 @@ public class Publication implements Parcelable {
             p.latitude = source.readDouble();
             p.longitude = source.readDouble();
             source.readList(p.imagesURLs, List.class.getClassLoader());
+            p.video = source.readString();
             return p;
         }
         public Publication[] newArray(int size) {

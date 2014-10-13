@@ -41,7 +41,7 @@ public class PublicationDetailActivity extends Activity {
 
     private View generateViewForGallery(String url){
 
-        ImageView imageView = new ImageView(getApplicationContext());
+        ImageView imageView = new ImageView(this);
         imageView.setLayoutParams(new LinearLayout.LayoutParams(400, 400));
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
@@ -61,10 +61,17 @@ public class PublicationDetailActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(false);
 
         LinearLayout imageGallery = (LinearLayout) findViewById(R.id.linearLayoutImages);
-        //HorizontalScrollView horizontalScrollView = (HorizontalScrollView) findViewById(R.id.horizontalScrollImages);
         int position = 0;
         for (String imageUrl : p.getImagesURLs()){
             imageGallery.addView(generateViewForGallery(imageUrl));
+        }
+
+        if (p.getVideo() != null && p.getVideo().length()>0){
+            ImageView imageView = new ImageView(this);
+            imageView.setLayoutParams(new LinearLayout.LayoutParams(400, 400));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setImageResource(R.drawable.video);
+            imageGallery.addView(imageView);
         }
 
         TextView tv;
@@ -301,6 +308,7 @@ public class PublicationDetailActivity extends Activity {
         Intent intent = new Intent(this, MediaDetailsActivity.class);
 
         intent.putStringArrayListExtra("imagesURLs", new ArrayList<String>(p.getImagesURLs()));
+        intent.putExtra("videoURL", p.getVideo());
         startActivity(intent);
 
     }

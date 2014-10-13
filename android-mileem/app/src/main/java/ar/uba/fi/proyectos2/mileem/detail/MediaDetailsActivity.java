@@ -18,20 +18,12 @@ import java.util.List;
 import ar.uba.fi.proyectos2.mileem.R;
 
 public class MediaDetailsActivity extends Activity {
-    /**
-     * The number of pages (wizard steps) to show in this demo.
-     */
-    private List<String> imagesURLs = new LinkedList<String>();
 
-    /**
-     * The pager widget, which handles animation and allows swiping horizontally to access previous
-     * and next wizard steps.
-     */
+    private List<String> imagesURLs = new LinkedList<String>();
+    private String videoURL;
+
     private ViewPager mPager;
 
-    /**
-     * The pager adapter, which provides the pages to the view pager widget.
-     */
     private PagerAdapter mPagerAdapter;
 
     @Override
@@ -41,22 +33,12 @@ public class MediaDetailsActivity extends Activity {
 
         Intent intent = getIntent();
         imagesURLs = intent.getExtras().getStringArrayList("imagesURLs");
+        videoURL = intent.getExtras().getString("videoURL");
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.mediaPager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager());
         mPager.setAdapter(mPagerAdapter);
-        mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                // When changing pages, reset the action bar actions since they are dependent
-                // on which page is currently active. An alternative approach is to have each
-                // fragment expose actions itself (rather than the activity exposing actions),
-                // but for simplicity, the activity provides the actions in this sample.
-                invalidateOptionsMenu();
-            }
-        });
-
     }
 
     @Override
@@ -85,12 +67,18 @@ public class MediaDetailsActivity extends Activity {
 
         @Override
         public Fragment getItem(int position) {
-            return ImagePageFragment.create(imagesURLs.get(position));
+            if (position == imagesURLs.size())
+                return VideoPageFragment.create(videoURL);
+            else
+                return ImagePageFragment.create(imagesURLs.get(position));
         }
 
         @Override
         public int getCount() {
-            return imagesURLs.size();
+            if (videoURL==null)
+                return imagesURLs.size();
+            else
+                return imagesURLs.size() + 1;
         }
     }
 
