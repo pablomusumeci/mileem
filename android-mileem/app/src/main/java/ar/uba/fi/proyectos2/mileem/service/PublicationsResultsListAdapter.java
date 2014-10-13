@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import ar.uba.fi.proyectos2.mileem.R;
 import ar.uba.fi.proyectos2.mileem.model.Publication;
+import ar.uba.fi.proyectos2.mileem.utils.DownloadImageTask;
 
 /**
  * Created by javier on 07/09/14.
@@ -76,6 +78,12 @@ public class PublicationsResultsListAdapter extends ArrayAdapter<Publication> {
                 
                 tt = (TextView) view.findViewById(R.id.neighbourhood);
                 tt.setText(p.getNeighbourhood_name());
+
+                // Carga de la imagen
+                if (! p.getImagesURLs().isEmpty()) {
+                    ImageView iv = (ImageView) view.findViewById(R.id.image);
+                    new DownloadImageTask(iv).execute(p.getImagesURLs().get(0));
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

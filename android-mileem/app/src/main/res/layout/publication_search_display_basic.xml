@@ -27,7 +27,10 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:minWidth="70dp"
-                android:src="@drawable/house" />
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/no_foto"
+                android:layout_marginRight="5dp" />
 
             <TableLayout
                 android:layout_width="fill_parent"
