@@ -103,7 +103,8 @@ public class PublicationBuilder {
                 // Esto no es una negrada, diria Rene Magritte
                 p.getImagesURLs().add("http://" + context.getString(R.string.host) + url);
             }
-            p.setVideo(obj.getString("video"));
+            if (obj.getString("video") != null && obj.getString("video").length() > 0 && "null".compareTo(obj.getString("video")) != 0)
+                p.setVideo("http://" + context.getString(R.string.host) + "/" + obj.getString("video"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

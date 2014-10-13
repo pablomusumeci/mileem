@@ -1,6 +1,5 @@
 package ar.uba.fi.proyectos2.mileem.detail;
 
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;

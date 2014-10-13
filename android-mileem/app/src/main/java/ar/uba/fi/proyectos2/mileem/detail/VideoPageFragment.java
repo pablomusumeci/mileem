@@ -15,7 +15,7 @@ import ar.uba.fi.proyectos2.mileem.R;
 public class VideoPageFragment extends Fragment {
 
     private static final String URL_KEY = "URL";
-
+    private VideoView videoView;
     private String url;
 
     public static VideoPageFragment create(String url) {
@@ -42,10 +42,8 @@ public class VideoPageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = (View) inflater.inflate(R.layout.fragment_video_page, container, false);
-        VideoView videoView = (VideoView) rootView.findViewById(R.id.videoView);
+        videoView = (VideoView) rootView.findViewById(R.id.videoView);
         videoView.setVideoPath(url);
-        videoView.start();
-        videoView.requestFocus();
         videoView.setMediaController(new MediaController(getActivity()));
         return rootView;
     }
@@ -53,7 +51,6 @@ public class VideoPageFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
     }
 
     @Override
