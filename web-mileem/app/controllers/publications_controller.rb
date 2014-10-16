@@ -54,9 +54,11 @@ class PublicationsController < ApplicationController
   # GET /publications/republicate
   def republicate
     @publication_data = Publication.find(params[:id]).attributes
-    
+    @old_publication_id = params[:id]
+    # Paso el id de la publicacion a republicar
+    @old_publication_plan_id = @publication_data["plan_id"]
     # Limpio campos de la publicacion vieja
-    ["id", "created_at", "updated_at", "status", "plan_id", "end_date"].each { |k| @publication_data.delete k }
+    ["id", "created_at", "updated_at", "status", "end_date"].each { |k| @publication_data.delete k }
     @publication = Publication.new(@publication_data)
     pesos = Currency.where(name: "Pesos").first
     @publication.effective_date = Date.today.strftime("%d/%m/%Y")
@@ -64,14 +66,34 @@ class PublicationsController < ApplicationController
 
   # POST /publications/republicate
   def save_republicate
-    @publication = Publication.new(publication_params)
+    @publication = Publication.new(publication_params)    
     @publication.user_id = current_user.id
     @publication.end_date = @publication.effective_date + @publication.plan.duration.months
     #@publication.available!
     @publication.status = "available"
-
     respond_to do |format|
+
       if @publication.save
+        cantidad_nueva = 1
+        Upload.where(publication_id: params[:old_publication_id]).each do |upload_old_publication|
+           # Paso la cantidad que dice el nuevo plan
+           break if cantidad_nueva > @publication.plan.number_images_allowed 
+           # Le asigno el ID de la publicacion nueva
+           upload_old_publication.publication_id = @publication.id
+           upload_old_publication.save
+           cantidad_nueva += 1
+        end
+
+        # Si el nuevo plan permite videos
+        if @publication.plan.number_videos_allowed > 0
+          VideoUpload.where(publication_id: params[:old_publication_id]).each do |video_old_publication|
+            video_old_publication.publication_id = @publication.id
+            video_old_publication.save
+          end
+        end
+
+        # TODO cambiarle el estado a la publicacion que fue republicada!
+        
         format.html { redirect_to @publication, notice: 'La publicación fue republicada exitosamente.' }
         format.json { render :show, status: :created, location: @publication }
       else

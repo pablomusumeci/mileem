@@ -21,6 +21,12 @@
 #  currency_id      :integer
 #  neighbourhood_id :integer
 #  property_type_id :integer
+#  user_id          :integer
+#  plan_id          :integer
+#  lat              :decimal(10, 6)
+#  lng              :decimal(10, 6)
+#  status           :integer
+#  end_date         :date
 #
 
 class Publication < ActiveRecord::Base
