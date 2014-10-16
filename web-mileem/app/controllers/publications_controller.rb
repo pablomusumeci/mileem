@@ -74,14 +74,12 @@ class PublicationsController < ApplicationController
     respond_to do |format|
 
       if @publication.save
-        cantidad_nueva = 1
-        Upload.where(publication_id: params[:old_publication_id]).each do |upload_old_publication|
-           # Paso la cantidad que dice el nuevo plan
-           break if cantidad_nueva > @publication.plan.number_images_allowed 
+        # Como mucho, traigo el limite del nuevo plan... Extasis!
+        Upload.where(publication_id: params[:old_publication_id]).
+        limit(@publication.plan.number_images_allowed ).each do |upload_old_publication|
            # Le asigno el ID de la publicacion nueva
            upload_old_publication.publication_id = @publication.id
            upload_old_publication.save
-           cantidad_nueva += 1
         end
 
         # Si el nuevo plan permite videos
@@ -93,7 +91,7 @@ class PublicationsController < ApplicationController
         end
 
         # TODO cambiarle el estado a la publicacion que fue republicada!
-        
+
         format.html { redirect_to @publication, notice: 'La publicación fue republicada exitosamente.' }
         format.json { render :show, status: :created, location: @publication }
       else
