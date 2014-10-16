@@ -38,7 +38,7 @@ class Publication < ActiveRecord::Base
 	has_many    :uploads
 	has_many    :video_uploads
 
-	enum status: [ :finished, :stopped, :available]
+	enum status: [ :finished, :stopped, :available, :republished]
 
 	validates :neighbourhood, presence: true
 	validates :plan, presence: true
@@ -51,7 +51,7 @@ class Publication < ActiveRecord::Base
 	validates :number_spaces, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	validates :surface, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	
-	validate :user_free_active_publication_limit
+	validate :user_free_active_publication_limit, :on => :create
 
 	def user_free_active_publication_limit
 		@user = User.find(self.user_id)
@@ -101,7 +101,7 @@ class Publication < ActiveRecord::Base
 	end
 	
 	def isAvailable
-		return (self.isActive && self.available?)
+		return (self.isActive && self.available? )
 	end
 		
 	self.per_page = 10

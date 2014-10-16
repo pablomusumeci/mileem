@@ -10,9 +10,10 @@ class PublicationsController < ApplicationController
   # GET /publications.json
   def index
     @filterrific = Filterrific.new(Publication, params[:filterrific])
-    #@publications = policy_scope(Publication)
-    @publications = Publication.filterrific_find(@filterrific).where(:user_id => current_user.id).paginate(page: params[:page])
-    # @publications = current_user.publications
+    number_status = Publication.statuses[:republished]
+    @publications = Publication.filterrific_find(@filterrific).
+    where("user_id = ? AND status <> ?", current_user.id, number_status).paginate(page: params[:page])
+
     respond_to do |format|
       format.html { render :index}
       format.js  
@@ -69,11 +70,9 @@ class PublicationsController < ApplicationController
     @publication = Publication.new(publication_params)    
     @publication.user_id = current_user.id
     @publication.end_date = @publication.effective_date + @publication.plan.duration.months
-    #@publication.available!
-    @publication.status = "available"
     respond_to do |format|
-
       if @publication.save
+        @publication.available!
         # Como mucho, traigo el limite del nuevo plan... Extasis!
         Upload.where(publication_id: params[:old_publication_id]).
         limit(@publication.plan.number_images_allowed ).each do |upload_old_publication|
@@ -89,8 +88,8 @@ class PublicationsController < ApplicationController
             video_old_publication.save
           end
         end
-
-        # TODO cambiarle el estado a la publicacion que fue republicada!
+        old_publication = Publication.find(params[:old_publication_id])
+        old_publication.republished!  
 
         format.html { redirect_to @publication, notice: 'La publicación fue republicada exitosamente.' }
         format.json { render :show, status: :created, location: @publication }
@@ -107,10 +106,9 @@ class PublicationsController < ApplicationController
     @publication = Publication.new(publication_params)
     @publication.user_id = current_user.id
     @publication.end_date = @publication.effective_date + @publication.plan.duration.months
-    @publication.status = "available"
-    Rails.logger.info @publication.inspect
     respond_to do |format|
       if @publication.save
+        @publication.available!
         format.html { redirect_to @publication, notice: 'La publicación fue creada exitosamente.' }
         format.json { render :show, status: :created, location: @publication }
       else
