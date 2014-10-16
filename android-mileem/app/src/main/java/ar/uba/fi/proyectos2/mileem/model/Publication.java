@@ -36,6 +36,15 @@ public class Publication implements Parcelable {
     private double latitude;
     private double longitude;
     private String video;
+    private int plan_priority;
+
+    public int getPlan_priority() {
+        return plan_priority;
+    }
+
+    public void setPlan_priority(int plan_priority) {
+        this.plan_priority = plan_priority;
+    }
 
     public String getVideo() {
         return video;
@@ -294,6 +303,7 @@ public class Publication implements Parcelable {
         parcel.writeDouble(longitude);
         parcel.writeList(imagesURLs);
         parcel.writeString(video);
+        parcel.writeInt(plan_priority);
     }
 
     public static final Parcelable.Creator<Publication> CREATOR = new Creator<Publication>() {
@@ -324,6 +334,7 @@ public class Publication implements Parcelable {
             p.longitude = source.readDouble();
             source.readList(p.imagesURLs, List.class.getClassLoader());
             p.video = source.readString();
+            p.plan_priority = source.readInt();
             return p;
         }
         public Publication[] newArray(int size) {

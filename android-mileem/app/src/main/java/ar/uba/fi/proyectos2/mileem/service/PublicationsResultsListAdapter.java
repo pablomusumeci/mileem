@@ -6,73 +6,89 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import ar.uba.fi.proyectos2.mileem.R;
 import ar.uba.fi.proyectos2.mileem.model.Publication;
+import ar.uba.fi.proyectos2.mileem.utils.DownloadImageTask;
 
 /**
  * Created by javier on 07/09/14.
  */
 public class PublicationsResultsListAdapter extends ArrayAdapter<Publication> {
-    private List<Publication> publications;
     private final Object mLock = new Object();
+    private List<Publication> publications;
+
     public PublicationsResultsListAdapter(Context context, int resource, List<Publication> publications) {
         super(context, resource, publications);
-        synchronized(mLock) {
+        synchronized (mLock) {
             this.publications = publications;
         }
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = convertView;
+        View view = convertView;
         TextView tt = null;
 
-        if (v == null) {
-            LayoutInflater vi = LayoutInflater.from(getContext());
-            v = vi.inflate(R.layout.publication_search_display, null);
-        }
-
-        synchronized(mLock) {
+        synchronized (mLock) {
             Publication p = publications.get(position);
-
+            if (p.getPlan_priority() == 3) {
+                if (view == null) {
+                    LayoutInflater layoutInflater = LayoutInflater.from(getContext());
+                    view = layoutInflater.inflate(R.layout.publication_search_display_free, null);
+                }
+            } else if (p.getPlan_priority() == 2) {
+                if (view == null) {
+                    LayoutInflater layoutInflater = LayoutInflater.from(getContext());
+                    view = layoutInflater.inflate(R.layout.publication_search_display_basic, null);
+                }
+            } else {
+                if (view == null) {
+                    LayoutInflater layoutInflater = LayoutInflater.from(getContext());
+                    view = layoutInflater.inflate(R.layout.publication_search_display_premium, null);
+                }
+            }
             try {
-                tt = (TextView) v.findViewById(R.id.PublicationStreetID);
+                tt = (TextView) view.findViewById(R.id.PublicationStreetID);
                 tt.setText(p.getAddress());
-                tt = (TextView) v.findViewById(R.id.PublicationOperationId);
+                tt = (TextView) view.findViewById(R.id.PublicationOperationId);
                 tt.setText(p.getOperation());
-                tt = (TextView) v.findViewById(R.id.PublicationSpacesID);
+                tt = (TextView) view.findViewById(R.id.PublicationSpacesID);
                 if (p.getNumber_spaces() == -1) {
                     tt.setText("");
-                    tt = (TextView) v.findViewById(R.id.detail_message_ambients);
+                    tt = (TextView) view.findViewById(R.id.detail_message_ambients);
                     tt.setText("");
                 } else {
                     tt.setText(Integer.toString(p.getNumber_spaces()));
                 }
-                tt = (TextView) v.findViewById(R.id.PublicationSurfaceId);
+                tt = (TextView) view.findViewById(R.id.PublicationSurfaceId);
                 if (p.getSurface() == -1) {
                     tt.setText("");
-                    tt = (TextView) v.findViewById(R.id.detail_message_surface);
+                    tt = (TextView) view.findViewById(R.id.detail_message_surface);
                     tt.setText("");
                 } else {
                     tt.setText(p.getSurface() + "m2");
                 }
-                tt = (TextView) v.findViewById(R.id.PublicationPriceID);
+                tt = (TextView) view.findViewById(R.id.PublicationPriceID);
                 tt.setText(Integer.toString(p.getNormalized_price()) + " " + p.getNormalized_currency());
-                if (position % 2 != 1)
-                    v.setBackgroundColor(Color.parseColor("#efedf5"));
-                else
-                    v.setBackgroundColor(Color.parseColor("#dadaeb"));
-                tt = (TextView) v.findViewById(R.id.neighbourhood);
+                
+                tt = (TextView) view.findViewById(R.id.neighbourhood);
                 tt.setText(p.getNeighbourhood_name());
+
+                // Carga de la imagen
+                if (! p.getImagesURLs().isEmpty()) {
+                    ImageView iv = (ImageView) view.findViewById(R.id.image);
+                    new DownloadImageTask(iv).execute(p.getImagesURLs().get(0));
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        return v;
+        return view;
     }
 }

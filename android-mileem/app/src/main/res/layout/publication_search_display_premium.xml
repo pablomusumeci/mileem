@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="ar.uba.fi.proyectos2.mileem.detail.PublicationDetailActivity"
+    android:background="@drawable/premium_background"
+    android:baselineAligned="false">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="70dp"
+            android:baselineAligned="false"
+            android:clickable="false"
+            android:animateLayoutChanges="false">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:minWidth="70dp"
+                android:adjustViewBounds="true"
+                android:layout_marginRight="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/no_foto" />
+
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="left">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="left">
+
+                        <TextView
+                            android:id="@+id/PublicationStreetID"
+                            android:name="street"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false"
+                            android:autoText="false"
+                            android:textStyle="bold"
+                            android:text="calle de la publicacion"
+                            android:gravity="left"
+                            android:layout_gravity="left"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/numberSpaces"
+                            android:id="@+id/detail_message_ambients"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/PublicationSpacesID"
+                            android:name="price"
+                            android:layout_width="37dp"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:layout_weight="3"
+                            android:text="Habs." />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/surface"
+                            android:id="@+id/detail_message_surface"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/PublicationSurfaceId"
+                            android:layout_weight="4"
+                            android:textStyle="bold"
+                            android:text="Sup. M2" />
+
+                    </LinearLayout>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_span="251">
+
+                        <TextView
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/PublicationOperationId"
+                            android:textStyle="bold"
+                            android:text="Operacion" />
+
+                    </LinearLayout>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/neighbourhood_name"
+                            android:id="@+id/textView"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="neighbourhood"
+                            android:id="@+id/neighbourhood"/>
+                    </LinearLayout>
+                </TableRow>
+
+            </TableLayout>
+
+        </TableRow>
+    </RelativeLayout>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:id="@+id/PublicationPriceID"
+            android:name="price"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Precio $"
+            android:textColor="@android:color/background_dark"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:fontFamily="@string/price"
+            android:textSize="24dp"
+            android:layout_column="1"
+            android:layout_weight="1" />
+    </TableRow>
+
+</TableLayout>
