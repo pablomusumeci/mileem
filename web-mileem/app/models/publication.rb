@@ -56,7 +56,7 @@ class Publication < ActiveRecord::Base
 	def user_free_active_publication_limit
 		@user = User.find(self.user_id)
 		if (not @user.can_have_new_free_publication?) and (self.plan_id == 3)
-      		errors.add(:limite_de_publicaciones_gratuitas_activas_alcanzado, 'No se pueden tener más de 5 publicaciones gratuitas activas de manera simultánea!')
+      		errors.add(:limite_de_publicaciones_gratuitas_activas_alcanzado, '(5)')
     	end
 	end
 	# agrego los nombres de las entidades externas

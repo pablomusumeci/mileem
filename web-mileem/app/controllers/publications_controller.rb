@@ -55,9 +55,6 @@ class PublicationsController < ApplicationController
   # GET /publications/republicate
   def republicate
     @publication_data = Publication.find(params[:id]).attributes
-    @old_publication_id = params[:id]
-    # Paso el id de la publicacion a republicar
-    @old_publication_plan_id = @publication_data["plan_id"]
     # Limpio campos de la publicacion vieja
     ["id", "created_at", "updated_at", "status", "end_date"].each { |k| @publication_data.delete k }
     @publication = Publication.new(@publication_data)
@@ -100,7 +97,7 @@ class PublicationsController < ApplicationController
           format.json { render :show, status: :created, location: @publication }
         end
       else
-        format.html { render :new }
+        format.html { render :action=>'republicate', :id=> params[:old_publication_id] }
         format.json { render json: @publication.errors, status: :unprocessable_entity }
       end
     end
