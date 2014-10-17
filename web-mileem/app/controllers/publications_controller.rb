@@ -90,9 +90,15 @@ class PublicationsController < ApplicationController
         end
         old_publication = Publication.find(params[:old_publication_id])
         old_publication.republished!  
-
-        format.html { redirect_to @publication, notice: 'La publicación fue republicada exitosamente.' }
-        format.json { render :show, status: :created, location: @publication }
+        if (old_publication.plan.priority < @publication.plan.priority)
+          flash["warning"] = 'Al obtener un plan inferior al actual se seleccionaron las primeras 
+          imágenes y video que cumplen con la cantidad permitida por el nuevo plan.'
+          format.html { redirect_to @publication }
+          format.json { render :show, status: :created, location: @publication }
+        else    
+          format.html { redirect_to @publication, notice: 'La publicación fue republicada exitosamente.' }
+          format.json { render :show, status: :created, location: @publication }
+        end
       else
         format.html { render :new }
         format.json { render json: @publication.errors, status: :unprocessable_entity }

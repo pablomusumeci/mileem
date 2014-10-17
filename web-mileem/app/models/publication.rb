@@ -103,7 +103,7 @@ class Publication < ActiveRecord::Base
 	def isAvailable
 		return (self.isActive && self.available? )
 	end
-		
+	
 	self.per_page = 10
 
 	scope :date_at_gte, lambda { |reference_time|

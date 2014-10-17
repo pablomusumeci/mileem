@@ -63,9 +63,11 @@
 	          <% end %>
           <% end %>     
 
+          <% if(policy(publication).republish?) %>  
             <%= button_to republicate_path(publication),class: "btn btn-success btn-xs", method: :get do %>
               <span class="glyphicon glyphicon-repeat" title="Republicar"></span>
             <% end %>
+          <% end %>  
         </td>
       </tr>
     <% end %>
