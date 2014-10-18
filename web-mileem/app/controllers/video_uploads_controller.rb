@@ -16,20 +16,17 @@ class VideoUploadsController < ApplicationController
       end
     end
   end
-
-
- # DELETE /uploads/1
-  # DELETE /uploads/1.json
-  #def destroy
-  #  @upload = Upload.find(params[:id])
-  #  publication_id = @upload.publication_id
-  #  publication_uploads_url = "/publications/#{publication_id}/uploads"
-  #  @upload.destroy
-  #  respond_to do |format|
-  #    format.html { redirect_to publication_uploads_url }
-  #    format.json { head :no_content }
-  #  end
-  #end
+  
+  def destroy
+    @videoUpload = VideoUpload.find(params[:id])
+    publication_id = @videoUpload.publication_id
+    publication_show_url = "/publications/#{publication_id}"
+    @videoUpload.destroy
+    respond_to do |format|
+      format.html { redirect_to publication_show_url }
+      format.json { head :no_content }
+    end
+  end
 
   def video_upload_params
     params.require(:video_upload).permit(:publication_id, :video)

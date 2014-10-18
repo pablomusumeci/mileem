@@ -12,12 +12,17 @@
   text-align: center;
   cursor: pointer;
   color: #dd4814;
-background-color: #ffffff;
-border: 1px solid #dddddd;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
 }
 
 .mediaTypeLink:hover{
   color: #97310e;
-background-color: #eeeeee;
-border: 1px solid #dddddd;
+  background-color: #eeeeee;
+  border: 1px solid #dddddd;
+}
+
+.videoButton{
+  float: left;
+  margin-right: 3px;
 }
