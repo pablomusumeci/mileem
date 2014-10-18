@@ -190,7 +190,7 @@ class PublicationsController < ApplicationController
     @publications = Publication.all.to_a.map!{|p| p.to_json}
     Rails.logger.info "Publicaciones total: #{@publications.size}"
     @publications.select!{ |p| Publication.find(p["id"]).isAvailable }
-    Rails.ger.info "Publicaciones activas: #{@publications.size}"
+    Rails.logger.info "Publicaciones activas: #{@publications.size}"
 
     if not params[:neighbourhood_name].nil? and (params[:neighbourhood_name].size > 0)
       barrios = params[:neighbourhood_name].split(",")
@@ -270,7 +270,17 @@ class PublicationsController < ApplicationController
       @publications.select!{ |p| p["number_spaces"] == params[:number_spaces].to_i }
     end
 
-    @publications.sort_by!{ |p|  Plan.find(p["plan_id"]).priority }
+    # ordeno por prioridad por default
+    @publications.sort_by!{ |p|  p["plan_priority"] }
+
+    # ordeno por precio y prioridad
+    if not params[:sort_by].nil?
+      order = 1 
+      order = order * -1 if (not params[:order].nil?) and (params[:order] == "des")
+      if params[:sort_by] == "price"
+        @publications.sort! { |a, b| [a["normalized_price"] * order, a['plan_priority']] <=> [b["normalized_price"] * order, b['plan_priority']] }
+      end 
+    end
 
     puts "Resultado busqueda: #{@publications.size}"
     respond_to do |format|
