@@ -64,7 +64,7 @@ User.create!({:email => "usuario1@prueba.com", :password => "111111", :password_
 User.create!({:email => "usuario2@prueba.com", :password => "222222", :password_confirmation => "222222", :phone_number =>  "01161860001" })
 
 Plan.create(name: "Premium", price: 1000, duration: 12, priority: 1, number_images_allowed: 20, number_videos_allowed: 1)
-Plan.create(name: "Básico", price: 300, duration: 4, priority: 2, number_images_allowed: 5, number_videos_allowed: 0)
+Plan.create(name: "Básico", price: 300, duration: 4, priority: 2, number_images_allowed: 5, number_videos_allowed: 1)
 Plan.create(name: "Gratis", price: 0, duration: 1, priority: 3, number_images_allowed: 1, number_videos_allowed: 0)
 
 Publication.create(user_id: 1, effective_date: (DateTime.now + 1.year).strftime("%d/%m/%Y") , end_date: (DateTime.now + 1.year + 1.year).strftime("%d/%m/%Y"),operation: "Alquiler", address: "Adolfo Alsina, Buenos Aires, Argentina", floor: 1, apartment: "1", number_spaces: 2, surface: 50, price: 3000.0, expenses: 200.0, antiquity: 10, description: "", additional_info: "", created_at: "2014-09-14 15:21:35", updated_at: "2014-09-14 17:33:20", currency_id: 2, neighbourhood_id: 5, property_type_id: 3, plan_id: 1, status: 2)
