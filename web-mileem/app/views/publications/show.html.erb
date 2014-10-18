@@ -40,7 +40,7 @@
 	    	<% if (@publication.video_uploads.size() > 0) %>
 				<%= video_tag @publication.video_uploads.first().video_url.to_s, :controls => true, :width=>"100%", :height=>"100%" %>
 			<% else %>
-				NO HAY VIDEO CARGADO
+				<%= image_tag "no_foto.jpg" , :width=>"100%", :height=>"100%" %>
 			<% end %>
 	    </div>
     </div>
@@ -88,14 +88,19 @@
 
 <div class="row">
   <div class="col-md-8 col-md-offset-4">
-      <% if (@publication.video_uploads.size() == 0) %>
+      <% if policy(@publication).upload_video? %>
       	<%= form_for VideoUpload.new, :url => "/video_uploads/create/#{@publication.id}", :html => { :multipart => true, :id => "videoupload"  } do |f| %>
       	  <span class="btn btn-md btn-success fileinput-button" id="video_upload_file_container">
       		<span>Seleccionar Video</span>
-                <%= f.file_field :video, :id => "video_upload_file" %>
-              </span>
+              <%= f.file_field :video, :id => "video_upload_file" %>
             </span>
-      	  <%= f.submit 'Guardar Video', :id => "video_upload_button", :class => 'btn btn-md btn-primary', :style => "display:none;" %>
+          </span>
+      	  <%= f.submit 'Guardar Video', :id => "video_upload_button", :class => 'btn btn-md btn-primary videoButton', :style => "display:none;" %>
+      	<% end %>
+      <% end %>
+	  <% if policy(@publication).delete_video? %>
+      	<%= form_for VideoUpload.new, :url => "/video_uploads/destroy/#{@publication.video_uploads.first.id}", :html => { :multipart => true, :id => "videoupload"  } do |f| %>
+      	  <%= f.submit 'Eliminar Video', :id => "video_upload_button", :class => 'btn btn-md btn-danger videoButton', :data => { :confirm => '¿Esta usted seguro que quiere eliminar el video de la publicación?' } %>
       	<% end %>
       <% end %>
 
@@ -128,12 +133,22 @@
   	$('#videoContainer').show();
   }
  
+  function validVideoFormat(filename){
+  	// a bit ugly validation
+  	fileExtension = $("#video_upload_file").val().split('.').pop();
+  	return (fileExtension == "mp4" || fileExtension == "mkv");
+  }
+ 
   function onfileSelected(){
   	filename = $("#video_upload_file").val().split('\\').pop();
-  	$("#video_upload_file").hide();
-  	$("#video_upload_file_container").hide();
-  	$("#video_upload_button").show();
-  	$("#video_upload_button").attr("title", filename);
+  	if (validVideoFormat(filename)){
+	  	$("#video_upload_file").hide();
+	  	$("#video_upload_file_container").hide();
+	  	$("#video_upload_button").show();
+	  	$("#video_upload_button").attr("title", filename);
+  	}else{
+  		alert('Formato de video invalido. Seleccione un video con formato mp4 o mkv');
+  	}
   }
 
 </script>
