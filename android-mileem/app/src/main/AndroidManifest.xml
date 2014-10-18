@@ -15,6 +15,10 @@
         <activity
             android:name=".search.SearchPublicationsActivity"
             android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".search.SearchResultsActivity"
@@ -39,14 +43,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ar.uba.fi.proyectos2.mileem.detail.PublicationDetailActivity" />
-        </activity>
-        <activity
-            android:name=".application.Main"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
