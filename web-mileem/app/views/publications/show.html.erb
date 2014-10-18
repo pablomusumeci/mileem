@@ -133,12 +133,22 @@
   	$('#videoContainer').show();
   }
  
+  function validVideoFormat(filename){
+  	// a bit ugly validation
+  	fileExtension = $("#video_upload_file").val().split('.').pop();
+  	return (fileExtension == "mp4" || fileExtension == "mkv");
+  }
+ 
   function onfileSelected(){
   	filename = $("#video_upload_file").val().split('\\').pop();
-  	$("#video_upload_file").hide();
-  	$("#video_upload_file_container").hide();
-  	$("#video_upload_button").show();
-  	$("#video_upload_button").attr("title", filename);
+  	if (validVideoFormat(filename)){
+	  	$("#video_upload_file").hide();
+	  	$("#video_upload_file_container").hide();
+	  	$("#video_upload_button").show();
+	  	$("#video_upload_button").attr("title", filename);
+  	}else{
+  		alert('Formato de video invalido. Seleccione un video con formato mp4 o mkv');
+  	}
   }
 
 </script>
