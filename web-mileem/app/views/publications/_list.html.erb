@@ -25,7 +25,7 @@
         <td><%= publication.property_type.name  if publication.property_type %></td>
         <td><%= publication.plan.name  if publication.plan %></td>
         <td><%= publication.operation %></td>
-        <td><%= publication.currency.abreviatura %> <%= publication.price %></td>
+        <td class="oneLineColumn"><%= publication.currency.abreviatura %> <%= publication.price %></td>
         <td class="actionsColumn">
           <% if(publication.isActive) %>
             
