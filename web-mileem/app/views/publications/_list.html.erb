@@ -12,7 +12,7 @@
       <th>Plan</th>
       <th>Tipo de Operacion</th>
       <th>Precio</th>
-      <th>Acciones</th>
+      <th class="actionsColumn">Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -26,7 +26,7 @@
         <td><%= publication.plan.name  if publication.plan %></td>
         <td><%= publication.operation %></td>
         <td><%= publication.currency.abreviatura %> <%= publication.price %></td>
-        <td>
+        <td class="actionsColumn">
           <% if(publication.isActive) %>
             
             <% if(publication.available?) %>
