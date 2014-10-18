@@ -1,8 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="ar.uba.fi.proyectos2.mileem.search.SearchResultsActivity" >
-    <item android:id="@+id/action_search"
+    <item android:id="@+id/action_search_priority"
         android:icon="@drawable/ic_action_sort_by_size"
-        android:title="Ordenar"
+        android:title="Ordenar por importancia"
+        android:showAsAction="ifRoom" />
+    <item android:id="@+id/action_search_price"
+        android:icon="@drawable/ic_action_sort_by_size"
+        android:title="Ordenar por precio"
         android:showAsAction="ifRoom" />
 </menu>

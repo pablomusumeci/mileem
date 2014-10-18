@@ -52,7 +52,7 @@ public class SearchResultsActivity extends ListActivity {
     public void onStart() {
         super.onStart();
         url = getIntent().getStringExtra("SEARCH.URL");
-        new GetHttpData().execute();
+        new GetHttpData().execute("");
         ListView lv = getListView();
         OnPublicationClickListener listener = new OnPublicationClickListener(this);
         lv.setOnItemClickListener(listener);
@@ -64,18 +64,22 @@ public class SearchResultsActivity extends ListActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_search_priority) {
+            new GetHttpData().execute("");
+            return true;
+        } else if (id == R.id.action_search_price) {
+            new GetHttpData().execute("?sort_by=price&order=asc");
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private class GetHttpData extends AsyncTask<Void, Void, Void> {
+    private class GetHttpData extends AsyncTask<String, Void, Void> {
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected Void doInBackground(String... params) {
             list.clear();
-            JSONArray jArray = JSONParser.getJSONAsArray(url);
+            JSONArray jArray = JSONParser.getJSONAsArray(url+params[0]);
             if (jArray == null) {
                 return null;
             }
