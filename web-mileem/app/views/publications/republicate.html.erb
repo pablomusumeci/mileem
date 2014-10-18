@@ -7,7 +7,12 @@
   <% if @publication.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@publication.errors.count, "error") %> prohibited this publication from being saved:</h3>
+        <h3 class="panel-title">
+        <% if @publication.errors.count > 1 %> 
+        <%= "#{@publication.errors.count} errores" %> impidieron que la publicación sea guardada:</h3>
+        <% else %>
+        <%= "Un error" %> impidio que la publicación sea guardada:</h3>
+        <% end %>
       </div>
       <div class="panel-body">
         <ul>
@@ -18,6 +23,7 @@
       </div>
     </div>
   <% end %>
+
 
 <input type="hidden" class="form-control" id="old_publication_id" value=<%= params[:id] %> name="old_publication_id">
 <input type="hidden" class="form-control" id="publication_lat" name="publication[lat]">
