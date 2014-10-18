@@ -115,4 +115,5 @@ public class SearchResultsActivity extends ListActivity {
             startActivity(intent);
         }
     }
+
 }

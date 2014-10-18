@@ -3,6 +3,7 @@ package ar.uba.fi.proyectos2.mileem.detail;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -70,7 +71,8 @@ public class PublicationDetailActivity extends Activity {
             ImageView imageView = new ImageView(this);
             imageView.setLayoutParams(new LinearLayout.LayoutParams(400, 400));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setImageResource(R.drawable.video);
+            imageView.setImageResource(R.drawable.ic_action_video);
+            imageView.setBackgroundColor(Color.BLACK);
             imageGallery.addView(imageView);
         }
 

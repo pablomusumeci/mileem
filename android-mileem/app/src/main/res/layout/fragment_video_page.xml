@@ -8,6 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/videoView"
+        android:background="#000000"
         android:layout_gravity="center_vertical" />
 
 </LinearLayout>

@@ -29,6 +29,7 @@ public class MediaDetailsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_media_details);
+        getActionBar().setDisplayHomeAsUpEnabled(false);
 
         Intent intent = getIntent();
         imagesURLs = intent.getExtras().getStringArrayList("imagesURLs");
