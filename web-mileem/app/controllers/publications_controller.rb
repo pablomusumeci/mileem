@@ -134,7 +134,7 @@ class PublicationsController < ApplicationController
         return
       end  
       if(!@publication.isActive)
-        @publication.end_date = @publication.effective_date + newPlan.duration.months
+        @publication.end_date = publication_params["effective_date"].to_date + newPlan.duration.months
       else
          @publication.end_date = Date.today + newPlan.duration.months
       end  
@@ -190,7 +190,7 @@ class PublicationsController < ApplicationController
     @publications = Publication.all.to_a.map!{|p| p.to_json}
     Rails.logger.info "Publicaciones total: #{@publications.size}"
     @publications.select!{ |p| Publication.find(p["id"]).isAvailable }
-    Rails.logger.info "Publicaciones activas: #{@publications.size}"
+    Rails.ger.info "Publicaciones activas: #{@publications.size}"
 
     if not params[:neighbourhood_name].nil? and (params[:neighbourhood_name].size > 0)
       barrios = params[:neighbourhood_name].split(",")

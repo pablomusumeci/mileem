@@ -24,6 +24,12 @@
 <input type="hidden" class="form-control" id="publication_lng" name="publication[lng]">
 
 <div class="row">
+    <div id="alertaErrorDireccion" class="alert alert-danger" role="alert ">
+    La dirección debe ser exacta (con número incluido) y pertencer a la Ciudad Autónoma de Buenos Aires.
+    </div>
+</div>
+
+<div class="row">
   <div class="col-md-2">
      <label for="effective_date" class="control-label">Fecha
         <span class="required">*</span> 
@@ -51,12 +57,6 @@
       </label>
     </div>   
   </div>
-  <div class="col-md-6">
-    <div id="alertaErrorDireccion" class="alert alert-danger" role="alert ">
-    La dirección debe ser exacta (con número incluido) y pertencer a la Ciudad Autónoma de Buenos Aires.
-    </div>
-  </div>
-
 </div>
 
 <div class="row">  
@@ -79,7 +79,7 @@
 
   <div class="col-md-2">
     <label for="floor" class="control-label">Piso</label>
-    <%= f.number_field :floor, :class => 'form-control' , step: 1 , min: 0 %>
+    <%= f.number_field :floor, :class => 'form-control' , step: 1 , min: 0 , max: 9999 %>
   </div>
   <div class="col-md-2">
     <label for="apartment" class="control-label">Departamento</label>
@@ -88,7 +88,7 @@
 
   <div class="col-md-2">
     <label for="antiquity" class="control-label">Antiguedad</label>
-    <%= f.number_field :antiquity,  :class => 'form-control',step: 1, min:0 %>
+    <%= f.number_field :antiquity,  :class => 'form-control',step: 1, min:0 , max: 99999 %>
   </div>
 </div>
 
@@ -102,11 +102,11 @@
       </div>
       <div class="col-md-4">
         <label for="number_spaces" class="control-label">Ambientes</label>
-        <%= f.number_field :number_spaces, :class => 'form-control',step: 1, min: 0 %>
+        <%= f.number_field :number_spaces, :class => 'form-control',step: 1, min: 0 , max: 9999 %>
       </div>
       <div class="col-md-4">
         <label for="surface" class="control-label">Superficie (m2)</label>
-        <%= f.number_field :surface, :class => 'form-control',step: 1, min:0 %>
+        <%= f.number_field :surface, :class => 'form-control',step: 1, min:0 , max: 9999999999 %>
       </div>
     </div>
 
@@ -115,11 +115,11 @@
         <label for="price" class="control-label">Precio
           <span class="required">*</span>
         </label>
-        <%= f.number_field :price, :class => 'form-control', :required => true, step: 0.01 , min: 0 %>
+        <%= f.number_field :price, :class => 'form-control', :required => true, step: 0.01 , min: 0 , max: 99999999999 %>
       </div>
       <div class="col-md-4">
         <label for="expenses" class="control-label">Expensas</label>
-        <%= f.number_field :expenses, :class => 'form-control', step: 0.01, min:0 %>
+        <%= f.number_field :expenses, :class => 'form-control', step: 0.01, min:0 , max: 99999999999 %>
       </div>
       <div class="col-md-4">
         <label for="currency" class="control-label"></label>
