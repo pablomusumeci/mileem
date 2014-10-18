@@ -27,6 +27,6 @@ class User < ActiveRecord::Base
   has_many :publications
 
   def can_have_new_free_publication?
-    return Publication.where("user_id = ? AND plan_id = ?",self.id,3).size < 5 
+    return Publication.where("user_id = ? AND plan_id = ?",self.id,Plan.get_free_plan_id).size < 5 
   end
 end

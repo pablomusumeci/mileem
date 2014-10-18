@@ -15,4 +15,12 @@
 #
 
 class Plan < ActiveRecord::Base
+  def is_free?
+    self.name == "Gratis" # could check by price
+  end
+  
+  def self.get_free_plan_id
+    return Plan.where("name = ? ","Gratis").first.id
+  end
+  
 end

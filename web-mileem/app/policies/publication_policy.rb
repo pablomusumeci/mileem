@@ -13,7 +13,7 @@ class PublicationPolicy < ApplicationPolicy
   end
 
   def upload_video?
-    record.video_uploads.size() == 0 && record.plan_id != 3 #hacked plan id. Must fix this
+    record.video_uploads.size() == 0 && !record.plan.is_free?
   end
 
   def delete_video?
