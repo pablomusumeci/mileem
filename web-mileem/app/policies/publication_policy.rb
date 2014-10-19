@@ -4,6 +4,10 @@ class PublicationPolicy < ApplicationPolicy
     user.id == record.user_id  && record.end_date > Date.today &&  !record.finished?
   end
   
+  def read?
+    user.id == record.user_id
+  end
+  
   def delete?
     Date.today < record.effective_date
   end

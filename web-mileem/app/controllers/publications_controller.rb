@@ -1,7 +1,8 @@
 # -*- encoding : utf-8 -*-
 class PublicationsController < ApplicationController
   before_action :set_publication, only: [:show, :edit, :update, :destroy, :uploads, :jsonifier, :stop, :finish, :active ]
-  before_action :authorize_update, only: [:show ,:edit, :update, :destroy, :uploads] #permisos del pundit
+  before_action :authorize_update, only: [:edit, :update, :destroy, :uploads] #permisos del pundit
+  before_action :authorize_read, :show
   before_filter :authenticate_user!, except: [:search, :jsonifier] # permisos del devise
   skip_before_action :verify_authenticity_token
 
@@ -301,6 +302,10 @@ class PublicationsController < ApplicationController
 
     def authorize_update
       authorize @publication, :update?
+    end
+
+    def authorize_read
+      authorize @publication, :read?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
