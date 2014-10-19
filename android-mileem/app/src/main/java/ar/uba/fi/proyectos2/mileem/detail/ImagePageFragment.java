@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import ar.uba.fi.proyectos2.mileem.R;
 import ar.uba.fi.proyectos2.mileem.utils.DownloadImageTask;
-
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class ImagePageFragment extends Fragment {
 
@@ -42,13 +42,13 @@ public class ImagePageFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = (View) inflater
-                .inflate(R.layout.fragment_image_page, container, false);
-        ImageView iv = (ImageView) rootView.findViewById(R.id.imageViewGallery);
+                             Bundle savedInstance)
+    {
+        View rootView = (View) inflater.inflate(R.layout.fragment_image_page, container, false);
+        ImageView view = (ImageView) rootView.findViewById(R.id.imageViewGallery);
+        PhotoViewAttacher mAttacher = new PhotoViewAttacher(view);
 
-        new DownloadImageTask(iv).execute(url);
-
+        new DownloadImageTask(view).execute(url);
         return rootView;
     }
 

@@ -1,14 +1,16 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ar.uba.fi.proyectos2.mileem.model.HackyScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clickable="false">
         <ImageView
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_width="fill_parent"
             android:id="@+id/imageViewGallery"
             android:visibility="visible"
             android:layout_gravity="center_vertical"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:contentDescription="" />
-</ScrollView>
+            android:contentDescription=""
+            />
+</ar.uba.fi.proyectos2.mileem.model.HackyScrollView>
