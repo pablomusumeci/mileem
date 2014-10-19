@@ -67,10 +67,15 @@ public class MediaDetailsActivity extends Activity {
 
         @Override
         public Fragment getItem(int position) {
-            if (position == imagesURLs.size())
-                return VideoPageFragment.create(videoURL);
-            else
+            if (videoURL == null) {
                 return ImagePageFragment.create(imagesURLs.get(position));
+            } else {
+                if (position < imagesURLs.size()) {
+                    return ImagePageFragment.create(imagesURLs.get(position));
+                } else {
+                    return VideoPageFragment.create(videoURL);
+                }
+            }
         }
 
         @Override
