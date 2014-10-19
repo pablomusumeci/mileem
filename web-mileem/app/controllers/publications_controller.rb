@@ -54,7 +54,10 @@ class PublicationsController < ApplicationController
 
   # GET /publications/republicate
   def republicate
-    @publication_data = Publication.find(params[:id]).attributes
+    old_publication = Publication.find(params[:id])
+    @publication_data = old_publication.attributes
+    # Si republica antes de que pase un mes del vencimiento/finalizacion de la publicacion vieja
+    @has_discount = (Date.today < old_publication.end_date + 1.month)
     # Limpio campos de la publicacion vieja
     ["id", "created_at", "updated_at", "status", "end_date"].each { |k| @publication_data.delete k }
     @publication = Publication.new(@publication_data)
@@ -92,7 +95,7 @@ class PublicationsController < ApplicationController
           imágenes y video que cumplen con la cantidad permitida por el nuevo plan.'
           format.html { redirect_to @publication }
           format.json { render :show, status: :created, location: @publication }
-        else    
+        else
           format.html { redirect_to @publication, notice: 'La publicación fue republicada exitosamente.' }
           format.json { render :show, status: :created, location: @publication }
         end
@@ -174,7 +177,9 @@ class PublicationsController < ApplicationController
 
   def finish
     if(@publication.isActive && @publication.available?)
+      @publication.end_date = Date.today
       @publication.finished!
+      @publication.save
       redirect_to publications_path
     end    
   end 
