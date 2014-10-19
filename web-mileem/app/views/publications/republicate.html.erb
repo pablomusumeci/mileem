@@ -1,6 +1,11 @@
+<% if @has_discount%>
+<div class="alert alert-success" role="alert">Esta republicación tiene bonficación del 20% del nuevo plan elegido!</div>
+<% end %>
+
 <div class="page-header">
   <h1>Republicar</h1>
 </div>
+
 
 <%= form_for @publication, :url => {:action => "save_republicate"}, :method => :post, :html => { :class => "form-horizontal publication" } do |f| %>
 
