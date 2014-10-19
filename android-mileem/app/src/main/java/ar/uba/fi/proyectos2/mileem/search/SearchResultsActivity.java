@@ -68,7 +68,7 @@ public class SearchResultsActivity extends ListActivity {
             new GetHttpData().execute("");
             return true;
         } else if (id == R.id.action_search_price) {
-            new GetHttpData().execute("?sort_by=price&order=asc");
+            new GetHttpData().execute("&sort_by=price&order=asc");
             return true;
         }
         return super.onOptionsItemSelected(item);
