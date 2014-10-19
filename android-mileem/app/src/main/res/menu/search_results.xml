@@ -2,11 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="ar.uba.fi.proyectos2.mileem.search.SearchResultsActivity" >
     <item android:id="@+id/action_search_priority"
-        android:icon="@drawable/ic_action_sort_by_size"
+        android:icon="@drawable/ic_action_sort_by_priority"
         android:title="Ordenar por importancia"
         android:showAsAction="ifRoom" />
     <item android:id="@+id/action_search_price"
-        android:icon="@drawable/ic_action_sort_by_size"
+        android:icon="@drawable/ic_action_sort_by_price"
         android:title="Ordenar por precio"
         android:showAsAction="ifRoom" />
 </menu>
