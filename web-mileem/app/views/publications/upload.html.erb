@@ -38,7 +38,7 @@
           			<i class="glyphicon glyphicon-upload"></i>
           			<span>Subir Todos</span>
         		</button>
-        		<button type="reset" class="btn btn-warning cancel">
+        		<button type="reset" class="btn btn-warning cancel" onclick="onElemRemoved()">
 		          	<i class="glyphicon glyphicon-ban-circle"></i>
 		         	<span>Cancelar Todos</span>
 		        </button>
@@ -87,7 +87,7 @@
     <td colspan="2"></td>
     {% } %}
     <td class="cancel">{% if (!i) { %}
-      <button class="btn btn-warning">
+      <button class="btn btn-warning" onclick="onElemRemoved()">
         <i class="glyphicon glyphicon-ban-circle"></i>
         <span>Cancelar</span>
       </button>
@@ -173,7 +173,12 @@
   	});
   }
   
+  function onElemRemoved(){
+  	setTimeout(function(){toggleSelectedImagesButtons();},'500');
+  }
+  
   $('#fileupload .files').bind('DOMNodeInserted', function(e) {
     onImageChanges();
   });
+  
 </script>
