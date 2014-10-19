@@ -38,6 +38,12 @@ public class SearchResultsActivity extends ListActivity {
         TextView emptyText = (TextView)findViewById(android.R.id.empty);
         emptyText.setVisibility(View.GONE);
         getActionBar().setDisplayHomeAsUpEnabled(false);
+
+        url = getIntent().getStringExtra("SEARCH.URL");
+        new GetHttpData().execute("");
+        ListView lv = getListView();
+        OnPublicationClickListener listener = new OnPublicationClickListener(this);
+        lv.setOnItemClickListener(listener);
     }
 
 
@@ -51,11 +57,6 @@ public class SearchResultsActivity extends ListActivity {
     @Override
     public void onStart() {
         super.onStart();
-        url = getIntent().getStringExtra("SEARCH.URL");
-        new GetHttpData().execute("");
-        ListView lv = getListView();
-        OnPublicationClickListener listener = new OnPublicationClickListener(this);
-        lv.setOnItemClickListener(listener);
     }
 
     @Override
