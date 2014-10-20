@@ -41,7 +41,7 @@ class PublicationsControllerTest < ActionController::TestCase
   end
 
   test "should update publication" do
-    patch :update, id: @publication, publication: { additional_info: @publication.additional_info, address: @publication.address, antiquity: @publication.antiquity, apartment: @publication.apartment, description: @publication.description, effective_date: @publication.effective_date, expenses: @publication.expenses, floor: @publication.floor, number_spaces: @publication.number_spaces, operation: @publication.operation, price: @publication.price, surface: @publication.surface }
+    patch :update, id: @publication, publication: { additional_info: @publication.additional_info, address: @publication.address, antiquity: @publication.antiquity, apartment: @publication.apartment, description: @publication.description, effective_date: @publication.effective_date, expenses: @publication.expenses, plan_id: @publication.plan_id, floor: @publication.floor, number_spaces: @publication.number_spaces, operation: @publication.operation, price: @publication.price, surface: @publication.surface }
     assert_redirected_to publication_path(assigns(:publication))
   end
 
@@ -83,7 +83,8 @@ class PublicationsControllerTest < ActionController::TestCase
     assert respuesta.size == 2, "Valido cantidad de resultados buscando por precio"
 
     respuesta.each do |p|
-      assert ((p["price"] >= 1000) and (p["price"] <= 2100))
+      @condition = ((p["price"] >= 1000) && (p["price"] <= 2100)) 
+      assert @condition
     end
   end
 end

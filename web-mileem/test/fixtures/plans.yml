@@ -3,17 +3,26 @@
 one:
   id: 1
   price: 1.5
-  duration: 1
+  name: "Premium"
   priority: 1
-  number_images_allowed: 1
+  number_images_allowed: 10
   number_videos_allowed: 1
   duration: 12
 
 two:
   id: 2
   price: 1.5
-  duration: 1
-  priority: 1
-  number_images_allowed: 1
+  name: "Basico"
+  priority: 5
+  number_images_allowed: 5
   number_videos_allowed: 1
   duration: 4
+  
+free:
+  id: 3
+  price: 0
+  name: "Gratis"
+  priority: 10
+  number_images_allowed: 3
+  number_videos_allowed: 0
+  duration: 1

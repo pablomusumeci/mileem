@@ -60,7 +60,7 @@ PropertyType.create(:name => "Terreno")
 PropertyType.create(:name => "Oficina")
 PropertyType.create(:name => "Local Comercial")
 
-User.create!({:email => "usuario1@prueba.com", :password => "111111", :password_confirmation => "111111", :phone_number =>  "01161860000"})
+User.create!({:email => "javierchoque21@gmail.com", :password => "111111", :password_confirmation => "111111", :phone_number =>  "01161860000"})
 User.create!({:email => "usuario2@prueba.com", :password => "222222", :password_confirmation => "222222", :phone_number =>  "01161860001" })
 
 Plan.create(name: "Premium", price: 1000, duration: 12, priority: 1, number_images_allowed: 10, number_videos_allowed: 1)
