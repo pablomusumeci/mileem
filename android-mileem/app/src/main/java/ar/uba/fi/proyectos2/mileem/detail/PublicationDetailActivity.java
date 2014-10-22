@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -39,6 +40,9 @@ public class PublicationDetailActivity extends Activity {
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
     private GestureDetector gestureDetector;
+
+    // Para compartir
+    private ShareActionProvider mShareActionProvider;
 
     private View generateViewForGallery(String url){
 
@@ -228,9 +232,6 @@ public class PublicationDetailActivity extends Activity {
             tv = (TextView) findViewById(R.id.locationTextView);
             tv.setVisibility(View.GONE);
         }
-
-
-
         tv = (TextView) findViewById(R.id.neighbourhood_name);
         tv.setText(p.getNeighbourhood_name());
 
@@ -249,25 +250,41 @@ public class PublicationDetailActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.publication_detail, menu);
+
+        // Locate MenuItem with ShareActionProvider
+        MenuItem item = menu.findItem(R.id.menu_item_share);
+
+        // Fetch and store ShareActionProvider
+        mShareActionProvider = (ShareActionProvider) item.getActionProvider();
+
+
+        // Datos para comparticion
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, this.getApplicationContext().getString(R.string.twitter_share) + p.getAddress());
+        sendIntent.setType("text/plain");
+        setShareIntent(sendIntent);
+
+        // Return true to display menu
         return true;
+    }
+
+    // Call to update the share intent
+    private void setShareIntent(Intent shareIntent) {
+        if (mShareActionProvider != null) {
+            mShareActionProvider.setShareIntent(shareIntent);
+        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 
 
     public void call(View view) {
         try {
-            callIntent = new Intent(Intent.ACTION_CALL); //ACTION_INSERT_OR_EDIT);//ACTION_CALL);
+            callIntent = new Intent(Intent.ACTION_CALL);
             //Log.e("valor",);
             callIntent.setData(Uri.parse("tel:" + ((TextView) findViewById(R.id.phone)).getText()));
 
