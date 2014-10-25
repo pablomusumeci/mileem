@@ -1,7 +1,8 @@
 # -*- encoding : utf-8 -*-
 Rails.application.routes.draw do
 
-  get 'payment/notification'
+  post 'payment/notification'
+  
   devise_for :users
 
   get 'publications/jsonifier/:id' => 'publications#jsonifier'
