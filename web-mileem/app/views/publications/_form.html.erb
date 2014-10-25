@@ -167,11 +167,6 @@
       <%= f.submit modoEdicion ? 'Actualizar' : 'Crear', :class => 'btn btn-success', :id => 'submitButton' %>
       <%= link_to 'Cancelar', publications_path, :class => 'btn btn-default' %>
     </div>
-
-    <div class="col-md-4 ">  
-      <%= link_to 'Pagar', @publication.url_de_pago(), :class => 'btn btn-info', :name => "MP-Checkout"%>    
-    </div>
-
   </div>
 <br>
 <% end %>
