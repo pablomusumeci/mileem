@@ -64,8 +64,7 @@ gem 'paperclip'
 gem 'carrierwave'
 
 # Pagos
-gem 'mercadopago'
-
+gem 'mercadopago', :git => 'git://github.com/pablomusumeci/mercadopago.git'
 group :development, :test do
   gem 'mysql2'
 end
