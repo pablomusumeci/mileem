@@ -7,6 +7,7 @@ class PublicationsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   @@currency_conversion = {"USD" => {"USD" => 1, "$" => 10}, "$" => {"USD" => 0.1, "$" => 1}}
+
   # GET /publications
   # GET /publications.json
   def index
@@ -46,6 +47,7 @@ class PublicationsController < ApplicationController
     @publication = Publication.new
     pesos = Currency.where(name: "Pesos").first
     @publication.currency_id = pesos.id
+    @publication.payment_status = "No realizado"
     @publication.effective_date = Date.today.strftime("%d/%m/%Y")
   end  
 
@@ -190,6 +192,8 @@ class PublicationsController < ApplicationController
       format.json { render :json => @publication.to_json}
     end
   end
+
+
 
   # GET /publications/search.json?param1=x&param2=y...
   def search
