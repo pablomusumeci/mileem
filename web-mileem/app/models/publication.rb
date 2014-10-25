@@ -30,6 +30,7 @@
 #
 
 class Publication < ActiveRecord::Base
+	
 	belongs_to	:neighbourhood
 	belongs_to  :currency
 	belongs_to  :property_type
@@ -102,6 +103,37 @@ class Publication < ActiveRecord::Base
 	
 	def isAvailable
 		return (self.isActive && self.available? )
+	end
+
+	def url_de_pago
+		data = {
+			external_reference: "PUBLICATION-ID-#{self.id}",
+			items: [
+				{
+					id:           "PUBLICATION-ID-#{self.id}",
+					title:        "#{self.plan.name}",
+					description:  "#{self.address}",
+					quantity:     1,
+					unit_price:   self.plan.price,
+					currency_id:  "ARS",
+					category_id:  self.operation
+				}
+				],
+				payer: {
+					name:     (self.user.username.nil? ? self.user.email : self.user.username),
+					email:   self.user.email
+					},
+					back_urls: {
+						pending: "publications/#{self.id}", #/success",
+						success: "publications/#{self.id}", #/success",
+						failure: "publications/#{self.id}" #/failure"
+					},
+				auto_return: 'approved',
+				notification_url: "payment/notification"
+		}
+
+		payment = $mp.create_preference(data)
+		return payment['sandbox_init_point']
 	end
 	
 	self.per_page = 10

@@ -106,6 +106,8 @@
 
       <%= link_to "Imagenes", uploads_publication_path(@publication), :class => 'btn btn-md btn-default' %>
 
+      <%= link_to 'Pagar', @publication.url_de_pago(), :class => 'btn btn-info', :name => "MP-Checkout"%>
+
       <%= link_to "Volver",  publications_path, :class => 'btn btn-md btn-default'  %>
       <%= link_to "Editar", edit_publication_path(@publication), :class => 'btn btn-md btn-default' %>
       

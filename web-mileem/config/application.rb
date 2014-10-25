@@ -2,6 +2,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'mercadopago.rb'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -14,6 +15,7 @@ module WebMileem
     config.serve_static_assets = true
     #ActiveRecord::Base.logger = Logger.new(STDOUT)
     config.log_level = :info
+    $mp = MercadoPago::Client.new(ENV["MP_CLIENT"], ENV["MP_KEY"])
     # Descomentando esta linea se habilita el output de debug de los assets
     # config.quiet_assets = false
 
