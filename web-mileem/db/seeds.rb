@@ -60,7 +60,7 @@ PropertyType.create(:name => "Terreno")
 PropertyType.create(:name => "Oficina")
 PropertyType.create(:name => "Local Comercial")
 
-User.create!({:email => "javierchoque21@gmail.com", :password => "111111", :password_confirmation => "111111", :phone_number =>  "01161860000"})
+User.create!({:email => "test_user_94742966@testuser.com", :password => "qatest7306", :password_confirmation => "qatest7306", :phone_number =>  "01161860000", :username => "TETE50014"})
 User.create!({:email => "usuario2@prueba.com", :password => "222222", :password_confirmation => "222222", :phone_number =>  "01161860001" })
 
 Plan.create(name: "Premium", price: 1000, duration: 12, priority: 1, number_images_allowed: 10, number_videos_allowed: 1)
@@ -79,9 +79,9 @@ Publication.create(user_id: 1, payment_status: "No realizado", effective_date: (
 
 Publication.create(user_id: 1, payment_status: "No realizado", effective_date: (DateTime.now - 45.days).strftime("%d/%m/%Y"), end_date: (DateTime.now - 45.days + 3.months).strftime("%d/%m/%Y"), operation: "Alquiler", address: "Av Paseo Colón 1000, Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina", floor: 5, apartment: "5", number_spaces: 4, surface: 200, price: 7000.0, expenses: 1200.0, antiquity: 40, description: "", additional_info: "", created_at: "2014-09-14 17:38:48", updated_at: "2014-09-14 17:38:48", currency_id: 2, neighbourhood_id: 6, property_type_id: 3,plan_id: 3,status: 2, lat: -34.619411,lng: -58.368486)
 
-p1 = Publication.create(user_id: 1, effective_date: (DateTime.now).strftime("%d/%m/%Y"),end_date: (DateTime.now + 3.months).strftime("%d/%m/%Y"), operation: "Venta", address: "Av Brasil 500, Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina", floor: 2, apartment: "3", number_spaces: 3, surface: 150, price: 10000.0, expenses: 100.0, antiquity: 50, description: "", additional_info: "", created_at: "2014-09-14 17:38:48", updated_at: "2014-09-14 17:38:48", currency_id: 1, neighbourhood_id: 20, property_type_id: 1,plan_id: 2,status: 2, lat: -34.625471, lng: -58.372606)
+p1 = Publication.create(user_id: 1, payment_status: "No realizado", effective_date: (DateTime.now).strftime("%d/%m/%Y"),end_date: (DateTime.now + 3.months).strftime("%d/%m/%Y"), operation: "Venta", address: "Av Brasil 500, Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina", floor: 2, apartment: "3", number_spaces: 3, surface: 150, price: 10000.0, expenses: 100.0, antiquity: 50, description: "", additional_info: "", created_at: "2014-09-14 17:38:48", updated_at: "2014-09-14 17:38:48", currency_id: 1, neighbourhood_id: 20, property_type_id: 1,plan_id: 2,status: 2, lat: -34.625471, lng: -58.372606)
 
-p2 = Publication.create(user_id: 1, effective_date: (DateTime.now).strftime("%d/%m/%Y"),end_date: (DateTime.now + 1.months).strftime("%d/%m/%Y"), operation: "Venta", address: "Av Callao 2000, Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina", floor: 7, apartment: "4", number_spaces: 5, surface: 120, price: 6500.0, expenses: 250.0, antiquity: 20, description: "", additional_info: "", created_at: "2014-09-14 17:38:48", updated_at: "2014-09-14 17:38:48", currency_id: 1, neighbourhood_id: 6, property_type_id: 3,plan_id: 3,status: 2, lat: -34.587552,lng: -58.387085)
+p2 = Publication.create(user_id: 1, payment_status: "No realizado", effective_date: (DateTime.now).strftime("%d/%m/%Y"),end_date: (DateTime.now + 1.months).strftime("%d/%m/%Y"), operation: "Venta", address: "Av Callao 2000, Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina", floor: 7, apartment: "4", number_spaces: 5, surface: 120, price: 6500.0, expenses: 250.0, antiquity: 20, description: "", additional_info: "", created_at: "2014-09-14 17:38:48", updated_at: "2014-09-14 17:38:48", currency_id: 1, neighbourhood_id: 6, property_type_id: 3,plan_id: 3,status: 2, lat: -34.587552,lng: -58.387085)
 
 p1.update(effective_date: (DateTime.now - 1.months).strftime("%d/%m/%Y"),end_date: (DateTime.now - 1.months + 3.months).strftime("%d/%m/%Y"))
 p2.update(effective_date: (DateTime.now - 45.days).strftime("%d/%m/%Y"),end_date: (DateTime.now - 45.days + 1.months).strftime("%d/%m/%Y"))
