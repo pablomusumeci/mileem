@@ -1,4 +1,6 @@
 class PaymentController < ApplicationController
+  skip_before_action :verify_authenticity_token
+	
   # GET /payment/notification
   def notification
   	@topic = params[:topic]

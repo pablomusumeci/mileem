@@ -124,9 +124,9 @@ class Publication < ActiveRecord::Base
 					email:   self.user.email
 					},
 					back_urls: {
-						pending: "publications/#{self.id}", #/success",
-						success: "publications/#{self.id}", #/success",
-						failure: "publications/#{self.id}" #/failure"
+						pending: "#{ENV['url']}/publications/#{self.id}", #/success",
+						success: "#{ENV['url']}/publications/#{self.id}", #/success",
+						failure: "#{ENV['url']}/publications/#{self.id}" #/failure"
 					},
 				auto_return: 'approved',
 				notification_url: "payment/notification"
