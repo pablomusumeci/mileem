@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag 'sessions' %>
+<%# stylesheet_link_tag 'sessions' %>
 <div class="background">
 	<div class="row">
 		<div class="col-md-7">
@@ -19,16 +19,21 @@
 			    <%= f.password_field :password, autocomplete: "off", :class => 'form-control', :required => true %>
 			</div>    
 			<div class="col-md-8 col-md-offset-5">
-			  <br><br>	    
+			  <br>   
 			  <% if devise_mapping.rememberable? -%>
-			  <label class="checkbox"><input type="checkbox" value="remember-me"> Recordarme </label>
+			  	<label class="checkbox"><input type="checkbox" value="remember-me"> Recordarme </label>
 			  <% end -%>
 
 			  <div><%= f.submit "Entrar", :class =>"btn btn-md btn-primary" %></div>
 			<% end %>
 			</div>
-			<%# render "devise/shared/links" %>
-		</div>
-
+			<div class="col-md-6 col-md-offset-4">
+				<br>
+				<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+					  <%= link_to "Has olvidado tu Contraseña?", new_password_path(resource_name) %><br />
+				<% end -%>
+				<%# render "devise/shared/links" %>
+			</div>			
+		</div>		
 	</div>
 </div>
