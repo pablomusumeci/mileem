@@ -53,6 +53,7 @@ class Publication < ActiveRecord::Base
 	validates :surface, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	
 	validate :user_free_active_publication_limit, :on => :create
+	validate :address_inside_bsas
 
 	def user_free_active_publication_limit
 		@user = User.find(self.user_id)
@@ -60,6 +61,42 @@ class Publication < ActiveRecord::Base
       		errors.add(:limite_de_publicaciones_gratuitas_alcanzado, '(5)')
     	end
 	end
+
+	# Llamo al geocoder de google para comprobar si existe la direccion
+	def address_inside_bsas
+		begin
+		address_encoded = self.address.gsub(" ","+")
+
+		parameters = {'language' => 'es', 'sensor' => 'false','key' => ENV['GOOGLE_KEY'], "address" => address_encoded}
+		uri = URI.parse('https://maps.googleapis.com/maps/api/geocode/json').tap do |uri|
+  			uri.query = URI.encode_www_form parameters
+		end
+
+		url = uri.to_s
+		response = HTTParty.get(url)
+		if (response["status"] == "REQUEST_DENIED") or (response["status"] == "ZERO_RESULTS")
+      		errors.add(:error_validando_direccion, ', la misma es inválida, vuelva a ingresarla.')
+		elsif response["results"][0]["address_components"].size < 6
+      		errors.add(:error_validando_direccion, ', la misma está incompleta, debe ser específico con la dirección (incluyendo numeración).')
+		else
+			in_bs_as = false
+			ciudad_bs_as = "Ciudad Autónoma de Buenos Aires"
+			response["results"][0]["address_components"].each_with_index do |element,i|
+				in_bs_as = true if (element["long_name"] == ciudad_bs_as)
+			end
+
+			if not in_bs_as
+	      		errors.add(:error_validando_direccion, ", la direcciión debe pertenercer a la #{ciudad_bs_as}.")
+			end
+		end
+
+		rescue Exception => e
+			Rails.logger.error("Error validando la direccion serverside")
+			Rails.logger.error(e.message)
+      		errors.add(:error_validando_direccion, 'Por favor, vuelva a ingresarla.')
+		end
+	end
+
 	# agrego los nombres de las entidades externas
 	def to_json
 		result = self.attributes
