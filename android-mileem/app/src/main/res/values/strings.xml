@@ -2,8 +2,8 @@
 <resources>
 
     <!-- Configuracion de la aplicacion -->
-    <string name="host">192.168.1.100:3000</string>
-    <string name="search_path">publications/search.json</string>
+    <string name="host">192.168.1.100:8000</string>
+    <string name="search_path">search.json</string>
 
     <!-- Aplicacion -->
     <string name="app_name">MiLEEM</string>
