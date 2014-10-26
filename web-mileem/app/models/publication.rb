@@ -148,7 +148,7 @@ class Publication < ActiveRecord::Base
 			items: [
 				{
 					id:           "PUBLICATION-ID-#{self.id}",
-					title:        "#{self.plan.name}",
+					title:        "Plan #{self.plan.name}",
 					description:  "#{self.address}",
 					quantity:     1,
 					unit_price:   self.plan.price,

@@ -115,6 +115,10 @@ class PublicationsController < ApplicationController
     @publication = Publication.new(publication_params)
     @publication.user_id = current_user.id
     @publication.end_date = @publication.effective_date + @publication.plan.duration.months
+    
+    # Los planes gratuitos se inicializan en pagos
+    @publication.payment_status = "Realizado" if (@publication.plan.name == "Gratis")
+
     respond_to do |format|
       if @publication.save
         @publication.available!
@@ -138,7 +142,13 @@ class PublicationsController < ApplicationController
         flash[:error] = "No se puede obtener un plan inferior al actual"
         render :edit 
         return
-      end  
+      end
+
+      # Hay que cobrar el nuevo plan
+      if (newPlan != oldPlan)
+        @publication.payment_status = "No realizado"
+      end
+
       if(!@publication.isActive)
         @publication.end_date = publication_params["effective_date"].to_date + newPlan.duration.months
       else
@@ -199,7 +209,9 @@ class PublicationsController < ApplicationController
   def search
     @publications = Publication.all.to_a.map!{|p| p.to_json}
     Rails.logger.info "Publicaciones total: #{@publications.size}"
-    @publications.select!{ |p| Publication.find(p["id"]).isAvailable }
+
+    #Me quedo con las activas que tienen pago realizado
+    @publications.select!{ |p| (Publication.find(p["id"]).isAvailable) and (p["payment_status"] == "Realizado")}
     Rails.logger.info "Publicaciones activas: #{@publications.size}"
 
     if not params[:neighbourhood_name].nil? and (params[:neighbourhood_name].size > 0)
