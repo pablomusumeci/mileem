@@ -9,7 +9,8 @@ class PaymentController < ApplicationController
   	@response = $mp.notification(@payment_id)
   	Rails.logger.info "Response #{@response}"
     if @response["collection"]["status"] == "approved"
-    	@publication_id = @notification["collection"]["external_reference"].split("-")[2].to_i
+      Rails.logger.info "PAGO ID #{@payment_id} APROBADO!"
+    	@publication_id = @response["collection"]["external_reference"].split("-")[2].to_i
     	@publication = Publication.find(@publication_id)
     	Rails.logger.info "Antes de modificarla #{@publication}"
     	@publication.payment_status = 'Realizado'
