@@ -1,0 +1,161 @@
+<div class="page-header">
+  
+</div>
+
+
+<div class="row">
+  <div class="col-md-4">
+  	<div class="mediaTypeLink" onclick="showPhotos()">FOTOS</div><div class="mediaTypeLink" onclick="showVideo()">VIDEO</div>
+    <div class="mediaContainer" id="mediaContainer">
+	    <div id="myCarousel" class="carousel slide">
+	      <ol class="carousel-indicators">
+	        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+	        <% (1..(@publication.uploads.size()- 1)).each do |i| %>
+	          <li data-target="#myCarousel" data-slide-to=<%= i.to_i %> ></li>
+	        <% end %>   
+	      </ol>
+	      <div class="carousel-inner">
+	        <% if(@publication.uploads.size() > 0) %>
+	          <div class="item active">
+	            <img src="<%= @publication.uploads.first().upload %>" style="width:100%;height:100%;" />
+	          </div>
+	          <% @publication.uploads.drop(1).each do |u| %>
+	            <div class="item ">
+	              <img src="<%= u.upload %>" style="width:100%;height:100%;" />
+	            </div>
+	        <% end %>
+	        <% else %>
+	          <div class="item active">
+	            <%= image_tag "no_foto.jpg" , :width=>"100%", :height=>"100%" %>
+	          </div>
+	        <% end %>   
+	      </div>
+	      <!-- Carousel nav -->
+	      <a class="carousel-control left" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+	      <a class="carousel-control right" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+	    </div>
+	    
+	    <!-- VIDEO -->
+	    <div id="videoContainer" style="display:none">
+	    	<% if (@publication.video_uploads.size() > 0) %>
+				<%= video_tag @publication.video_uploads.first().video_url.to_s, :controls => true, :width=>"100%", :height=>"100%" %>
+			<% else %>
+				<%= image_tag "no_foto.jpg" , :width=>"100%", :height=>"100%" %>
+			<% end %>
+	    </div>
+    </div>
+  </div>
+
+  <h2><strong><%= @publication.address %></strong></h2>
+  <div class="col-md-3">
+    <dl class="dl-horizontal">
+      <dt><strong>Barrio</strong></dt>
+      <dd><%= @publication.neighbourhood.name %></dd>
+      <dt><strong>Precio (<%= @publication.currency.abreviatura %>)</strong></dt>
+      <dd><%= @publication.price %></dd>
+      <dt><strong>Expensas (<%= @publication.currency.abreviatura %>)</strong></dt>
+      <dd><%= @publication.expenses %></dd>
+      <dt><strong>Tipo</strong></dt>
+      <dd><%= @publication.operation %></dd>
+      <dt><strong>Ambientes</strong></dt>
+      <dd><%= @publication.number_spaces %></dd>
+      <dt><strong>Superficie</strong></dt>
+      <dd><%= @publication.surface %></dd>
+      <dt><strong>Antiguedad (años) </strong></dt>
+      <dd><%= @publication.antiquity %></dd>
+      <dt><strong>Descripción</strong></dt>
+      <p style="line-height: 1.42857143;" ><%= @publication.description %></p>
+      <dt><strong>Información adicional</strong></dt>
+      <p style="line-height: 1.42857143;" ><%= @publication.additional_info %></p>
+    </dl>     
+  </div>
+  <div class="col-md-5">
+    </br></br></br>
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <div class="map_container">
+            <div id="map" class="map_canvas"></div>
+        </div>
+          <!-- <div id="map" style="width:500px;height:300px;"></div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<input type="hidden" class="form-control" id="publication_lat" name="publication[lat]">
+<input type="hidden" class="form-control" id="publication_lng" name="publication[lng]">
+
+
+<script type="text/javascript" >
+  $( document ).ready(function() {
+      $('.carousel').carousel();
+      //attach to file chosen event
+      $("#video_upload_file").change(function (){
+      	onfileSelected();
+      });
+  });
+  
+  function showPhotos(){
+  	$('#videoContainer').hide();
+  	$('#myCarousel').show();
+  }
+  
+  function showVideo(){
+  	$('#myCarousel').hide();
+  	$('#videoContainer').show();
+  }
+ 
+  var ready;
+  var addressPicker;
+  ready = function() {
+
+    // https://developers.google.com/places/documentation/autocomplete#place_types
+    var addressPicker = new AddressPicker(
+      {
+        autocompleteService: {
+          types: ['address'], 
+          componentRestrictions: {country: 'AR'}
+        },
+        map: {
+          id: '#map',
+          options: {
+            <% if @publication.lat.nil? or @publication.lng.nil? %>
+            zoom: 12,
+            center: new google.maps.LatLng(-34.6037232, -58.3815931),
+            <% else  %>
+            zoom: 16,
+            center: new google.maps.LatLng(<%= @publication.lat %>, <%= @publication.lng %>),
+            <% end %>
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            styles: mapStyle
+          }
+        }
+      }
+    );
+
+    $('#publication_address').typeahead(null, {
+      displayKey: 'description',
+      source: addressPicker.ttAdapter()
+    });
+
+    <% if not @publication.address.blank? %>
+      $('#publication_address').typeahead('val', "<%= @publication.address %>");
+      $('#publication_lat').val(<%= @publication.lat %>);
+      $('#publication_lng').val(<%= @publication.lng %>);
+    <% end %>
+
+    <% if not @publication.lat.nil? and not @publication.lng.nil? %>
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(<%= @publication.lat %>, <%= @publication.lng %>),
+        map: addressPicker.map,
+        title: '<%= @publication.address %>'
+      });
+    <% end %>
+
+
+  }
+
+  $(document).ready(ready);
+
+</script>
+

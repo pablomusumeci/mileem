@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get 'publications/jsonifier/:id' => 'publications#jsonifier'
   get 'publications/search' => 'publications#search'
+  get 'publications/:id/preview', to: 'publications#preview', as: 'preview_publication'
   get 'publications/:id/uploads', to: 'publications#uploads', as: 'uploads_publication'
   get 'publications/:id/stop', to: 'publications#stop', as: 'stop_publication'
   get 'publications/:id/finish', to: 'publications#finish', as: 'finish_publication'
