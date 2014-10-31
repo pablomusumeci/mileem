@@ -93,7 +93,7 @@ class Publication < ActiveRecord::Base
 		rescue Exception => e
 			Rails.logger.error("Error validando la direccion serverside")
 			Rails.logger.error(e.message)
-      		errors.add(:error_validando_direccion, 'Por favor, vuelva a ingresarla.')
+      		errors.add(:error_validando_direccion, 'Por favor, vuelva a ingresar la dirección.')
 		end
 	end
 
