@@ -39,6 +39,7 @@
         <activity
             android:name=".detail.MediaDetailsActivity"
             android:label="@string/title_activity_media_details"
+            android:screenOrientation="portrait"
             android:parentActivityName=".detail.PublicationDetailActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

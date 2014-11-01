@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 class PublicationsController < ApplicationController
-  before_action :set_publication, only: [:show, :edit, :update, :destroy, :uploads, :jsonifier, :stop, :finish, :active ]
+  before_action :set_publication, only: [:show, :edit, :update, :destroy, :uploads, :jsonifier, :stop, :finish, :active , :preview]
   before_action :authorize_update, only: [:edit, :update, :destroy, :uploads] #permisos del pundit
   before_action :authorize_read, only: [:show]
-  before_filter :authenticate_user!, except: [:search, :jsonifier] # permisos del devise
+  before_filter :authenticate_user!, except: [:search, :jsonifier, :preview] # permisos del devise
   skip_before_action :verify_authenticity_token
 
   @@currency_conversion = {"USD" => {"USD" => 1, "$" => 10}, "$" => {"USD" => 0.1, "$" => 1}}
@@ -40,6 +40,14 @@ class PublicationsController < ApplicationController
   # GET /publications/1.json
   def show
     render :show
+  end
+
+  def preview
+    if(@publication.isAvailable and (@publication.payment_status == "Realizado"))
+      render :preview
+    else
+      render :file => "#{Rails.root}/public/404.html",  :status => 404
+    end  
   end
 
   # GET /publications/new

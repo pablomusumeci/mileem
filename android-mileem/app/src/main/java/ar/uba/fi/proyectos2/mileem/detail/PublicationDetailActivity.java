@@ -2,17 +2,25 @@ package ar.uba.fi.proyectos2.mileem.detail;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.LabeledIntent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.Html;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,8 +29,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
 
 import ar.uba.fi.proyectos2.mileem.R;
 import ar.uba.fi.proyectos2.mileem.model.Publication;
@@ -246,40 +258,6 @@ public class PublicationDetailActivity extends Activity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.publication_detail, menu);
-
-        // Locate MenuItem with ShareActionProvider
-        MenuItem item = menu.findItem(R.id.menu_item_share);
-
-        // Fetch and store ShareActionProvider
-        mShareActionProvider = (ShareActionProvider) item.getActionProvider();
-
-
-        // Datos para comparticion
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, this.getApplicationContext().getString(R.string.twitter_share) + p.getAddress());
-        sendIntent.setType("text/plain");
-        setShareIntent(sendIntent);
-
-        // Return true to display menu
-        return true;
-    }
-
-    // Call to update the share intent
-    private void setShareIntent(Intent shareIntent) {
-        if (mShareActionProvider != null) {
-            mShareActionProvider.setShareIntent(shareIntent);
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
 
 
     public void call(View view) {
@@ -299,13 +277,14 @@ public class PublicationDetailActivity extends Activity {
         // Obtengo el mail del anunciante
         String[] to =  {((TextView) findViewById(R.id.email)).getText().toString()};
         String subject = "Consulta Propiedad " + ((TextView) findViewById(R.id.address)).getText();
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.setData(Uri.parse("mailto:"));
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
+        //Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO,Uri.parse("mailto:"+to[0]));
+        emailIntent.setData(Uri.parse("mailto:"+to[0]));
+        //emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
         //emailIntent.putExtra(Intent.EXTRA_CC, cc);
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
         //emailIntent.putExtra(Intent.EXTRA_TEXT, mensaje);
-        emailIntent.setType("message/rfc822");
+        //emailIntent.setType("message/rfc822");
         startActivity(Intent.createChooser(emailIntent, "Email"));
     }
 
@@ -329,6 +308,57 @@ public class PublicationDetailActivity extends Activity {
         intent.putStringArrayListExtra("imagesURLs", new ArrayList<String>(p.getImagesURLs()));
         intent.putExtra("videoURL", p.getVideo());
         startActivity(intent);
+
+    }
+
+    public static String urlEncode(String s) {
+        try {
+            return URLEncoder.encode(s, "UTF-8");
+        }
+        catch (UnsupportedEncodingException e) {
+            throw new RuntimeException("URLEncoder.encode() failed for " + s);
+        }
+    }
+
+    public void onShareTwitter(View view) {
+        String tweetUrl =
+                String.format("https://twitter.com/intent/tweet?text=%s&url=%s",
+                        urlEncode(getString(R.string.twitter_share)), urlEncode("https://www.google.com.ar/"));
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(tweetUrl));
+
+        List<ResolveInfo> matches = getPackageManager().queryIntentActivities(intent, 0);
+        for (ResolveInfo info : matches) {
+            if (info.activityInfo.packageName.toLowerCase().startsWith("com.twitter")) {
+                intent.setPackage(info.activityInfo.packageName);
+                break;
+            }
+        }
+
+        startActivity(intent);
+    }
+
+
+    public void onShareFacebook(View view){
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, "www.google.com.ar");
+        PackageManager packManager = getPackageManager();
+        List<ResolveInfo> resolvedInfoList = packManager.queryIntentActivities(sharingIntent,  PackageManager.MATCH_DEFAULT_ONLY);
+
+        boolean resolved = false;
+        for(ResolveInfo resolveInfo: resolvedInfoList){
+            if(resolveInfo.activityInfo.packageName.startsWith("com.facebook.katana")){
+                sharingIntent.setClassName(
+                        resolveInfo.activityInfo.packageName,
+                        resolveInfo.activityInfo.name );
+                resolved = true;
+                break;
+            }
+        }
+        if(resolved){
+            startActivity(sharingIntent);
+        }
 
     }
 
