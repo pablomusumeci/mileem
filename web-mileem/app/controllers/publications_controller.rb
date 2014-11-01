@@ -125,13 +125,17 @@ class PublicationsController < ApplicationController
     @publication.end_date = @publication.effective_date + @publication.plan.duration.months
     
     # Los planes gratuitos se inicializan en pagos
-    @publication.payment_status = "Realizado" if (@publication.plan.name == "Gratis")
+    @publication.payment_status = "Realizado" if (@publication.plan.id == Plan.get_free_plan_id)
 
     respond_to do |format|
       if @publication.save
-        #redirect_to @publication.url_de_pago()
+        url_to_redirect = "/publications/payment_return/#{@publication.id}/1"
+        if (@publication.plan.id != Plan.get_free_plan_id)
+          url_to_redirect = @publication.url_de_pago
+        end
+          
         @publication.available!
-        format.html { redirect_to @publication.url_de_pago() }
+        format.html { redirect_to url_to_redirect }
         format.json { render :show, status: :created, location: @publication }
       else
         format.html { render :new }
@@ -179,7 +183,7 @@ class PublicationsController < ApplicationController
     if (params[:status] == "1")
       @publication = Publication.find(params[:id])
       url = publication_url(@publication)
-      flash[:notice] = "La publicacion ha sido pagada correctamente."
+      flash[:notice] = "La publicacion ha sido creada correctamente."
     elsif (params[:status] == "2")
       url = publications_url
       flash[:error] = "El pago de la publiacción no pudo completarse correctamente."
