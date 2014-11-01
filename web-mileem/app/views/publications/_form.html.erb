@@ -24,12 +24,6 @@
 <input type="hidden" class="form-control" id="publication_lng" name="publication[lng]">
 
 <div class="row">
-    <div id="alertaErrorDireccion" class="alert alert-danger" role="alert ">
-    La dirección debe ser exacta (con número incluido) y pertencer a la Ciudad Autónoma de Buenos Aires.
-    </div>
-</div>
-
-<div class="row">
   <div class="col-md-2">
      <label for="effective_date" class="control-label">Fecha
         <span class="required">*</span> 
@@ -173,24 +167,10 @@
 
 <script type="text/javascript" >
 
-  function dentroDeBsAs(placeResult){
-    if (typeof(placeResult.address_components) == 'undefined' || typeof(placeResult.address_components[4]) == 'undefined'){
-      console.log("placeResult es undefined!");
-      return false;
-    } else if ((placeResult.address_components[4].long_name != 'Autonomous City of Buenos Aires')
-    && (placeResult.address_components[4].long_name != "Ciudad Autónoma de Buenos Aires")) {
-      console.log(placeResult.address_components[4].long_name + " no es buenos aires!");
-      return false;
-    }
-      return true;
-  }
 
   var ready;
   var addressPicker;
   ready = function() {
-    $("#alertaErrorDireccion").hide();
-
-    // https://developers.google.com/places/documentation/autocomplete#place_types
     var addressPicker = new AddressPicker(
       {
         autocompleteService: {
@@ -247,18 +227,6 @@
 
     addressPicker.bindDefaultTypeaheadEvent($('#address'))
     $(addressPicker).on('addresspicker:selected', function (event, result) {
-
-      if (! dentroDeBsAs(result.placeResult)){
-         $('#fg-address').addClass("has-error");
-         $('#fg-address').addClass("has-error");
-         $("#alertaErrorDireccion").show();
-         $('#submitButton').addClass("disabled");
-      } else {
-         $('#fg-address').removeClass("has-error");
-         $('#fg-address').addClass("has-success");
-         $('#submitButton').removeClass("disabled");
-         $("#alertaErrorDireccion").hide();
-      }
 
       $('#publication_lat').val(result.latitude);
       $('#publication_lng').val(result.longitude);

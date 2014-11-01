@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 class PublicationsController < ApplicationController
-  before_action :set_publication, only: [:show, :edit, :update, :destroy, :uploads, :jsonifier, :stop, :finish, :active ]
+  before_action :set_publication, only: [:show, :edit, :update, :destroy, :uploads, :jsonifier, :stop, :finish, :active , :preview]
   before_action :authorize_update, only: [:edit, :update, :destroy, :uploads] #permisos del pundit
   before_action :authorize_read, only: [:show]
-  before_filter :authenticate_user!, except: [:search, :jsonifier] # permisos del devise
+  before_filter :authenticate_user!, except: [:search, :jsonifier, :preview] # permisos del devise
   skip_before_action :verify_authenticity_token
 
   @@currency_conversion = {"USD" => {"USD" => 1, "$" => 10}, "$" => {"USD" => 0.1, "$" => 1}}
@@ -40,6 +40,14 @@ class PublicationsController < ApplicationController
   # GET /publications/1.json
   def show
     render :show
+  end
+
+  def preview
+    if(@publication.isAvailable and (@publication.payment_status == "Realizado"))
+      render :preview
+    else
+      render :file => "#{Rails.root}/public/404.html",  :status => 404
+    end  
   end
 
   # GET /publications/new
@@ -115,6 +123,10 @@ class PublicationsController < ApplicationController
     @publication = Publication.new(publication_params)
     @publication.user_id = current_user.id
     @publication.end_date = @publication.effective_date + @publication.plan.duration.months
+    
+    # Los planes gratuitos se inicializan en pagos
+    @publication.payment_status = "Realizado" if (@publication.plan.name == "Gratis")
+
     respond_to do |format|
       if @publication.save
         @publication.available!
@@ -138,7 +150,13 @@ class PublicationsController < ApplicationController
         flash[:error] = "No se puede obtener un plan inferior al actual"
         render :edit 
         return
-      end  
+      end
+
+      # Hay que cobrar el nuevo plan
+      if (newPlan != oldPlan)
+        @publication.payment_status = "No realizado"
+      end
+
       if(!@publication.isActive)
         @publication.end_date = publication_params["effective_date"].to_date + newPlan.duration.months
       else
@@ -199,7 +217,9 @@ class PublicationsController < ApplicationController
   def search
     @publications = Publication.all.to_a.map!{|p| p.to_json}
     Rails.logger.info "Publicaciones total: #{@publications.size}"
-    @publications.select!{ |p| Publication.find(p["id"]).isAvailable }
+
+    #Me quedo con las activas que tienen pago realizado
+    @publications.select!{ |p| (Publication.find(p["id"]).isAvailable) and (p["payment_status"] == "Realizado")}
     Rails.logger.info "Publicaciones activas: #{@publications.size}"
 
     if not params[:neighbourhood_name].nil? and (params[:neighbourhood_name].size > 0)

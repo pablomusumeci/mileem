@@ -299,13 +299,14 @@ public class PublicationDetailActivity extends Activity {
         // Obtengo el mail del anunciante
         String[] to =  {((TextView) findViewById(R.id.email)).getText().toString()};
         String subject = "Consulta Propiedad " + ((TextView) findViewById(R.id.address)).getText();
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.setData(Uri.parse("mailto:"));
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
+        //Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO,Uri.parse("mailto:"+to[0]));
+        emailIntent.setData(Uri.parse("mailto:"+to[0]));
+        //emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
         //emailIntent.putExtra(Intent.EXTRA_CC, cc);
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
         //emailIntent.putExtra(Intent.EXTRA_TEXT, mensaje);
-        emailIntent.setType("message/rfc822");
+        //emailIntent.setType("message/rfc822");
         startActivity(Intent.createChooser(emailIntent, "Email"));
     }
 

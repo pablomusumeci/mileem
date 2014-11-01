@@ -8,13 +8,15 @@ class PaymentController < ApplicationController
   	Rails.logger.info "NOTIFICACION RECIBIDA ID : #{@payment_id}"
   	@response = $mp.notification(@payment_id)
   	Rails.logger.info "Response #{@response}"
-  	@notification = JSON.parse(@response)
-  	@publication_id = @notification["external_reference"].split("-")[2].to_i
-  	@publication = Publication.find(@publication_id)
-  	Rails.logger.info "Antes de modificarla #{@publication}"
-  	@publication.payment_status = 'Aprobado'
-  	@publication.save
-  	Rails.logger.info "Despues del save #{@publication}"
+    if @response["collection"]["status"] == "approved"
+      Rails.logger.info "PAGO ID #{@payment_id} APROBADO!"
+    	@publication_id = @response["collection"]["external_reference"].split("-")[2].to_i
+    	@publication = Publication.find(@publication_id)
+    	Rails.logger.info "Antes de modificarla #{@publication}"
+    	@publication.payment_status = 'Realizado'
+    	@publication.save
+    	Rails.logger.info "Despues del save #{@publication}"
+    end
   rescue Exception => e
   	Rails.logger.error "Error en notification #{e.message}"
   end

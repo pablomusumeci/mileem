@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>Publicación</h1>
+  
 </div>
 
 
@@ -47,76 +47,45 @@
   </div>
 
   <h2><strong><%= @publication.address %></strong></h2>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <dl class="dl-horizontal">
-      <dt><strong>Plan</strong></dt>
-      <dd><%= @publication.plan.name %></dd>
-      <dt><strong>Fecha de publicación</strong></dt>
-      <dd><%= @publication.effective_date %></dd>
-      <dt><strong>Fecha de vencimiento</strong></dt>
-      <dd><%= @publication.end_date %></dd>
       <dt><strong>Barrio</strong></dt>
       <dd><%= @publication.neighbourhood.name %></dd>
       <dt><strong>Precio (<%= @publication.currency.abreviatura %>)</strong></dt>
       <dd><%= @publication.price %></dd>
       <dt><strong>Expensas (<%= @publication.currency.abreviatura %>)</strong></dt>
       <dd><%= @publication.expenses %></dd>
-      <dt><strong>Descripción</strong></dt>
-      <dd><%= @publication.description %></dd>
-    </dl>     
-  </div>
-
-  <div class="col-md-4">
-    <dl class="dl-horizontal">
       <dt><strong>Tipo</strong></dt>
       <dd><%= @publication.operation %></dd>
-      <dt><strong>Piso</strong></dt>
-      <dd><%= @publication.floor %></dd>
-      <dt><strong>Departamento</strong></dt>
-      <dd><%= @publication.apartment %></dd>
       <dt><strong>Ambientes</strong></dt>
       <dd><%= @publication.number_spaces %></dd>
       <dt><strong>Superficie</strong></dt>
       <dd><%= @publication.surface %></dd>
       <dt><strong>Antiguedad (años) </strong></dt>
       <dd><%= @publication.antiquity %></dd>
+      <dt><strong>Descripción</strong></dt>
+      <p style="line-height: 1.42857143;" ><%= @publication.description %></p>
       <dt><strong>Información adicional</strong></dt>
-      <dd><%= @publication.additional_info %></dd>
+      <p style="line-height: 1.42857143;" ><%= @publication.additional_info %></p>
     </dl>     
   </div>
-</div>
-
-<div class="row">
-  <div class="col-md-8 col-md-offset-4">
-      <% if policy(@publication).upload_video? %>
-      	<%= form_for VideoUpload.new, :url => "/video_uploads/create/#{@publication.id}", :html => { :multipart => true, :id => "videoupload"  } do |f| %>
-      	  <span class="btn btn-md btn-success fileinput-button" id="video_upload_file_container">
-      		<span>Seleccionar Video</span>
-              <%= f.file_field :video, :id => "video_upload_file" %>
-            </span>
-          </span>
-      	  <%= f.submit 'Guardar Video', :id => "video_upload_button", :class => 'btn btn-md btn-primary videoButton', :style => "display:none;" %>
-      	<% end %>
-      <% end %>
-	  <% if policy(@publication).delete_video? %>
-      	<%= form_for VideoUpload.new, :url => "/video_uploads/destroy/#{@publication.video_uploads.first.id}", :html => { :multipart => true, :id => "videoupload"  } do |f| %>
-      	  <%= f.submit 'Eliminar Video', :id => "video_upload_button", :class => 'btn btn-md btn-danger videoButton', :data => { :confirm => '¿Esta usted seguro que quiere eliminar el video de la publicación?' } %>
-      	<% end %>
-      <% end %>
-
-      <%= link_to "Imagenes", uploads_publication_path(@publication), :class => 'btn btn-md btn-default' %>
-      <% if @publication.payment_status == "No realizado" %>      
-        <%= link_to 'Pagar', @publication.url_de_pago(), :class => 'btn btn-info', :name => "MP-Checkout"%>
-      <% end %>
-
-      <%= link_to "Volver",  publications_path, :class => 'btn btn-md btn-default'  %>
-      <%= link_to "Editar", edit_publication_path(@publication), :class => 'btn btn-md btn-default' %>
-      
-
-      <%= link_to "Eliminar", publication_path(@publication), :method => 'delete',              :data => { :confirm => 'Está seguro que desea eliminar la publicación?' }, :class => 'btn btn-md btn-danger' %>
-    
+  <div class="col-md-5">
+    </br></br></br>
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <div class="map_container">
+            <div id="map" class="map_canvas"></div>
+        </div>
+          <!-- <div id="map" style="width:500px;height:300px;"></div> -->
+      </div>
+    </div>
   </div>
 </div>
+
+<input type="hidden" class="form-control" id="publication_lat" name="publication[lat]">
+<input type="hidden" class="form-control" id="publication_lng" name="publication[lng]">
+
+
 <script type="text/javascript" >
   $( document ).ready(function() {
       $('.carousel').carousel();
@@ -136,23 +105,57 @@
   	$('#videoContainer').show();
   }
  
-  function validVideoFormat(filename){
-  	// a bit ugly validation
-  	fileExtension = $("#video_upload_file").val().split('.').pop();
-  	return (fileExtension == "mp4" || fileExtension == "mkv");
+  var ready;
+  var addressPicker;
+  ready = function() {
+
+    // https://developers.google.com/places/documentation/autocomplete#place_types
+    var addressPicker = new AddressPicker(
+      {
+        autocompleteService: {
+          types: ['address'], 
+          componentRestrictions: {country: 'AR'}
+        },
+        map: {
+          id: '#map',
+          options: {
+            <% if @publication.lat.nil? or @publication.lng.nil? %>
+            zoom: 12,
+            center: new google.maps.LatLng(-34.6037232, -58.3815931),
+            <% else  %>
+            zoom: 16,
+            center: new google.maps.LatLng(<%= @publication.lat %>, <%= @publication.lng %>),
+            <% end %>
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            styles: mapStyle
+          }
+        }
+      }
+    );
+
+    $('#publication_address').typeahead(null, {
+      displayKey: 'description',
+      source: addressPicker.ttAdapter()
+    });
+
+    <% if not @publication.address.blank? %>
+      $('#publication_address').typeahead('val', "<%= @publication.address %>");
+      $('#publication_lat').val(<%= @publication.lat %>);
+      $('#publication_lng').val(<%= @publication.lng %>);
+    <% end %>
+
+    <% if not @publication.lat.nil? and not @publication.lng.nil? %>
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(<%= @publication.lat %>, <%= @publication.lng %>),
+        map: addressPicker.map,
+        title: '<%= @publication.address %>'
+      });
+    <% end %>
+
+
   }
- 
-  function onfileSelected(){
-  	filename = $("#video_upload_file").val().split('\\').pop();
-  	if (validVideoFormat(filename)){
-	  	$("#video_upload_file").hide();
-	  	$("#video_upload_file_container").hide();
-	  	$("#video_upload_button").show();
-	  	$("#video_upload_button").attr("title", filename);
-  	}else{
-  		alert('Formato de video invalido. Seleccione un video con formato mp4 o mkv');
-  	}
-  }
+
+  $(document).ready(ready);
 
 </script>
 
