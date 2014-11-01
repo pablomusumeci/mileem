@@ -129,8 +129,9 @@ class PublicationsController < ApplicationController
 
     respond_to do |format|
       if @publication.save
+        #redirect_to @publication.url_de_pago()
         @publication.available!
-        format.html { redirect_to @publication, notice: 'La publicación fue creada exitosamente.' }
+        format.html { redirect_to @publication.url_de_pago() }
         format.json { render :show, status: :created, location: @publication }
       else
         format.html { render :new }
@@ -172,7 +173,7 @@ class PublicationsController < ApplicationController
     end
   end
   
-  
+  # 1: success, 2: pending, 3: failure
   def payment_return
     url = root_url
     if (params[:status] == "1")
