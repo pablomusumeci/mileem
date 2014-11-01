@@ -157,10 +157,10 @@ class PublicationsController < ApplicationController
         return
       end
 
-      # Hay que cobrar el nuevo plan
-      if (newPlan != oldPlan)
-        @publication.payment_status = "No realizado"
-      end
+      # Conservo el plan hasta que se cambie en el payment_controller
+      params[:publication][:plan_id] = oldPlan.id
+
+      # TODO llamar a url de pago con newPlan.id como parametro!
 
       if(!@publication.isActive)
         @publication.end_date = publication_params["effective_date"].to_date + newPlan.duration.months

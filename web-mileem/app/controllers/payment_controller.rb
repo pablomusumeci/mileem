@@ -11,7 +11,9 @@ class PaymentController < ApplicationController
     if @response["collection"]["status"] == "approved"
       Rails.logger.info "PAGO ID #{@payment_id} APROBADO!"
     	@publication_id = @response["collection"]["external_reference"].split("-")[2].to_i
+      @plan_id = @response["collection"]["external_reference"].split("-")[3].to_i
     	@publication = Publication.find(@publication_id)
+      @publication.plan_id = @plan_id
     	Rails.logger.info "Antes de modificarla #{@publication}"
     	@publication.payment_status = 'Realizado'
     	@publication.save
