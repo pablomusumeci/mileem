@@ -17,6 +17,7 @@ module WebMileem
     config.log_level = :info
     $mp = MercadoPago::Client.new(ENV["MP_CLIENT"], ENV["MP_KEY"])
 
+    config.assets.initialize_on_precompile = false
     # Descomentando esta linea se habilita el output de debug de los assets
     # config.quiet_assets = false
 
