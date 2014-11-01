@@ -174,14 +174,19 @@ class PublicationsController < ApplicationController
   
   
   def payment_return
-    puts "la #{params[:id]}"
-    #
-    if (params[:id] == 3)
-      flash[:notice] = "3"
-    else
-      flash[:notice] = "no 3"
+    url = root_url
+    if (params[:status] == "1")
+      @publication = Publication.find(params[:id])
+      url = publication_url(@publication)
+      flash[:notice] = "La publicacion ha sido pagada correctamente."
+    elsif (params[:status] == "2")
+      url = publications_url
+      flash[:error] = "El pago de la publiacción no pudo completarse correctamente."
+    elsif (params[:status] == "3")
+      url = publications_url
+      flash[:error] = "El pago de la publiacción no pudo completarse correctamente."
     end
-    redirect_to root_url
+    redirect_to url
   end
 
   # DELETE /publications/1
