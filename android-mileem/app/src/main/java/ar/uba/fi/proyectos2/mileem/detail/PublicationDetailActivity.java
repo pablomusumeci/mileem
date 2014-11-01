@@ -321,9 +321,12 @@ public class PublicationDetailActivity extends Activity {
     }
 
     public void onShareTwitter(View view) {
+
+        String hostBase = getString(R.string.host);
+
         String tweetUrl =
                 String.format("https://twitter.com/intent/tweet?text=%s&url=%s",
-                        urlEncode(getString(R.string.twitter_share)), urlEncode("https://www.google.com.ar/"));
+                        urlEncode(getString(R.string.twitter_share)), urlEncode("http://"+hostBase+"/publications/"+p.getId()+"/preview"));
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(tweetUrl));
 
         List<ResolveInfo> matches = getPackageManager().queryIntentActivities(intent, 0);
@@ -342,7 +345,8 @@ public class PublicationDetailActivity extends Activity {
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-        sharingIntent.putExtra(Intent.EXTRA_TEXT, "www.google.com.ar");
+        String hostBase = getString(R.string.host);
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, "http://"+hostBase+"/publications/"+p.getId()+"/preview");
         PackageManager packManager = getPackageManager();
         List<ResolveInfo> resolvedInfoList = packManager.queryIntentActivities(sharingIntent,  PackageManager.MATCH_DEFAULT_ONLY);
 
