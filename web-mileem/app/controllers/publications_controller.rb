@@ -186,7 +186,7 @@ class PublicationsController < ApplicationController
       flash[:notice] = "La publicacion ha sido creada correctamente."
     elsif (params[:status] == "2")
       url = publications_url
-      flash[:error] = "El pago de la publiacción no pudo completarse correctamente."
+      flash[:notice] = "El pago de la publiacción esta pendiente. Al completarse exitosamente el mismo, la publicación quedará creada correctamente."
     elsif (params[:status] == "3")
       url = publications_url
       flash[:error] = "El pago de la publiacción no pudo completarse correctamente."
