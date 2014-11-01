@@ -142,12 +142,13 @@ class Publication < ActiveRecord::Base
 		return (self.isActive && self.available? )
 	end
 
-  def url_de_pago
+  def url_de_pago(plan_id)
+  		plan_id = self.plan_id if plan_id.nil?
 		data = {
-			external_reference: "PUBLICATION-ID-#{self.id}",
+			external_reference: "PUBLICATION-ID-#{self.id}-#{plan_id}",
 			items: [
 				{
-					id:           "PUBLICATION-ID-#{self.id}",
+					id:           "PUBLICATION-ID-#{self.id}-#{plan_id}",
 					title:        "Plan #{self.plan.name}",
 					description:  "#{self.address}",
 					quantity:     1,
