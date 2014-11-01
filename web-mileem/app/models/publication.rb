@@ -142,6 +142,8 @@ class Publication < ActiveRecord::Base
 		return (self.isActive && self.available? )
 	end
 
+  enum return_url_status: [ :success, :pending, :failure]
+
 	def url_de_pago
 		data = {
 			external_reference: "PUBLICATION-ID-#{self.id}",
@@ -161,9 +163,9 @@ class Publication < ActiveRecord::Base
 					email:   self.user.email
 					},
 					back_urls: {
-						pending: "#{ENV['url']}/publications/#{self.id}", #/success",
-						success: "#{ENV['url']}/publications/#{self.id}", #/success",
-						failure: "#{ENV['url']}/publications/#{self.id}" #/failure"
+						pending: "#{ENV['url']}/publications/payment_return/#{self.id}/#{return_url_status.pending}", #/success",
+						success: "#{ENV['url']}/publications/payment_return/#{self.id}/#{return_url_status.success}", #/success",
+						failure: "#{ENV['url']}/publications/payment_return/#{self.id}/#{return_url_status.failure}" #/failure"
 					},
 				auto_return: 'approved',
 				notification_url: "payment/notification"

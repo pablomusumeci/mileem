@@ -163,6 +163,18 @@ class PublicationsController < ApplicationController
       end
     end
   end
+  
+  
+  def payment_return
+    puts "la #{params[:id]}"
+    #
+    if (params[:id] == 3)
+      flash[:notice] = "3"
+    else
+      flash[:notice] = "no 3"
+    end
+    redirect_to root_url
+  end
 
   # DELETE /publications/1
   # DELETE /publications/1.json

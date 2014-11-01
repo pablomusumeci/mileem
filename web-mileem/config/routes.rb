@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   get 'publications/:id/republicate', to: 'publications#republicate', as: 'republicate'
   post 'publications/:id/republicate', to: 'publications#save_republicate'
 
+  #get 'publications/payment_return/:id/:status', to: 'publications#payment_return', as: 'payment_return'
+  #
+
 
   resources :uploads
   resources :publications do
@@ -22,6 +25,8 @@ Rails.application.routes.draw do
       get :reset_filterrific
     end
   end
+  
+  match "publications/payment_return/:id/:status" => "publications#payment_return", :as => :payment_return, :via => [:get,:post]
 
   get 'uploads/:id/delete', to: 'uploads#destroy', as: 'uploads_destroy'
 
