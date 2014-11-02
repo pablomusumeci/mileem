@@ -49,6 +49,11 @@
   <h2><strong><%= @publication.address %></strong></h2>
   <div class="col-md-3">
     <dl class="dl-horizontal">
+      <dt><strong>Teléfono Anunciante</strong></dt>
+      <dd><%= @publication.user.phone_number %></dd>
+      <dt><strong>Email Anunciante</strong></dt>
+      <dd><%= @publication.user.email %></dd>
+
       <dt><strong>Barrio</strong></dt>
       <dd><%= @publication.neighbourhood.name %></dd>
       <dt><strong>Precio (<%= @publication.currency.abreviatura %>)</strong></dt>
