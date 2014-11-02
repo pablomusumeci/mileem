@@ -35,12 +35,6 @@
       </div>
   </div>
   <div class="col-md-2">
-    <label for="plan" class="control-label">Plan
-      <span class="required">*</span>
-    </label>
-     <%= f.collection_select(:plan_id, Plan.all , :id, :name, {:prompt   => "Seleccione una opción"}, { :class =>"form-control" ,:required => true }) %>
-   </div>
-  <div class="col-md-2">
     <label for="operation" class="control-label"></label>
     <div class="radio">
       <label class="radio-inline">
@@ -51,6 +45,52 @@
       </label>
     </div>   
   </div>
+  <div class="col-md-2">
+    <label for="plan" class="control-label">Plan
+      <span class="required">*</span>
+    </label>
+     <%= f.collection_select(:plan_id, Plan.all , :id, :name, {:prompt   => "Seleccione una opción"}, { :class =>"form-control" ,:required => true }) %>
+  
+  </div>
+  <div class="col-md-1">
+	  <div class="plansHelpContainer" id="plansHelp">
+	  	<span class="glyphicon glyphicon-question-sign"></span>
+	  	<div class="myqtip-content">
+	      <table>
+	      	<thead class="headingListar">
+    		  <tr>
+      			<th class="plan-column">Gratis</th>
+      			<th class="plan-column">Basico</th>
+      			<th class="plan-column">Premium</th>
+	      	  </tr>
+      	    </thead>
+  			<tbody>
+  			  <tr class="plansDescriptionsColums">
+        		<td>
+        		  <div>$ 0</div>
+        		  <div>3 Imagenes</div>
+        		  <div>Sin Videos</div>
+        		  <div>1 mes</div>
+        		</td>
+        		<td>
+				  <div>$ 300</div>
+        		  <div>5 Imagenes</div>
+        		  <div>1 Video</div>
+        		  <div>3 meses</div>
+				</td>
+        		<td>
+        		  <div>$ 1000</div>
+        		  <div>10 Imagenes</div>
+        		  <div>1 Video</div>
+        		  <div>12 meses</div>
+        		</td>
+        	  </tr>
+  			</tbody>
+	      </table>
+	  	</div>
+	  </div>
+  </div>
+	  
 </div>
 
 <div class="row">  
@@ -166,6 +206,13 @@
 <% end %>
 
 <script type="text/javascript" >
+/*$(document).ready(function(){
+   
+});*/
+</script>
+
+
+<script type="text/javascript" >
 
 
   var ready;
@@ -232,6 +279,7 @@
       $('#publication_lng').val(result.longitude);
       $('#publication_address').typeahead('val', result.placeResult.formatted_address);
     });
+    
   }
 
   $(document).ready(ready);

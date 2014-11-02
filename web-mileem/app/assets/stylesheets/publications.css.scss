@@ -33,3 +33,37 @@
 .oneLineColumn{
   white-space: nowrap;
 }
+
+.plansHelpContainer{
+  display: inline-block;
+  margin-top: 41px;
+}
+
+.myqtip-content{
+  position: absolute;
+  width: 400px;
+  top: -50px;
+  left: 30px;
+  border: 1px solid black;
+  background-color: #F2F2F2; 
+}
+
+.myqtip-content table{
+  width: 100%;
+}
+
+.plansDescriptionsColums td div{
+  text-align: center;
+}
+
+.plan-column{
+  text-align: center;
+}
+
+#plansHelp .myqtip-content{
+  display: none;
+}
+
+#plansHelp:hover .myqtip-content{
+  display: block;
+}
