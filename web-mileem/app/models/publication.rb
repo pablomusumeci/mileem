@@ -142,6 +142,27 @@ class Publication < ActiveRecord::Base
 		return (self.isActive && self.available? )
 	end
 
+	def get_current_status
+		if(self.isActive)
+			case self.status
+				when "finished" 
+					return "Finalizada"
+				when "available"
+					return "Activa"
+				when "republished"
+					return "Republicada"
+				when "stopped"
+					return "Pausada"
+			end
+		else
+			if(self.end_date < DateTime.now)
+				return "Vencida"
+			else
+				return "Creada"	
+			end	
+		end
+	end
+
   def url_de_pago(plan_id = nil, has_discount = false)
   	plan_id = self.plan_id if plan_id.nil?
   	plan = Plan.find(plan_id)
