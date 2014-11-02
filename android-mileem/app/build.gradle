@@ -1,21 +1,30 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'release'
+            keyPassword 'mileem'
+            storeFile file('/home/javi/claves/mileem.jks')
+            storePassword 'mileem'
+        }
+    }
     compileSdkVersion 19
     buildToolsVersion '20.0.0'
-
     defaultConfig {
-        applicationId "ar.uba.fi.proyectos2.mileem"
+        applicationId 'ar.uba.fi.proyectos2.mileem'
         minSdkVersion 14
         targetSdkVersion 17
         versionCode 1
-        versionName "1.0"
+        versionName '1.0'
     }
     buildTypes {
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    productFlavors {
     }
 }
 
