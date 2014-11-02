@@ -83,5 +83,8 @@ p1 = Publication.create(user_id: 1, payment_status: "Realizado", effective_date:
 
 p2 = Publication.create(user_id: 1, payment_status: "Realizado", effective_date: (DateTime.now).strftime("%d/%m/%Y"),end_date: (DateTime.now + 1.months).strftime("%d/%m/%Y"), operation: "Venta", address: "Av Callao 2000, Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina", floor: 7, apartment: "4", number_spaces: 5, surface: 120, price: 6500.0, expenses: 250.0, antiquity: 20, description: "", additional_info: "", created_at: "2014-09-14 17:38:48", updated_at: "2014-09-14 17:38:48", currency_id: 1, neighbourhood_id: 6, property_type_id: 3,plan_id: 3,status: 2, lat: -34.587552,lng: -58.387085)
 
+p3 = Publication.create(user_id: 1, payment_status: "Realizado", effective_date: (DateTime.now).strftime("%d/%m/%Y"),end_date: (DateTime.now + 3.months).strftime("%d/%m/%Y"), operation: "Alquiler", address: "Avenida Callao 3000, Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina", floor: 4, apartment: "1", number_spaces: 4, surface: 90, price: 3000.0, expenses: 300.0, antiquity: 5, description: "", additional_info: "", created_at: "2014-09-14 17:38:48", updated_at: "2014-09-14 17:38:48", currency_id: 1, neighbourhood_id: 2, property_type_id: 3,plan_id: 2,status: 2, lat: -34.5865885, lng: -58.3858701999)
+
 p1.update(effective_date: (DateTime.now - 1.months).strftime("%d/%m/%Y"),end_date: (DateTime.now - 1.months + 3.months).strftime("%d/%m/%Y"))
 p2.update(effective_date: (DateTime.now - 45.days).strftime("%d/%m/%Y"),end_date: (DateTime.now - 45.days + 1.months).strftime("%d/%m/%Y"))
+p3.update(effective_date: (DateTime.now - 6.months).strftime("%d/%m/%Y"),end_date: (DateTime.now - 3.months).strftime("%d/%m/%Y"))
