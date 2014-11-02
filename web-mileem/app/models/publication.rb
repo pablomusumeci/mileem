@@ -86,12 +86,12 @@ class Publication < ActiveRecord::Base
 			end
 
 			if not in_bs_as
-	      		errors.add(:error_validando_direccion, ", la direcciión debe pertenercer a la #{ciudad_bs_as}.")
+	      		errors.add(:error_validando_direccion, ", la dirección debe pertenercer a la #{ciudad_bs_as}.")
 			end
 		end
 
 		rescue Exception => e
-			Rails.logger.error("Error validando la direccion serverside")
+			Rails.logger.error("Error validando la dirección serverside")
 			Rails.logger.error(e.message)
       		errors.add(:error_validando_direccion, 'Por favor, vuelva a ingresar la dirección.')
 		end
@@ -172,6 +172,13 @@ class Publication < ActiveRecord::Base
   	end
 		data = {
 			external_reference: "PUBLICATION-ID-#{self.id}-#{plan_id}",
+			payment_methods: {
+    			excluded_payment_types: [
+		            {
+		            	id: "ticket"
+		            }
+		        ]
+			},
 			items: [
 				{
 					id:           "PUBLICATION-ID-#{self.id}-#{plan_id}",
@@ -182,18 +189,18 @@ class Publication < ActiveRecord::Base
 					currency_id:  "ARS",
 					category_id:  self.operation
 				}
-				],
-				payer: {
-					name:     (self.user.username.nil? ? self.user.email : self.user.username),
-					email:   self.user.email
-					},
-					back_urls: {
-						pending: "#{ENV['url']}/publications/payment_return/#{self.id}/2", #/success",
-						success: "#{ENV['url']}/publications/payment_return/#{self.id}/1", #/success",
-						failure: "#{ENV['url']}/publications/payment_return/#{self.id}/3" #/failure"
-					},
-				auto_return: 'approved',
-				notification_url: "payment/notification"
+			],
+			payer: {
+				name:     (self.user.username.nil? ? self.user.email : self.user.username),
+				email:   self.user.email
+				},
+				back_urls: {
+					pending: "#{ENV['url']}/publications/payment_return/#{self.id}/2", #/success",
+					success: "#{ENV['url']}/publications/payment_return/#{self.id}/1", #/success",
+					failure: "#{ENV['url']}/publications/payment_return/#{self.id}/3" #/failure"
+				},
+			auto_return: 'approved',
+			notification_url: "payment/notification"
 		}
 
 		payment = $mp.create_preference(data)
