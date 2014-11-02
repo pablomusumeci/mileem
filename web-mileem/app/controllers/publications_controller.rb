@@ -81,6 +81,7 @@ class PublicationsController < ApplicationController
     @publication = Publication.new(publication_params)    
     @publication.user_id = current_user.id
     @publication.end_date = @publication.effective_date + @publication.plan.duration.months
+    @publication.payment_status = "No realizado"
     respond_to do |format|
       if @publication.save
         @publication.available!
@@ -101,13 +102,26 @@ class PublicationsController < ApplicationController
         end
         old_publication = Publication.find(params[:old_publication_id])
         old_publication.republished!  
+        
+        # Check if has discount
+        @has_discount = (Date.today < old_publication.end_date + 1.month)
+        
         if (old_publication.plan.priority < @publication.plan.priority)
           flash["warning"] = 'Al obtener un plan inferior al actual se seleccionaron las primeras 
           imágenes y video que cumplen con la cantidad permitida por el nuevo plan.'
-          format.html { redirect_to @publication }
+          url_to_redirect = publication_url(@publication)
+          if (@publication.plan.id != Plan.get_free_plan_id)
+            url_to_redirect = @publication.url_de_pago(@publication.plan.id, @has_discount)
+          end
+          format.html { redirect_to url_to_redirect }
           format.json { render :show, status: :created, location: @publication }
         else
-          format.html { redirect_to @publication, notice: 'La publicación fue republicada exitosamente.' }
+          if (@publication.plan.id != Plan.get_free_plan_id)
+            format.html { redirect_to @publication.url_de_pago(@publication.plan.id, @has_discount) }
+          else
+            format.html { redirect_to @publication, notice: 'La publicación fue republicada exitosamente.' }  
+          end
+          
           format.json { render :show, status: :created, location: @publication }
         end
       else
@@ -124,6 +138,7 @@ class PublicationsController < ApplicationController
     @publication.user_id = current_user.id
     @publication.end_date = @publication.effective_date + @publication.plan.duration.months
     
+    @publication.payment_status = "No realizado"
     # Los planes gratuitos se inicializan en pagos
     @publication.payment_status = "Realizado" if (@publication.plan.id == Plan.get_free_plan_id)
 
@@ -150,6 +165,7 @@ class PublicationsController < ApplicationController
     respond_to do |format|
       oldPlan = Publication.find(@publication.id).plan
       newPlan = Plan.find(publication_params["plan_id"])
+      
       #Solo se puede hacer upgrade 
       if(newPlan.priority > oldPlan.priority)
         flash[:error] = "No se puede obtener un plan inferior al actual"
@@ -160,7 +176,11 @@ class PublicationsController < ApplicationController
       # Conservo el plan hasta que se cambie en el payment_controller
       params[:publication][:plan_id] = oldPlan.id
 
-      # TODO llamar a url de pago con newPlan.id como parametro!
+      url_to_redirect = "/publications/payment_return/#{@publication.id}/4"
+      #si es upgrade tiene que pagar
+      if(newPlan.priority < oldPlan.priority)
+        url_to_redirect = @publication.url_de_pago(newPlan.id)
+      end
 
       if(!@publication.isActive)
         @publication.end_date = publication_params["effective_date"].to_date + newPlan.duration.months
@@ -168,7 +188,7 @@ class PublicationsController < ApplicationController
          @publication.end_date = Date.today + newPlan.duration.months
       end  
       if @publication.update(publication_params)
-        format.html { redirect_to @publication, notice: 'La publicación fue actualizada exitosamente.' }
+        format.html { redirect_to url_to_redirect }
         format.json { render :show, status: :ok, location: @publication }
       else
         format.html { render :edit }
@@ -177,7 +197,7 @@ class PublicationsController < ApplicationController
     end
   end
   
-  # 1: success, 2: pending, 3: failure
+  # 1: success, 2: pending, 3: failure, 4: update without payment
   def payment_return
     url = root_url
     if (params[:status] == "1")
@@ -190,6 +210,10 @@ class PublicationsController < ApplicationController
     elsif (params[:status] == "3")
       url = publications_url
       flash[:error] = "El pago de la publiacción no pudo completarse correctamente."
+    elsif (params[:status] == "4")
+      @publication = Publication.find(params[:id])
+      url = publication_url(@publication)
+      flash[:notice] = "La publicación fue actualizada exitosamente."
     end
     redirect_to url
   end

@@ -142,17 +142,22 @@ class Publication < ActiveRecord::Base
 		return (self.isActive && self.available? )
 	end
 
-  def url_de_pago(plan_id)
-  		plan_id = self.plan_id if plan_id.nil?
+  def url_de_pago(plan_id = nil, has_discount = false)
+  	plan_id = self.plan_id if plan_id.nil?
+  	plan = Plan.find(plan_id)
+  	if (has_discount)
+  	  # discount = 20%
+  	  plan.price = plan.price*0.8
+  	end
 		data = {
 			external_reference: "PUBLICATION-ID-#{self.id}-#{plan_id}",
 			items: [
 				{
 					id:           "PUBLICATION-ID-#{self.id}-#{plan_id}",
-					title:        "Plan #{self.plan.name}",
+					title:        "Plan #{plan.name}",
 					description:  "#{self.address}",
 					quantity:     1,
-					unit_price:   self.plan.price,
+					unit_price:   plan.price,
 					currency_id:  "ARS",
 					category_id:  self.operation
 				}
