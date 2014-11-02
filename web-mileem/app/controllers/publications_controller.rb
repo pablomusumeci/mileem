@@ -14,7 +14,7 @@ class PublicationsController < ApplicationController
     @filterrific = Filterrific.new(Publication, params[:filterrific])
     number_status = Publication.statuses[:republished]
     @publications = Publication.filterrific_find(@filterrific).
-    where("user_id = ? AND status <> ?", current_user.id, number_status).paginate(page: params[:page])
+    where("user_id = ? AND status <> ? AND payment_status = ?", current_user.id, number_status, "Realizado").paginate(page: params[:page])
 
     respond_to do |format|
       format.html { render :index}
