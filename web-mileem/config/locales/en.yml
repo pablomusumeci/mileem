@@ -51,8 +51,8 @@ en:
       send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
       updated: "Su contraseña se ha modificado correctamente. Ahora ha ingresado al sistema."
     errors:
-    messages:
-      not_found: "no encontrado"
+      messages:
+        not_found: "no encontrado"
   activerecord:
     errors:
       template:
