@@ -2,37 +2,28 @@ package ar.uba.fi.proyectos2.mileem.detail;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.LabeledIntent;
-import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.text.Html;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.FacebookException;
+import com.facebook.Session;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.FacebookDialog;
+import com.facebook.widget.WebDialog;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -357,15 +348,51 @@ public class PublicationDetailActivity extends Activity {
 
 
     public void onShareFacebook(View view){
+        if (FacebookDialog.canPresentShareDialog(getApplicationContext(),
+                FacebookDialog.ShareDialogFeature.SHARE_DIALOG)) {
+            String hostBase = getString(R.string.host);
+            String urlToShare =  "http://"+hostBase+"/publications/"+p.getId()+"/preview";
+            FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(this)
+                    .setLink(urlToShare)
+                    .setCaption("MiLEEM")
+                    .setDescription(getString(R.string.facebook_share))
+                    .build();
+            uiHelper.trackPendingDialogCall(shareDialog.present());
+        } else {
+            Context context = getApplicationContext();
+            CharSequence text = getString(R.string.facebook_error);
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            //publishFeedDialog();
+        }
+    }
+
+    private void publishFeedDialog() {
         String hostBase = getString(R.string.host);
         String urlToShare =  "http://"+hostBase+"/publications/"+p.getId()+"/preview";
-        FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(this)
-                .setLink(urlToShare)
-                .setCaption("MiLEEM")
-                .setDescription(getString(R.string.facebook_share))
-                .build();
-        uiHelper.trackPendingDialogCall(shareDialog.present());
+        Bundle params = new Bundle();
+        params.putString("name", getString(R.string.app_name));
+        params.putString("caption", getString(R.string.app_name));
+        params.putString("description", getString(R.string.facebook_share));
+        params.putString("link", urlToShare);
 
+        WebDialog feedDialog = (
+                new WebDialog.FeedDialogBuilder(this,
+                        Session.getActiveSession(),
+                        params))
+                .setOnCompleteListener(new WebDialog.OnCompleteListener() {
+
+                    @Override
+                    public void onComplete(Bundle values,
+                                           FacebookException error) {
+
+                    }
+
+                })
+                .build();
+        feedDialog.show();
     }
 
     @Override
