@@ -31,6 +31,9 @@ import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.UiLifecycleHelper;
+import com.facebook.widget.FacebookDialog;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -42,19 +45,11 @@ import ar.uba.fi.proyectos2.mileem.utils.DownloadImageTask;
 
 public class PublicationDetailActivity extends Activity {
 
-    public TextView makeCall;
-    public TextView makeEmail;
-    public ImageButton makeButtonCall;
-    public ImageButton makeButtonEmail;
     public Intent callIntent;
 
-    private Publication p;
-    private ViewPager mPager;
-    private PagerAdapter mPagerAdapter;
-    private GestureDetector gestureDetector;
+    private UiLifecycleHelper uiHelper;
 
-    // Para compartir
-    private ShareActionProvider mShareActionProvider;
+    private Publication p;
 
     private View generateViewForGallery(String url){
 
@@ -76,6 +71,10 @@ public class PublicationDetailActivity extends Activity {
 
         setContentView(R.layout.activity_publication_detail);
         getActionBar().setDisplayHomeAsUpEnabled(false);
+
+        // para el compartir en Facebook
+        uiHelper = new UiLifecycleHelper(this, null);
+        uiHelper.onCreate(savedInstanceState);
 
         LinearLayout imageGallery = (LinearLayout) findViewById(R.id.linearLayoutImages);
         int position = 0;
@@ -257,7 +256,22 @@ public class PublicationDetailActivity extends Activity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        uiHelper.onActivityResult(requestCode, resultCode, data, new FacebookDialog.Callback() {
+            @Override
+            public void onError(FacebookDialog.PendingCall pendingCall, Exception error, Bundle data) {
+                Log.e("Activity", String.format("Error: %s", error.toString()));
+            }
+
+            @Override
+            public void onComplete(FacebookDialog.PendingCall pendingCall, Bundle data) {
+                Log.i("Activity", "Success!");
+            }
+        });
+    }
 
 
     public void call(View view) {
@@ -342,28 +356,39 @@ public class PublicationDetailActivity extends Activity {
 
 
     public void onShareFacebook(View view){
-        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-        sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
         String hostBase = getString(R.string.host);
-        sharingIntent.putExtra(Intent.EXTRA_TEXT, "http://"+hostBase+"/publications/"+p.getId()+"/preview");
-        PackageManager packManager = getPackageManager();
-        List<ResolveInfo> resolvedInfoList = packManager.queryIntentActivities(sharingIntent,  PackageManager.MATCH_DEFAULT_ONLY);
+        String urlToShare =  "http://"+hostBase+"/publications/"+p.getId()+"/preview";
+        FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(this)
+                .setLink(urlToShare)
+                .setCaption("MiLEEM")
+                .setDescription(getString(R.string.facebook_share))
+                .build();
+        uiHelper.trackPendingDialogCall(shareDialog.present());
 
-        boolean resolved = false;
-        for(ResolveInfo resolveInfo: resolvedInfoList){
-            if(resolveInfo.activityInfo.packageName.startsWith("com.facebook.katana")){
-                sharingIntent.setClassName(
-                        resolveInfo.activityInfo.packageName,
-                        resolveInfo.activityInfo.name );
-                resolved = true;
-                break;
-            }
-        }
-        if(resolved){
-            startActivity(sharingIntent);
-        }
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        uiHelper.onResume();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        uiHelper.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        uiHelper.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        uiHelper.onDestroy();
     }
 
 }

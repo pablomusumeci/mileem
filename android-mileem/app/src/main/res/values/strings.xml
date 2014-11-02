@@ -103,13 +103,11 @@
         <item>Villa Urquiza</item>
     </string-array>
     <string name="share_chooser_text">Compartir publicación</string>
-    <string name="share_facebook">Facebook</string>
-    <string name="share_twitter">Twitter</string>
     <string name="title_activity_media_details">Galería</string>
     <string name="title_activity_main">Main</string>
 
     <!-- Comparticion -->
-    <string name="twitter_share">Encontré esta propiedad en MiLEEM: </string>
-    <string name="facebook_share">Encontré esta propiedad en MiLEEM: </string>
+    <string name="twitter_share">Miren seguidores, encontré esta propiedad en MiLEEM: </string>
+    <string name="facebook_share">Miren amigos, encontré esta propiedad en MiLEEM: </string>
 
 </resources>

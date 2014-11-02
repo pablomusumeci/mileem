@@ -1,1 +1,1 @@
-include ':app', ':PhotoView'
+include ':app', ':PhotoView', ':facebook'

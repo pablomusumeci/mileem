@@ -24,4 +24,5 @@ dependencies {
 //    compile "com.android.support:support-v4:18.0.+"
     compile files('libs/android-support-v13.jar')
     compile project(':PhotoView')
+    compile project(':facebook')
 }
