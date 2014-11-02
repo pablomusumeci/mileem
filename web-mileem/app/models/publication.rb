@@ -86,12 +86,12 @@ class Publication < ActiveRecord::Base
 			end
 
 			if not in_bs_as
-	      		errors.add(:error_validando_direccion, ", la direcciión debe pertenercer a la #{ciudad_bs_as}.")
+	      		errors.add(:error_validando_direccion, ", la dirección debe pertenercer a la #{ciudad_bs_as}.")
 			end
 		end
 
 		rescue Exception => e
-			Rails.logger.error("Error validando la direccion serverside")
+			Rails.logger.error("Error validando la dirección serverside")
 			Rails.logger.error(e.message)
       		errors.add(:error_validando_direccion, 'Por favor, vuelva a ingresar la dirección.')
 		end
