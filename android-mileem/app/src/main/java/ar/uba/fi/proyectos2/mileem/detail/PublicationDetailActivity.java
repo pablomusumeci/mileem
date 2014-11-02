@@ -74,6 +74,7 @@ public class PublicationDetailActivity extends Activity {
 
         // para el compartir en Facebook
         uiHelper = new UiLifecycleHelper(this, null);
+
         uiHelper.onCreate(savedInstanceState);
 
         LinearLayout imageGallery = (LinearLayout) findViewById(R.id.linearLayoutImages);
