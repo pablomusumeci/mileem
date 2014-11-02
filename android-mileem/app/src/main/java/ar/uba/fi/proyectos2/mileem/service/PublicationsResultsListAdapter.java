@@ -36,21 +36,13 @@ public class PublicationsResultsListAdapter extends ArrayAdapter<Publication> {
 
         synchronized (mLock) {
             Publication p = publications.get(position);
+            LayoutInflater layoutInflater = LayoutInflater.from(getContext());
             if (p.getPlan_priority() == 3) {
-                if (view == null) {
-                    LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-                    view = layoutInflater.inflate(R.layout.publication_search_display_free, null);
-                }
+                 view = layoutInflater.inflate(R.layout.publication_search_display_free, null);
             } else if (p.getPlan_priority() == 2) {
-                if (view == null) {
-                    LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-                    view = layoutInflater.inflate(R.layout.publication_search_display_basic, null);
-                }
+                 view = layoutInflater.inflate(R.layout.publication_search_display_basic, null);
             } else {
-                if (view == null) {
-                    LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-                    view = layoutInflater.inflate(R.layout.publication_search_display_premium, null);
-                }
+                view = layoutInflater.inflate(R.layout.publication_search_display_premium, null);
             }
             try {
                 tt = (TextView) view.findViewById(R.id.PublicationStreetID);

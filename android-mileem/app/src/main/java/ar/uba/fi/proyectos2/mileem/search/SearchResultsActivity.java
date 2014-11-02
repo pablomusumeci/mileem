@@ -40,7 +40,7 @@ public class SearchResultsActivity extends ListActivity {
         getActionBar().setDisplayHomeAsUpEnabled(false);
 
         url = getIntent().getStringExtra("SEARCH.URL");
-        new GetHttpData().execute("");
+        new GetHttpData().execute("&sort_by=plan_priority&order=asc");
         ListView lv = getListView();
         OnPublicationClickListener listener = new OnPublicationClickListener(this);
         lv.setOnItemClickListener(listener);
@@ -66,7 +66,7 @@ public class SearchResultsActivity extends ListActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_search_priority) {
-            new GetHttpData().execute("");
+            new GetHttpData().execute("&sort_by=plan_priority&order=asc");
             return true;
         } else if (id == R.id.action_search_price) {
             new GetHttpData().execute("&sort_by=price&order=asc");
