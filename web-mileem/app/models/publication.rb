@@ -172,6 +172,13 @@ class Publication < ActiveRecord::Base
   	end
 		data = {
 			external_reference: "PUBLICATION-ID-#{self.id}-#{plan_id}",
+			payment_methods: {
+    			excluded_payment_types: [
+		            {
+		            	id: "ticket"
+		            }
+		        ]
+			},
 			items: [
 				{
 					id:           "PUBLICATION-ID-#{self.id}-#{plan_id}",
@@ -182,18 +189,18 @@ class Publication < ActiveRecord::Base
 					currency_id:  "ARS",
 					category_id:  self.operation
 				}
-				],
-				payer: {
-					name:     (self.user.username.nil? ? self.user.email : self.user.username),
-					email:   self.user.email
-					},
-					back_urls: {
-						pending: "#{ENV['url']}/publications/payment_return/#{self.id}/2", #/success",
-						success: "#{ENV['url']}/publications/payment_return/#{self.id}/1", #/success",
-						failure: "#{ENV['url']}/publications/payment_return/#{self.id}/3" #/failure"
-					},
-				auto_return: 'approved',
-				notification_url: "payment/notification"
+			],
+			payer: {
+				name:     (self.user.username.nil? ? self.user.email : self.user.username),
+				email:   self.user.email
+				},
+				back_urls: {
+					pending: "#{ENV['url']}/publications/payment_return/#{self.id}/2", #/success",
+					success: "#{ENV['url']}/publications/payment_return/#{self.id}/1", #/success",
+					failure: "#{ENV['url']}/publications/payment_return/#{self.id}/3" #/failure"
+				},
+			auto_return: 'approved',
+			notification_url: "payment/notification"
 		}
 
 		payment = $mp.create_preference(data)
