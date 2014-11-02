@@ -10,8 +10,8 @@
         ¿Esta usted seguro que desea finalizar la publicación?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <%= button_to finish_publication_path(publication) , class: "btn btn-primary", :method => :get do %>Finalizar<% end %>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <%= button_to finish_publication_path(publication) , class: "btn btn-danger", :method => :get do %>Finalizar<% end %>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
