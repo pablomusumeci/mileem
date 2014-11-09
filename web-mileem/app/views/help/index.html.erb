@@ -1,0 +1,131 @@
+<div class="page-header">
+  <h1>Instrucciones</h1>
+</div>
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail" style="height: 300px">
+      <div class="caption">
+        <h3 style="text-align: center">Nueva Publicación</h3>
+        <p>Para crear una publicación es posible acceder desde la barra de navegación seleccionando la opción "Nueva Publicación".</p> 
+        <p> En la página se puede observar un mapa de la ciudad de buenos que ayuda a la ubicación del inmueble en el momento de ingresar la dirección de la misma, la cual es autocompletable.</p>
+        <p>
+        <% if user_signed_in? %>
+          <%= link_to "Nueva publicación", new_publication_path, :class => "btn btn-success" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-6 col-md-4">
+    <div class="thumbnail" style="height: 300px">
+      <div class="caption">
+        <h3 style="text-align: center">Mis Publicaciones</h3>
+        <p>Para ver las publicaciones se debe acceder a través de la barra de navegación seleccionando la opción "Mis publicaciones".</p> 
+        <p> En la página se puede observar un listado todas las publicaciones, sus estados y las acciones posibles a realizar sobre las mismas.</p>
+        <p>
+        <br>
+        <% if user_signed_in? %>
+          <%= link_to "Mis publicaciones", publications_path, :class => "btn btn-success" %>
+        <% end %> 
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail" style="height: 300px">
+      <div class="caption">
+        <h3 style="text-align: center">Mis Datos</h3>
+        <p>Para ver y poder editar los datos del usuario se podrá acceder a través de la barra de navegación seleccionando el email del usuario conectado.</p>
+        <p>En esta página se podrán actualizar los datos personales y cambiar la contraseña.</p>
+        <br><br>
+        <% if user_signed_in? %>
+          <%= link_to "Editar Usuario", edit_user_registration_path, :class => "btn btn-success" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail" style="height: 300px">
+      <div class="caption">
+        <h3 style="text-align: center">Buscar Publicación</h3>
+        <p>Para poder buscar en las publicaciones disponibles se debe acceder a través de la barra de navegación seleccionando la opción "Mis publicaciones".</p> 
+        <p> En la página se cuenta con un buscador que permite filtrar las publicaciones de acuerdo a los parámetros buscados. Se puede buscar por barrio, tipo de operación, fecha de publicación, precio, moneda y tipo de operación. </p>
+        <p>
+        <% if user_signed_in? %>
+          <%= link_to "Mis publicaciones", publications_path, :class => "btn btn-success" %>
+        <% end %> 
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-6 col-md-4">
+    <div class="thumbnail" style="height: 300px">
+      <div class="caption">
+        <h3 style="text-align: center">Editar Publicación</h3>
+        <p> Para editar una publicación es necesario acceder al listado de publicaciones y seleccionar la opción <div class="btn btn-default btn-xs"><span class="glyphicon glyphicon-edit" title="Editar Publicación"></span></div>.  Sólo se podrán editar aquellas publicaciones que no estén finalizadas y que no hayan vencidos. Los campos editables dependerán de la fecha de publicación, si la publicación ya se encuentra activa no se podrán editar todos los campos. 
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail" style="height: 300px">
+      <div class="caption">
+        <h3 style="text-align: center">Ver publicación</h3>
+        <p> Para ver una publicación es necesario acceder al listado de publicaciones y seleccionar la opción <div class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open" title="Ver Publicación"></span></div>.  En esta página se pueden ver las fotos y videos cargados de la publciación y el detalle de la misma, pudiendo comprobar como se vería en la aplicación mobile.
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail" style="height: 300px">
+      <div class="caption">
+        <h3 style="text-align: center">Pagar Plan</h3>
+        <p> Cuando se crea una publicación se debe seleccionar un plan, cada uno cuenta con beneficios diferentes, y al crearlo el usuario es redirigido a una página donde se efectuará el pago de la publicación. En el caso de que el pago fracase la publicación no será creada.</p>
+        <br><br>
+        <%= link_to "Más Info sobre Planes", plans_path, :class => "btn btn-success" %>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-6 col-md-4">
+    <div class="thumbnail" style="height: 300px">
+      <div class="caption">
+        <h3 style="text-align: center">Cargar Imágenes y Videos</h3>
+        <p>Para cargar imágenes y videos es necesario acceder al listado de publicaciones y seleccionar al opción de ver el detalle de una publicación, para cargar imágenes se debe seleccionar la opción "Imágenes" donde se pueden seleccionar múltiples imágenes dependiendo de la cantidad permitida por el plan correspondiente. Si el plan lo permite, también se podrá cargar un video seleccionado la opción "Seleccionar video".</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail" style="height: 300px">
+      <div class="caption">
+        <h3 style="text-align: center">Eliminar Publicación</h3>
+        <p> Para eliminar una publicación es necesario acceder al listado de publicaciones y seleccionar la opción <div class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove-circle" title="Eliminar Publicación"></span></div>. Sólo se pueden eliminar las publicaciones que no están activas, una vez eliminada la publicación se dejará de mostrar en los resultados de búsqueda y no se podrá volver a acceder a la misma.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail" style="height: 300px">
+      <div class="caption">
+        <h3 style="text-align: center">Pausar y Activar</h3>
+         <p> Para pausar una publicación es necesario acceder al listado de publicaciones y seleccionar la opción <div class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pause" title="Pausar"></div>. La publicación se pausará y se dejará de mostrar en los resultados de búsqueda de la aplicación mobile, sin embargo la duración del plan no se interrumpirá.</p>
+         <p> Para volver a activar se debe seleccionar la opción <div class="btn btn-default btn-xs"><span class="glyphicon glyphicon-play" title="Activar"></span></div>. La publicación pasará a mostrarse nuevamente en los resultados de búsqueda de la aplicación mobile.
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-6 col-md-4">
+    <div class="thumbnail" style="height: 300px">
+      <div class="caption">
+        <h3 style="text-align: center">Finalizar</h3>
+        <p> Para finalizar una publicación es necesario acceder al listado de publicaciones y seleccionar la opción <div class="btn btn-default btn-xs"><span class="glyphicon glyphicon-ban-circle" title="Finalizar"></span></div>. Sólo se pueden finalizar las publicaciones activas, una vez finalizada la publicación se dejará de mostrar en los resultados de búsqueda y no se podrá volver a utilizar (solo podrá republicarse).</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail" style="height: 300px">
+      <div class="caption">
+        <h3 style="text-align: center">Republicar</h3>
+          <p> Para republicar una publicación es necesario acceder al listado de publicaciones y seleccionar la opción <div class="btn btn-success btn-xs"><span class="glyphicon glyphicon-repeat" title="Republicar"></div>. Sólo se pueden republicar las publicaciones vencidas o finalizadas. Al republicar, se pueden modificar datos de la publicación, seleccionar un nuevo plan y pagar el mismo, una vez republicada la publicación volverá a mostrarse en los resultados de búsqueda.</p>
+      </div>
+    </div>
+  </div>
+</div>

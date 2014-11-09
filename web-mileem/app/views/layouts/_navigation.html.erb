@@ -11,16 +11,21 @@
 		</div>
 		<div class="navbar-collapse collapse navbar-inverse-collapse">
 			<ul class="nav navbar-nav navbar-left">
+				<%= image_tag "logo-mileem-barra.png" , :width=>"100px", :height=>"50px" %>
+			</ul>
+			<ul class="nav navbar-nav navbar-left">
 				<li><%= link_to 'Inicio', root_path, class: "navbar-brand" %></li>
 				<%= render 'layouts/navigation_links' %>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
+				<li><%= link_to "Planes", plans_path %><li>
+				<li><%= link_to "Ayuda", help_path %><li>
 				<% if user_signed_in? %>
 					<li><%= link_to "Nueva publicación", new_publication_path %><li>
 					<li><%= link_to "Mis publicaciones", publications_path %><li>
+
 					<li><%= link_to current_user.email, edit_user_registration_path %><li>
-						
 					<li class="divider"></li>
 					<li><%= link_to "Salir", destroy_user_session_path, :method => :delete  %></li>
 				<% else %>

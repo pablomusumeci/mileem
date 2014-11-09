@@ -19,9 +19,12 @@ Rails.application.routes.draw do
   get 'publications/:id/republicate', to: 'publications#republicate', as: 'republicate'
   post 'publications/:id/republicate', to: 'publications#save_republicate'
 
+  resources :plans
+    match 'plans' => "plans#index", :as => :plans_index, via: [:get, :post]
+
   #get 'publications/payment_return/:id/:status', to: 'publications#payment_return', as: 'payment_return'
   #
-
+  get 'help' => "help#index", :as => :help
 
   resources :uploads
   resources :publications do

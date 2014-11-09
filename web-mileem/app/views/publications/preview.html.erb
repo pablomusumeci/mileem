@@ -5,17 +5,17 @@
 <h3><strong><%= @publication.address %></strong></h3>
 
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-md-4">
     <div class="mediaTypeLink" onclick="showPhotos()">FOTOS</div><div class="mediaTypeLink" onclick="showVideo()">VIDEO</div>
-    <div class="mediaContainer" id="mediaContainer">
-      <div id="myCarousel" class="carousel slide">
+    <div class="mediaContainer" id="mediaContainer" >
+      <div id="myCarousel" class="carousel slide" >
         <ol class="carousel-indicators">
           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
           <% (1..(@publication.uploads.size()- 1)).each do |i| %>
             <li data-target="#myCarousel" data-slide-to=<%= i.to_i %> ></li>
           <% end %>   
         </ol>
-        <div class="carousel-inner">
+        <div class="carousel-inner" >
           <% if(@publication.uploads.size() > 0) %>
             <div class="item active">
               <img src="<%= @publication.uploads.first().upload %>" style="width:100%;height:100%;" />
@@ -37,7 +37,7 @@
       </div>
       
       <!-- VIDEO -->
-      <div id="videoContainer" style="display:none">
+      <div id="videoContainer" style="display:none;">
         <% if (@publication.video_uploads.size() > 0) %>
         <%= video_tag @publication.video_uploads.first().video_url.to_s, :controls => true, :width=>"100%", :height=>"100%" %>
       <% else %>
@@ -46,11 +46,10 @@
       </div>
     </div>
   </div>
-</div>
-<div class="row">
 
-  <div class="col-xs-12">
-    <dl class="dl-horizontal">
+  <div class="col-md-4">
+    <br>
+    <dl>
       <dd><strong>Teléfono Anunciante</strong>: <%= @publication.user.phone_number %></dd>
       <dd><strong>Email Anunciante</strong>: <%= @publication.user.email %></dd>
       <dd><strong>Barrio</strong>: <%= @publication.neighbourhood.name %></dd>
@@ -71,10 +70,8 @@
 
     </dl>     
   </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12">
+  <div class="col-md-4">
+    <br>
     <%= image_tag("http://maps.google.com/maps/api/staticmap?center=#{@publication.lat},#{@publication.lng}&zoom=14&size=300x200&markers=size:mid|color:red|#{@publication.lat},#{@publication.lng}") %>
   </div>
 </div>
@@ -98,7 +95,6 @@
   	$('#myCarousel').hide();
   	$('#videoContainer').show();
   }
-  $(document).ready(ready);
 
 </script>
 
