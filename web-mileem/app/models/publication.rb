@@ -49,8 +49,8 @@ class Publication < ActiveRecord::Base
 	validates :antiquity, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	validates :expenses, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
 	validates :floor, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
-	validates :number_spaces, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
-	validates :surface, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => true
+	validates :number_spaces, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => false
+	validates :surface, :numericality => { :greater_than_or_equal_to => 0 }, :allow_nil => false
 	
 	validate :user_free_active_publication_limit, :on => :create
 	validate :address_inside_bsas

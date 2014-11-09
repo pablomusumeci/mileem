@@ -135,12 +135,12 @@
         <%= f.collection_select(:property_type_id, PropertyType.all , :id, :name, {:prompt   => "Seleccione una opción"}, { :class =>"form-control" } ) %>  
       </div>
       <div class="col-md-4">
-        <label for="number_spaces" class="control-label">Ambientes</label>
-        <%= f.number_field :number_spaces, :class => 'form-control',step: 1, min: 0 , max: 9999 %>
+        <label for="number_spaces" class="control-label">Ambientes <span class="required">*</span> </label>
+        <%= f.number_field :number_spaces, :class => 'form-control',step: 1, min: 0 , max: 9999, :required => true  %>
       </div>
       <div class="col-md-4">
-        <label for="surface" class="control-label">Superficie (m2)</label>
-        <%= f.number_field :surface, :class => 'form-control',step: 1, min:0 , max: 9999999999 %>
+        <label for="surface" class="control-label">Superficie (m2) <span class="required">*</span></label>
+        <%= f.number_field :surface, :class => 'form-control',step: 1, min:0 , max: 9999999999 , :required => true %>
       </div>
     </div>
 
