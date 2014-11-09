@@ -1,6 +1,10 @@
 # -*- encoding : utf-8 -*-
 Rails.application.routes.draw do
 
+  get 'statistics/spaces_distribution'
+
+  get 'statistics/near_prices'
+
   post 'payment/notification'
   
   devise_for :users
