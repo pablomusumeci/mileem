@@ -1,0 +1,89 @@
+// Place all the styles related to the plans controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+html, body {
+    padding-top: 10px;
+    height: 100%;
+//    margin-left: 0px;
+//   margin-right: 0px;
+}
+
+.top-section {
+background-image:  image-url("ciudad4.png");
+background-position: center center;
+background-size:100% auto;
+color: #fff;
+-webkit-border-radius: 0px;
+-moz-border-radius: 0px;
+border-radius: 0px;
+margin-bottom: 0px;
+position:relative;
+}
+
+.top-section .bgafter {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    display:inline-block;
+    background: rgba(44, 62, 80, .9);
+    z-index:0;
+}
+
+.top-section .jumbotron {
+    background:none;
+    color:#fff;
+}
+
+.top-section .container {
+    z-index:100;
+    display:inline-block;
+}
+
+.second-section, .features-section, .price-section {
+    padding:40px 0px;
+}
+
+.second-section {
+    background:#34495e;
+    color:#fff !important;
+}
+
+.second-section h3 {
+    color:#fff !important;
+}
+
+.features-section {
+    background:#2c3e50;
+    color:#fff;
+}
+
+.features-section h2 {
+    color:#fff !important;
+}
+
+.features-section small {
+    color:#fff; 
+}
+
+.price-section {
+    background:#3498db; 
+}
+
+.buy-section {
+    background: #2980b9;
+    background-size:100% auto;
+    color: #fff;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    margin-bottom: 0px;
+    position:relative;
+    padding:40px 0px;
+}
+
+.glyphicon-mission-vision-goals {
+    font-size: 40px; 
+}
