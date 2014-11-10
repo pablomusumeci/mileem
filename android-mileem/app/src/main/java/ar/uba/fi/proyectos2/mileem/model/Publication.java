@@ -38,6 +38,16 @@ public class Publication implements Parcelable {
     private String video;
     private int plan_priority;
 
+    public int getNeighbourhood_id() {
+        return neighbourhood_id;
+    }
+
+    public void setNeighbourhood_id(int neighbourhood_id) {
+        this.neighbourhood_id = neighbourhood_id;
+    }
+
+    private int neighbourhood_id;
+
     public int getPlan_priority() {
         return plan_priority;
     }
@@ -304,6 +314,7 @@ public class Publication implements Parcelable {
         parcel.writeList(imagesURLs);
         parcel.writeString(video);
         parcel.writeInt(plan_priority);
+        parcel.writeInt(neighbourhood_id);
     }
 
     public static final Parcelable.Creator<Publication> CREATOR = new Creator<Publication>() {
@@ -335,6 +346,7 @@ public class Publication implements Parcelable {
             source.readList(p.imagesURLs, List.class.getClassLoader());
             p.video = source.readString();
             p.plan_priority = source.readInt();
+            p.neighbourhood_id = source.readInt();
             return p;
         }
         public Publication[] newArray(int size) {

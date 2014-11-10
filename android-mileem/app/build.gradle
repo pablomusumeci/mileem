@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'release'
+            keyPassword 'mileem'
+            storeFile file('/home/javi/claves/mileem.jks')
+            storePassword 'mileem'
+        }
+    }
     compileSdkVersion 19
     buildToolsVersion '20.0.0'
     defaultConfig {
@@ -24,4 +32,5 @@ dependencies {
     compile project(':PhotoView')
     compile project(':facebook')
     compile 'com.android.support:support-v13:20.0.0'
+    compile fileTree(dir: 'libs', include: ['androidplot-core-0.6.2-SNAPSHOT.jar'])
 }

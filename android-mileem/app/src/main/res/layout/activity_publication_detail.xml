@@ -557,6 +557,16 @@
                     android:background="@null"
                     android:clickable="true"
                     android:onClick="onShareFacebook" />
+
+                <ImageButton
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:id="@+id/statsPrice"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/stats"
+                    android:background="@null"
+                    android:clickable="true"
+                    android:onClick="showPriceStats" />
             </LinearLayout>
         </TableRow>
 

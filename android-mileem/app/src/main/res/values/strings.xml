@@ -4,7 +4,6 @@
     <!-- Configuracion de la aplicacion -->
     <string name="host">192.168.1.100:3000</string>
     <string name="search_path">/publications/search.json</string>
-
     <string name="facebook_app_id">385283794970002</string>
 
     <!-- Aplicacion -->
@@ -104,6 +103,7 @@
         <item>Villa Soldati</item>
         <item>Villa Urquiza</item>
     </string-array>
+
     <string name="share_chooser_text">Compartir publicación</string>
     <string name="title_activity_media_details">Galería</string>
     <string name="title_activity_main">Main</string>
@@ -112,5 +112,7 @@
     <string name="twitter_share">Encontré esta propiedad en MiLEEM: </string>
     <string name="facebook_share">Encontré esta propiedad en MiLEEM: </string>
     <string name="facebook_error">Necesitas instalar la aplicación de Facebook. </string>
+    <string name="title_activity_price_stats">PriceStatsActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

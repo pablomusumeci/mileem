@@ -32,6 +32,7 @@ import java.util.List;
 
 import ar.uba.fi.proyectos2.mileem.R;
 import ar.uba.fi.proyectos2.mileem.model.Publication;
+import ar.uba.fi.proyectos2.mileem.stats.PriceStatsActivity;
 import ar.uba.fi.proyectos2.mileem.utils.DownloadImageTask;
 
 public class PublicationDetailActivity extends Activity {
@@ -367,6 +368,14 @@ public class PublicationDetailActivity extends Activity {
             toast.show();
             //publishFeedDialog();
         }
+    }
+
+    public void showPriceStats(View view){
+        Intent intent = new Intent(this, PriceStatsActivity.class);
+        intent.putExtra("neighbourhood_id", p.getNeighbourhood_id());
+        intent.putExtra("operation", p.getOperation());
+        startActivity(intent);
+
     }
 
     private void publishFeedDialog() {
