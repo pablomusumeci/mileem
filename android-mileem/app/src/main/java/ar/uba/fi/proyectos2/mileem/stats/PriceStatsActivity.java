@@ -2,6 +2,7 @@ package ar.uba.fi.proyectos2.mileem.stats;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.PointF;
@@ -9,6 +10,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Pair;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -90,7 +92,7 @@ public class PriceStatsActivity extends Activity {
         @Override
         protected void onPostExecute(List<Pair<String, Integer>> result) {
             neighborhoodStats = result;
-            if (! neighborhoodStats.isEmpty()) {
+            if (neighborhoodStats.size() > 1) {
                 loadAndPlot();
             } else {
                 showNoStatsAlert();
@@ -102,8 +104,8 @@ public class PriceStatsActivity extends Activity {
 
     private void showNoStatsAlert(){
         new AlertDialog.Builder(this)
-                .setTitle("No hay estadisticas")
-                .setMessage("no hay estadisticas disponibles para la publicacion seleccionada.")
+                .setTitle(getString(R.string.no_stats_title))
+                .setMessage(getString(R.string.no_stats_description))
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
@@ -115,12 +117,24 @@ public class PriceStatsActivity extends Activity {
 //                            }
 //                        })
                 .setIcon(android.R.drawable.ic_dialog_alert)
+                .setOnKeyListener(new Dialog.OnKeyListener() {
+                    @Override
+                    public boolean onKey(DialogInterface arg0, int keyCode,
+                                         KeyEvent event) {
+                        // TODO Auto-generated method stub
+                        if (keyCode == KeyEvent.KEYCODE_BACK) {
+                            finish();
+                        }
+                        return true;
+                    }
+                })
                 .show();
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_price_stats);
+        getActionBar().setDisplayHomeAsUpEnabled(false);
 
 //        Uri.Builder builder = new Uri.Builder()
 //                .scheme("http")
@@ -129,7 +143,7 @@ public class PriceStatsActivity extends Activity {
 
         // Carga del JSON
             //url = "http://www.mocky.io/v2/545e98e033a0a97d10f28d76";
-        String url = "http://" + getString(R.string.host) + "/statistics/near_prices.json";
+        String url = "http://" + getString(R.string.host) + getString(R.string.stats_price_path);
 
         int neighbourhood_id = getIntent().getIntExtra("neighbourhood_id", 0);
         String operation = getIntent().getStringExtra("operation");
@@ -345,7 +359,7 @@ public class PriceStatsActivity extends Activity {
         if (selection == null) {
             selectionWidget.setText(NO_SELECTION_TXT);
         } else {
-            selectionWidget.setText("Precio: " + selection.second.getY(selection.first));
+            selectionWidget.setText(getString(R.string.price) + selection.second.getY(selection.first));
         }
         plot.redraw();
     }

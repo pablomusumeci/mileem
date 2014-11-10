@@ -37,6 +37,7 @@ public class Publication implements Parcelable {
     private double longitude;
     private String video;
     private int plan_priority;
+    private int neighbourhood_id;
 
     public int getNeighbourhood_id() {
         return neighbourhood_id;
@@ -46,7 +47,6 @@ public class Publication implements Parcelable {
         this.neighbourhood_id = neighbourhood_id;
     }
 
-    private int neighbourhood_id;
 
     public int getPlan_priority() {
         return plan_priority;

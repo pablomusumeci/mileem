@@ -106,6 +106,7 @@ public class PublicationBuilder {
             if (obj.getString("video") != null && obj.getString("video").length() > 0 && "null".compareTo(obj.getString("video")) != 0)
                 p.setVideo("http://" + context.getString(R.string.host) + "/" + obj.getString("video"));
             p.setPlan_priority(obj.getInt("plan_priority"));
+            p.setNeighbourhood_id(obj.getInt("neighbourhood_id"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

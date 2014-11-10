@@ -2,7 +2,8 @@
 <resources>
 
     <!-- Configuracion de la aplicacion -->
-    <string name="host">192.168.1.100:3000</string>
+    <!-- https://mileem-inmuebles.herokuapp.com -->
+    <string name="host">mileem-inmuebles.herokuapp.com</string>
     <string name="search_path">/publications/search.json</string>
     <string name="facebook_app_id">385283794970002</string>
 
@@ -112,7 +113,10 @@
     <string name="twitter_share">Encontré esta propiedad en MiLEEM: </string>
     <string name="facebook_share">Encontré esta propiedad en MiLEEM: </string>
     <string name="facebook_error">Necesitas instalar la aplicación de Facebook. </string>
-    <string name="title_activity_price_stats">PriceStatsActivity</string>
+    <string name="title_activity_price_stats">Precio por metro cuadrado</string>
     <string name="hello_world">Hello world!</string>
+    <string name="no_stats_title">No hay estadisticas</string>
+    <string name="no_stats_description">no hay estadisticas disponibles para la publicacion seleccionada.</string>
+    <string name="stats_price_path">/statistics/near_prices.json</string>
 
 </resources>
