@@ -32,7 +32,7 @@ class StatisticsController < ApplicationController
 	  			# Convierto moneda a pesos
 	  			factor = conversiones[p.currency.abreviatura]["$"]
 	  			# Sumo el precio en pesos de esta publicacion
-	  			total += p.price * factor
+	  			total += (p.price * factor) / p.surface if (p.surface > 0)
 	  		end
 	  		resultados_parciales[barrio] = total.to_f / publications_from_this_neighbourhood.size
   		end
