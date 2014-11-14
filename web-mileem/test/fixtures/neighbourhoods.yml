@@ -1,13 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
+  id: 5
   name: Belgrano
 
 two:
-  id: 2
+  id: 28
   name: Recoleta
 
 three:
-  id: 3
+  id: 6
   name: Boedo
+
+four:
+  id: 22
+  name: Palermo

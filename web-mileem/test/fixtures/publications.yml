@@ -1,77 +1,80 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  effective_date: 2014-10-10
-  end_date: 2015-10-10
-  operation: MyString
+  effective_date: 2014-11-10
+  end_date: 2015-11-10
+  operation: Alquiler
   address: MyString
   floor: 1
   apartment: MyString
   number_spaces: 1
-  surface: 1
-  price: 1.5
-  expenses: 1.5
-  antiquity: 1
-  description: MyText
-  additional_info: MyText
-  currency_id: 1
-  property_type_id: 1
-  neighbourhood_id: 1
-  user_id: 1
-  plan_id: 1
-  status: 2
-
-two:
-  effective_date: 2014-10-10
-  end_date: 2015-10-10
-  operation: MyString
-  address: MyString
-  floor: 1
-  apartment: MyString
-  number_spaces: 1
-  surface: 1
-  price: 1.5
-  expenses: 1.5
-  antiquity: 1
-  description: MyText
-  additional_info: MyText
-  currency_id: 2
-  property_type_id: 2
-  neighbourhood_id: 2
-  user_id: 1
-  plan_id: 1
-  status: 2
-
-three:
-  effective_date: 2014-10-10
-  end_date: 2015-10-10
-  operation: MyString
-  address: MyString
-  floor: 1
-  apartment: MyString
-  number_spaces: 2
-  surface: 120
-  price: 1200
-  expenses: 120
+  surface: 100
+  price: 5000
+  expenses: 800
   antiquity: 10
   description: MyText
   additional_info: MyText
   currency_id: 1
   property_type_id: 1
-  neighbourhood_id: 1
+  neighbourhood_id: 5
   user_id: 1
   plan_id: 1
   status: 2
+  payment_status: Realizado
 
-four:
-  effective_date: 2014-10-10
-  end_date: 2015-10-10
-  operation: MyString
+two:
+  effective_date: 2014-11-10
+  end_date: 2015-11-10
+  operation: Alquiler
   address: MyString
   floor: 1
   apartment: MyString
-  number_spaces: 4
-  surface: 200
+  number_spaces: 3
+  surface: 140
+  price: 7300
+  expenses: 400
+  antiquity: 5
+  description: MyText
+  additional_info: MyText
+  currency_id: 1
+  property_type_id: 2
+  neighbourhood_id: 22
+  user_id: 1
+  plan_id: 1
+  status: 2
+  payment_status: Realizado
+
+three:
+  effective_date: 2014-11-10
+  end_date: 2015-11-10
+  operation: Venta
+  address: MyString
+  floor: 1
+  apartment: MyString
+  number_spaces: 2
+  surface: 120
+  price: 120000
+  expenses: 500
+  antiquity: 10
+  description: MyText
+  additional_info: MyText
+  currency_id: 1
+  property_type_id: 1
+  neighbourhood_id: 5
+  user_id: 1
+  plan_id: 1
+  status: 2
+  payment_status: Realizado
+
+four:
+  effective_date: 2014-11-10
+  end_date: 2015-11-10
+  operation: Alquiler
+  address: MyString
+  floor: 1
+  apartment: MyString
+  number_spaces: 1
+  surface: 60
   price: 2000
   expenses: 200
   antiquity: 20
@@ -79,27 +82,29 @@ four:
   additional_info: MyText
   currency_id: 1
   property_type_id: 2
-  neighbourhood_id: 1
+  neighbourhood_id: 5
   user_id: 1
   plan_id: 1
   status: 2
+  payment_status: Realizado
 
 fifth:
   id: 11
-  effective_date: 2014-10-10
-  end_date: 2015-10-10
-  operation: Venta
+  effective_date: 2014-11-10
+  end_date: 2015-11-10
+  operation: Alquiler
   address: "Quesada, Buenos Aires, Argentina"
   floor: 7
   apartment: Asd
-  number_spaces: 5
-  surface: 120
+  number_spaces: 4
+  surface: 85
   price: 6500
-  expenses: 250
+  expenses: 450
   antiquity: 20
   currency_id: 1
-  neighbourhood_id: 3
+  neighbourhood_id: 22
   property_type_id: 3
   user_id: 1
   plan_id: 1
   status: 2
+  payment_status: Realizado

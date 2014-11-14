@@ -61,11 +61,11 @@ class PublicationsControllerTest < ActionController::TestCase
   end
 
   test "should search publication in neighbourhood" do
-    get :search, :format => :json, "neighbourhood_name" => "Boedo"
+    get :search, :format => :json, "neighbourhood_name" => "Palermo"
     respuesta = JSON.parse(response.body)
-    assert respuesta.size == 1, "Valido cantidad de resultados en Boedo"
+    assert respuesta.size == 2, "Valido cantidad de resultados en Palermo"
     respuesta.each do |p|
-      assert p["neighbourhood_name"] == "Boedo", "Valido resultados en Boedo"
+      assert p["neighbourhood_name"] == "Palermo", "Valido resultados en Palermo"
     end
 
     get :search, :format => :json, "neighbourhood_name" => "Belgrano"
@@ -78,12 +78,11 @@ class PublicationsControllerTest < ActionController::TestCase
   end
 
   test "should search publication with price range" do
-    get :search, :format => :json, "min_price" => 1000, "max_price" => 2100
+    get :search, :format => :json, "min_price" => 2500, "max_price" => 6900
     respuesta = JSON.parse(response.body)
     assert respuesta.size == 2, "Valido cantidad de resultados buscando por precio"
-
     respuesta.each do |p|
-      @condition = ((p["price"] >= 1000) && (p["price"] <= 2100)) 
+      @condition = ((p["price"] >= 2500) && (p["price"] <= 6900)) 
       assert @condition
     end
   end
