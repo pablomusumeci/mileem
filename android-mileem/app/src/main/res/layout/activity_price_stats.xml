@@ -10,7 +10,7 @@
         android:layout_alignParentTop="true"
         android:orientation="vertical">
 
-        <com.androidplot.pie.PieChart
+        <com.androidplot.xy.XYPlot
             android:id="@+id/plotBarras"
             android:layout_width="match_parent"
             android:layout_height="300dp" />
