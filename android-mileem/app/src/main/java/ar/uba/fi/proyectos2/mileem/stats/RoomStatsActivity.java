@@ -28,6 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -37,9 +38,6 @@ import ar.uba.fi.proyectos2.mileem.utils.JSONParser;
 public class RoomStatsActivity extends Activity {
 
     private List<Pair<String, Integer>> roomStats;
-
-    private TextView donutSizeTextView;
-    private SeekBar donutSizeSeekBar;
 
     private PieChart pie;
 
@@ -73,7 +71,7 @@ public class RoomStatsActivity extends Activity {
             for (int i = 0; i < len; ++i) {
                 try {
                     JSONObject obj = jArray.getJSONObject(i);
-                    Pair<String, Integer> p = new Pair<String, Integer>(obj.getString("number_spaces")+" Habs.", obj.getInt("quantity"));
+                    Pair<String, Integer> p = new Pair<String, Integer>(obj.getString("number_spaces"), obj.getInt("quantity"));
                     list.add(p);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -117,26 +115,6 @@ public class RoomStatsActivity extends Activity {
         });
 
 
-        donutSizeSeekBar = (SeekBar) findViewById(R.id.donutSizeSeekBar);
-
-        donutSizeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {}
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                pie.getRenderer(PieRenderer.class).setDonutSize(seekBar.getProgress()/100f,
-                        PieRenderer.DonutMode.PERCENT);
-                pie.redraw();
-                updateDonutText();
-            }
-        });
-
-        donutSizeTextView = (TextView) findViewById(R.id.donutSizeTextView);
-        updateDonutText();
 
 
         EmbossMaskFilter emf = new EmbossMaskFilter(
@@ -164,18 +142,19 @@ public class RoomStatsActivity extends Activity {
 
         SegmentFormatter formatters[] = new SegmentFormatter[]{sf1, sf2, sf3, sf4};
         int posFormatter = 0;
-
+        double sum = 0;
         for (Pair<String, Integer> p : roomStats) {
-            pie.addSeries(new Segment(p.first, p.second), formatters[(posFormatter++)%(formatters.length)]);
+            sum+=p.second;
+        }
+        DecimalFormat df = new DecimalFormat("#");
+        for (Pair<String, Integer> p : roomStats) {
+            pie.addSeries(new Segment(p.first + " ("+df.format(p.second/sum*100.0)+"%)", p.second), formatters[(posFormatter++)%(formatters.length)]);
         }
 
         pie.getBorderPaint().setColor(Color.TRANSPARENT);
         pie.getBackgroundPaint().setColor(Color.TRANSPARENT);
         pie.redraw();
-    }
-
-    protected void updateDonutText() {
-        donutSizeTextView.setText(donutSizeSeekBar.getProgress() + "%");
+        pie.getRenderer(PieRenderer.class).setDonutSize(0.0f, PieRenderer.DonutMode.PERCENT);
     }
 
     private void showNoStatsAlert(){

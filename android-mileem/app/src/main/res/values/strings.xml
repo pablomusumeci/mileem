@@ -117,6 +117,6 @@
     <string name="no_stats_description">No hay estadisticas disponibles para la publicacion seleccionada.</string>
     <string name="stats_price_path">/statistics/near_prices.json</string>
     <string name="room_stats_path">/statistics/spaces_distribution.json</string>
-    <string name="title_activity_room_stats">Estadísticas por barrio</string>
+    <string name="title_activity_room_stats">Ambientes por publicación</string>
 
 </resources>
