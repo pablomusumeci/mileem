@@ -4,12 +4,25 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.EmbossMaskFilter;
+import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.SeekBar;
+import android.widget.TextView;
+
+import com.androidplot.pie.PieChart;
+import com.androidplot.pie.PieRenderer;
+import com.androidplot.pie.Segment;
+import com.androidplot.pie.SegmentFormatter;
+import com.androidplot.xy.XYPlot;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +36,17 @@ import ar.uba.fi.proyectos2.mileem.utils.JSONParser;
 
 public class RoomStatsActivity extends Activity {
 
-    private List<Pair<Integer, Integer>> roomStats;
+    private List<Pair<String, Integer>> roomStats;
+
+    private TextView donutSizeTextView;
+    private SeekBar donutSizeSeekBar;
+
+    private PieChart pie;
+
+    private Segment s1;
+    private Segment s2;
+    private Segment s3;
+    private Segment s4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +59,11 @@ public class RoomStatsActivity extends Activity {
         new GetHTTPTask().execute(url);
     }
 
-    private class GetHTTPTask extends AsyncTask<String, Void, List<Pair<Integer, Integer>>> {
+    private class GetHTTPTask extends AsyncTask<String, Void, List<Pair<String, Integer>>> {
 
         @Override
         protected List doInBackground(String... params) {
-            List<Pair<Integer, Integer>> list = new LinkedList<Pair<Integer, Integer>>();
+            List<Pair<String, Integer>> list = new LinkedList<Pair<String, Integer>>();
             String url = params[0];
             JSONArray jArray = JSONParser.getJSONAsArray(url);
             if (jArray == null) {
@@ -50,7 +73,7 @@ public class RoomStatsActivity extends Activity {
             for (int i = 0; i < len; ++i) {
                 try {
                     JSONObject obj = jArray.getJSONObject(i);
-                    Pair<Integer, Integer> p = new Pair<Integer, Integer>(obj.getInt("number_spaces"), obj.getInt("quantity"));
+                    Pair<String, Integer> p = new Pair<String, Integer>(obj.getString("number_spaces")+" Habs.", obj.getInt("quantity"));
                     list.add(p);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -60,7 +83,7 @@ public class RoomStatsActivity extends Activity {
         }
 
         @Override
-        protected void onPostExecute(List<Pair<Integer, Integer>> result) {
+        protected void onPostExecute(List<Pair<String, Integer>> result) {
             roomStats = result;
             if (roomStats.size() > 1) {
                 loadAndPlot();
@@ -73,6 +96,86 @@ public class RoomStatsActivity extends Activity {
 
     private void loadAndPlot(){
 
+        pie = (PieChart) findViewById(R.id.pieChartRooms);
+
+
+        // detect segment clicks:
+        pie.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                PointF click = new PointF(motionEvent.getX(), motionEvent.getY());
+                if(pie.getPieWidget().containsPoint(click)) {
+                    Segment segment = pie.getRenderer(PieRenderer.class).getContainingSegment(click);
+                    if(segment != null) {
+                        // handle the segment click...for now, just print
+                        // the clicked segment's title to the console:
+                        System.out.println("Clicked Segment: " + segment.getTitle());
+                    }
+                }
+                return false;
+            }
+        });
+
+
+        donutSizeSeekBar = (SeekBar) findViewById(R.id.donutSizeSeekBar);
+
+        donutSizeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {}
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                pie.getRenderer(PieRenderer.class).setDonutSize(seekBar.getProgress()/100f,
+                        PieRenderer.DonutMode.PERCENT);
+                pie.redraw();
+                updateDonutText();
+            }
+        });
+
+        donutSizeTextView = (TextView) findViewById(R.id.donutSizeTextView);
+        updateDonutText();
+
+
+        EmbossMaskFilter emf = new EmbossMaskFilter(
+                new float[]{1, 1, 1}, 0.4f, 10, 8.2f);
+
+        SegmentFormatter sf1 = new SegmentFormatter();
+        sf1.configure(getApplicationContext(), R.xml.pie_segment_formatter1);
+
+        sf1.getFillPaint().setMaskFilter(emf);
+
+        SegmentFormatter sf2 = new SegmentFormatter();
+        sf2.configure(getApplicationContext(), R.xml.pie_segment_formatter2);
+
+        sf2.getFillPaint().setMaskFilter(emf);
+
+        SegmentFormatter sf3 = new SegmentFormatter();
+        sf3.configure(getApplicationContext(), R.xml.pie_segment_formatter3);
+
+        sf3.getFillPaint().setMaskFilter(emf);
+
+        SegmentFormatter sf4 = new SegmentFormatter();
+        sf4.configure(getApplicationContext(), R.xml.pie_segment_formatter4);
+
+        sf4.getFillPaint().setMaskFilter(emf);
+
+        SegmentFormatter formatters[] = new SegmentFormatter[]{sf1, sf2, sf3, sf4};
+        int posFormatter = 0;
+
+        for (Pair<String, Integer> p : roomStats) {
+            pie.addSeries(new Segment(p.first, p.second), formatters[(posFormatter++)%(formatters.length)]);
+        }
+
+        pie.getBorderPaint().setColor(Color.TRANSPARENT);
+        pie.getBackgroundPaint().setColor(Color.TRANSPARENT);
+        pie.redraw();
+    }
+
+    protected void updateDonutText() {
+        donutSizeTextView.setText(donutSizeSeekBar.getProgress() + "%");
     }
 
     private void showNoStatsAlert(){
