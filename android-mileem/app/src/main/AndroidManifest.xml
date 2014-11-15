@@ -58,6 +58,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ar.uba.fi.proyectos2.mileem.detail.PublicationDetailActivity" />
         </activity>
+        <activity
+            android:name=".stats.RoomStatsActivity"
+            android:label="@string/title_activity_room_stats"
+            android:parentActivityName=".search.SearchPublicationsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ar.uba.fi.proyectos2.mileem.search.SearchPublicationsActivity" />
+        </activity>
     </application>
 
 </manifest>

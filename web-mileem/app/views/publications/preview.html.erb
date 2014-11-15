@@ -1,8 +1,7 @@
 <div class="page-header">
-  
+<h3><strong><%= @publication.address %></strong></h3>
 </div>
 
-<h3><strong><%= @publication.address %></strong></h3>
 
 <div class="row">
   <div class="col-md-4">
@@ -84,8 +83,11 @@
       $("#video_upload_file").change(function (){
       	onfileSelected();
       });
+
+      $("#main_navbar").hide();
   });
   
+
   function showPhotos(){
   	$('#videoContainer').hide();
   	$('#myCarousel').show();
