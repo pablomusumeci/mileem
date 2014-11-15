@@ -16,11 +16,11 @@
 	      </ol>
 	      <div class="carousel-inner">
 	        <% if(@publication.uploads.size() > 0) %>
-	          <div class="item active">
+	          <div class="item active" style="height: 300px">
 	            <img src="<%= @publication.uploads.first().upload %>" style="width:100%;height:100%;" />
 	          </div>
 	          <% @publication.uploads.drop(1).each do |u| %>
-	            <div class="item ">
+	            <div class="item" style="height: 300px">
 	              <img src="<%= u.upload %>" style="width:100%;height:100%;" />
 	            </div>
 	        <% end %>
@@ -57,6 +57,8 @@
       <dd><%= @publication.end_date %></dd>
       <dt><strong>Barrio</strong></dt>
       <dd><%= @publication.neighbourhood.name %></dd>
+      <dt><strong>Tipo de propiedad</strong></dt>
+      <dd><%= @publication.property_type.name if (@publication.property_type) %></dd>
       <dt><strong>Precio (<%= @publication.currency.abreviatura %>)</strong></dt>
       <dd><%= @publication.price %></dd>
       <dt><strong>Expensas (<%= @publication.currency.abreviatura %>)</strong></dt>
@@ -76,7 +78,7 @@
       <dd><%= @publication.apartment %></dd>
       <dt><strong>Ambientes</strong></dt>
       <dd><%= @publication.number_spaces %></dd>
-      <dt><strong>Superficie</strong></dt>
+      <dt><strong>Superficie (m2)</strong></dt>
       <dd><%= @publication.surface %></dd>
       <dt><strong>Antiguedad (años) </strong></dt>
       <dd><%= @publication.antiquity %></dd>
