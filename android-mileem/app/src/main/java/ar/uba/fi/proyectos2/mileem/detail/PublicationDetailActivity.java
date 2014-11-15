@@ -373,6 +373,8 @@ public class PublicationDetailActivity extends Activity {
     public void showPriceStats(View view){
         Intent intent = new Intent(this, PriceStatsActivity.class);
         intent.putExtra("neighbourhood_id", p.getNeighbourhood_id());
+        String neighbourhood = p.getNeighbourhood_name();
+        intent.putExtra("neighbourhood_name", p.getNeighbourhood_name());
         intent.putExtra("operation", p.getOperation());
         startActivity(intent);
 

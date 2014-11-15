@@ -10,15 +10,19 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Pair;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.androidplot.LineRegion;
@@ -147,6 +151,9 @@ public class PriceStatsActivity extends Activity {
 
         int neighbourhood_id = getIntent().getIntExtra("neighbourhood_id", 0);
         String operation = getIntent().getStringExtra("operation");
+        String neighbourhood_name = getIntent().getStringExtra("neighbourhood_name");
+        TextView tv = (TextView) findViewById(R.id.neighbourhoodName);
+        tv.setText(neighbourhood_name);
         new GetHTTPTask().execute(url+"?neighbourhood_id="+ Integer.toString(neighbourhood_id) +"&operation="+operation);
     }
 
@@ -256,6 +263,33 @@ public class PriceStatsActivity extends Activity {
         plot.getLayoutManager().remove(plot.getDomainLabelWidget());
         updatePlot();
 
+        for (Pair<String, Integer> p : neighborhoodStats){
+            TableLayout tl = (TableLayout) findViewById(R.id.neighborhoodTable);
+            TableRow tr = new TableRow(this);
+
+            TextView col1 = new TextView(this);
+            col1.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.WRAP_CONTENT, 0.5f));
+            col1.setText(p.first);
+            col1.setTextSize(17.0f);
+            col1.setPadding(5, 0, 0, 2);
+            col1.setTextColor(Color.GRAY);
+            col1.setGravity(Gravity.CENTER_VERTICAL);
+            tr.addView(col1);
+
+            TextView col2 = new TextView(this);
+            col2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,TableRow.LayoutParams.WRAP_CONTENT));
+            col2.setText(p.second.toString());
+            col2.setTextSize(17.0f);
+            col2.setPadding(80, 2, 20, 2);
+            col2.setTextColor(Color.GRAY);
+            col2.setGravity(Gravity.CENTER_VERTICAL);
+
+            tr.addView(col2);
+
+
+            tl.addView(tr);
+
+        }
     }
 
     private List<String> toListStrings(){
