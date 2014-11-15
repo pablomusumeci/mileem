@@ -96,6 +96,18 @@ p2.update(effective_date: (DateTime.now - 45.days).strftime("%d/%m/%Y"),end_date
 p3.update(effective_date: (DateTime.now - 6.months).strftime("%d/%m/%Y"),end_date: (DateTime.now - 3.months).strftime("%d/%m/%Y"))
 
 
+p4 = Publication.create(user_id: 2, payment_status: "Realizado", effective_date: (DateTime.now).strftime("%d/%m/%Y"), end_date: (DateTime.now + 1.year).strftime("%d/%m/%Y"),operation: "Alquiler", address: "Conesa 2270, Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina", floor: 4, apartment: "C", number_spaces: 3, surface: 60, price: 5700, expenses: 550.0, description: "", additional_info: "", currency_id: 1, neighbourhood_id: colegiales_id, property_type_id: 1,plan_id: 1,status: 2, lat: -34.563494, lng: -58.463902)
+p5 = Publication.create(user_id: 1, payment_status: "Realizado", effective_date: (DateTime.now).strftime("%d/%m/%Y"), end_date: (DateTime.now + 3.months).strftime("%d/%m/%Y"),operation: "Alquiler", address: "Arenales 3280, Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina", floor: 8, apartment: "F", number_spaces: 2, surface: 50, price: 2100.0, description: "", additional_info: "", currency_id: 1, neighbourhood_id: palermo_id, property_type_id: 1,plan_id: 2,status: 2, lat: -34.588291, lng: -58.409511)
+p6 = Publication.create(user_id: 2, payment_status: "Realizado", effective_date: (DateTime.now).strftime("%d/%m/%Y"),end_date: (DateTime.now + 1.months).strftime("%d/%m/%Y"), operation: "Alquiler", address: "Av Congreso 4014, Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina", floor: 7, apartment: "A", number_spaces: 3, surface: 75, price: 2300.0, expenses: 400.0, antiquity: 60, description: "", additional_info: "", currency_id: 1, neighbourhood_id: coghlan_id, property_type_id: 1,plan_id: 3,status: 2, lat: -34.564055,lng: -58.479263)
+p7 = Publication.create(user_id: 2, payment_status: "Realizado", effective_date: (DateTime.now).strftime("%d/%m/%Y"),end_date: (DateTime.now + 1.months).strftime("%d/%m/%Y"), operation: "Alquiler", address: "Av Congreso 4014, Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina", floor: 10, apartment: "B", number_spaces: 4, surface: 100, price: 3400.0, expenses: 400.0, antiquity: 60, description: "", additional_info: "", currency_id: 1, neighbourhood_id: coghlan_id, property_type_id: 1,plan_id: 3,status: 2, lat: -34.564055,lng: -58.479263)
+
+p4.update(effective_date: (DateTime.now - 5.months).strftime("%d/%m/%Y"),end_date: (DateTime.now - 5.months + 1.year).strftime("%d/%m/%Y"))
+p5.update(effective_date: (DateTime.now - 12.days).strftime("%d/%m/%Y"),end_date: (DateTime.now - 12.days + 3.months).strftime("%d/%m/%Y"))
+p6.update(effective_date: (DateTime.now - 5.days).strftime("%d/%m/%Y"),end_date: (DateTime.now - 5.days + 1.months).strftime("%d/%m/%Y"))
+p7.update(effective_date: (DateTime.now - 5.days).strftime("%d/%m/%Y"),end_date: (DateTime.now - 5.days + 1.months).strftime("%d/%m/%Y"))
+
+
+
 Upload.create(upload_file_name:	"depto6.jpg",upload_content_type: "image/jpeg",upload_file_size: 56158,publication_id: 1)
 Upload.create(upload_file_name:	"depto10.jpg",upload_content_type: "image/jpeg",upload_file_size: 262308,publication_id: 1)
 Upload.create(upload_file_name:	"depto2.jpg",upload_content_type: "image/jpeg",upload_file_size: 9527,publication_id: 2)
