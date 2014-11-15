@@ -104,7 +104,14 @@ class PublicationTest < ActiveSupport::TestCase
     assert_not @publication.save, 'Validate that surface must be positive'
   end
   
-  # publication date must have date format
-  # Validate direction from outside territory (capital) ?
+  def test_surface_required
+    @publication.surface = ''
+    assert_not @publication.save, 'Surface must be a required field'
+  end
+  
+  def test_number_spaces_required
+    @publication.number_spaces = ''
+    assert_not @publication.save, 'Number of spaces must be a required field'
+  end
   
 end

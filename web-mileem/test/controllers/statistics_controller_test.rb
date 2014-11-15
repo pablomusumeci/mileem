@@ -19,6 +19,14 @@ class StatisticsControllerTest < ActionController::TestCase
     assert respuesta.include?({"neighbourhood_name"=>"Palermo", "average"=>6.43, "currency"=>"USD"}),"Valido estadisticas de Palermo en #{operacion} en USD"
     assert respuesta.include?({"neighbourhood_name"=>"Belgrano", "average"=>4.17, "currency"=>"USD"}),"Valido estadisticas de Belgrano en #{operacion} en USD"
   end
+  
+  #test sin barrios aledaños
+  test "should get just one neighbourhood" do
+    operacion = "Alquiler"
+    get :near_prices, :format => :json, "neighbourhood_id" => 22, "operation" => operacion
+    respuesta = JSON.parse(response.body)
+    assert respuesta.size == 1, "Valido que solo traiga al mismo barrio de la busqueda como resultado"
+  end
 
   test "should get right spaces distribution" do
     get :spaces_distribution, :format => :json
