@@ -115,11 +115,6 @@ public class PriceStatsActivity extends Activity {
                         finish();
                     }
                 })
-//                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                finishActivity(0);
-//                            }
-//                        })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setOnKeyListener(new Dialog.OnKeyListener() {
                     @Override
@@ -134,19 +129,13 @@ public class PriceStatsActivity extends Activity {
                 })
                 .show();
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_price_stats);
         getActionBar().setDisplayHomeAsUpEnabled(false);
 
-//        Uri.Builder builder = new Uri.Builder()
-//                .scheme("http")
-//                .encodedAuthority(getString(R.string.host))
-//                .appendEncodedPath(getString(R.string.search_path));
-
-        // Carga del JSON
-            //url = "http://www.mocky.io/v2/545e98e033a0a97d10f28d76";
         String url = "http://" + getString(R.string.host) + getString(R.string.stats_price_path);
 
         int neighbourhood_id = getIntent().getIntExtra("neighbourhood_id", 0);

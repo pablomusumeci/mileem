@@ -4,7 +4,7 @@ one:
   effective_date: 2014-11-10
   end_date: 2015-11-10
   operation: Alquiler
-  address: MyString
+  address: "Av Congreso 4014, Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina"
   floor: 1
   apartment: MyString
   number_spaces: 1
@@ -18,7 +18,7 @@ one:
   property_type_id: 1
   neighbourhood_id: 5
   user_id: 1
-  plan_id: 1
+  plan_id: 2
   status: 2
   payment_status: Realizado
 
@@ -26,7 +26,7 @@ two:
   effective_date: 2014-11-10
   end_date: 2015-11-10
   operation: Alquiler
-  address: MyString
+  address: "Av Congreso 4014, Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina"
   floor: 1
   apartment: MyString
   number_spaces: 3
@@ -48,7 +48,7 @@ three:
   effective_date: 2014-11-10
   end_date: 2015-11-10
   operation: Venta
-  address: MyString
+  address: "Av Congreso 4014, Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina"
   floor: 1
   apartment: MyString
   number_spaces: 2
@@ -70,7 +70,7 @@ four:
   effective_date: 2014-11-10
   end_date: 2015-11-10
   operation: Alquiler
-  address: MyString
+  address: "Av Congreso 4014, Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina"
   floor: 1
   apartment: MyString
   number_spaces: 1
@@ -93,7 +93,7 @@ fifth:
   effective_date: 2014-11-10
   end_date: 2015-11-10
   operation: Alquiler
-  address: "Quesada, Buenos Aires, Argentina"
+  address: "Av Congreso 4014, Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina"
   floor: 7
   apartment: Asd
   number_spaces: 4

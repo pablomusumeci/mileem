@@ -2,4 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".SearchPublications" >
 
+    <item android:id="@+id/action_room_stats"
+        android:icon="@drawable/ic_action_room_stats"
+        android:title="Ver habitaciones por barrio"
+        android:showAsAction="ifRoom" />
+
 </menu>

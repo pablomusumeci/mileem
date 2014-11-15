@@ -81,7 +81,14 @@ class PublicationsController < ApplicationController
     @publication = Publication.new(publication_params)    
     @publication.user_id = current_user.id
     @publication.end_date = @publication.effective_date + @publication.plan.duration.months
-    @publication.payment_status = "No realizado"
+    
+    # Si el nuevo plan elegido es gratuito, pongo la publicacion como paga
+    if (@publication.plan.id == Plan.get_free_plan_id)
+      @publication.payment_status = "Realizado" 
+    else
+      @publication.payment_status = "No realizado"
+    end
+    
     respond_to do |format|
       if @publication.save
         @publication.available!
@@ -105,7 +112,6 @@ class PublicationsController < ApplicationController
         
         # Check if has discount
         @has_discount = (Date.today < old_publication.end_date + 1.month)
-        
         if (old_publication.plan.priority < @publication.plan.priority)
           flash["warning"] = 'Al obtener un plan inferior al actual se seleccionaron las primeras 
           imágenes y video que cumplen con la cantidad permitida por el nuevo plan.'

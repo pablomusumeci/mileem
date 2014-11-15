@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import ar.uba.fi.proyectos2.mileem.R;
 import ar.uba.fi.proyectos2.mileem.model.MultiSpinner;
 import ar.uba.fi.proyectos2.mileem.model.PublicationSearchRequest;
+import ar.uba.fi.proyectos2.mileem.stats.RoomStatsActivity;
 
 public class SearchPublicationsActivity extends Activity implements MultiSpinner.MultiSpinnerListener {
 
@@ -73,7 +74,9 @@ public class SearchPublicationsActivity extends Activity implements MultiSpinner
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_room_stats) {
+            Intent intent = new Intent(this, RoomStatsActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
