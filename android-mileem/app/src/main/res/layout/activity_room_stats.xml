@@ -8,5 +8,28 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="ar.uba.fi.proyectos2.mileem.stats.RoomStatsActivity">
 
+    <com.androidplot.pie.PieChart
+        android:id="@+id/pieChartRooms"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/donutSizeSeekBar"
+        android:layout_below="@+id/pieChartRooms"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/pieChartRooms"
+        android:layout_alignEnd="@+id/pieChartRooms" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/donutSizeTextView"
+        android:layout_below="@+id/donutSizeSeekBar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
