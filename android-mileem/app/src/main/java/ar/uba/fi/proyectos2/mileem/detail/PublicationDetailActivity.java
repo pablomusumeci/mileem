@@ -376,6 +376,7 @@ public class PublicationDetailActivity extends Activity {
         String neighbourhood = p.getNeighbourhood_name();
         intent.putExtra("neighbourhood_name", p.getNeighbourhood_name());
         intent.putExtra("operation", p.getOperation());
+        intent.putExtra("currency", p.getNormalized_currency());
         startActivity(intent);
 
     }
