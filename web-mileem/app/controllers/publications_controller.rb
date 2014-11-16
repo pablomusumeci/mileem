@@ -306,7 +306,7 @@ class PublicationsController < ApplicationController
 
     if not params[:property_name].nil?
       tipo = params[:property_name]
-      @publications.reject!{ |p|  p["property_type"].nil? }
+      @publications.reject!{ |p|  p["property_type"].nil? } if tipo != "Todos"
       @publications.select!{ |p| p["property_type"] == params[:property_name]} if tipo != "Todos"
     end
 
