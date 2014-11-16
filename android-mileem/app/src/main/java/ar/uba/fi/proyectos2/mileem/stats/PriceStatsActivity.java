@@ -208,17 +208,15 @@ public class PriceStatsActivity extends Activity {
                 return toListStrings().indexOf(string);
             }
         });
-        plot.setRangeTopMax(((maxPrice + 10)/10)*10);
         plot.setRangeValueFormat(new DecimalFormat("#"));
+        plot.setRangeLowerBoundary(0, BoundaryMode.FIXED);
 
         plot.getLayoutManager().remove(plot.getDomainLabelWidget());
         plot.getLegendWidget().setVisible(false);
 
         plot.getGraphWidget().getRangeLabelPaint().setTextSize(30);
         plot.getGraphWidget().getDomainLabelPaint().setTextSize(30);
-        plot.getGraphWidget().setSize(new SizeMetrics(
-                0.5f, SizeLayoutType.RELATIVE,
-                0.5f, SizeLayoutType.RELATIVE));
+        plot.getGraphWidget().setDomainLabelWidth(80);
 
         // Setup the BarRenderer with our selected options
         MyBarRenderer renderer = ((MyBarRenderer) plot.getRenderer(MyBarRenderer.class));
@@ -235,10 +233,32 @@ public class PriceStatsActivity extends Activity {
 
         TableLayout tl = (TableLayout) findViewById(R.id.neighborhoodTable);
         tl.removeAllViews();
-        for (Pair<String, Integer> p : neighborhoodStats){
-            TableRow tr = new TableRow(this);
 
-            TextView col1 = new TextView(this);
+        TextView col1 = new TextView(this);
+        TableRow tr = new TableRow(this);
+        col1.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.WRAP_CONTENT, 0.5f));
+        col1.setText("Barrio");
+        col1.setTextSize(20.0f);
+        col1.setPadding(5, 0, 0, 2);
+        col1.setTextColor(Color.BLACK);
+        col1.setGravity(Gravity.CENTER_VERTICAL);
+        tr.addView(col1);
+
+        TextView col2 = new TextView(this);
+        col2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+        col2.setText("Precio");
+        col2.setTextSize(20.0f);
+        col2.setPadding(80, 2, 20, 2);
+        col2.setTextColor(Color.BLACK);
+        col2.setGravity(Gravity.CENTER_VERTICAL);
+
+        tr.addView(col2);
+
+        tl.addView(tr);
+        for (Pair<String, Integer> p : neighborhoodStats){
+            tr = new TableRow(this);
+
+            col1 = new TextView(this);
             col1.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.WRAP_CONTENT, 0.5f));
             col1.setText(p.first);
             col1.setTextSize(17.0f);
@@ -247,7 +267,7 @@ public class PriceStatsActivity extends Activity {
             col1.setGravity(Gravity.CENTER_VERTICAL);
             tr.addView(col1);
 
-            TextView col2 = new TextView(this);
+            col2 = new TextView(this);
             col2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
             col2.setText(p.second.toString() + " " + (currency != null ? currency : ""));
             col2.setTextSize(17.0f);
